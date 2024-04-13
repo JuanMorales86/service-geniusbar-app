@@ -1,0 +1,43 @@
+---
+import IcoNavApple from "../utilities/icons/icoNavApple.astro";
+import IcoNavList from "../utilities/icons/icoNavList.astro";
+import Headerbutton from "./Headerbutton.astro";
+import Logout from "./Logout.astro";
+
+const {user} = Astro.props
+
+console.log(user)
+---
+
+<nav class="flex flex-col justify-around  text-center md:flex-row sticky top-0 bg-gray-400 shrink-0">
+  <div class="flex flex-col items-center  justify-center md:flex-row">
+    <Headerbutton class="text-white" href="/"> Home</Headerbutton>
+    <Headerbutton href="/servicios">
+      <IcoNavApple slot="before" />
+      Servicios
+    </Headerbutton>
+    <Headerbutton href="/">
+      <IcoNavList slot="before" />
+      Ordenes y Reparaciones</Headerbutton>
+    <Headerbutton href="/">Contacto</Headerbutton>
+    <Headerbutton href="/signup">Crear Cuenta</Headerbutton>
+    <Headerbutton href="/signin">Iniciar Sesión</Headerbutton>
+  {
+    user ? 
+      <Logout /> 
+      :
+      <Headerbutton href="/api/github">Iniciar Sesión con GitHub
+        </Headerbutton>
+  } 
+        
+    </div> 
+        <div>
+          {
+            user ?
+            `hola: ${user.username}`
+            :
+            `hola`
+          }
+        </div>
+   
+</nav>

@@ -1,0 +1,22 @@
+---
+
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<header transition:persist="true" class="py-8 px-4 mx-w-xl lg:py-2 lg:px-6">
+  <div class="mx-auto mb-8 lg:mb-8 text-center">
+    
+    <h2 class="mb-4 text-5xl text-white tracking-tight roboto-bold">{title}</h2>
+    <p
+      class="font-light text-gray-500 sm:text-xl dark:text-gray-400 roboto-regular"
+    >
+      {description}
+    </p>
+  </div>
+</header>

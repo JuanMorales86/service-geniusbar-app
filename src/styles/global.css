@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Mono:wght@400;500;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@300;400;700;900&display=swap');
+
+
+:root {
+    --accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+}
+html {
+    font-family: system-ui, sans-serif;
+    background: #13151a;
+    /* background-size: 224px; */
+    color-scheme: dark light;
+    
+    
+    
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  .roboto-semibold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+/* 100 a 900 */
+  .montserrat-bold {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+  }
+  .montserrat-semibold {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .montserrat-regular {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .fira-code-normal {
+    font-family: "Fira Code", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .fira-mono-regular {
+    font-family: "Fira Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .fira-mono-medium {
+    font-family: "Fira Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .fira-mono-bold {
+    font-family: "Fira Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+  }
+/* 300 a 700 */
+  .fira-code-bold {
+    font-family: "Fira Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .bg-gradient-blk-gray {
+    background: linear-gradient(to bottom, #13151a 0%, #13151a 5%, #4b5563 100%); 
+  }
+
+

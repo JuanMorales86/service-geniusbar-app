@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "extends": "astro/tsconfigs/strict"
+}

@@ -1,0 +1,42 @@
+---
+import Header from '@/components/Header.astro';
+import Navbar from '@/components/Navbar.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const user = Astro.locals.user;
+
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions/>
+	</head>
+	<body>
+		<div class="pt-1">
+
+			<Navbar  user={user}/>
+			<Header title='Genius Bar Servicio Tecnico' description='Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.'/>
+			<main>
+				<slot/>
+			</main>
+		</div>
+	</body>
+</html>
+
+
+<style is:global>
+ @import '../styles/global.css';
+ @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Mono:wght@400;500;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@300;400;700;900&display=swap');
+</style>
