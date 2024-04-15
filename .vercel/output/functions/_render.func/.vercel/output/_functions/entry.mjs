@@ -1,7 +1,8 @@
 import { renderers } from './renderers.mjs';
-import { l as levels, g as getEventPrefix, L as Logger, A as AstroIntegrationLogger, manifest } from './manifest_D_2dOGg6.mjs';
-import { A as AstroError, R as ResponseSentError, n as MiddlewareNoDataOrNextCalled, o as MiddlewareNotAResponse, p as ROUTE_TYPE_HEADER, q as REROUTE_DIRECTIVE_HEADER, G as GetStaticPathsRequired, t as InvalidGetStaticPathsReturn, u as InvalidGetStaticPathsEntry, v as GetStaticPathsExpectedParams, w as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, D as DEFAULT_404_COMPONENT, N as NoMatchingStaticPathFound, x as PrerenderDynamicEndpointPathCollide, y as ReservedSlotName, z as renderSlotToString, B as renderJSX, C as chunkToString, H as LocalsNotAnObject, J as clientLocalsSymbol, K as clientAddressSymbol$1, O as ClientAddressNotAvailable, S as StaticClientAddressNotAvailable, Q as ASTRO_VERSION, T as responseSentSymbol$1, V as AstroResponseHeadersReassigned, W as renderPage, X as renderEndpoint, Y as REROUTABLE_STATUS_CODES, Z as commonjsGlobal } from './chunks/astro_CbyKwe56.mjs';
-import { e as appendForwardSlash, j as joinPaths, t as trimSlashes, f as fileExtension, s as slash$1, p as prependForwardSlash, g as removeTrailingForwardSlash, h as collapseDuplicateSlashes } from './chunks/astro/assets-service_BVELt0bK.mjs';
+import { l as levels, g as getEventPrefix, L as Logger, A as AstroIntegrationLogger, manifest } from './manifest_Dc_9b8yd.mjs';
+import { A as AstroError, R as ResponseSentError, n as MiddlewareNoDataOrNextCalled, o as MiddlewareNotAResponse, p as ROUTE_TYPE_HEADER, q as REROUTE_DIRECTIVE_HEADER, G as GetStaticPathsRequired, t as InvalidGetStaticPathsReturn, u as InvalidGetStaticPathsEntry, v as GetStaticPathsExpectedParams, w as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, D as DEFAULT_404_COMPONENT, N as NoMatchingStaticPathFound, x as PrerenderDynamicEndpointPathCollide, y as ReservedSlotName, z as renderSlotToString, B as renderJSX, C as chunkToString, H as LocalsNotAnObject, J as clientLocalsSymbol, K as clientAddressSymbol$1, O as ClientAddressNotAvailable, S as StaticClientAddressNotAvailable, Q as ASTRO_VERSION, T as responseSentSymbol$1, V as AstroResponseHeadersReassigned, W as renderPage, X as renderEndpoint, Y as REROUTABLE_STATUS_CODES, Z as commonjsGlobal } from './chunks/astro_BkI29Jvg.mjs';
+import { e as appendForwardSlash, j as joinPaths, t as trimSlashes, f as fileExtension, s as slash$1, p as prependForwardSlash, g as removeTrailingForwardSlash, h as collapseDuplicateSlashes } from './chunks/astro/assets-service_BxKhW4tn.mjs';
+import { s as sequence, o as onRequest } from './chunks/_astro-internal_middleware_CWHZQV9h.mjs';
 import require$$1 from 'os';
 import require$$0 from 'path';
 import require$$0$1 from 'util';
@@ -11,7 +12,6 @@ import require$$0$3 from 'fs';
 import nodePath from 'node:path';
 import buffer from 'node:buffer';
 import crypto from 'node:crypto';
-import { onRequest } from './_noop-middleware.mjs';
 
 function shouldAppendForwardSlash(trailingSlash, buildFormat) {
   switch (trailingSlash) {
@@ -64,6 +64,140 @@ class Unreachable extends Error {
     super(
       "Astro encountered an unexpected line of code.\nIn most cases, this is not your fault, but a bug in astro code.\nIf there isn't one already, please create an issue.\nhttps://astro.build/issues"
     );
+  }
+}
+
+function parseLocale(header) {
+  if (header === "*") {
+    return [{ locale: header, qualityValue: void 0 }];
+  }
+  const result = [];
+  const localeValues = header.split(",").map((str) => str.trim());
+  for (const localeValue of localeValues) {
+    const split = localeValue.split(";").map((str) => str.trim());
+    const localeName = split[0];
+    const qualityValue = split[1];
+    if (!split) {
+      continue;
+    }
+    if (qualityValue && qualityValue.startsWith("q=")) {
+      const qualityValueAsFloat = Number.parseFloat(qualityValue.slice("q=".length));
+      if (Number.isNaN(qualityValueAsFloat) || qualityValueAsFloat > 1) {
+        result.push({
+          locale: localeName,
+          qualityValue: void 0
+        });
+      } else {
+        result.push({
+          locale: localeName,
+          qualityValue: qualityValueAsFloat
+        });
+      }
+    } else {
+      result.push({
+        locale: localeName,
+        qualityValue: void 0
+      });
+    }
+  }
+  return result;
+}
+function sortAndFilterLocales(browserLocaleList, locales) {
+  const normalizedLocales = toCodes(locales).map(normalizeTheLocale);
+  return browserLocaleList.filter((browserLocale) => {
+    if (browserLocale.locale !== "*") {
+      return normalizedLocales.includes(normalizeTheLocale(browserLocale.locale));
+    }
+    return true;
+  }).sort((a, b) => {
+    if (a.qualityValue && b.qualityValue) {
+      if (a.qualityValue > b.qualityValue) {
+        return -1;
+      } else if (a.qualityValue < b.qualityValue) {
+        return 1;
+      }
+    }
+    return 0;
+  });
+}
+function computePreferredLocale(request, locales) {
+  const acceptHeader = request.headers.get("Accept-Language");
+  let result = void 0;
+  if (acceptHeader) {
+    const browserLocaleList = sortAndFilterLocales(parseLocale(acceptHeader), locales);
+    const firstResult = browserLocaleList.at(0);
+    if (firstResult && firstResult.locale !== "*") {
+      for (const currentLocale of locales) {
+        if (typeof currentLocale === "string") {
+          if (normalizeTheLocale(currentLocale) === normalizeTheLocale(firstResult.locale)) {
+            result = currentLocale;
+          }
+        } else {
+          for (const currentCode of currentLocale.codes) {
+            if (normalizeTheLocale(currentCode) === normalizeTheLocale(firstResult.locale)) {
+              result = currentLocale.path;
+            }
+          }
+        }
+      }
+    }
+  }
+  return result;
+}
+function computePreferredLocaleList(request, locales) {
+  const acceptHeader = request.headers.get("Accept-Language");
+  let result = [];
+  if (acceptHeader) {
+    const browserLocaleList = sortAndFilterLocales(parseLocale(acceptHeader), locales);
+    if (browserLocaleList.length === 1 && browserLocaleList.at(0).locale === "*") {
+      return locales.map((locale) => {
+        if (typeof locale === "string") {
+          return locale;
+        } else {
+          return locale.codes.at(0);
+        }
+      });
+    } else if (browserLocaleList.length > 0) {
+      for (const browserLocale of browserLocaleList) {
+        for (const loopLocale of locales) {
+          if (typeof loopLocale === "string") {
+            if (normalizeTheLocale(loopLocale) === normalizeTheLocale(browserLocale.locale)) {
+              result.push(loopLocale);
+            }
+          } else {
+            for (const code of loopLocale.codes) {
+              if (code === browserLocale.locale) {
+                result.push(loopLocale.path);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return result;
+}
+function computeCurrentLocale(pathname, locales) {
+  for (const segment of pathname.split("/")) {
+    for (const locale of locales) {
+      if (typeof locale === "string") {
+        if (!segment.includes(locale))
+          continue;
+        if (normalizeTheLocale(locale) === normalizeTheLocale(segment)) {
+          return locale;
+        }
+      } else {
+        if (locale.path === segment) {
+          return locale.codes.at(0);
+        } else {
+          for (const code of locale.codes) {
+            if (normalizeTheLocale(code) === normalizeTheLocale(segment)) {
+              return code;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -610,140 +744,6 @@ function redirectRouteGenerate(renderContext) {
   return redirect.destination;
 }
 
-function parseLocale(header) {
-  if (header === "*") {
-    return [{ locale: header, qualityValue: void 0 }];
-  }
-  const result = [];
-  const localeValues = header.split(",").map((str) => str.trim());
-  for (const localeValue of localeValues) {
-    const split = localeValue.split(";").map((str) => str.trim());
-    const localeName = split[0];
-    const qualityValue = split[1];
-    if (!split) {
-      continue;
-    }
-    if (qualityValue && qualityValue.startsWith("q=")) {
-      const qualityValueAsFloat = Number.parseFloat(qualityValue.slice("q=".length));
-      if (Number.isNaN(qualityValueAsFloat) || qualityValueAsFloat > 1) {
-        result.push({
-          locale: localeName,
-          qualityValue: void 0
-        });
-      } else {
-        result.push({
-          locale: localeName,
-          qualityValue: qualityValueAsFloat
-        });
-      }
-    } else {
-      result.push({
-        locale: localeName,
-        qualityValue: void 0
-      });
-    }
-  }
-  return result;
-}
-function sortAndFilterLocales(browserLocaleList, locales) {
-  const normalizedLocales = toCodes(locales).map(normalizeTheLocale);
-  return browserLocaleList.filter((browserLocale) => {
-    if (browserLocale.locale !== "*") {
-      return normalizedLocales.includes(normalizeTheLocale(browserLocale.locale));
-    }
-    return true;
-  }).sort((a, b) => {
-    if (a.qualityValue && b.qualityValue) {
-      if (a.qualityValue > b.qualityValue) {
-        return -1;
-      } else if (a.qualityValue < b.qualityValue) {
-        return 1;
-      }
-    }
-    return 0;
-  });
-}
-function computePreferredLocale(request, locales) {
-  const acceptHeader = request.headers.get("Accept-Language");
-  let result = void 0;
-  if (acceptHeader) {
-    const browserLocaleList = sortAndFilterLocales(parseLocale(acceptHeader), locales);
-    const firstResult = browserLocaleList.at(0);
-    if (firstResult && firstResult.locale !== "*") {
-      for (const currentLocale of locales) {
-        if (typeof currentLocale === "string") {
-          if (normalizeTheLocale(currentLocale) === normalizeTheLocale(firstResult.locale)) {
-            result = currentLocale;
-          }
-        } else {
-          for (const currentCode of currentLocale.codes) {
-            if (normalizeTheLocale(currentCode) === normalizeTheLocale(firstResult.locale)) {
-              result = currentLocale.path;
-            }
-          }
-        }
-      }
-    }
-  }
-  return result;
-}
-function computePreferredLocaleList(request, locales) {
-  const acceptHeader = request.headers.get("Accept-Language");
-  let result = [];
-  if (acceptHeader) {
-    const browserLocaleList = sortAndFilterLocales(parseLocale(acceptHeader), locales);
-    if (browserLocaleList.length === 1 && browserLocaleList.at(0).locale === "*") {
-      return locales.map((locale) => {
-        if (typeof locale === "string") {
-          return locale;
-        } else {
-          return locale.codes.at(0);
-        }
-      });
-    } else if (browserLocaleList.length > 0) {
-      for (const browserLocale of browserLocaleList) {
-        for (const loopLocale of locales) {
-          if (typeof loopLocale === "string") {
-            if (normalizeTheLocale(loopLocale) === normalizeTheLocale(browserLocale.locale)) {
-              result.push(loopLocale);
-            }
-          } else {
-            for (const code of loopLocale.codes) {
-              if (code === browserLocale.locale) {
-                result.push(loopLocale.path);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  return result;
-}
-function computeCurrentLocale(pathname, locales) {
-  for (const segment of pathname.split("/")) {
-    for (const locale of locales) {
-      if (typeof locale === "string") {
-        if (!segment.includes(locale))
-          continue;
-        if (normalizeTheLocale(locale) === normalizeTheLocale(segment)) {
-          return locale;
-        }
-      } else {
-        if (locale.path === segment) {
-          return locale.codes.at(0);
-        } else {
-          for (const code of locale.codes) {
-            if (normalizeTheLocale(code) === normalizeTheLocale(segment)) {
-              return code;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 async function callMiddleware(onRequest, apiContext, responseFunction) {
   let nextCalled = false;
   let responseFunctionPromise = void 0;
@@ -775,35 +775,6 @@ async function callMiddleware(onRequest, apiContext, responseFunction) {
       return value;
     }
   });
-}
-
-function sequence(...handlers) {
-  const filtered = handlers.filter((h) => !!h);
-  const length = filtered.length;
-  if (!length) {
-    const handler = defineMiddleware((context, next) => {
-      return next();
-    });
-    return handler;
-  }
-  return defineMiddleware((context, next) => {
-    return applyHandle(0, context);
-    function applyHandle(i, handleContext) {
-      const handle = filtered[i];
-      const result = handle(handleContext, async () => {
-        if (i < length - 1) {
-          return applyHandle(i + 1, handleContext);
-        } else {
-          return next();
-        }
-      });
-      return result;
-    }
-  });
-}
-
-function defineMiddleware(fn) {
-  return fn;
 }
 
 function pathnameHasLocale(pathname, locales) {
@@ -9003,11 +8974,31 @@ const createExports = (manifest, { middlewareSecret }) => {
   return { default: handler };
 };
 
-const _page0 = () => import('./chunks/generic_s9FRSix8.mjs');
-const _page1 = () => import('./chunks/index_Bfu738cl.mjs');
+const _page0 = () => import('./chunks/generic_DOs9R9Bn.mjs');
+const _page1 = () => import('./chunks/admin_BveWY1ze.mjs');
+const _page2 = () => import('./chunks/github_Crlgp3jK.mjs');
+const _page3 = () => import('./chunks/github_DPT9Oy9W.mjs');
+const _page4 = () => import('./chunks/signin_Dm9r0Z-K.mjs');
+const _page5 = () => import('./chunks/signout_hL7p9xq7.mjs');
+const _page6 = () => import('./chunks/signup_C6ZGh0Kh.mjs');
+const _page7 = () => import('./chunks/servicios_CNL4NQ4H.mjs');
+const _page8 = () => import('./chunks/signin_CFzqHm2W.mjs');
+const _page9 = () => import('./chunks/signup_D-9Sq2nL.mjs');
+const _page10 = () => import('./chunks/TestTurso_BCfkfTYD.mjs');
+const _page11 = () => import('./chunks/index_BYrMg1y5.mjs');
 const pageMap = new Map([
     ["node_modules/.pnpm/astro@4.5.10_typescript@5.4.3/node_modules/astro/dist/assets/endpoint/generic.js", _page0],
-    ["src/pages/index.astro", _page1]
+    ["src/pages/admin.astro", _page1],
+    ["src/pages/api/callbacks/github.ts", _page2],
+    ["src/pages/api/github.ts", _page3],
+    ["src/pages/api/signin.ts", _page4],
+    ["src/pages/api/signout.ts", _page5],
+    ["src/pages/api/signup.ts", _page6],
+    ["src/pages/servicios.astro", _page7],
+    ["src/pages/signin.astro", _page8],
+    ["src/pages/signup.astro", _page9],
+    ["src/pages/TestTurso.astro", _page10],
+    ["src/pages/index.astro", _page11]
 ]);
 
 const _manifest = Object.assign(manifest, {
@@ -9016,7 +9007,7 @@ const _manifest = Object.assign(manifest, {
     middleware: onRequest
 });
 const _args = {
-    "middlewareSecret": "443e11a6-c359-4b4c-886e-c9a1f5f0f4f4"
+    "middlewareSecret": "7f6755c5-d76b-475e-968b-603ec718fd1f"
 };
 const _exports = createExports(_manifest, _args);
 const __astrojsSsrVirtualEntry = _exports.default;

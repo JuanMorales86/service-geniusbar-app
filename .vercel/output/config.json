@@ -16,6 +16,46 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/admin\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/callbacks\\/github\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/github\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/signin\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/signout\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/signup\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/servicios\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/signin\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/signup\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/TestTurso\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/$",
 			"dest": "_render"
 		}
