@@ -16,6 +16,10 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/404\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/admin\\/?$",
 			"dest": "_render"
 		},
@@ -24,7 +28,23 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/createOrder\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/enviar-email\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/api\\/github\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/sendMail\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/sendMail-Respaldo\\/?$",
 			"dest": "_render"
 		},
 		{
@@ -40,7 +60,35 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/submitForm\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/expert-help\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/formservice\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/service-createorders\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/service-orders\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/servicedescription\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/servicios\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/serviciosm\\/?$",
 			"dest": "_render"
 		},
 		{
@@ -58,6 +106,11 @@
 		{
 			"src": "^\\/$",
 			"dest": "_render"
+		},
+		{
+			"src": "/.*",
+			"dest": "_render",
+			"status": 404
 		}
 	]
 }

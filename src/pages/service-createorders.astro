@@ -1,0 +1,13 @@
+---
+import CreateOrderForm from "@/components/service-createorders-form";
+import Layout from "@/layouts/Layout.astro";
+
+// Agregar autentificaciones y chekeo de roles
+if (!Astro.locals.user) {
+    return Astro.redirect("/odershow-page");
+}
+---
+
+<Layout title="Ordernes de Servicios 🧑‍💻">
+    <CreateOrderForm client:load/>
+</Layout>

@@ -1,14 +1,29 @@
 import { lucia } from "@/auth/auth";
 import type { APIContext } from "astro";
 import { db, eq, User } from "astro:db";
+import { checkAccountLocked, incrementFailedAttempts, resetFailedAttempts } from "./signverificator";
 import { Argon2id } from "oslo/password";
 
 export async function POST(context: APIContext):Promise<Response>{
 
     //Leer la data del form
     const formData = await context.request.formData();
-    const username = formData.get("username")
-    const password = formData.get("password")
+    const usernameInput = formData.get("username")
+    const username = typeof usernameInput === 'string' ? usernameInput : '';
+    const password = formData.get("password");
+    
+    //Validar si la cuenta esta bloqueada
+    const { isLocked, remainingTime, permanentLock } = await checkAccountLocked(username);
+    if (permanentLock) {
+        return context.redirect(`/signin?error=permanent_lock&username=${encodeURIComponent(username)}`);
+    }
+    
+    if (isLocked) {
+        const remainingSeconds = Math.ceil(remainingTime / 1000);
+        const currentTime = Date.now();
+        const unlockTime = currentTime + remainingTime;
+        return context.redirect(`/signin?error=account_locked&remainingTime=${remainingSeconds}&unlockTime=${unlockTime}&username=${encodeURIComponent(username)}`);
+    }
 
     //Validar los datos
     if(typeof username !=='string'){
@@ -24,11 +39,11 @@ export async function POST(context: APIContext):Promise<Response>{
 
     //Si el usuario no existe
     if(!foundUser){
-        return new Response("El Usuario no existe ", {status:400})
+        return context.redirect("/signin?error=user_not_found");
     }
     //verificar el usuario tiene password
     if(!foundUser.password){
-        return new Response("El Password no existe ", {status:400})
+        return new Response("El Usuario o el Password es Incorrecto", {status:400})
     }
 
 
@@ -40,8 +55,11 @@ export async function POST(context: APIContext):Promise<Response>{
 
     //si el password no es valido
     if(!valiPassword){
-        return new Response("El Usuario o el Password es Incorrecto ", {status:400})
-    }
+        return context.redirect("/signin?error=invalid_password&username=" + encodeURIComponent(username));    }
+
+    
+
+    await resetFailedAttempts(username);
 
     //El password es valido, el usuario se puede logear
     const session = await lucia.createSession(foundUser.id, {});
@@ -51,6 +69,6 @@ export async function POST(context: APIContext):Promise<Response>{
         sessionCookie.value,
         sessionCookie.attributes
     )
-    return context.redirect("/")
+    return context.redirect("/home")
 
 }

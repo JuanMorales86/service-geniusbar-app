@@ -2,42 +2,75 @@
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
 import { Argon2id } from 'oslo/password'
-import { db, User } from "astro:db";
+import { db, eq, User } from "astro:db";
 import { lucia } from "@/auth/auth";
+const cl = console.log.bind(console);
 
 export async function POST(context:APIContext) : Promise<Response> {
     //Primero leer los datos del form
     const formData = await context.request.formData();
-    const username = formData.get("username");
+    const usernameInput = formData.get("username");
+    const username = typeof usernameInput === 'string' ? usernameInput : '';
     const password = formData.get("password");
+    const adminCode = formData.get("adminCode");
+
+    const {ADMIN_USER_LEVEL, ADMIN_USERNAMES } = import.meta.env;
+    const adminUsers = String(ADMIN_USERNAMES);
+    const adminUserLevel = String(ADMIN_USER_LEVEL);
+
+    const adminUsernames = adminUsers?.split(',') || [];
+    const isAdminUsername = adminUsernames.includes(username);
+    const hasValidAdminCode = adminCode === adminUserLevel;
+
+    const isAdmin = isAdminUsername && hasValidAdminCode;
+    
+    try{
+        //Flujo de validacion
+        //Verificar si el usuario ya existe
+        const existingUser = await db.select().from(User).where(eq(User.username, username));// existingUser es un array que contiene los resultados de la consulta a la base de datos
+        if (existingUser.length > 0) {// length > 0 significa que se encontró al menos un usuario con ese nombre. Si es mayor que 0, significa que ya existe un usuario con ese nombre
+            return context.redirect("/signup?error=user_exists&message=" + encodeURIComponent("Este usuario ya existe")); 
+
+            /** 
+            Redirige al usuario de vuelta al formulario de registro.
+            Añade parámetros en la URL:
+                > error=user_exists: identificador del tipo de error.
+                > message=: el mensaje que se mostrará al usuario.
+            encodeURIComponent(): función que codifica el texto para que sea seguro usarlo en URLs. */
+        }
 
     //Validar los datos
     if (!username || !password){
-        return new Response("Usuario o Contraseña incorrectos", {status:400})
+        return context.redirect("/signup?error=invalid_input&message=" + encodeURIComponent("Usuario o Contraseña incorrectos"));
     }
-
+    
     if( typeof username !== 'string' || username.length < 4){
-        return new Response("El Usuario debe contener al menos 4 caracteres de longitud ", {status:400})
+        // return new Response("El Usuario debe contener al menos 4 caracteres de longitud ", {status:400})
+        return context.redirect("/signup?error=invalid_username&message=" + encodeURIComponent("Usuario debe contener al menos 4 caracteres de longitud"));
     }
-
+    
     if( typeof password !== 'string' || password.length < 4){
-        return new Response("La Contraseña debe contener al menos 4 caracteres de longitud ", {status:400})
+        // return new Response("La Contraseña debe contener al menos 4 caracteres de longitud ", {status:400})
+        return context.redirect("/signup?error=invalid_password&message=" + encodeURIComponent("La Contraseña debe contener al menos 4 caracteres de longitud"));
     }
+    
 
-    //Insertar el usuario en la base de datos
-
+    
+    //Insertar el usuario en la base de datos (creacion del usurio)
     const userId = generateId(15);//genera un id del usuario
     const hashedPassword = await new Argon2id().hash(password);//el await es por q devuelve una promesa es el hash de su contrasena
-
+    
     await db.insert(User).values([
         {
             id: userId,
             username,
             password: hashedPassword,
+            github_id: null,
+            isAdmin: isAdmin,
         },
     ])
-
-    //generar session
+    
+    //generar cookie de session (gestion de sesiones)
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     context.cookies.set(
@@ -45,6 +78,21 @@ export async function POST(context:APIContext) : Promise<Response> {
         sessionCookie.value,
         sessionCookie.attributes
     )
+    
+    return context.redirect("/serviciosm")
+    //Manejo de errores
+} catch(error) {
+    console.error("Error durante el registro:", error);
+    return context.redirect("/signup?error=server_error&message=" + encodeURIComponent("Error en el servidor"));
+    
+}
 
-    return context.redirect("/")
+}
+
+//Redirige las peticionoes GET de vuelta a la pagina de registro
+export async function GET(): Promise<Response> {
+    return new Response(null, {
+        status: 307,
+        headers: { Location: '/signup' }
+    });
 }

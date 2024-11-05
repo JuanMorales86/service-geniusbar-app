@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { GET } from '../pages/api/getOrders';
+
+const orders = await GET
+
+console.log(orders)
+
+if(orders.length < 1) {
+  setTimeout(() => {
+    window.location.href = '/home'; }, 3000);
+}
+
+---
+
+<Layout title="spiner">
+  <div class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-gray-100 z-50">
+    <div class="flex flex-col items-center justify-center">
+      <Icon size={50} class=" text-sky-600 custom:text-4xl text-5xl animate-spin-slow hover:animate-none origin-center drop-shadow-xl" 
+        name="lucide:atom" 
+        title="logo de carga atomo...."
+        />
+        <span class="custom:text-2xl">Cargando...</span>
+      </div>  
+    </div>
+</Layout>
+
+

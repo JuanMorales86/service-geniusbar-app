@@ -1,20 +1,24 @@
 ---
 
-
 interface Props {
   title: string;
   description: string;
+  user?:{} | null;
+  
 }
 
-const { title, description } = Astro.props;
+const { title, description, user } = Astro.props;
+console.log(user)
+
 ---
 
-<header transition:persist="true" class="py-8 px-4 mx-w-xl lg:py-2 lg:px-6">
-  <div class="mx-auto mb-8 lg:mb-8 text-center">
+<header class="py-8 px-4 mx-w-xl lg:py-2 lg:px-6">
+  <div class="mx-auto mb-4 lg:mb-4 text-center">
+
+    <h2 class="text-5xl text-white tracking-tight font-sans font-bold">{title}</h2>
     
-    <h2 class="mb-4 text-5xl text-white tracking-tight roboto-bold">{title}</h2>
     <p
-      class="font-light text-gray-500 sm:text-xl dark:text-gray-400 roboto-regular"
+      class="font-light sm:text-xl dark:text-gray-400 font-apple"
     >
       {description}
     </p>

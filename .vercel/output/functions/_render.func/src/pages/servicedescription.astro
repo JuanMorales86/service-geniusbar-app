@@ -1,0 +1,49 @@
+---
+import Layout from '@/./layouts/Layout.astro'
+import ParallaxServices from  '@/components/parallaxServices'
+const detailServices = [
+    {
+        title: 'Cambio de Pantallas',
+        description: 'Nuestro servicio de cambio de pantallas se enfoca en el reemplazo de pantallas dañadas o rotas para restaurar la funcionalidad y la estética del dispositivo.',
+        image: 'https://i.imgur.com/maICruG.png'
+    },
+    {
+        title: 'Cambio de Baterias',
+        description: 'Con nuestro servicio de cambio de baterias, podrás sustituir las baterías agotadas o falladas en tu equipo celular, tablet o pc portatil, lo que aumenta su duración de vida y su desempeño.',
+        image: 'https://i.imgur.com/RGIN6yq.png'
+    },
+    {
+        title: 'Cambio de Carcazas',
+        description: 'Nuestro servicio de cambio de carcasa completa te permite reemplazar la carcasa dañada o deteriorada de tu celular y darle un aspecto nuevo y fresco.',
+        image: 'https://i.imgur.com/oU5Yi8f.png'
+    },
+    {
+        title: 'Cambio de Pines de Carga',
+        description: 'Si el puerto de carga de tu celular está defectuoso, nuestro servicio de cambio de pines de carga te permitirá reemplazar los soldadura que están fallando para restaurar la funcionalidad del dispositivo.',
+        image: 'https://i.imgur.com/Rzly3iL.png'
+    },
+    {
+        title: 'Reparacion con Microsoldaduras',
+        description: 'Nuestra oferta de reparación con microsoldaduras se enfoca en la reparación de placas, ICs de carga y ICs de táctiles utilizando técnicas de micro soldadura especializadas. Esto incluye la reparación de placas dañadas o rotas, los problemas de conexión de los ICs y los problemas relacionados con los pines de carga, entre otras.',
+        image: 'https://i.imgur.com/GpHQn3C.png'
+    },
+    {
+        title: 'Reparaciones Multimarcas',
+        description: 'Nuestra oferta de reparaciones multimarcas se enfoca en la reparación de diferentes marcas de celulares, incluidos iPhone, Android y BlackBerry. Con nuestro servicio podrás restaurar el funcionamiento de tu dispositivo y asegurarte de que pueda ser utilizado nuevamente sin problemas.',
+        image: 'https://i.imgur.com/mAxgfP1.png'
+    }
+]
+
+---
+
+<Layout title='Servicios Detalles 📱 GeniusBar'>
+ <ParallaxServices services={detailServices} client:load />
+</Layout>
+
+<style>
+    body{
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+
+    }
+</style>

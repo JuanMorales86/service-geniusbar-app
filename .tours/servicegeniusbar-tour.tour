@@ -1,0 +1,101 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "parallaxServices.jsx",
+  "steps": [
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Referencias usando useRef para almacenar los elementos de sección y fondo.",
+      "line": 7
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Es una funcion para llamar al console.log solo con cl",
+      "line": 3
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Esto hace que el factor aumente gradualmente hasta el cuarto índice y luego se mantenga constante.",
+      "line": 18
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": " Esta función implementa un efecto de parallax y fade-in para secciones de contenido al hacer scroll.",
+      "line": 11
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "obtener la posicion del scroll",
+      "line": 13
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Interar sobre cada seccion usando foreach",
+      "line": 14
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Obtenemos las dimensiones y posicion del elemento de seccion en relacion con el viewport. Esto proporciona datos sobre donde se encuentra la seccion en la pantalla. En otras palabras da la posición vertical del borde superior del elemento en relación con la ventana del navegador.",
+      "line": 15
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "1) rect.top da la posición vertical del borde superior del elemento en relación con la ventana del navegador.\r\n2) window.innerHeight / 2 calcula la mitad de la altura de la ventana del navegador.\r\n3) Restar estos valores (rect.top - window.innerHeight / 2) determina la distancia del elemento al centro vertical de la pantalla.\r\n\r\nEste cálculo es crucial para el efecto parallax, ya que permite ajustar el desplazamiento de cada elemento basándose en su posición relativa al centro de la pantalla. Esto crea un punto de referencia consistente para todos los elementos, lo que resulta en un efecto de desplazamiento suave y visualmente atractivo.",
+      "line": 16
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Calcula un factor de desplazamiento para cada seccion. Este factor aumenta con el indice de la seccion, pero esta limitado a un maximo de 0.5. Esto asegura que las secciones mas bajas no se desplacen demasiado. Nota: lo cambie a let por la modicifcacion de la variable en el if mas abajo pero originalmente era sin el if y con el const",
+      "line": 19
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Calcula el desplazamiento real para la seccion. Utiliza la posiciono vertical de laseccion (rect.top), la ajusta al centro de la ventana, y la multiplica por el factor calculado. Esto determina cuanto se movera la seccion durante el scroll, creando el efect parallax.",
+      "line": 20
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Ajuste adicional para indices mayores a 4",
+      "line": 22
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Reduce el factor para subir mas la imagen",
+      "line": 23
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Aplica una transformacion al fondo de la seccion para crear e efecto parallax. Para el fondo",
+      "line": 27
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Fade in efecto para titulo y descripcion.//Aplica una transformación a la sección misma para el efecto de desplazamiento. Para la seccion",
+      "line": 31
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "conclucion: Esto crea un efecto parallax más suave y consistente, donde el fondo se mueve más rápido que la sección, pero ambos mantienen una relación constante.\r\n\r\nAl limitar el crecimiento del factor y aplicar diferentes multiplicadores, eliminamos el gap pronunciado que aparecía después del cuarto índice.",
+      "line": 32
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Calcula y aplica opacidad para crear un efecto fade-in",
+      "line": 33
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Se agrega el evento listener para el scroll al montar el componente.",
+      "line": 38
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "//Se remueve el event listener al desmontar el componente para evitar el memory leak",
+      "line": 39
+    },
+    {
+      "file": "src/components/parallaxServices.jsx",
+      "description": "Cambiar backgroundposition a 'center-top'como originalmente estaba ya que ahora subi la imagen -50px mas arriba",
+      "line": 54
+    }
+  ]
+}

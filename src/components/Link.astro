@@ -1,0 +1,21 @@
+---
+import type { Links } from "@/data/layout/links";
+import { Icon } from "astro-icon/components";
+import IcoNavApple from "../utilities/icons/icoNavApple.astro";
+import Headerbutton from "./Headerbutton.astro";
+
+const {title, url} = Astro.props as Links;
+---
+
+<!-- <a href={url} class="hover:underline">
+    {title}
+</a> -->
+
+<Headerbutton href={url}>
+{title === 'Home' && <Icon class="text-black text-xl" name="lucide:home" />}
+{title === 'Servicios' && <IcoNavApple slot="before" />}
+{title === 'Ordenes y Reparaciones' && <Icon name="lucide:book-copy"/>}
+{title === 'Contacto'  && <Icon class="text-black text-xl" name="lucide:contact-round" />}
+{title}
+</Headerbutton>
+

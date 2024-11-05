@@ -28,9 +28,23 @@ Navbar.jsx
 Logout.jsx
 Headerbutton.jsx
 User.jsx
+enviar-email.ts
+
+#Apis
+sendMail-Respaldo.js
+
+#db
+config.ts
+seed.ts
+checktables.ts
 
 #Src
 middleware.ts
+Pruebas
+theme.ts
+
+#txts
+definiciones.txt
 
 
 

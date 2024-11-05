@@ -1,0 +1,46 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "createOrder.ts",
+  "steps": [
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "This approach safely handles cases where latestOrder might be null or undefined, or when ordernumber might not exist. If any part of the chain is null or undefined, it will default to '000', ensuring that the parseInt function always receives a valid string.",
+      "line": 13
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Esta función garantiza que cada nueva orden tenga un número único y secuencial, manejando correctamente el caso de la primera orden y asegurando que los números siempre tengan el formato deseado.",
+      "line": 2
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Se importan las dependencias necesarias de \"astro:db\": la base de datos (db), la función para ordenar de forma descendente (desc), y el modelo ServiceOrder.",
+      "line": 1
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Se define una función asíncrona llamada getNextOrderNumber.",
+      "line": 3
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Dentro de la función, se realiza una consulta a la base de datos:\r\n\r\nSe selecciona solo la columna 'ordernumber' de la tabla ServiceOrder.\r\nSe ordena de forma descendente por 'ordernumber'.\r\nSe limita el resultado a 1 registro (el más reciente).",
+      "line": 4
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Si no se encuentra ningún registro (latestOrder.length === 0), se devuelve 'Orden000' como el primer número de orden.",
+      "line": 9
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Se calcula el siguiente número sumando 1 al último número.",
+      "line": 14
+    },
+    {
+      "file": "src/utilities/orderUtils.ts",
+      "description": "Finalmente, se devuelve el nuevo número de orden formateado.",
+      "line": 15
+    }
+  ]
+}

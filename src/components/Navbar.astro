@@ -1,43 +1,97 @@
 ---
-import IcoNavApple from "../utilities/icons/icoNavApple.astro";
-import IcoNavList from "../utilities/icons/icoNavList.astro";
-import Headerbutton from "./Headerbutton.astro";
-import Logout from "./Logout.astro";
+import { linksData } from "@/data/layout/links";
+import Link from "./Link.astro";
+import { Icon } from "astro-icon/components";
+import UserDropdown from "./UserDropdown.astro";
+const cl = console.log.bind(console)
+
+interface Props {
+  user: {
+    username: string;
+    isAdmin: boolean;
+  }
+}
 
 const {user} = Astro.props
+cl(user)
 
-console.log(user)
 ---
 
-<nav class="flex flex-col justify-around  text-center md:flex-row sticky top-0 bg-gray-400 shrink-0">
-  <div class="flex flex-col items-center  justify-center md:flex-row">
-    <Headerbutton class="text-white" href="/"> Home</Headerbutton>
-    <Headerbutton href="/servicios">
-      <IcoNavApple slot="before" />
-      Servicios
-    </Headerbutton>
-    <Headerbutton href="/">
-      <IcoNavList slot="before" />
-      Ordenes y Reparaciones</Headerbutton>
-    <Headerbutton href="/">Contacto</Headerbutton>
-    <Headerbutton href="/signup">Crear Cuenta</Headerbutton>
-    <Headerbutton href="/signin">Iniciar Sesión</Headerbutton>
-  {
-    user ? 
-      <Logout /> 
-      :
-      <Headerbutton href="/api/github">Iniciar Sesión con GitHub
-        </Headerbutton>
-  } 
-        
-    </div> 
-        <div>
+<nav  id="navbar" class="navbar z-10 flex flex-col custom:flex-row justify-around text-center  sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1">
+  <div class="flex flex-col items-center justify-center custom:flex-row">
+
+    <div class="flex custom:w-56">
+      <a href="/" class="hover:animate-spin-reverse animate-spin-scale" title="Home" aria-label="logo tienda">
+        <Icon class="text-sky-600 custom:text-4xl text-5xl animate-spin-slow hover:animate-none origin-center drop-shadow-xl " name="lucide:atom" title="logo tienda"/>
+      </a>
+    </div>
+
+   <!-- {linksData.map(link => (
+   (!link.requiresAuth || user) && <Link title={link.title} url={link.url} />
+   ))} -->
+
+   {linksData.map(link => {
+    const showLink = !link.requiresAuth || user;
+    const finalUrl = (link.adminOnly && user && !user.isAdmin)
+    ? link.userRedirectUrl
+    : link.url;
+
+    return showLink && <Link title={link.title} url={finalUrl} />;
+   })}
+    
+    </div>
+
+        <div  class="flex flex-row items-center gap-x-8 font-display font-bold text-sky-500 filter drop-shadow-lg hover:cursor-none">
+          <UserDropdown user={user}/>
           {
             user ?
-            `hola: ${user.username}`
+            `Hola: ${user.username} ✋`
             :
-            `hola`
+            `Hola: anonimo`
           }
         </div>
    
 </nav>
+
+<script>
+	import { initNavbar } from "@/script/navbar";//secript para desaparecer el navbar cuando baje el scroll
+ 
+	
+		document.addEventListener("astro:page-load", () => {
+			initNavbar();
+		})  
+
+	</script>
+
+  <!-- <style is:global>
+    /* ejemplo diferente .icon-link:hover .animate-spin-slow {
+      animation: spin-reverse 0.5 linear 1 forwards;
+    } */
+  
+    //modo estructural comun como css
+    .icon-link {
+      animation-name: spin;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .icon-link:hover {
+      animation-name: spin-reverse;
+      animation-duration: 0.5s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards; 
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spin-reverse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+  </style> -->
+
+<!--DOMContentLoaded -->
+<!-- astro:after-swap -->

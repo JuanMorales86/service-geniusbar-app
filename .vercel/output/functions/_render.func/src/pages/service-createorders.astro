@@ -1,0 +1,11 @@
+---
+import CreateOrderForm from "@/components/service-createorders-form";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Creacion de Ordenes">
+    <CreateOrderForm client:load/>
+    <script>
+        console.log('Service create orders page loaded');
+      </script>
+</Layout>

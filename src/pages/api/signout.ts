@@ -12,7 +12,7 @@ export async function POST(context: APIContext): Promise<Response> {
 	await lucia.invalidateSession(context.locals.session.id);//Metodo de lucia invalidateSession accedo mediante locals a la session iniciada a su id para invalidarla
 
     //Vuelve a crear una cookie de session pero vacia
-	const sessionCookie = lucia.createBlankSessionCookie();//aqui despues secrea una cookie de ssesion pero vacia
+	const sessionCookie = lucia.createBlankSessionCookie();//aqui despues se crea una cookie de ssesion pero vacia
 	context.cookies.set(
 	sessionCookie.name, 
 	sessionCookie.value, 
@@ -20,5 +20,5 @@ export async function POST(context: APIContext): Promise<Response> {
 );
 
     //por ultimo redirige a la pagina de login
-	return context.redirect("/");
+	return context.redirect("/serviciosm");
 }

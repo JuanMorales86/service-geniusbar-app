@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+import DropDownbutton from "./DropDownbutton.astro";
+
+const {user} = Astro.props
+---
+
+
+<div  class="relative inline-block text-left">
+    <div>
+        <button  type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 focus-visible:outline-none focus-visible:ring-0" id="user-menu" aria-haspopup="true" aria-expanded="false">
+            <!--Icono Burguer-->
+            <Icon class="text-white text-2xl" name="lucide:square-menu"/>
+        </button>
+    </div>
+
+    <div  class="absolute right-0 w-56 mt-2  bg-gray-400 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id="user-dropdown">
+        
+                    <div class="py-1"  role="none">
+                        <DropDownbutton class="block px-4 py-2  " href="/" role="menuitem">
+                            Home
+                        </DropDownbutton>
+                    
+                        <DropDownbutton class="block px-4 py-2 " href="/signin" role="menuitem">
+                            
+                        </DropDownbutton>
+                    </div>
+
+                    <div class="py-1" role="none">
+                        <DropDownbutton class="rounded-none" href="/api/github" role="menuitem">
+                            Iniciar Sesión con Github
+                        </DropDownbutton>
+                    </div>
+
+    </div>
+
+</div>
+
+<script >
+    import { initUserDropdown, destroyUserDropdown } from '@/script/inituserdropdown.js';
+
+    document.addEventListener('astro:page-load', () => {
+        initUserDropdown();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        destroyUserDropdown();
+        initUserDropdown();
+    });
+</script>

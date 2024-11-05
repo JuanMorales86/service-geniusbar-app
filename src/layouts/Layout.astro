@@ -1,42 +1,68 @@
 ---
 import Header from '@/components/Header.astro';
 import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
+import '@fontsource-variable/montserrat/wght.css';// Supports weights 100-900
+import '@fontsource/roboto/700.css';//Supports 100-300-400-500-700-900-italic
+import '@fontsource-variable/space-grotesk';//Supports 300-700
+
 
 interface Props {
 	title: string;
+	user?: {}; //si no lo uso en todos los layouts se coloca ?
 }
 
-const { title } = Astro.props;
-const user = Astro.locals.user;
+const { title, user = Astro.locals.user } = Astro.props;
+
+console.log(user)
 
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="dark">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="Sitio web de cotizaciones y administración de órdenes de reparación para dispositivos electrónicos. Guía al cliente en la identificación de fallas y ofrece soluciones eficientes.">
+		<meta name="keywords" content="reparación de dispositivos electrónicos, servicio técnico, cotizaciones, administración de órdenes, reparación de teléfonos, reparación de tablets, reparación de laptops, solución de problemas, identificación de fallas, Astro, Preact, Tailwind CSS, Redux, TypeScript, AstroDB, Fontsource, TablerIcons">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ViewTransitions/>
 	</head>
-	<body>
-		<div class="pt-1">
-
-			<Navbar  user={user}/>
-			<Header title='Genius Bar Servicio Tecnico' description='Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.'/>
-			<main>
-				<slot/>
+	<body >
+		<div class=" bg-gradient-to-b from-blk-gray-dark from-10% via-blk-gray-dark via-10% to-blk-gray-light to-100%">
+			
+			<Navbar user={user}/>
+			<Header user={user} title='Genius Bar Servicio Tecnico' description='Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.'/>
+			<main >
+				<slot transition:name="hero">
 			</main>
+			<Footer/>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 	</body>
 </html>
 
 
 <style is:global>
  @import '../styles/global.css';
- @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Mono:wght@400;500;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@300;400;700;900&display=swap');
 </style>
+
+
+<!-- GRADIENT CLARO class="bg-gradient-to-b from-gray-700 from-10% via-gray-500 via-10% to-gray-300 to-90% flex flex-col items-center justify-center" -->
+
+<!-- Astro.locals.user:
+
+Astro.locals es un objeto que contiene datos locales que se pasan desde el servidor al componente de Astro.
+Cuando obtienes const user = Astro.locals.user, estás accediendo al valor del usuario que se ha pasado desde el servidor al componente.
+Este valor generalmente se establece en el servidor, por ejemplo, después de autenticar al usuario o recuperar su información de la base de datos.
+Al utilizar Astro.locals.user, estás accediendo directamente al valor del usuario y puedes utilizarlo en tu componente. -->
+
+
+<!-- declare module 'astro':
+
+La declaración declare module 'astro' se utiliza para extender la interfaz AstroSlotAttributes y agregar una propiedad user al objeto Astro.props que se pasa al slot.
+Esta declaración es necesaria cuando deseas pasar el valor del usuario al slot y hacer que sea accesible en el componente hijo a través de Astro.props.
+La declaración en sí misma no establece la conexión con la base de datos ni recupera el valor del usuario. Solo define la estructura y el tipo de la propiedad user en el objeto Astro.props. -->
