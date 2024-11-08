@@ -2,13 +2,17 @@
 import DropDownbutton from "./DropDownbutton.astro";
 import Logout from "./Logout.astro";
 
-const {user} = Astro.props
+const { user, variant = 'desktop' } = Astro.props
+const buttonId = `user-menu-${variant}`;
+const dropdownId = `user-dropdown-${variant}`;
 ---
 
-
-<div  class="relative inline-block text-left">
+<!-- Front User Menu Icon -->
+<div  class="relative inline-block text-left ">
     <div>
-        <button  type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 focus-visible:outline-none focus-visible:ring-0" id="user-menu" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 " 
+        id={buttonId}
+        aria-haspopup="true" aria-expanded="false">
             <!--Icono usuario-->
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -16,7 +20,7 @@ const {user} = Astro.props
         </button>
     </div>
 
-    <div  class="absolute right-0 w-56 mt-2  bg-gray-400 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id="user-dropdown">
+    <div  class="absolute right-0 mt-2  bg-gray-400 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden w-full lg:w-56 z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
         {
             user ? (
                 <div class="px-4 py-3" role="none">
@@ -57,7 +61,8 @@ const {user} = Astro.props
     import { initLockTimer } from '@/script/lockTimer';
 
     document.addEventListener('astro:page-load', () => {
-        initUserDropdown();
+        destroyUserDropdown();//Limpiar el dropdown
+        initUserDropdown();//Inicializar el dropdown
         initLockTimer();
     });
 

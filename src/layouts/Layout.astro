@@ -10,13 +10,14 @@ import '@fontsource-variable/space-grotesk';//Supports 300-700
 
 interface Props {
 	title: string;
-	user?: {}; //si no lo uso en todos los layouts se coloca ?
+	user?: {
+		username: string;
+		isAdmin: boolean;
+	} | null; //si no lo uso en todos los layouts se coloca ?
 }
 
+
 const { title, user = Astro.locals.user } = Astro.props;
-
-console.log(user)
-
 ---
 
 <!doctype html>

@@ -2,47 +2,70 @@
 import { linksData } from "@/data/layout/links";
 import Link from "./Link.astro";
 import { Icon } from "astro-icon/components";
-import UserDropdown from "./UserDropdown.astro";
+import UserDropdown from "./UserMenu.astro";
 const cl = console.log.bind(console)
 
 interface Props {
-  user: {
+  user?: {
     username: string;
     isAdmin: boolean;
-  }
-}
+  } | null
+};
+
 
 const {user} = Astro.props
-cl(user)
-
 ---
 
-<nav  id="navbar" class="navbar z-10 flex flex-col custom:flex-row justify-around text-center  sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1">
-  <div class="flex flex-col items-center justify-center custom:flex-row">
-
-    <div class="flex custom:w-56">
-      <a href="/" class="hover:animate-spin-reverse animate-spin-scale" title="Home" aria-label="logo tienda">
-        <Icon class="text-sky-600 custom:text-4xl text-5xl animate-spin-slow hover:animate-none origin-center drop-shadow-xl " name="lucide:atom" title="logo tienda"/>
+<nav  id="navbar" class="navbar z-20 flex justify-between items-center  sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1 px-4">
+    <div class="flex items-center custom:w-56">
+      <a href="/home" class="hover:animate-spin-reverse animate-spin-scale" title="Home" aria-label="logo tienda">
+        <Icon class="text-sky-600 custom:text-4xl text-4xl animate-spin-slow hover:animate-none origin-center drop-shadow-xl " name="lucide:atom" title="logo tienda"/>
       </a>
     </div>
 
-   <!-- {linksData.map(link => (
-   (!link.requiresAuth || user) && <Link title={link.title} url={link.url} />
-   ))} -->
+    <!-- Menu Hamburger for mobile -->
+     <button id="mobile-menu-button" class="lg:hidden text-sky-600">
+      <Icon name="lucide:menu" class="w-6 h-6"/>
+     </button>
 
-   {linksData.map(link => {
-    const showLink = !link.requiresAuth || user;
-    const finalUrl = (link.adminOnly && user && !user.isAdmin)
-    ? link.userRedirectUrl
-    : link.url;
+     <!-- Side Menu for mobile -->
+     <div id="mobile-menu" class="lg:hidden fixed top-0 right-0 h-screen w-64 bg-gray-esp transform translate-x-full transition-transform duration-300 ease-in-out z-30" >
+      <div class="p-4 h-full w-full overflow-y-auto">
+        <button id="close-menu" class="absolute top-4 right-4">
+          <Icon name="lucide:x" class="w-6 h-6 text-sky-600"/>
+        </button>
+        <div class="flex flex-col space-y-4 mt-16">
+          {linksData.map(link => {
+            const showLink = !link.requiresAuth || user;
+            const finalUrl = (link.adminOnly && user && !user.isAdmin)
+            ? link.userRedirectUrl
+            : link.url;
+        
+            return showLink && <Link title={link.title} url={finalUrl} />;
+           })}
+           <UserDropdown user={user} variant="mobile"/>
+        </div>
+      </div>
+     </div>
 
-    return showLink && <Link title={link.title} url={finalUrl} />;
-   })}
-    
-    </div>
+      <!-- Menu desktop -->
+       <div class="hidden lg:flex items-center space-x-4 z-50">
+        {linksData.map(link => {
+          const showLink = !link.requiresAuth || user;
+          const finalUrl = (link.adminOnly && user && !user.isAdmin)
+          ? link.userRedirectUrl
+          : link.url;
+      
+          return showLink && <Link title={link.title} url={finalUrl} />;
+         })}
+         <div class="relative">
+           <UserDropdown user={user} variant="desktop"/>
+         </div>
+       </div>
 
-        <div  class="flex flex-row items-center gap-x-8 font-display font-bold text-sky-500 filter drop-shadow-lg hover:cursor-none">
-          <UserDropdown user={user}/>
+
+
+        <div  class="flex flex-row items-center gap-x-8 font-display font-bold text-sky-500 filter drop-shadow-lg hyphens-auto hover:cursor-none">
           {
             user ?
             `Hola: ${user.username} ✋`
@@ -54,44 +77,12 @@ cl(user)
 </nav>
 
 <script>
-	import { initNavbar } from "@/script/navbar";//secript para desaparecer el navbar cuando baje el scroll
+  import { initNavbarMobileMenu } from '@/components/initMobileMenu.ts'
+	// import { initNavbar } from "@/script/navbar";script para desaparecer el navbar cuando baje el scroll
  
 	
 		document.addEventListener("astro:page-load", () => {
-			initNavbar();
+			initNavbarMobileMenu();
 		})  
 
 	</script>
-
-  <!-- <style is:global>
-    /* ejemplo diferente .icon-link:hover .animate-spin-slow {
-      animation: spin-reverse 0.5 linear 1 forwards;
-    } */
-  
-    //modo estructural comun como css
-    .icon-link {
-      animation-name: spin;
-      animation-duration: 3s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-
-    .icon-link:hover {
-      animation-name: spin-reverse;
-      animation-duration: 0.5s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards; 
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes spin-reverse {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(-360deg); }
-    }
-  </style> -->
-
-<!--DOMContentLoaded -->
-<!-- astro:after-swap -->

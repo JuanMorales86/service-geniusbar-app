@@ -36,6 +36,7 @@ sendMail-Respaldo.js
 #db
 config.ts
 seed.ts
+turso.ts
 checktables.ts
 
 #Src
@@ -45,10 +46,12 @@ theme.ts
 
 #txts
 definiciones.txt
+guardarcodigo.txt
 
 #tours
 .tours
 
-
+#data\layout
+links.ts
 
 
