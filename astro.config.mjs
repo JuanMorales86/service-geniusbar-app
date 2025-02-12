@@ -1,13 +1,12 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import db from "@astrojs/db";
 
 
 import icon from "astro-icon";
 
-console.log('Starting Astro configuration');
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,14 +32,27 @@ export default defineConfig({
   //   }
   // },
 
-  integrations: [tailwind(), db(), react(), icon({
+  integrations: [
+    tailwind(), 
+    db({
+      remoteUrl: process.env.ASTRO_DB_REMOTE_URL,
+      token:process.env.ASTRO_STUDIO_APP_TOKEN
+    }), 
+    react(), 
+    icon({
     include: { 
       lucide: ["*"] //importar todo * biblioteca de iconos
     }
   })],
   vite: {
     optimizeDeps: {
+      include: ["react-to-print"],
       exclude: ["oslo"]
+    },
+    build: {
+      commonjsOptions: {
+        include: [/react-to-print/]
+      }
     },
     server: {
       hmr:{

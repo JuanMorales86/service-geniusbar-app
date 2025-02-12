@@ -34,7 +34,7 @@ export const linksData: Links[] = [//Array linksData: Es un array de objetos que
         title: 'Contacto',
         url: '/formservice',
         requiresAuth: false
-    }
+    },
 ]
 
 export const linksServices: Linkservice[] = [
@@ -60,3 +60,34 @@ export const linksServices: Linkservice[] = [
     }
 
 ]
+
+
+export const CarouselTexts = {
+    firstRow: [
+        "Pantalla",
+        "Bateria",
+        "Puerto de Carga",
+        "Cámara Principal",
+        "Cámara Selfie",
+        "Face ID",
+        "Boton Home",
+        "Botones Volumen",
+        "Boton Silenciar",
+        "Botón de Power",
+        "Altavoz",
+        "Microfono",
+    ],
+    secondRow: [
+        "Antena Wifi",
+        "Antena Bluetooth",
+        "Señal de Red Celular",
+        "Bandeja Sim",
+        "Sensor de Proximidad",
+        "Plaquitas y Tornillos",
+        "Sistema Software",
+        "Codigos de Error de Software",
+        "Liquido en el Equipo",
+        "Cambio de Vidrio Pantalla",
+        "Entre Otros"
+    ]
+}

@@ -4,9 +4,10 @@
 
 import type { APIContext } from "astro";
 
-import { db, Usermsj } from "astro:db";
+//import { db, Usermsj } from "astro:db";
 import { sendMail } from "@/pages/api/sendMail";
 import { generateId } from "lucia";
+import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 
 
@@ -33,19 +34,24 @@ export async function POST(context: APIContext) : Promise<Response> {
 
     //Guardar en Base de datos
     try{
-        await db.insert(Usermsj).values(
-            {
-            id: userGenerate,
-            userId: userGenerate,
-            nombre,
-            modelo,
-            telefono,
-            email,
-            mensaje,
-            opcionSeleccionada,
-            opcionDispositivo,
-            }
-        );
+        // await db.insert(Usermsj).values(
+        //     {
+        //     id: userGenerate,
+        //     userId: userGenerate,
+        //     nombre,
+        //     modelo,
+        //     telefono,
+        //     email,
+        //     mensaje,
+        //     opcionSeleccionada,
+        //     opcionDispositivo,
+        //     }
+        // );
+
+        await turdb.execute({
+            sql:'INSERT INTO Usermsj (id, userId, nombre, modelo, telefono, email, mensaje, opcionSeleccionada, opcionDispositivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            args:[userGenerate, userGenerate, nombre, modelo, telefono, email, mensaje, opcionSeleccionada, opcionDispositivo]
+        })
 
         //!el env si funciona aqui
         const mailOptions ={ 

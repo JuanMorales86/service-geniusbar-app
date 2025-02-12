@@ -2,7 +2,8 @@
 import Header from '@/components/Header.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
-import { ViewTransitions } from 'astro:transitions';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { ClientRouter } from 'astro:transitions'; // lo que era ViewTransition ahora se llama ClientRouter
 import '@fontsource-variable/montserrat/wght.css';// Supports weights 100-900
 import '@fontsource/roboto/700.css';//Supports 100-300-400-500-700-900-italic
 import '@fontsource-variable/space-grotesk';//Supports 300-700
@@ -10,37 +11,82 @@ import '@fontsource-variable/space-grotesk';//Supports 300-700
 
 interface Props {
 	title: string;
+	description?: string;
+	keywords?: string;
+	image?: string;
+	url?: string;
 	user?: {
 		username: string;
 		isAdmin: boolean;
 	} | null; //si no lo uso en todos los layouts se coloca ?
+	showWhatsAppButton?: boolean;
 }
 
 
-const { title, user = Astro.locals.user } = Astro.props;
+const { title = 'Genius Bar Servicio Técnico - Apple', 
+		description = 'Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.',
+		keywords = 'reparación de dispositivos de telefonia movil y portatiles laptops, servicio técnico, Apple, Genius Bar, iPhone, Mac, iPad, Multi marca, Samsung, Xiaomi, Tcl, Android"',
+		image = "@/utilities/img/logogeniusbar130px.png",
+		url = "https://apple.com",
+		user = Astro.locals.user, 
+		showWhatsAppButton = true } 
+		= Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="dark">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Sitio web de cotizaciones y administración de órdenes de reparación para dispositivos electrónicos. Guía al cliente en la identificación de fallas y ofrece soluciones eficientes.">
-		<meta name="keywords" content="reparación de dispositivos electrónicos, servicio técnico, cotizaciones, administración de órdenes, reparación de teléfonos, reparación de tablets, reparación de laptops, solución de problemas, identificación de fallas, Astro, Preact, Tailwind CSS, Redux, TypeScript, AstroDB, Fontsource, TablerIcons">
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width" initiall-scale="1.0" />
+		<meta name={description} content={description} />
+		<meta name={keywords} content={keywords} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<ViewTransitions/>
+
+		<!-- Open Graph (Para Faceebook, Twitter, Instagram, Whastapp etc.) -->
+		 <meta property="og:type" content="website" />
+		 <meta property="og:title" content={title} />
+		 <meta property="og:description" content={description} />
+		 <meta property="og:image" content={image} />
+		 <meta property="og:url" content={url} />
+
+		 <!-- Twitter -->
+		  <meta name="twitter:card" content="summary_large_image" />
+		  <meta name="twitter:title" content={title} />
+		  <meta name="twitter:description" content={description} />
+		  <meta name="twitter:image" content={image} />
+
+		  <!-- JSON-LD para google -->
+		<script type="application/ld+json">
+			{JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "WebPage",
+				"url": url,
+				"name": title,
+				"description": description,
+				"image": image,
+				"publisher": {
+					"@type": "Organization",
+					"name": "GeniusBarService",
+				}
+			}, null, 2)}
+		</script>
+
+		<ClientRouter/>
 	</head>
 	<body >
-		<div class=" bg-gradient-to-b from-blk-gray-dark from-10% via-blk-gray-dark via-10% to-blk-gray-light to-100%">
-			
+		<div class:list={["bg-gradient-to-b",
+				"from-[#FEFFFE] via-[#F8F8F8] to-[#F5F5F5]", //FEFFFE COLOR APPLE (Gris)
+				"dark:from-blk-gray-dark dark:via-blk-dark dark:to-blk-gray-light",
+				]}>
 			<Navbar user={user}/>
-			<Header user={user} title='Genius Bar Servicio Tecnico' description='Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.'/>
+			<Header title={title} description={description} user={user}/>
 			<main >
-				<slot transition:name="hero">
+				<slot />
 			</main>
 			<Footer/>
+			{showWhatsAppButton && <WhatsAppButton />}
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 	</body>
@@ -51,7 +97,7 @@ const { title, user = Astro.locals.user } = Astro.props;
  @import '../styles/global.css';
 </style>
 
-
+<!-- is:global -->
 <!-- GRADIENT CLARO class="bg-gradient-to-b from-gray-700 from-10% via-gray-500 via-10% to-gray-300 to-90% flex flex-col items-center justify-center" -->
 
 <!-- Astro.locals.user:
@@ -67,3 +113,20 @@ Al utilizar Astro.locals.user, estás accediendo directamente al valor del usuar
 La declaración declare module 'astro' se utiliza para extender la interfaz AstroSlotAttributes y agregar una propiedad user al objeto Astro.props que se pasa al slot.
 Esta declaración es necesaria cuando deseas pasar el valor del usuario al slot y hacer que sea accesible en el componente hijo a través de Astro.props.
 La declaración en sí misma no establece la conexión con la base de datos ni recupera el valor del usuario. Solo define la estructura y el tipo de la propiedad user en el objeto Astro.props. -->
+
+<!-- La sintaxis class:list en Astro es una forma dinámica de manejar clases CSS. Veamos el desglose en español:
+
+class:list={[ ]} - Es una directiva especial de Astro que permite definir un array de clases
+
+Las clases definidas:
+
+"bg-gradient-to-b" - Define un gradiente base que va de arriba hacia abajo
+"dark:from-blk-gray-dark dark:via-blk-gray-dark dark:to-blk-gray-light" - Define los colores del gradiente para el tema oscuro:
+from: color inicial
+via: color intermedio
+to: color final
+"light:from-gray-100 light:via-gray-200 light:to-gray-300" - Define los colores del gradiente para el tema claro:
+from: gris claro inicial
+via: gris intermedio
+to: gris final
+Esta estructura permite que el gradiente cambie automáticamente según el tema del sistema (claro u oscuro) que esté activo. -->

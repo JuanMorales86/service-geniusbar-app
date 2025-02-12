@@ -1,7 +1,8 @@
 // src/components/service-createorders-form.jsx
 import React from "react";
-import Toast from "./ToastContainer";
+import {Toast} from "./ToastContainer";
 import CustomMultiSelect from "./CreateMultiSelect";
+
 const cl = console.log.bind(console)
 cl("Service create orders form component loaded");
 
@@ -74,28 +75,88 @@ export default function CreateOrderForm() {
   const [colorToast, setColorToast] = React.useState("text-lime-500/90");
   const [toastPositionV, setToastPositionV] = React.useState("");
   const [toastPositionH, setToastPositionH] = React.useState("");
+  const [emailStatus, setEmailStatus] = React.useState({
+    isValid: true,
+    isChecking: false,
+    wasChecked: false
+  });
+  let timeoutId;
 
   
   const resetForm = () => {
     setFormData(initialFormState);
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-
-  const handleMultipleSelect = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-    setFormData(prevData => { 
-      const currentSelections = prevData.phonedetails.split(',').map(item => item.trim()).filter(Boolean);
-      const updateSelections = selectedOptions.length === 0 ? [] : currentSelections.filter(item => !selectedOptions.includes(item)).concat(selectedOptions.filter(item => !currentSelections.includes(item)));
-      return {
-        ...formData, 
-        phonedetails: [...new Set(updateSelections)].join(', ')
-      };
+    setEmailStatus({
+      isValid: true,
+      isChecking: false,
+      wasChecked: false
     });
   };
+
+  const verifyEmail = async (email) => {
+    setEmailStatus(prev => ({ ...prev, isChecking: true }));
+    try {
+      const response = await fetch('/api/verify-email',{
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+      const data = await response.json();;
+      
+      setEmailStatus({
+        isValid: data.isValid,
+        isChecking: false,
+        wasChecked: true
+      });
+
+      if(!data.isValid && !emailStatus.isChecking){
+        setTimeout(() => {
+          setToastMessage('Email no válido o dominino inexistente ')
+          setToastType('error');
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 2000);
+        }, 1000);
+      }
+    } catch(error){
+      console.error('Error varificando el email:', error);
+      setEmailStatus({
+        isValid: false,
+        isChecking: false,
+        wasChecked: true
+      });
+    }
+    //setIsCheckingEmail(false);
+  }
+
+    // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if(name === 'email' && value){
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => verifyEmail(value), 1000);
+    }
+  };
+
+  
+
+  // const handleMultipleSelect = (e) => {
+  //   const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
+  //   setFormData(prevData => { 
+  //     const currentSelections = prevData.phonedetails.split(',').map(item => item.trim()).filter(Boolean);
+  //     const updateSelections = selectedOptions.length === 0 ? [] : currentSelections.filter(item => !selectedOptions.includes(item)).concat(selectedOptions.filter(item => !currentSelections.includes(item)));
+  //     return {
+  //       ...formData, 
+  //       phonedetails: [...new Set(updateSelections)].join(', ')
+  //     };
+  //   });
+  // };
 
   const navigateTo = () => {
     window.location.href = '/ordershow-page';
@@ -148,7 +209,7 @@ export default function CreateOrderForm() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-blend-lighten">
-      <div className="bg-gradient-sweep animate-gradient-sweep text-light-text dark:text-dark-text p-8 rounded-lg dark:border dark:border-light-bg shadow-lg w-full max-w-4xl">
+      <div className="bg-gradient-sweep animate-gradient-sweep text-mainbrand-light dark:text-mainbrand-light p-8 rounded-lg dark:border dark:border-light-bg shadow-lg w-full max-w-4xl">
         <h2 className="text-3xl font-bold mb-6 text-center">
           Hoja de Servicio Técnico
         </h2>
@@ -196,15 +257,29 @@ export default function CreateOrderForm() {
               >
                 Email
               </label>
+              <div className="relative">
+
               <input
                 type="email"
                 name="email"
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="cliente@hotmail.com"
-                className="form-inputbox"
+                placeholder="cliente@mail.com"
+                className={`form-inputbox ${emailStatus.wasChecked && !emailStatus.isValid ? 'border-redCrayola' : ''}
+                ${emailStatus.wasChecked && emailStatus.isValid ? 'border-lime-500' : ''}`}
               />
+              {emailStatus.isChecking && (
+              <span className="absolute right-2 top-1/2 -translate-y-1/2 text-sky-500 text-sm animate-pulse">
+                Verificando email...
+                </span>
+                )}
+                {emailStatus.wasChecked && !emailStatus.isChecking && (
+                <span className={`asolute right-2 top-1/2 -translate-y-1/2 ${emailStatus.isValid ? 'text-lime-500' : 'text-redCrayola'}`}>
+                  {emailStatus.isValid ? '🆗' : '❌'}
+                </span>
+              )}
+              </div>
             </div>
             <div className="space-y-2 transition-all duration-300 hover:transform hover:scale-105">
               <label
@@ -333,8 +408,8 @@ export default function CreateOrderForm() {
             }}
             />
 
-          <div className="flex justify-center">
-            <button type="submit" className="btn-custom">
+          <div className="flex justify-center gap-4">
+            <button type="submit" className="btn-custom-orders">
               Crear Orden
             </button>
             <button type="button" onClick={() => {
@@ -346,12 +421,12 @@ export default function CreateOrderForm() {
               setToastType('warning')
               setTimeout(() => setShowToast(false), 5000);
               setColorToast('text-redCrayola')
-              }} className="btn-custom">
+              }} className="btn-custom-orders">
               Borrar Formulario
             </button>
           </div>
           <div className="flex justify-center">
-            <button onClick={navigateTo} className="btn-custom">
+            <button onClick={navigateTo} className="btn-custom-orders">
               Mostrar Ordenes
             </button>
           </div>

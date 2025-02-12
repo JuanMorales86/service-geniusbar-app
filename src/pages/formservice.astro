@@ -1,17 +1,19 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import FormReact from "@/components/FormReact"
-// const values = import.meta.env.USER_GMAIL //para pasar env con astro
-// const values2 = import.meta.env.PASS_APP_GMAIL //para pasar env con astro
 
+const seoData = {
+    title: "Formulario de Consultas - Genius Bar Service",
+    description: "Consulta por la reparación de tu iPhone, MacBook, iPad o Apple Watch. Rellena nuestro formulario y recibe una respuesta rápida de nuestros expertos.",
+    keywords: "consulta reparación Apple, formulario servicio técnico, reparación iPhone, Genius Bar Argentina, reparación MacBook, consulta Genius Bar",
+    image: "https://i.imgur.com/DGwX45I.png?format=webp",
+    url: "https://geniusbarservice.com/formservice",
 
+}
 ---
 
 
-<Layout title="Servicios Genius Bar Formulario">
-    <!-- <div class="flex flex-col gap-8 items-center text-white font-bold">
-        <h1 class="text-2xl font-bold py-4">Formulario de Servicio Tecnico Clientes</h1>
-    </div> -->
+<Layout {...seoData}>
     <div class="flex flex-col gap-8 ">
     <FormReact  client:load>
     </FormReact>

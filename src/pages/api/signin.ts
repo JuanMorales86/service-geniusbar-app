@@ -3,6 +3,7 @@ import type { APIContext } from "astro";
 import { db, eq, User } from "astro:db";
 import { checkAccountLocked, incrementFailedAttempts, resetFailedAttempts } from "./signverificator";
 import { Argon2id } from "oslo/password";
+import { turdb } from "db/turso";
 
 export async function POST(context: APIContext):Promise<Response>{
 
@@ -33,9 +34,18 @@ export async function POST(context: APIContext):Promise<Response>{
     if(typeof password !=='string'){
         return new Response("El Usuario o el Password es Incorrecto ", {status:400})
     }
-
+    
     //Buscar el usuario en la bd
-    const foundUser = (await db.select().from(User).where(eq(User.username, username))).at(0) //compara el User.username con el usuario que han enviado
+    //const foundUser = (await db.select().from(User).where(eq(User.username, username))).at(0) //compara el User.username con el usuario que han enviado
+    const { rows: [foundUser] } = await turdb.execute({
+        sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
+        args: [username]
+
+        /** - Usamos turdb.execute() para hacer consultas SQL directas
+            - rows: [foundUser] desestructura directamente el primer resultado
+            - LIMIT 1 asegura que solo obtenemos un usuario
+            - El objeto foundUser mantiene la misma estructura con las propiedades id, username, password, etc. */
+    })
 
     //Si el usuario no existe
     if(!foundUser){
@@ -49,8 +59,8 @@ export async function POST(context: APIContext):Promise<Response>{
 
     //Comparar el password hash
     const valiPassword = await new Argon2id().verify(
-        foundUser.password, 
-        password
+        String(foundUser.password), 
+        String(password)
     )
 
     //si el password no es valido
@@ -62,13 +72,13 @@ export async function POST(context: APIContext):Promise<Response>{
     await resetFailedAttempts(username);
 
     //El password es valido, el usuario se puede logear
-    const session = await lucia.createSession(foundUser.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id)
+    const session = await lucia.createSession(String(foundUser.id), {});//Creasesión de usuario
+    const sessionCookie = lucia.createSessionCookie(session.id)//Crea una cookie de sesión
     context.cookies.set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
-    )
-    return context.redirect("/home")
+    ) //Establece la cookie en la respuesta
+    return context.redirect("/home") //Redirige al usuario a la página de inicio
 
 }

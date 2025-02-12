@@ -1,10 +1,20 @@
 //Proceso de Registro
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
-import { Argon2id } from 'oslo/password'
+import { Argon2id } from 'oslo/password';
 import { db, eq, User } from "astro:db";
 import { lucia } from "@/auth/auth";
+import { turdb } from "db/turso";
 const cl = console.log.bind(console);
+
+async function storeSessionData(session: any) {
+    const sessionids = generateId(32);//genera un id del usuario
+      //Almacenar la session en la base de datos Turso
+      await turdb.execute({
+        sql: "INSERT INTO Session ( id, user_id, expires_at) VALUES (?, ?, ?)",
+        args: [ sessionids, session.userId, session.expiresAt]
+    })
+}
 
 export async function POST(context:APIContext) : Promise<Response> {
     //Primero leer los datos del form
@@ -27,7 +37,12 @@ export async function POST(context:APIContext) : Promise<Response> {
     try{
         //Flujo de validacion
         //Verificar si el usuario ya existe
-        const existingUser = await db.select().from(User).where(eq(User.username, username));// existingUser es un array que contiene los resultados de la consulta a la base de datos
+        //const existingUser = await db.select().from(User).where(eq(User.username, username));// existingUser es un array que contiene los resultados de la consulta a la base de datos
+        //Checks if User exists - Turso Version
+        const { rows: existingUser } = await turdb.execute({
+            sql: "SELECT * FROM User WHERE username = ?", 
+            args: [username]
+        });
         if (existingUser.length > 0) {// length > 0 significa que se encontró al menos un usuario con ese nombre. Si es mayor que 0, significa que ya existe un usuario con ese nombre
             return context.redirect("/signup?error=user_exists&message=" + encodeURIComponent("Este usuario ya existe")); 
 
@@ -60,26 +75,38 @@ export async function POST(context:APIContext) : Promise<Response> {
     const userId = generateId(15);//genera un id del usuario
     const hashedPassword = await new Argon2id().hash(password);//el await es por q devuelve una promesa es el hash de su contrasena
     
-    await db.insert(User).values([
-        {
-            id: userId,
-            username,
-            password: hashedPassword,
-            github_id: null,
-            isAdmin: isAdmin,
-        },
-    ])
+    // await db.insert(User).values([
+    //     {
+    //         id: userId,
+    //         username,
+    //         password: hashedPassword,
+    //         github_id: null,
+    //         isAdmin: isAdmin,
+    //     },
+    // ])
+
+    await turdb.execute({
+        sql: "INSERT INTO User (id, username, password, github_id, isAdmin) VALUES ( ?, ? , ?, ? , ? )",
+        args: [userId, username, hashedPassword, null, isAdmin]
+    })
+    cl('User created successfully:', userId);
+    //Crear sesion de usuario 
+    
+    
     
     //generar cookie de session (gestion de sesiones)
-    const session = await lucia.createSession(userId, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
+    const session = await lucia.createSession(userId, {});//Crear session
+    const sessionCookie = lucia.createSessionCookie(session.id);//Setear la cookie de sesion
     context.cookies.set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
     )
+
+    //await storeSessionData(session)
+
     
-    return context.redirect("/serviciosm")
+    return context.redirect("/serviciosm")//Redirige a la pagina 
     //Manejo de errores
 } catch(error) {
     console.error("Error durante el registro:", error);

@@ -1,5 +1,5 @@
 import { generateState } from 'arctic';
-import { g as github } from '../../chunks/auth_cIWyA0at.mjs';
+import { g as github } from '../../chunks/auth_DaMfVQSL.mjs';
 export { renderers } from '../../renderers.mjs';
 
 async function GET(context) {

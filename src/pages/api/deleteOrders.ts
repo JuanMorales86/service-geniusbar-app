@@ -1,5 +1,5 @@
 import type { APIContext } from "astro"
-import { db, eq, ServiceOrder } from "astro:db"
+import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 
 interface Props {}
@@ -9,10 +9,14 @@ export async function DELETE(context: APIContext): Promise<Response> {
         const {id} = await context.request.json();
         cl('Tratando de borrar la orden', id);
 
-        const deletedOrder = await db
-            .delete(ServiceOrder)
-            .where(eq(ServiceOrder.id, id))
-            .returning();
+ 
+        const {rows: deletedOrder} = await turdb.execute({
+            sql:'DELETE FROM ServiceOrder WHERE id = ? RETURNING *',
+            args: [id],
+        })
+
+        cl('Delete operation result:', deletedOrder);
+
         if (deletedOrder.length === 0) {
             return new Response(JSON.stringify({ error: 'Orden no encontrada' }), {
                 status: 404,
@@ -20,7 +24,10 @@ export async function DELETE(context: APIContext): Promise<Response> {
             });
         }
 
-    return new Response(JSON.stringify({message: 'Orden borrada con exitoso'}), {
+        return new Response(JSON.stringify({
+            message: 'Orden borrada con exitoso',
+            deletedOrder: deletedOrder[0]
+        }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
     });

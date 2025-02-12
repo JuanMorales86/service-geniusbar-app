@@ -44,7 +44,7 @@ const ParallaxServices = ({services}) => {
                 >
                     <div 
                     ref = {(el) => (backgroundsRefs.current[index] = el)}
-                    className={"absolute  inset-0 bg-contain bg-top bg-no-repeat rounded-xl "}
+                    className={"absolute inset-0 bg-contain bg-top bg-no-repeat rounded-xl "}
                     style={{backgroundImage: ` url(${service.image})`,
                     backgroundPosition: 'center -50px', backgroundSize: 'contain',    
                 }}>

@@ -24,6 +24,10 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/adminConfig\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/api\\/callbacks\\/github\\/?$",
 			"dest": "_render"
 		},
@@ -32,11 +36,23 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/deleteOrders\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/api\\/enviar-email\\/?$",
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/getOrders\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/api\\/github\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/resetAttempts\\/?$",
 			"dest": "_render"
 		},
 		{
@@ -60,7 +76,15 @@
 			"dest": "_render"
 		},
 		{
+			"src": "^\\/api\\/signverificator\\/?$",
+			"dest": "_render"
+		},
+		{
 			"src": "^\\/api\\/submitForm\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/updateOrders\\/?$",
 			"dest": "_render"
 		},
 		{
@@ -72,11 +96,15 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^\\/service-createorders\\/?$",
+			"src": "^\\/home\\/?$",
 			"dest": "_render"
 		},
 		{
-			"src": "^\\/service-orders\\/?$",
+			"src": "^\\/ordershow-page\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/service-createorders\\/?$",
 			"dest": "_render"
 		},
 		{
@@ -101,10 +129,6 @@
 		},
 		{
 			"src": "^\\/TestTurso\\/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^\\/$",
 			"dest": "_render"
 		},
 		{

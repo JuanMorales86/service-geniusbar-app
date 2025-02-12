@@ -1,0 +1,21 @@
+---
+import { GET } from './api/getOrders'
+import OrdersShowCase from '@/components/OrdersShowCase'
+import Layout from "../layouts/Layout.astro"
+import MyLoadingIcon from '@/components/MyLoadingIcon.astro';
+
+const orders =  GET;
+---
+
+
+
+
+<Layout title='Lista de Ordenes 📱'>
+    {
+        orders.length > 0 ? (
+            <OrdersShowCase client:load/>
+        ) : (
+            <MyLoadingIcon />
+        )
+    }
+</Layout>

@@ -18,9 +18,18 @@ if (errorParam === "user_not_found") {
 } else if (errorParam === "permanent_lock") {
   errorMessage = "Tu cuenta ha sido bloqueada permanentemente por exceder el número máximo de intentos. Contacta al administrador.";
 }
+
+const seoData = {
+  title: "Iniciar sesión - Genius Bar Service",
+  description: "Accede a tu cuenta en Genius Bar Service para gestionar tus consultas y seguimiento de reparaciones.",
+  keywords: "iniciar sesión, login Genius Bar, acceder cuenta servicio técnico Apple, seguimiento de reparaciones, Genius Bar Argentina",
+  image: "https://i.imgur.com/xYGD6SF.jpg?format=webp",
+  url:"https://geniusbarservice.com/signin"
+}
+
 ---
 
-<Layout title="Inicio de Session">
+<Layout {...seoData}>
   <section class="">
     <div
       class="flex flex-col items-center justify-center px-6 py-0 mx-auto lg:py-0"

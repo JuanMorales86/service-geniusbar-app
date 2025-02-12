@@ -1,9 +1,10 @@
-import { d as db, a as Usermsj } from '../../chunks/_astro_db_Cmk0CmgW.mjs';
-import { s as sendMail } from '../../chunks/sendMail_Dk3nIJNo.mjs';
+import { d as db, b as Usermsj } from '../../chunks/_astro_db_B32vqkck.mjs';
+import { s as sendMail } from '../../chunks/sendMail_yqDenn5b.mjs';
 import { generateId } from 'lucia';
 export { renderers } from '../../renderers.mjs';
 
 const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": undefined, "SSR": true};
+console.log.bind(console);
 async function POST(context) {
   const formData = await context.request.formData();
   const nombre = formData.get("nombre");
@@ -13,11 +14,14 @@ async function POST(context) {
   const mensaje = formData.get("mensaje");
   const opcionSeleccionada = formData.get("opcionSeleccionada");
   const opcionDispositivo = formData.get("opcionDispositivo");
-  const { PASS_APP_GMAIL, USER_GMAIL } = Object.assign(__vite_import_meta_env__, { USER_GMAIL: "juanjosemorales1986@gmail.com", PASS_APP_GMAIL: "rvhbtmhpjbcccuvm", OS: process.env.OS });
+  const { PASS_APP_GMAIL, USER_GMAIL, ACCOUNT_SMPT_HOST, ACCOUNT_SMPT_SERVICE, ACCOUNT_SMPT_PORT, ACCOUNT_SMPT_SECURE } = Object.assign(__vite_import_meta_env__, { USER_GMAIL: "juanjosemorales1986@gmail.com", PASS_APP_GMAIL: "rvhbtmhpjbcccuvm", ACCOUNT_SMPT_SERVICE: "gmail", ACCOUNT_SMPT_HOST: "smtp.gmail.com", ACCOUNT_SMPT_PORT: "587", ACCOUNT_SMPT_SECURE: "false", OS: process.env.OS });
   let usergmail = String(USER_GMAIL);
   let usergmailp = String(PASS_APP_GMAIL);
+  let accountsmptservice = String(ACCOUNT_SMPT_SERVICE);
+  let accountsmpthost = String(ACCOUNT_SMPT_HOST);
+  let accountsmptport = String(ACCOUNT_SMPT_PORT);
+  let accountsmptsecure = String(ACCOUNT_SMPT_SECURE);
   const userGenerate = generateId(15);
-  console.log(formData);
   try {
     await db.insert(Usermsj).values(
       {
@@ -39,7 +43,7 @@ async function POST(context) {
         address: USER_GMAIL
       },
       // sender address
-      to: `tecnorosativentas@gmail.com, ${email}`,
+      to: `geniusbarservices.ar@gmail.com, ${email}`,
       // list of receivers
       subject: "Confimacion de envío de la consulta",
       // Subject line
@@ -83,7 +87,15 @@ async function POST(context) {
         }
       ]
     };
-    await sendMail(mailOptions, usergmail, usergmailp);
+    await sendMail(
+      mailOptions,
+      usergmail,
+      usergmailp,
+      accountsmptservice,
+      accountsmpthost,
+      accountsmptport,
+      accountsmptsecure
+    );
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {

@@ -10,7 +10,25 @@ const Toast = ({ message, type, positionH, positionV, onClose, color }) => {
     );
 };
 
-export default Toast;
+const ConfirmationToast = ({ message, type, positionH, positionV, onConfirm, onCancel, color }) => {
+    return (
+        <div className={`toast toast-${positionV} toast-${positionH} z-10 transition-all duration-300 ease-in-out`}>
+            <div className={`alert alert-${type} backdrop-opacity-70  bg-dark-input`}>
+              <span className={`font-bold font-apple text-base ${color || 'text-lime-500/90'}`}>{message}</span>
+              <div className="flex gap-2">
+                <button className="btn btn-success btn-sm" onClick={onConfirm}>Sí</button>
+                <button className="btn btn-error btn-sm" onClick={onCancel}>No</button>
+              </div>
+            </div>
+        </div>
+    )
+}
+
+
+export {Toast, ConfirmationToast};
+
+
+
 
 /*
 dependencia: daisyui

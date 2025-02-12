@@ -1,10 +1,10 @@
 /* empty css                                     */
-import { c as createComponent, r as renderTemplate, d as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_BgmmEVtV.mjs';
-import { $ as $$Layout } from '../chunks/Layout_BHzrqhtq.mjs';
+import { c as createComponent, r as renderTemplate, d as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_C3fX89Zu.mjs';
+import { $ as $$Layout } from '../chunks/Layout_BIGIKqIB.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { T as Toast } from '../chunks/ToastContainer_Bdby1Vkr.mjs';
+import { T as Toast } from '../chunks/ToastContainer_BDuoAs-w.mjs';
 export { renderers } from '../renderers.mjs';
 
 const imagesHelpers = [
@@ -725,7 +725,7 @@ function FormServices({}) {
             id: "opcion",
             value: opcionSeleccionada,
             onChange: handleOpcionSeleccionadaChange,
-            className: "select-input",
+            className: "form-inputbox text-center",
             children: /* @__PURE__ */ jsx("optgroup", { label: "Seleccione un tipo de reparación", children: devicetype.map((device) => {
               return /* @__PURE__ */ jsx("option", { value: device.value, children: device.label }, device.value);
             }) })

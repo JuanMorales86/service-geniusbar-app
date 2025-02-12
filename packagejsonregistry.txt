@@ -1,0 +1,58 @@
+
+ESTO ES PARA LLEVAR UN LOG DE LAS ACTUALIZACION DE ASTRO Q HAGO SOBRE EL PACKAGE.JSON
+dia: 10/02/2025 : actualizacion astro 5.2.5
+{
+  "name": "service-geniusbar-app",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host",
+    "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/db": "^0.14.5",
+    "@astrojs/react": "^4.1.4",
+    "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/vercel": "^8.0.2",
+    "@fontsource-variable/montserrat": "^5.1.0",
+    "@fontsource-variable/space-grotesk": "^5.1.0",
+    "@fontsource/fira-sans": "^5.1.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@formkit/tempo": "^0.1.2",
+    "@libsql/client": "^0.3.0",
+    "@lucia-auth/adapter-drizzle": "^1.1.0",
+    "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "@prisma/client": "^6.1.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "arctic": "^1.9.2",
+    "astro": "^5.1.6", 
+    "astro-icon": "^1.1.4",
+    "blurhash": "^2.0.5",
+    "lucia": "^3.2.2",
+    "nodemailer": "^6.9.16",
+    "oslo": "^1.2.1",
+    "prisma": "^6.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.33.5",
+    "tailwind-scrollbar-hide": "^2.0.0",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.18",
+    "@types/nodemailer": "^6.4.17",
+    "daisyui": "^4.12.22",
+    "dotenv": "^16.4.7",
+    "react-hook-form": "^7.54.1",
+    "react-to-print": "^3.0.4",
+    "ts-node": "^10.9.2",
+    "zod": "^3.24.1"
+  }
+}

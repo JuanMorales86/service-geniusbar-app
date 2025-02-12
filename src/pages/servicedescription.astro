@@ -1,6 +1,16 @@
 ---
 import Layout from '@/./layouts/Layout.astro'
-import ParallaxServices from  '@/components/parallaxServices'
+// import ParallaxServices from  '@/components/parallaxServices'
+import ParallaxServicesGSAP from '@/components/parallaxServicesGSAP'
+
+const seoData = {
+  title: "Servicios Detallados 📱 GeniusBar",
+  description: "Servicio técnico especializado en dispositivos Apple",
+  keywords: "iniciar sesión, login Genius Bar, acceder cuenta servicio técnico Apple, seguimiento de reparaciones, Genius Bar Argentina",
+  image: "https://i.imgur.com/xYGD6SF.jpg?format=webp",
+  url:"https://geniusbarservice.com/signin"
+}
+
 const detailServices = [
     {
         title: 'Cambio de Pantallas',
@@ -36,10 +46,10 @@ const detailServices = [
 
 ---
 
-<Layout title='Servicios Detalles 📱 GeniusBar'>
- <ParallaxServices services={detailServices} client:load />
+<Layout {...seoData}>
+ <ParallaxServicesGSAP services={detailServices} client:load />
  
- <section class="bg-sky-700 text-white py-16">
+ <section class="bg-sky-700 text-white py-16 mt-4">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-4">¿Listo para reparar tu dispositivo?</h2>
       <p class="text-xl mb-8">Contáctanos hoy mismo para obtener un diagnóstico gratuito</p>
@@ -55,9 +65,20 @@ const detailServices = [
 </Layout>
 
 <style>
-    body{
+    /* body{
         overflow-x: hidden;
         scroll-behavior: smooth;
+    } */
 
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+
+    .parallax-services {
+        position: relative;
+        
+        height: 100%;
+        overflow: hidden;
+        transform-style: preserve-3d;
     }
 </style>

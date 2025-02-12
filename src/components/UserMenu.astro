@@ -2,6 +2,7 @@
 import DropDownbutton from "./DropDownbutton.astro";
 import Logout from "./Logout.astro";
 
+
 const { user, variant = 'desktop' } = Astro.props
 const buttonId = `user-menu-${variant}`;
 const dropdownId = `user-dropdown-${variant}`;
@@ -44,6 +45,11 @@ const dropdownId = `user-dropdown-${variant}`;
                             Iniciar Sesión con Github
                         </DropDownbutton>
                     </div>
+                    <div class="py-1" role="none">
+                        <DropDownbutton class="rounded-none" href="/api/google" role="menuitem">
+                            Iniciar Sesión con Google
+                        </DropDownbutton>
+                    </div>
                 )
         }
 
@@ -57,18 +63,19 @@ const dropdownId = `user-dropdown-${variant}`;
 </div>
 
 <script >
-    import { initUserDropdown, destroyUserDropdown } from '@/script/inituserdropdown.js';
+    // import { initUserDropdown, destroyUserDropdown } from '@/script/inituserdropdown.js';
+    import { initUserDropdownGSAP, destroyUserDropdownGSAP } from './initUserDropdownGSAP';
     import { initLockTimer } from '@/script/lockTimer';
 
     document.addEventListener('astro:page-load', () => {
-        destroyUserDropdown();//Limpiar el dropdown
-        initUserDropdown();//Inicializar el dropdown
+        destroyUserDropdownGSAP();//Limpiar el dropdown
+        initUserDropdownGSAP();//Inicializar el dropdown
         initLockTimer();
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-        destroyUserDropdown();
-        initUserDropdown();
+        destroyUserDropdownGSAP();
+        initUserDropdownGSAP();
         initLockTimer();
     });
 </script>

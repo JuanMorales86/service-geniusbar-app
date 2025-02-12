@@ -16,6 +16,7 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
         
         getAdminUsers();
     }, []);
+    cl(adminUsers)
   
     const handleUsernameChange = (e: any) => {
         const value = e.target.value;

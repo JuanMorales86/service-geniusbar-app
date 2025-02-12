@@ -53,37 +53,34 @@ export function observerBounce(imageClass, sectionId, animationClass) {
 	if (section) { observerBounce.observe(section);}
 }
 
+
+export function ObserveImages() {// Funcion Sin Uso no me funciono
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+      const element = entry.target;
+      const imageUrl = element.dataset.src;
+
+      if (imageUrl) {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+          const blurImage = element.querySelector('.blur-image');
+          const mainImage = element.querySelector('.main-image');
+
+          if (blurImage) blurImage.style.opacity = 0;
+          if (mainImage) mainImage.style.opacity  = 1;
+        };
+      }
+      observer.unobserve(element);
+    }
+    });
+  }, {threshold: 0.1});
+
+  return observer;
+}
+
 /*
 !Resumen: Este enfoque permite una animación suave que comienza tan pronto como el elemento empieza a entrar en la vista y alcanza su estado final cuando el 40% del elemento es visible, simulando así el comportamiento de animation-range: entry 0% cover 40%. */
 
-/*
-export function observers() {
-    let lastScrollTop = 0;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            //Obtener la posicion alctual del scroll
-            const st = window.scrollY || document.documentElement.scrollTop;
-
-            if (entry.isIntersecting && st > lastScrollTop) {
-                //Scrolling hacia abajo  y el elemento entra en vista
-                entry.target.classList.add('visible');
-            } else if (!entry.isIntersecting && st < lastScrollTop) {
-                //Scrolling hacia arriba  y el elemento sale de la vista
-                entry.target.classList.remove('visible');
-            }
-
-            //Actualizar la ultima posicion del scroll conocida
-            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-
-        });
-    }, {
-        threshold: 0.4 // Esto es equivalente a "40% cover"
-    })
-    
-    document.querySelectorAll('.section').forEach(el => {
-        observer.observe(el)
-    })
-}
-*/
 

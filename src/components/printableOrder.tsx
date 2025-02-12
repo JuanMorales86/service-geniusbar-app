@@ -2,13 +2,15 @@ import React from "react";
 import type { ServiceOrder } from "@/types/database";
 
 export class PrintableOrder extends React.PureComponent<{
-  order: ServiceOrder;
+  order?: ServiceOrder;
+  innerRef?: React.Ref<HTMLDivElement>;
 }> {
+  
   render() {
     const { order } = this.props;
     return (
       <>
-      <div className="printable-order-container font-apple text-black">
+      <div ref={this.props.innerRef} className="printable-order-container font-apple text-black">
         <div className="page first-page">
         <div className="printable-order border-2">
         <div className="flex flex-row justify-around items-center">
@@ -23,19 +25,19 @@ export class PrintableOrder extends React.PureComponent<{
         <div className="text-end text-md border-blk-gray-dark p-2 mb-2 font-semibold">Buenos Aires, 02 de Octubre de 2024</div>
 
         <table className="order-details ">
-          <div className="">
-            <tr><th>Numero de Orden:</th><td>{order.ordernumber}</td></tr>
-            <tr><th>Status:</th><td>{order.status}</td></tr>
-            <tr><th>Cliente:</th><td>{order.clientname}</td></tr>
-            <tr><th>Dni:</th><td>{order.clientdni}</td></tr>
+          <tbody>
+            <tr><th>Numero de Orden:</th><td>{order.ordernumber || 'No Disponible'}</td></tr>
+            <tr><th>Status:</th><td>{order.status || 'No Especificado'}</td></tr>
+            <tr><th>Cliente:</th><td>{order.clientname || 'Anonimo'}</td></tr>
+            <tr><th>Dni:</th><td>{order.clientdni || 'No Resgristrado'}</td></tr>
             <tr><th>Email:</th><td>{order.email || 'Vacio' }</td></tr>
-            <tr><th>Telefono:</th><td>{order.phone}</td></tr>
-            <tr><th>Modelo:</th><td>{order.model}</td></tr>
+            <tr><th>Telefono:</th><td>{order.phone || 'Vacio'}</td></tr>
+            <tr><th>Modelo:</th><td>{order.model || 'No Informado'}</td></tr>
             <tr><th>Serial Equipo:</th><td>{order.serial || "Vacio"}</td></tr>
             <tr><th>Detalles de Visuales del Equipo:</th><td>{order.phonedetails || 'Vacio'}</td></tr>
-            <tr><th>Problema:</th><td>{order.issue}</td></tr>
+            <tr><th>Problema:</th><td>{order.issue || 'No Especificado'}</td></tr>
            
-          </div>
+          </tbody>
         </table>
         <div className="mt-12 left-10 right-10 text-right border-t-2 border-blk-gray-light text-blk-gray-dark pt-2"><span>Cordialmente:<span className="block text-blk-gray-dark font-bold">Juan Morales</span> </span>
         </div>

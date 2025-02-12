@@ -1,24 +1,8 @@
-import { d as db, b as ServiceOrder } from '../../chunks/_astro_db_Cmk0CmgW.mjs';
+import { d as db, S as ServiceOrder, O as OrderCount } from '../../chunks/_astro_db_B32vqkck.mjs';
 import { generateId } from 'lucia';
-import { format } from '@formkit/tempo';
-import { desc } from '@astrojs/db/dist/runtime/virtual.js';
+import { g as getCurrentFormattedDate } from '../../chunks/dateFormatter_BMWjZbs9.mjs';
+import { desc, sql, eq } from '@astrojs/db/dist/runtime/virtual.js';
 export { renderers } from '../../renderers.mjs';
-
-function formatDate() {
-  const d = /* @__PURE__ */ new Date();
-  return format({
-    date: d,
-    format: { date: "short", time: "short" },
-    // usa la sintaxys del objeto para la funcion format
-    tz: "America/Argentina/Buenos_Aires",
-    // especifica el timezone usando la propiedad tz
-    locale: "es-AR"
-    // setea el locale usando la propiedad locale.
-  });
-}
-function getCurrentFormattedDate() {
-  return formatDate();
-}
 
 async function getNextOrderNumber() {
   const latestOrder = await db.select({ ordernumber: ServiceOrder.ordernumber }).from(ServiceOrder).orderBy(desc(ServiceOrder.ordernumber)).limit(1);
@@ -43,10 +27,14 @@ async function POST(contex) {
     model,
     serial,
     issue,
-    devicepassword
+    devicepassword,
+    aditionalObservation,
+    donerepairments,
+    topay,
+    payed
   } = formData;
-  console.log("CreateOrder API endpoint hit", formData);
-  console.log("Attempting to insert order into database", {
+  cl("CreateOrder API endpoint hit", formData);
+  cl("Attempting to insert order into database", {
     clientname,
     clientdni,
     email,
@@ -76,8 +64,46 @@ async function POST(contex) {
       devicepassword,
       status: "Pending",
       createdAt: getCurrentFormattedDate(),
-      updatedAt: getCurrentFormattedDate()
+      updatedAt: getCurrentFormattedDate(),
+      aditionalObservation: "Sin especificar",
+      donerepairments: "Sin especificar",
+      topay: 0,
+      payed: 0
     });
+    const countResults = await db.select().from(OrderCount).limit(1);
+    if (countResults.length === 0) {
+      const initialCountResult = await db.select({ total: sql`COUNT(*)` }).from(ServiceOrder);
+      //! Usamos sql<number> para tipar el resultado
+      const initialCount = initialCountResult[0]?.total;
+      await db.insert(OrderCount).values({
+        totalOrders: initialCount || 0
+        // Usar 0 si initialCount es undefined
+      });
+    }
+    const countResultsUpdate = await db.select({
+      idCount: OrderCount.id,
+      totalOrders: OrderCount.totalOrders
+    }).from(OrderCount).limit(1);
+    cl("countResults:", countResultsUpdate);
+    if (countResultsUpdate.length > 0) {
+      cl("countResults[0]:", countResultsUpdate[0]);
+      const idFromCount = countResultsUpdate[0].idCount;
+      cl("idFrontCount", idFromCount);
+      if (idFromCount !== void 0) {
+        const orderCountBeforeUpdate = await db.select().from(OrderCount).limit(1);
+        console.log("OrderCount antes de la actualización:", orderCountBeforeUpdate);
+        await db.update(OrderCount).set({
+          totalOrders: sql`(${db.select({ count: sql`COUNT(*)` }).from(ServiceOrder)})`
+        }).where(eq(OrderCount.id, idFromCount));
+        const orderCountAfterUpdate = await db.select().from(OrderCount).limit(1);
+        console.log("OrderCount después de la actualización:", orderCountAfterUpdate);
+      } else {
+        console.error("Error: idFromCount es un undefined, pero countResults.lenght > 0");
+        await db.insert(OrderCount).values({ totalOrders: 0 });
+      }
+    } else {
+      await db.insert(OrderCount).values({ totalOrders: 0 });
+    }
     cl("orden creada:", orderId, "Numero de Orden:", orderNumber);
     return new Response(JSON.stringify({ success: true, orderId, orderNumber }), {
       status: 200,

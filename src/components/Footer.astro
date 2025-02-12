@@ -6,12 +6,61 @@ import { Icon } from "astro-icon/components";
 ---
 
 <footer>
-    <div class="flex flex-col md:flex-row justify-center gap-5 border-y-[1px] border-blue-400 py-4 mt-8 items-center bg-blk-gray-dark ">
+    <div class="flex flex-col  justify-center gap-5 border-y-[1px] border-blue-400 py-4 mt-8 items-center bg-blk-gray-dark ">
         <!-- <IcoAtom name="logo" wi="3rem" he="3rem" /> -->
-        <Icon class="text-sky-600 text-6xl" name="lucide:atom" />
-        <nav class="flex flex-col md:flex-row gap-3 items-center">
-            {linksData.map((link: Links) => <Linksfooter {...link}/>)}
-        </nav>
+        <!-- <Icon class="text-sky-600 text-6xl" name="lucide:atom" /> -->
+         <div class="flex justify-around items-center w-full px-4">
+            <div class="flex items-center">
+
+                <picture class="w-16 h-auto ">
+                    <a href="/home">
+                        <img class="rounded-lg hover:animate-shake transition-all duration-1000 ease-in-out" src="/src//utilities//img/logogeniusbar130px.png" alt="Logo Empresa">
+                    </a>
+                </picture>
+            </div>
+            <nav class="flex flex-col md:flex-row gap-3 items-center">
+                {linksData.map((link: Links) => <Linksfooter {...link}/>)}
+            </nav>
+         </div>
+
+         <div class="flex flex-col md:flex-row justify-between items-center border-t border-blue-400  pt-4">
+            <!-- Social Networks -->
+            <div class="flex gap-2">
+                <a href="https://www.instagram.com/geniusbartechnology/"  aria-label="facebook" ><Icon class=" text-pink-instagram animate-pulse transition-all duration-500 text-4xl" name="lucide:instagram" /></a>
+                <a href="https://www.facebook.com/Barradeatomo"  aria-label="instagram"><Icon class="text-blue-facebook animate-pulse transition-all duration-500 text-4xl" name="lucide:facebook" /></a>
+            </div>
+
+            <form action="/subscribe" method="POST" class="flex flex-col sm:flex-row items-center gap-2 mt-4 ms-0 md:mt-0 md:ms-8">
+                <input type="email" placeholder="Tu correo electrónico" class="px-4 py-2 border rounded bg-gray-700 text-white" required>
+                <button type="submit" class="bg-blue-500 text-white font-apple font-bold px-4 py-2 rounded hover:scale-custom2 hover:animate-pulse transition-all ease-in-out duration-500">Suscribirse</button>
+            </form>
+         </div>
+
+         <div class="flex flex-col justify-center items-center border-t border-blue-400 pt-4">
+           
+             <div class="flex flex-col md:flex-row justify-center items-center gap-4 pb-4">
+                <p class="font-apple font-bold text-center text-white">
+                  Puedes Pagar Con:
+                </p>
+                
+                    <img class="overflow-hidden w-[60px] h-[40px] object-cover" src="https://i.imgur.com/xm8TQC3.png" alt="visa" />
+            
+               
+                    <img class="overflow-hidden w-[60px] h-[40px] object-cover" src="https://i.imgur.com/uuLL15w.png" alt="MasterCard" />
+               
+              
+                    <img class="overflow-hidden w-[60px] h-[40px] object-cover" src="https://i.imgur.com/Ibf7JfX.png" alt="AmercanExpress" />  
+              
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <p class="font-apple font-bold">Tranferencia <wbr />/ Deposito Bancario</p>
+                </div>
+          
+         </div>
+
+        <div class="flex justify-center  border-t-[1px] border-blue-400 py-4 mt-8 items-center bg-blk-gray-dark w-full h-full">
+            <p class="text-mainbrand-light"><span class="text-sky-600 font-apple font-bold">Genius Bar (2017)</span> © 2025 Desarrollado por <a class="hover:underline text-mainbrand-light " href="mailto:juanjosemorales1986@gmail.com">juanmdev</a></p>
+        </div>
     </div>
 </footer>
 

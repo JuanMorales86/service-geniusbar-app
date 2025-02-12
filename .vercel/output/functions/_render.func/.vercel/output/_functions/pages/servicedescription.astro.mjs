@@ -1,6 +1,6 @@
 /* empty css                                     */
-import { c as createComponent, r as renderTemplate, d as renderComponent } from '../chunks/astro/server_BgmmEVtV.mjs';
-import { $ as $$Layout } from '../chunks/Layout_BHzrqhtq.mjs';
+import { c as createComponent, r as renderTemplate, d as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_C3fX89Zu.mjs';
+import { $ as $$Layout } from '../chunks/Layout_BIGIKqIB.mjs';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import React from 'react';
 /* empty css                                              */
@@ -92,7 +92,9 @@ const $$Servicedescription = createComponent(($$result, $$props, $$slots) => {
       image: "https://i.imgur.com/mAxgfP1.png"
     }
   ];
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Servicios Detalles \u{1F4F1} GeniusBar", "data-astro-cid-l4easj7h": true }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "ParallaxServices", ParallaxServices, { "services": detailServices, "client:load": true, "client:component-hydration": "load", "client:component-path": "@/components/parallaxServices", "client:component-export": "default", "data-astro-cid-l4easj7h": true })} ` })} `;
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Servicios Detalles \u{1F4F1} GeniusBar", "data-astro-cid-l4easj7h": true }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "ParallaxServices", ParallaxServices, { "services": detailServices, "client:load": true, "client:component-hydration": "load", "client:component-path": "@/components/parallaxServices", "client:component-export": "default", "data-astro-cid-l4easj7h": true })} ${maybeRenderHead()}<section class="bg-sky-700 text-white py-16" data-astro-cid-l4easj7h> <div class="container mx-auto px-6 text-center" data-astro-cid-l4easj7h> <h2 class="text-3xl font-bold mb-4" data-astro-cid-l4easj7h>¿Listo para reparar tu dispositivo?</h2> <p class="text-xl mb-8" data-astro-cid-l4easj7h>Contáctanos hoy mismo para obtener un diagnóstico gratuito</p> <a href="/formservice" class="btn-custom-hero" data-astro-cid-l4easj7h>
+Solicitar Servicio
+</a> </div> </section> ` })} `;
 }, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/src/pages/servicedescription.astro", void 0);
 
 const $$file = "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/src/pages/servicedescription.astro";

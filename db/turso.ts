@@ -1,7 +1,11 @@
 //Inicializar un nuevo cliente para turso
 import { createClient } from '@libsql/client/web'
 
-export const turso = createClient({
-    url: import.meta.env.TURSO_DATABASE_URL,
-    authToken: import.meta.env.TURSO_AUTH_TOKEN,
+
+export const turdb = createClient({
+    url: import.meta.env.ASTRO_DB_REMOTE_URL,
+    authToken: import.meta.env.ASTRO_STUDIO_APP_TOKEN,
 })
+
+
+

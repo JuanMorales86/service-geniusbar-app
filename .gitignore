@@ -22,6 +22,8 @@ pnpm-debug.log*
 
 #Pages
 TestTurso.astro
+MenuDropdown.astro
+
 
 #Components
 Navbar.jsx
@@ -29,9 +31,21 @@ Logout.jsx
 Headerbutton.jsx
 User.jsx
 enviar-email.ts
+BlurHashImages.tsx
+ImageLoader.tsx
+initMobileMenu.ts
+
+#Scripts
+inituserdropdown.js
+navbar.js
+observer.js
+
+#Utilities
+encodeImageToBlurhash.ts
 
 #Apis
 sendMail-Respaldo.js
+generate-blurhash.ts
 
 #db
 config.ts
@@ -43,6 +57,7 @@ checktables.ts
 middleware.ts
 Pruebas
 theme.ts
+prisma
 
 #txts
 definiciones.txt

@@ -4,8 +4,11 @@
 
 :root {
     --accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
+		--accent-light: 249, 249, 249;
 		--accent-dark: #13151a;
+    --accent-sencundary: #4f46e5;
+    --accent-secundary-light: #818cf8;
+    --accent-secundary-dark: #312e81;
 		--accent-gradient: linear-gradient(
 			45deg,
 			rgb(var(--accent)),
@@ -14,6 +17,7 @@
 		);
     --max-width: 100%;
     --padding: 1rem;
+    color-scheme: light dark;
     
 }
 html, body {
@@ -22,17 +26,26 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
-    color-scheme: dark light;
+    background-color: light-dark(#ffffff, #13151a);
+    color: light-dark(#13151a, #ffffff);
     margin: 0;
     padding: 0;
     /* scrollbar-width: none; */
     scrollbar-color: var(--accent-light);
+    scrollbar-width: thin;
+    
     
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
+  }
+}
+
+@media(prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
   }
 }
 
@@ -67,6 +80,14 @@ main{
  .bg-gradient-sweep {
   background: linear-gradient(to top, #000000, #333333, #000000);
   background-size: 100% 200%;
+}
+
+.text-shadow-custom {
+  text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 

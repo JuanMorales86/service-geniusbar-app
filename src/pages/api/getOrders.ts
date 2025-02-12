@@ -1,7 +1,7 @@
 import { offset } from "@formkit/tempo";
 import type { APIContext } from "astro";
-import { db, ServiceOrder, OrderCount } from "astro:db";
 import { PUT as updateOrder } from "./updateOrders";
+import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 
 
@@ -22,17 +22,32 @@ export async function GET(context: APIContext): Promise<Response> {
         const offset = (actualPage - 1) * elementsPerPages;
 
         //1.Obtener el conteo total de ordenes desde OrderCount
-        const countResults = await db.select({ totalOrders: OrderCount.totalOrders }).from(OrderCount).limit(1);
-        const totalOrder = countResults[0].totalOrders ?? 0;
+        // const countResults = await db.select({ totalOrders: OrderCount.totalOrders }).from(OrderCount).limit(1);
+
+        const {rows: countResults} = await turdb.execute({
+            sql: "SELECT totalOrders FROM OrderCount LIMIT 1 ",
+            args: [],
+        })
+
+        cl('Count countResults', countResults)
+
+        const totalOrder = Number(countResults[0]?.totalOrders) ?? 0;
+        cl('Total de ordenes', totalOrder)
 
         //2.Calcular el total de paginas
         const totalPages = Math.ceil(totalOrder / elementsPerPages);
         
         //3.Obtener las ordenes de la pagina actual
-        const orders = await db.select()
-        .from(ServiceOrder)
-        .offset(offset)
-        .limit(elementsPerPages);
+        // const orders = await db.select()
+        // .from(ServiceOrder)
+        // .offset(offset)
+        // .limit(elementsPerPages);
+
+        const {rows: orders} = await turdb.execute({
+            sql: "SELECT * FROM ServiceOrder LIMIT ? OFFSET ?",
+            args: [elementsPerPages, offset],
+        });
+        cl('Orders retrived', orders)
 
         return new Response(JSON.stringify({
             ordenes: orders,

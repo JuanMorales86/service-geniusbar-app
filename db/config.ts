@@ -1,16 +1,25 @@
 //My base de datos
-import { defineDb, defineTable, column, TRUE } from 'astro:db';
+import { defineDb, defineTable, column } from 'astro:db';
 
 const User = defineTable({
   columns: {
     id: column.text({ primaryKey: true, optional: false, unique: true }),
     username: column.text({ unique: true, optional: false }),
     password: column.text({ optional: true }), //puede logearse con otras alternativas como github o google o apple por ejemplo
-    github_id: column.text({ optional: true, unique: true }),
+    github_id: column.text({ optional: true, unique: true }), // esto lucia dice q va tipo number pero en realidad necesita es un text o string asi que va text
+    google_id: column.text({ optional: true, unique: true}),
     failedAttempts: column.number({ default: 0}),
     lastFailedAttempt: column.text({ default: '0' }),
     isAdmin: column.boolean({ default: false }),
     totalAttempts: column.number({ default: 0}),
+  }
+})
+
+const Session = defineTable({
+  columns: {
+    id: column.text({ optional: false, unique: true }), //OJO da error hasta ahora colocando id  en la ssesion como clave primaria pero con el lucia auth
+    user_id: column.text({ optional: false, references: () => User.columns.id }),
+    expires_at: column.number({ optional: false }),
   }
 })
 
@@ -37,13 +46,7 @@ const Usermsj = defineTable({
   }
 })
 
-const Session = defineTable({
-  columns: {
-    id: column.text({ optional: false, unique: true }), //OJO da error hasta ahora colocando id  en la ssesion como clave primaria pero con el lucia auth
-    userId: column.text({ optional: false, references: () => User.columns.id }),
-    expiresAt: column.number({ optional: false }),
-  }
-})
+
 
   const ServiceOrder = defineTable({
     columns: {
@@ -61,7 +64,7 @@ const Session = defineTable({
       devicepassword: column.text({optional: true}),
       status: column.text({ optional: true }),
       createdAt: column.number({ optional: true }),
-      updatedAt: column.number({ optional: true }),
+      updatedAt: column.text({ optional: true }),
       aditionalObservation: column.text({ optional: true}),
       donerepairments: column.text({optional: true}),
       topay: column.number({ optional: true}),

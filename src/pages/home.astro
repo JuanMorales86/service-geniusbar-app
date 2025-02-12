@@ -1,15 +1,120 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+import ImageLightboxSlider from '@/components/CardSliders';
+import BlurImages from '@/components/BlurImages.tsx';
+
+
+
+// array de imagenes para el componente ImageLightboxSlider
+const galleryImages = [
+  {
+    images: [
+      'https://i.imgur.com/C30dsYG.jpg',
+      'https://i.imgur.com/nQhGJpy.jpg',
+      'https://i.imgur.com/EdFTahl.jpg',
+      'https://i.imgur.com/EFSbcxd.jpg',
+    ],
+    alt: 'Servicios Apple',
+    title: 'IPhone',
+    textColor: 'text-mainbrand-light',
+    path: '/serviceiphone'
+  },
+  {
+    images: [
+      'https://i.imgur.com/yE7tFt8.jpg',
+      'https://i.imgur.com/wSRSkzR.jpg',
+      'https://i.imgur.com/FnuAXMM.jpg',
+      'https://i.imgur.com/FLzR2BJ.jpg',
+    ],
+    alt: 'Servicios Apple',
+    title: 'MacBook',
+    textColor: 'text-mainbrand-light',
+    path: '/servicemac'
+  },
+  {
+    images: [
+      'https://i.imgur.com/glr1Ad7.jpg',
+      'https://i.imgur.com/c14BzUo.jpg',
+      'https://i.imgur.com/Wwni3iI.jpg',
+      'https://i.imgur.com/wdMXHy1.jpg'
+  ],
+    alt: 'Servicios Apple',
+    title: 'iMac',
+    textColor: 'text-mainbrand-light',
+    path: '/serviceimac'
+  },
+  {
+    images: [
+      'https://i.imgur.com/F9Gq85J.png',
+      'https://i.imgur.com/GqmOdfP.jpg',
+      'https://i.imgur.com/6n4kXao.jpg',
+      'https://i.imgur.com/UiOhCVk.jpg'
+    ],
+    alt: 'Servicios Apple',
+    title: 'Placas',
+    textColor: 'text-mainbrand-light',
+    bgColor: 'bg-mainbrand-dark',
+    path: '/serviceplacas'
+  },
+  {
+    images: [
+      'https://i.imgur.com/Fp85sfh.jpg',
+      'https://i.imgur.com/L3KfcrY.jpg',
+      'https://i.imgur.com/2c8wjmb.jpg',
+      'https://i.imgur.com/C6Nxi7K.jpg'
+    ],
+    alt: 'Servicios Apple',
+    title: 'iPads',
+    path: '/serviceipad'
+  },
+  {
+    images: [
+      'https://i.imgur.com/2wXcn2t.jpg',
+      'https://i.imgur.com/JRYItAL.jpg',
+      'https://i.imgur.com/XRT8a93.jpg',
+      'https://i.imgur.com/rm3Q1tU.jpg'
+    ],
+    alt: 'Servicios Apple',
+    title: 'Apple Watch',
+    textColor: 'text-mainbrand-light',
+    path: '/serviceapplewatch'
+  },
+  {
+    images: [
+      'https://i.imgur.com/JBXETLS.jpg',
+      'https://i.imgur.com/P9nXzbB.jpg',
+      'https://i.imgur.com/Jr3EApO.jpg',
+      'https://i.imgur.com/vVLdrf8.jpg',
+      'https://i.imgur.com/5Dh5t2L.jpg',
+
+    ],
+    alt: 'Servicios Apple',
+    title: 'MagSafe',
+    textColor: 'text-mainbrand-light',
+    path: '/servicemagsafe'
+  },
+  {
+    images: [
+      'https://i.imgur.com/dPf5FtL.jpg',
+      'https://i.imgur.com/rQ7P7QH.png',
+      'https://i.imgur.com/vVAnm8B.jpg',
+      'https://i.imgur.com/7zq5NGl.jpg'
+    ],
+    alt: 'Servicios Apple',
+    title: 'Consultas',
+    textColor: 'text-sky-700',
+    path: '/serviceconsultas'
+  },
+]
 
 const ourServiceImages = [
-  {image: 'https://i.imgur.com/C30dsYG.jpg', title: 'Celulares y Tablets', description: 'Arreglamos pantallas, baterías, botones y más para Marcas Apple.'},
-  {image: 'https://i.imgur.com/zkNNKcN.jpg', title: 'Computadoras', description: 'Mantenimiento y reparación de MacBooks y iMacs.'},
-  {image: 'https://i.imgur.com/BBitngx.jpg', title: 'Placas', description: 'Soluciones de soldaduras para todas las marcas y modelos.'},   
+  {image: 'https://imgur.com/C30dsYG.jpg', title: 'Celulares y Tablets', description: 'Arreglamos pantallas, baterías, botones y más para Marcas Apple.'},
+  {image: 'https://imgur.com/zkNNKcN.jpg', title: 'Computadoras', description: 'Mantenimiento y reparación de MacBooks y iMacs.'},
+  {image: 'https://imgur.com/BBitngx.jpg', title: 'Placas', description: 'Soluciones de soldaduras para todas las marcas y modelos.'},   
 ]
 
 const plusServices = [
-{image: 'https://i.imgur.com/zX9OKvw.png', title: 'MacBooks & iPhones', description: 'Alta experiencia en recuperaciones rapidas de equipos mojados'}
+{image: 'https://i.imgur.com/zX9OKvw.png', title: 'MacBooks & iPhones', description: 'Alta experiencia en recuperaciones rapidas de equipos mojados y fallas por cortos circuitos'}
 ]
 
 const whySelectUsdata = [
@@ -33,11 +138,18 @@ const aboutGen = 'En Genius Bar, nos dedicamos a proporcionar servicios técnico
 const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando perfectamente, minimizando el tiempo de inactividad y maximizando tu productividad y satisfacción.'
 
 
+const seoData = {
+  title: 'Genius Bar Service - Reparación Apple en Argentina',
+  description: 'Servicio técnico especializado en reparación de iPhones, MacBooks, iPads y más. Garantía en todas nuestras reparaciones. Ubicados en Florida 537, Galerías Jardín, Local 366 PB, CABA.',
+  keywords: 'reparación Apple, servicio técnico iPhone, reparación MacBook, arreglo iPad, Genius Bar Argentina, mantenimiento Apple',
+  image: "https://i.imgur.com/UJ4wmM6.png?format=webp",
+  url: "https://geniusbarservice.com/"
+}
 ---
 
-<Layout  title="Genius Bar Servicio Tecnico">
-
-    <section class="bg-sky-700 text-white rounded-t-lg">
+<Layout  {...seoData}>
+  <!-- Hero Section -->
+    <section class="bg-mainbrand-dark dark:bg-sky-700 text-mainbrand-light rounded-t-lg ">
       <div class="container mx-auto px-6 py-16 text-center">
         <h1 class="text-4xl md:text-6xl font-bold mb-4">
           Servicio Técnico Profesional para tus Dispositivos
@@ -54,38 +166,68 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
       </div>
     </section>
     
-
-      <section class="bg-white py-16">
+    <!-- Services Section -->
+      <section class="bg-mainbrand-light dark:bg-mainbrand-dark text-mainbrand-dark dark:text-mainbrand-light py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {ourServiceImages.map((services,index) => (
-            <div class="text-center" >
-              <Image src={services.image} alt={services.title} quality="medium" inferSize densities={[4,4]} class="w-auto h-5/6 rounded-lg mx-auto mb-4 shadow-md"/>
-              <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
-              <p>{services.description}</p>
-            </div>
-            ))}
+            {ourServiceImages.map(async (services,index) => {
+              return (
+                // <div class="text-center" >
+                //   <Image src={services.image} alt={services.title} quality="medium" inferSize densities={[4,4]} class="w-auto h-5/6 rounded-lg mx-auto mb-4 shadow-md" loading={"lazy"}/>
+                //   <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
+                //   <p>{services.description}</p>
+                // </div>
+                <div class="text-center">
+                  <BlurImages
+                  client:visible
+                  src={services.image}
+                  alt={services.title}
+                  className='w-auto h-80 rounded-lg mx-auto mb-4 shadow-md '
+                  />
+                  <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
+                  <p>{services.description}</p>
+                </div>
+              
+              )
+            })}
           </div>
           <div class="grid grid-cols-1 mt-24 ">
-            {plusServices.map((services,index) => (
-              <div class="text-center" >
-                <Image src={services.image} alt={services.title} quality="medium" inferSize densities={[4,4]} class="w-5/6 h-5/6 rounded-lg mx-auto mb-4 shadow-md"/>
+            {plusServices.map( async (services,index) => {
+              return (
+
+              <div class="text-center">
+                <BlurImages
+                client:visible
+                src={services.image}
+                alt={services.title}
+                className='w-auto h-auto lg:h-[500px] lg:w-full rounded-lg mx-auto mb-4 shadow-md object-cover'
+                />
                 <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
                 <p>{services.description}</p>
               </div>
-              ))}
+              )}
+            )}
           </div>
           </div>
       </section>
+      
+      <!-- Cards Section -->
+       <section class="">
+        <div class="">
+          <h2></h2>
+          <ImageLightboxSlider client:visible images={galleryImages}/>
+        </div>
+       </section>
 
-      <section class="bg-gray-100 py-16">
+      <!-- Why Choose Us Section -->
+      <section class="bg-mainbrand-dark dark:bg-mainbrand-light text-mainbrand-light dark:text-mainbrand-dark py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Por qué elegirnos?</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
             {
               whySelectUsdata.map((choose, index) => (
-              <div class="bg-white p-6 rounded-lg shadow-md hover:scale-custom2 transition duration-300 ease-in-out">
+              <div class="bg-gray-esp text-mainbrand-dark p-6 rounded-lg shadow-md hover:scale-custom2 transition duration-300 ease-in-out">
                   <h3 class="text-xl font-semibold mb-2">{choose.title}</h3>
                   <p>{choose.description}</p>
                 </div>
@@ -94,15 +236,16 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
           </div>
         </div>
       </section>
-
-      <section class="bg-white py-16">
+      
+      <!-- Testimonials Section -->
+      <section class="bg-mainbrand-light dark:bg-mainbrand-dark text-mainbrand-dark dark:text-mainbrand-light md:text-lg smd:text-md py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Lo que dicen nuestros clientes!</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {
               userTestimony.map((users, index) => (
-              <div class="bg-gray-400 p-6 rounded-lg shadow-xl">
-                  <p class="mb-4 text-white">{users.valoration}</p>
+              <div class="bg-gray-esp p-6 rounded-lg shadow-xl hover:scale-custom2 transition duration-300 ease-in-out">
+                  <p class="font-semibolb mb-4 text-mainbrand-dark">{users.valoration}</p>
                   <p class="font-semibold text-black">- {users.username}</p>
                 </div>
               ))
@@ -110,14 +253,22 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
           </div>
         </div>
       </section>
-
-      <section class="bg-gray-900 text-white py-16">
+      
+      <!-- About Us Section -->
+      <section class="bg-gray-900 dark:bg-mainbrand-light dark:text-mainbrand-dark text-white py-16">
         <div class="container mx-auto px-6">
           <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-3/4 mb-8 md:mb-0">
-              <Image src="https://i.imgur.com/oU5Yi8f.png" inferSize densities={[3,3]} alt="Genius Bar Team" class="rounded-lg shadow-lg">
+              <!-- <Image src="https://i.imgur.com/oU5Yi8f.png" inferSize densities={[3,3]} alt="Genius Bar Team" class="rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light "> -->
+              <BlurImages
+              client:visible
+              src="https://i.imgur.com/oU5Yi8f.png"
+              alt="Genius Bar Team"
+              className='rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
+              />
             </div>
-            <div class="md:w-1/2 md:pl-12">
+            
+            <div class="md:w-1/2 md:pl-12 text-center md:text-left">
               <h2 class="text-3xl font-bold mb-4">Sobre Genius Bar</h2>
               <p class="mb-4">
                 {aboutGen}
@@ -130,7 +281,8 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
         </div>
       </section>
 
-      <section class="bg-sky-700 text-white py-16">
+      <!-- Contact Us Section 1 -->
+      <section class="bg-sky-700  dark:bg-sky-700 text-mainbrand-light py-16">
         <div class="container mx-auto px-6 text-center">
           <h2 class="text-3xl font-bold mb-4">¿Listo para reparar tu dispositivo?</h2>
           <p class="text-xl mb-8">Contáctanos hoy mismo para obtener un diagnóstico gratuito</p>
@@ -143,23 +295,26 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
         </div>
       </section>
 
-      <section class="bg-gray-100 py-16">
+      <!-- FAQ Section -->
+      <section class="bg-mainbrand-light dark:bg-mainbrand-dark text-mainbrand-dark  dark:text-mainbrand-light py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Preguntas Frecuentes:</h2>
+          
+          <!-- FAQ Cards -->
           <div class="space-y-4">
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Cuánto tiempo toma una reparación típica?</h3>
               <p>La mayoría de las reparaciones se completan en 24-48 horas, dependiendo de la complejidad y disponibilidad de piezas.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Ofrecen garantía en sus reparaciones?</h3>
               <p>Sí, todas nuestras reparaciones vienen con una garantía de 90 días en mano de obra y piezas.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Qué marcas de dispositivos reparan?</h3>
               <p>Trabajamos con todas las marcas principales, incluyendo Apple, Samsung, LG, Huawei, y más.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Necesito una cita previa?</h3>
               <p>No, atendemos en el momento, puedes acercarte dentro del horario.</p>
             </div>
@@ -167,32 +322,35 @@ const missionGen = '  Nuestra misión es mantener tus dispositivos funcionando p
         </div>
       </section>
 
-      <section class="bg-white py-16 rounded-b-lg">
+      <!-- Contact Us Section 2 -->
+      <section class="bg-sky-700 dark:bg-sky-700 text-mainbrand-light dark:text-mainbrand-light py-16 rounded-b-lg">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <p class="font-semibold">Teléfono</p>
-              <p>+54 9 11-2356-0959</p>
-              <p>+54 9 11-2391-7853</p>
+              <p class="font-bold">Teléfono</p>
+              <a  href="https://wa.me/5491123560959?text=Hola,%20quisiera%20más%20información%20sobre%20sus%20servicios"
+              target="_blank"
+              rel="noopener noreferrer"><p class="font-semibold">+54 9 11-2356-0959</p></a>
+             
             </div>
             <div class="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <p class="font-semibold">Email</p>
-              <a href="mailto:geniusbarservices.ar@gmail.com" class="hover:text-blue-500 transition-colors">geniusbarservices.ar@gmail.com</a>
+              <p class="font-bold animate-bounce transition-all duration-500 hover:animate-none">Email</p>
+              <a href="mailto:geniusbarservices.ar@gmail.com" class="hover:text-blue-500 transition-colors font-semibold ">geniusbarservices.ar@gmail.com</a>
             </div>
             <div class="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <p class="font-semibold">Dirección</p>
-              <p>Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>
+              <p class="font-bold">Dirección</p>
+              <p class="font-semibold">Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>
             </div>
           </div>
         </div>
