@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useForm} from 'react-hook-form'
+import {useEffect, useState} from "react";
+// import {useForm} from 'react-hook-form'
 import {Toast} from "./ToastContainer";
-import { positionAt } from "node_modules/astro/dist/core/errors";
+
 
 
 const imagesHelpers = [
@@ -503,7 +503,7 @@ const deviceWatch = [
 
 
 export default function FormServices({})  {
-    const [render, setRender] = useState(false)
+    // const [render, setRender] = useState(false)
     const [nombre, setNombre] = useState('')
     const [modelo, setModelo] = useState('')
     const [telefono, setTelefono] = useState('')
@@ -531,7 +531,7 @@ export default function FormServices({})  {
     const [isSubmit, setIsSubmit] = useState(false)// Estado para controlar el boton de envio
     const [isHover, setIsHover] = useState(false)//Estado Hover images helpers
     const [currentImageIndex, setCurrentImageIndex] = useState(0)// Estado para correr las imagenes helpers
-    const {register} = useForm()
+    // const {register} = useForm()
 
     
 const styles = {

@@ -7,19 +7,9 @@ import Layout from "@/layouts/Layout.astro";
 import IcoDoubleCheck from "@/utilities/icons/icoDoubleCheck.astro";
 import IcoScrewDriver from "@/utilities/icons/icoScrewDriver.astro";
 import IcoHumanFixer from "@/utilities/icons/icoHumanFixer.astro";
-import srcImage from "../utilities/img/macbookimg.png"
+// import srcImage from "../utilities/img/macbookimg.png"
 import BlurImages from "@/components/BlurImages";
-//import macbookimg from "@/utilities/img/macbookimg.png" //esta importacion es desde la utilities dentro de src
 
-/**<Image class="img-class2" width={480} height={270} src="/img/imac.png" alt="imagenes de Imac 2023"> este src es desde la carpeta public*/
-
-// const imagenPrincipal = "https://i.imgur.com/4Dfhwxq.jpg"
-// const imagenWatch = "https://i.imgur.com/MWqBcoZ.png"
-// const imagenIpads = "https://i.imgur.com/qp7cVtL.png"
-// const imagenMacbook = "https://i.imgur.com/4oYiCkZ.png"
-// const imagenImac = "https://i.imgur.com/9CkA3Td.png"
-// const imagenIphone = "https://i.imgur.com/PH2qZ3V.png"
-// const imagenMagsafe = 'https://i.imgur.com/CrJ07C2.png'
 
 const imgServiciosm = {
     imagenWatch: "https://i.imgur.com/MWqBcoZ.png?format=webp",
@@ -74,9 +64,11 @@ console.log(user)
                     <div class="animate-spin-scale hover:animate-none">
                         <IcoHumanFixer wi="5rem" he="5rem"/>
                     </div>
-                    <Image class="img-class" inferSize={true} src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"high"} densities={[1.5, 2]}/>
+                    <div class="w-full md:w-1/2 flex items-center justify-center">
+                        <Image class="img-class" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"high"} densities={[1.5, 2]}/>
+                    </div>
                         <IcoScrewDriver wi="5rem" he="5rem"/>
-                    <Image class="img-class" inferSize={true} src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"high"} densities={[1.5, 2]} />
+                    <Image class="img-class" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"high"} densities={[1.5, 2]} />
                     <div class="animate-spin-scale">      
                         <IcoDoubleCheck wi="5rem" he="5rem"/>
                     </div>

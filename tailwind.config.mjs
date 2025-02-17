@@ -1,7 +1,5 @@
-import { custom } from "astro:schema";
-import { apply } from "node_modules/astro/dist/core/polyfill";
 import defaultTheme from "tailwindcss/defaultTheme";
-import { transform } from "typescript";
+
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -166,7 +164,7 @@ export default {
 		    "pulse-whatsapp": "pulsewithpause 5s ease-in-out infinite",
         "scroll-left": "scrollleft 60s linear infinite ",
         "scroll-right": "scrollright 60s linear infinite  ",
-        appear: "appear 1s forwards",
+        appear: "appear2 1s forwards",
         bounce: "bounce 5s ease-in-out infinite",
         "gradient-sweep": "gradientSweep2 8s ease-in-out infinite",
         shake: "shake 0.5s cubic-bezier(.36,.07,.19,.97) both",
@@ -254,7 +252,7 @@ export default {
             transform: 'translateX(0)'
           }
         },
-        appear: {
+        appear2: {
           from: {
             opacity: 0,
             transform: "scale(0.5)",
@@ -443,10 +441,10 @@ export default {
         },
         ".form-inputbox optgroup": {
           "@apply transition-all duration-300 ease-in-out": {},
-          "&.not(:hover)": {
+          "&:not(:hover)": {
             "@apply opacity-0 h-auto pointer-events-none": {},
           },
-          "&.hover": {
+          "&:hover": {
             "@apply opacity-100 pointer-events-auto": {},
           },
         },

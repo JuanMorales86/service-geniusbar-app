@@ -2,19 +2,19 @@
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
 import { Argon2id } from 'oslo/password';
-import { db, eq, User } from "astro:db";
+// import { db, eq, User } from "astro:db";
 import { lucia } from "@/auth/auth";
 import { turdb } from "db/turso";
 const cl = console.log.bind(console);
 
-async function storeSessionData(session: any) {
-    const sessionids = generateId(32);//genera un id del usuario
-      //Almacenar la session en la base de datos Turso
-      await turdb.execute({
-        sql: "INSERT INTO Session ( id, user_id, expires_at) VALUES (?, ?, ?)",
-        args: [ sessionids, session.userId, session.expiresAt]
-    })
-}
+// async function storeSessionData(session: any) {
+//     const sessionids = generateId(32);//genera un id del usuario
+//       //Almacenar la session en la base de datos Turso
+//       await turdb.execute({
+//         sql: "INSERT INTO Session ( id, user_id, expires_at) VALUES (?, ?, ?)",
+//         args: [ sessionids, session.userId, session.expiresAt]
+//     })
+// }
 
 export async function POST(context:APIContext) : Promise<Response> {
     //Primero leer los datos del form

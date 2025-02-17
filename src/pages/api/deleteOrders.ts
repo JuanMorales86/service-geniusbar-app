@@ -2,7 +2,6 @@ import type { APIContext } from "astro"
 import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 
-interface Props {}
 
 export async function DELETE(context: APIContext): Promise<Response> {
     try{    

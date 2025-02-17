@@ -1,4 +1,3 @@
-import { db, Admin } from "astro:db";
 import { turdb } from "db/turso";
 const cl = console.log.bind(console);
 

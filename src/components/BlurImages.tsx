@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { ObserveImages } from "@/script/observer";
 
 interface BlurImagesProps {
     src: string;

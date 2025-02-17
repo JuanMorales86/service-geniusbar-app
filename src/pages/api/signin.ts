@@ -1,7 +1,7 @@
 import { lucia } from "@/auth/auth";
 import type { APIContext } from "astro";
-import { db, eq, User } from "astro:db";
-import { checkAccountLocked, incrementFailedAttempts, resetFailedAttempts } from "./signverificator";
+// import { db, eq, User } from "astro:db";
+import { checkAccountLocked, resetFailedAttempts } from "./signverificator";
 import { Argon2id } from "oslo/password";
 import { turdb } from "db/turso";
 

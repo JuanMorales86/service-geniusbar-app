@@ -8,7 +8,7 @@ import type { APIContext } from "astro";
 import { sendMail } from "@/pages/api/sendMail";
 import { generateId } from "lucia";
 import { turdb } from "db/turso";
-const cl = console.log.bind(console)
+
 
 
 export async function POST(context: APIContext) : Promise<Response> {

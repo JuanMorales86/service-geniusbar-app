@@ -2,7 +2,6 @@
 import { github, lucia } from "@/auth/auth";
 import { OAuth2RequestError } from "arctic";
 import { generateId } from "lucia";
-const cl = console.log.bind(console);
 //import { db, User, eq } from "astro:db";
 
 import type { APIContext } from "astro";

@@ -1,5 +1,5 @@
 import { google, lucia } from "@/auth/auth";
-import { generateCodeVerifier, OAuth2RequestError } from "arctic";
+import {  OAuth2RequestError } from "arctic";
 import { generateId } from "lucia";
 import type { APIContext } from "astro";
 import { turdb } from "db/turso";

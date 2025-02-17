@@ -1,6 +1,6 @@
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
 import type { APIContext } from "astro";
-import { ServiceOrder, db, eq } from "astro:db";
+// import { ServiceOrder, db, eq } from "astro:db";
 import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 

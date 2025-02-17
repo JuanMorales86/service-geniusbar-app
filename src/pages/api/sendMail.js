@@ -6,28 +6,28 @@ config({ path: '../../../.env'});
 // const path = require("path");
 
 //Configurar el envio (ya lo hago con mailoptions que viene del FormReact.jsx)
-const sendMailOptions = {
-    from: {
-        name: 'Genius Bar',
-        address: process.env.USER_GMAIL
-    }, // sender address
-    to: ["tecnorosativentas@gmail.com", "manofspotify986@gmail.com", "juanjosemorales1986@hotmail.com"], // list of receivers
-    subject: "Email enviado usando nodemailer y gmail", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-    attachments: [
-        {
-            filename: 'test.pdf',
-            path: '../../Pruebas/test.pdf.pdf',
-            contenType: 'application/pdf'
-        },
-        {
-            filename: 'sample_jpg',
-            path: '../../Pruebas/sample_jpg.jpg',
-            contenType: 'image/jpg'
-        },
-    ]
-}
+// const sendMailOptions = {
+//     from: {
+//         name: 'Genius Bar',
+//         address: process.env.USER_GMAIL
+//     }, // sender address
+//     to: ["tecnorosativentas@gmail.com", "manofspotify986@gmail.com", "juanjosemorales1986@hotmail.com"], // list of receivers
+//     subject: "Email enviado usando nodemailer y gmail", // Subject line
+//     text: "Hello world?", // plain text body
+//     html: "<b>Hello world?</b>", // html body
+//     attachments: [
+//         {
+//             filename: 'test.pdf',
+//             path: '../../Pruebas/test.pdf.pdf',
+//             contenType: 'application/pdf'
+//         },
+//         {
+//             filename: 'sample_jpg',
+//             path: '../../Pruebas/sample_jpg.jpg',
+//             contenType: 'image/jpg'
+//         },
+//     ]
+// }
 
 export async function sendMail(mailOptions, usergmail, usergmailp, accountsmptservice,
     accountsmpthost, accountsmptport, accountsmptsecure) {

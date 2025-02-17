@@ -4,9 +4,17 @@ import IcoAtom from "@/utilities/icons/icoAtom.astro";
 import SignupFormReact from '@/components/signupFormReact';
 const errorMessage = Astro.url.searchParams.get('message');
 
+const seoData = {
+  title: "Crear cuenta - Genius Bar Service",
+  description: "Regístrate en Genius Bar Service para gestionar tus consultas de reparación y recibir atención personalizada.",
+  keywords: "crear cuenta, registrarse Genius Bar, servicio técnico Apple, Genius Bar Argentina, registro de usuario",
+  image: "https://i.imgur.com/Plv66zB.jpg?format=webp",
+  url: "https://geniusbarservice.com/signup",
+}
+
 ---
 
-<Layout title="Crear Cuenta de Session" >
+<Layout {...seoData}>
     <section>
       <div
         class="flex flex-col items-center justify-center px-6 mx-auto lg:py-0"

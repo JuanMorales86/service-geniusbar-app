@@ -1,7 +1,7 @@
 //Api endpoint createOrder
 
 import type { APIContext } from "astro";
-import { db, ServiceOrder, OrderCount, sql, eq } from "astro:db"
+// import { db, ServiceOrder, OrderCount, sql, eq } from "astro:db"
 import { generateId } from "lucia";
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
 import { getNextOrderNumber } from "@/utilities/orderUtils";
@@ -11,8 +11,7 @@ const cl = console.log.bind(console);
 export async function POST(contex: APIContext) : Promise<Response> {
     const formData = await contex.request.json();
     const {
-        clientname, clientdni, email, phone, deviceType, phonedetails, model, serial, issue, devicepassword, aditionalObservation, donerepairments,
-        topay, payed,
+        clientname, clientdni, email, phone, deviceType, phonedetails, model, serial, issue, devicepassword,
     } = formData;
     cl('CreateOrder API endpoint hit', formData);
 

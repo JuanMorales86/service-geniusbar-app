@@ -8,25 +8,25 @@ interface CarouselText {
 
 interface InfiniteCarouselProps {
     texts: CarouselText;
-    gradientColors?: {
-        firstRow:  {
-            from: string;
-            to: string;
-        };
-        secondRow: {
-            from: string;
-            to: string;
-        };
-    };
+    // gradientColors?: {
+    //     firstRow:  {
+    //         from: string;
+    //         to: string;
+    //     };
+    //     secondRow: {
+    //         from: string;
+    //         to: string;
+    //     };
+    // };
 }
 
 
 const InfiniteCarousel = ({
     texts,
-    gradientColors = {
-        firstRow: { from: 'sky-500', to: 'purple-medium' },
-        secondRow: { from: 'prueple-deeppurple', to: 'pink-rosegold' },
-    }
+    // gradientColors = {
+    //     firstRow: { from: 'sky-500', to: 'purple-medium' },
+    //     secondRow: { from: 'prueple-deeppurple', to: 'pink-rosegold' },
+    // }
 }: InfiniteCarouselProps) => {
 
     return (

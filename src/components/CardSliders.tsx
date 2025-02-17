@@ -83,7 +83,7 @@ export default function ImageLightboxSlider({images}: LightboxPorps) {
         return () => clearInterval(interval);
     }, [images]);
 
-    const openLightBox = (index: number) => setSelectedIndex(index);
+    // const openLightBox = (index: number) => setSelectedIndex(index);
     const closeLightbox = () => setSelectedIndex(null);
     
     const nextImage = () => {

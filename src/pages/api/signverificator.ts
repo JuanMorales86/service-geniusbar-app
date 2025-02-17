@@ -1,4 +1,4 @@
-import { db, eq, sql, User } from "astro:db";
+// import { db, eq, sql, User } from "astro:db";
 import { turdb } from "db/turso";
 const cl = console.log.bind(console)
 

@@ -3,7 +3,7 @@ import Header from '@/components/Header.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import { ClientRouter } from 'astro:transitions'; // lo que era ViewTransition ahora se llama ClientRouter
+import  {ClientRouter}   from 'astro:transitions'; // lo que era ViewTransition ahora se llama ClientRouter
 import '@fontsource-variable/montserrat/wght.css';// Supports weights 100-900
 import '@fontsource/roboto/700.css';//Supports 100-300-400-500-700-900-italic
 import '@fontsource-variable/space-grotesk';//Supports 300-700
@@ -41,6 +41,8 @@ const { title = 'Genius Bar Servicio Técnico - Apple',
 		<meta name={description} content={description} />
 		<meta name={keywords} content={keywords} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.cdnfonts.com" as="font" crossorigin="anonymous" />
+		<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" >
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
@@ -56,9 +58,9 @@ const { title = 'Genius Bar Servicio Técnico - Apple',
 		  <meta name="twitter:title" content={title} />
 		  <meta name="twitter:description" content={description} />
 		  <meta name="twitter:image" content={image} />
-
+		  <ClientRouter />
 		  <!-- JSON-LD para google -->
-		<script type="application/ld+json">
+		<script is:inline type="application/ld+json">
 			{JSON.stringify({
 				"@context": "https://schema.org",
 				"@type": "WebPage",
@@ -72,8 +74,7 @@ const { title = 'Genius Bar Servicio Técnico - Apple',
 				}
 			}, null, 2)}
 		</script>
-
-		<ClientRouter/>
+			
 	</head>
 	<body >
 		<div class:list={["bg-gradient-to-b",

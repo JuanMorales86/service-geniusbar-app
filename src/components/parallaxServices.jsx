@@ -1,9 +1,9 @@
 import React from "react"; 
 
-const cl = console.log.bind(console);
+
 
 const ParallaxServices = ({services}) => {
-    const [hoveredIndex, setIsHoveredIndex] = React.useState(-1)
+    const [, setIsHoveredIndex] = React.useState(-1)
     const sectionRefs = React.useRef([]);
     const backgroundsRefs = React.useRef([]);
 

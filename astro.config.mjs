@@ -5,6 +5,7 @@ import vercel from "@astrojs/vercel";
 import db from "@astrojs/db";
 
 
+
 import icon from "astro-icon";
 
 
@@ -46,12 +47,13 @@ export default defineConfig({
   })],
   vite: {
     optimizeDeps: {
-      include: ["react-to-print"],
+      include: ["react-to-print", "fast-glob"],
       exclude: ["oslo"]
     },
     build: {
       commonjsOptions: {
-        include: [/react-to-print/]
+        include: [/react-to-print/, /fast-glob/, /node_modules/],
+        transformMixedEsModules: true,
       }
     },
     server: {
@@ -65,18 +67,18 @@ export default defineConfig({
   },
   output: "server",
   adapter: vercel(),
-  hooks: {
-    'astro:config:setup': ({ command, isRestart }) => {
-      console.log(`Astro build starting. Command: ${command}, isRestart: ${isRestart}`);
-    },
-    'astro:config:done': ({ config }) => {
-      console.log('Astro configuration completed');
-    },
-    'astro:server:setup': ({ server }) => {
-      console.log('Astro server setup completed');
-    },
-    'astro:build:start': ({ buildConfig }) => {
-      console.log('Astro build started');
-    },
-  },
+  // hooks: {
+  //   'astro:config:setup': ({ command, isRestart }) => {
+  //     console.log(`Astro build starting. Command: ${command}, isRestart: ${isRestart}`);
+  //   },
+  //   'astro:config:done': ({ config }) => {
+  //     console.log('Astro configuration completed');
+  //   },
+  //   'astro:server:setup': ({ server }) => {
+  //     console.log('Astro server setup completed');
+  //   },
+  //   'astro:build:start': ({ buildConfig }) => {
+  //     console.log('Astro build started');
+  //   },
+  // },
 });
