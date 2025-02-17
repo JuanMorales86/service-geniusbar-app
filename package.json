@@ -25,8 +25,8 @@
     "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
     "@prisma/client": "^6.3.1",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "arctic": "^1.9.2",
     "astro": "^5.3.0",
     "astro-icon": "^1.1.5",
@@ -61,7 +61,14 @@
       "postinstall-postinstall"
     ]
   },
-"overrides": {
+  "resolutions": {
+    "minimist": "1.2.6",
+    "lodash": "4.17.21",
+    "knex": "2.4.0",
+    "patch-to-regexp": "6.2.1",
+    "minimatch": "^5.1.0"
+  },
+  "overrides": {
     "fast-glob": {
       "main": "./out/index.js",
       "module": "./out/index.js",
@@ -73,5 +80,5 @@
         }
       }
     }
-}
+  }
 }
