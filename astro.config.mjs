@@ -67,10 +67,6 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    imagesConfig: true,
-    serverless: {
-      entry: 'dist/server/entry.mjs',
-      includeFiles: ['dist/server/**/*']
-    }
+    imageService: true,
   })
 });

@@ -244,12 +244,6 @@ const AstroGlobNoMatch = {
   message: (globStr) => `\`Astro.glob(${globStr})\` did not return any matching files.`,
   hint: "Check the pattern for typos."
 };
-const MissingSharp = {
-  name: "MissingSharp",
-  title: "Could not find Sharp.",
-  message: "Could not find Sharp. Please install Sharp (`sharp`) manually into your project or migrate to another image service.",
-  hint: "See Sharp's installation instructions for more information: https://sharp.pixelplumbing.com/install. If you are not relying on `astro:assets` to optimize, transform, or process any images, you can configure a passthrough image service instead of installing Sharp. See https://docs.astro.build/en/reference/errors/missing-sharp for more information.\n\nSee https://docs.astro.build/en/guides/images/#default-image-service for more information on how to migrate to another image service."
-};
 const i18nNoLocaleFoundInPath = {
   name: "i18nNoLocaleFoundInPath",
   title: "The path doesn't contain any locale",
@@ -2781,8 +2775,153 @@ async function renderPage(result, componentFactory, props, children, streaming, 
   }
 }
 
-// import cssesc from "cssesc";
-(await import('../cssesc_BZn-iIFu.mjs').then(n => n.c)).default;
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function getAugmentedNamespace(n) {
+  if (n.__esModule) return n;
+  var f = n.default;
+	if (typeof f == "function") {
+		var a = function a () {
+			if (this instanceof a) {
+        return Reflect.construct(f, arguments, this.constructor);
+			}
+			return f.apply(this, arguments);
+		};
+		a.prototype = f.prototype;
+  } else a = {};
+  Object.defineProperty(a, '__esModule', {value: true});
+	Object.keys(n).forEach(function (k) {
+		var d = Object.getOwnPropertyDescriptor(n, k);
+		Object.defineProperty(a, k, d.get ? d : {
+			enumerable: true,
+			get: function () {
+				return n[k];
+			}
+		});
+	});
+	return a;
+}
+
+/*! https://mths.be/cssesc v3.0.0 by @mathias */
+
+var cssesc_1;
+var hasRequiredCssesc;
+
+function requireCssesc () {
+	if (hasRequiredCssesc) return cssesc_1;
+	hasRequiredCssesc = 1;
+
+	var object = {};
+	var hasOwnProperty = object.hasOwnProperty;
+	var merge = function merge(options, defaults) {
+		if (!options) {
+			return defaults;
+		}
+		var result = {};
+		for (var key in defaults) {
+			// `if (defaults.hasOwnProperty(key) { … }` is not needed here, since
+			// only recognized option names are used.
+			result[key] = hasOwnProperty.call(options, key) ? options[key] : defaults[key];
+		}
+		return result;
+	};
+
+	var regexAnySingleEscape = /[ -,\.\/:-@\[-\^`\{-~]/;
+	var regexSingleEscape = /[ -,\.\/:-@\[\]\^`\{-~]/;
+	var regexExcessiveSpaces = /(^|\\+)?(\\[A-F0-9]{1,6})\x20(?![a-fA-F0-9\x20])/g;
+
+	// https://mathiasbynens.be/notes/css-escapes#css
+	var cssesc = function cssesc(string, options) {
+		options = merge(options, cssesc.options);
+		if (options.quotes != 'single' && options.quotes != 'double') {
+			options.quotes = 'single';
+		}
+		var quote = options.quotes == 'double' ? '"' : '\'';
+		var isIdentifier = options.isIdentifier;
+
+		var firstChar = string.charAt(0);
+		var output = '';
+		var counter = 0;
+		var length = string.length;
+		while (counter < length) {
+			var character = string.charAt(counter++);
+			var codePoint = character.charCodeAt();
+			var value = void 0;
+			// If it’s not a printable ASCII character…
+			if (codePoint < 0x20 || codePoint > 0x7E) {
+				if (codePoint >= 0xD800 && codePoint <= 0xDBFF && counter < length) {
+					// It’s a high surrogate, and there is a next character.
+					var extra = string.charCodeAt(counter++);
+					if ((extra & 0xFC00) == 0xDC00) {
+						// next character is low surrogate
+						codePoint = ((codePoint & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000;
+					} else {
+						// It’s an unmatched surrogate; only append this code unit, in case
+						// the next code unit is the high surrogate of a surrogate pair.
+						counter--;
+					}
+				}
+				value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+			} else {
+				if (options.escapeEverything) {
+					if (regexAnySingleEscape.test(character)) {
+						value = '\\' + character;
+					} else {
+						value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+					}
+				} else if (/[\t\n\f\r\x0B]/.test(character)) {
+					value = '\\' + codePoint.toString(16).toUpperCase() + ' ';
+				} else if (character == '\\' || !isIdentifier && (character == '"' && quote == character || character == '\'' && quote == character) || isIdentifier && regexSingleEscape.test(character)) {
+					value = '\\' + character;
+				} else {
+					value = character;
+				}
+			}
+			output += value;
+		}
+
+		if (isIdentifier) {
+			if (/^-[-\d]/.test(output)) {
+				output = '\\-' + output.slice(1);
+			} else if (/\d/.test(firstChar)) {
+				output = '\\3' + firstChar + ' ' + output.slice(1);
+			}
+		}
+
+		// Remove spaces after `\HEX` escapes that are not followed by a hex digit,
+		// since they’re redundant. Note that this is only possible if the escape
+		// sequence isn’t preceded by an odd number of backslashes.
+		output = output.replace(regexExcessiveSpaces, function ($0, $1, $2) {
+			if ($1 && $1.length % 2) {
+				// It’s not safe to remove the space, so don’t.
+				return $0;
+			}
+			// Strip the space.
+			return ($1 || '') + $2;
+		});
+
+		if (!isIdentifier && options.wrap) {
+			return quote + output + quote;
+		}
+		return output;
+	};
+
+	// Expose default options (so they can be overridden globally).
+	cssesc.options = {
+		'escapeEverything': false,
+		'isIdentifier': false,
+		'quotes': 'single',
+		'wrap': false
+	};
+
+	cssesc.version = '3.0.0';
+
+	cssesc_1 = cssesc;
+	return cssesc_1;
+}
+
+requireCssesc();
+
 "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
 "-0123456789_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
 
@@ -2803,4 +2942,4 @@ function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
   return markHTMLString(output);
 }
 
-export { renderPage as $, AstroError as A, PrerenderDynamicEndpointPathCollide as B, ReservedSlotName as C, DEFAULT_404_COMPONENT as D, renderSlotToString as E, Fragment as F, GetStaticPathsRequired as G, renderJSX as H, InvalidGetStaticPathsReturn as I, chunkToString as J, isRenderInstruction as K, SessionStorageInitError as L, MissingSharp as M, NOOP_MIDDLEWARE_HEADER as N, ROUTE_TYPE_HEADER as O, PageNumberParamNotFound as P, ForbiddenRewrite as Q, ResponseSentError as R, SessionStorageSaveError as S, ASTRO_VERSION as T, LocalsReassigned as U, PrerenderClientAddressNotAvailable as V, clientAddressSymbol as W, ClientAddressNotAvailable as X, StaticClientAddressNotAvailable as Y, AstroResponseHeadersReassigned as Z, responseSentSymbol as _, createAstro as a, REWRITE_DIRECTIVE_HEADER_KEY as a0, REWRITE_DIRECTIVE_HEADER_VALUE as a1, renderEndpoint as a2, ExpectedImage as a3, LocalImageUsedWrongly as a4, MissingImageDimension as a5, UnsupportedImageFormat as a6, IncompatibleDescriptorOptions as a7, UnsupportedImageConversion as a8, NoImageMetadata as a9, FailedToFetchRemoteImageDimensions as aa, ExpectedImageOptions as ab, ExpectedNotESMImage as ac, InvalidImageService as ad, toStyleString as ae, ImageMissingAlt as af, bold as ag, red as ah, yellow as ai, dim as aj, blue as ak, LocalsNotAnObject as al, REROUTABLE_STATUS_CODES as am, addAttribute as b, createComponent as c, renderComponent as d, renderScript as e, decodeKey as f, escape as g, renderSlot as h, renderHead as i, decryptString as j, createSlotValueFromString as k, isAstroComponentFactory as l, maybeRenderHead as m, REROUTE_DIRECTIVE_HEADER as n, i18nNoLocaleFoundInPath as o, originPathnameSymbol as p, RewriteWithBodyUsed as q, renderTemplate as r, spreadAttributes as s, MiddlewareNoDataOrNextCalled as t, unescapeHTML as u, MiddlewareNotAResponse as v, InvalidGetStaticPathsEntry as w, GetStaticPathsExpectedParams as x, GetStaticPathsInvalidRouteParam as y, NoMatchingStaticPathFound as z };
+export { REWRITE_DIRECTIVE_HEADER_KEY as $, AstroError as A, ReservedSlotName as B, renderSlotToString as C, DEFAULT_404_COMPONENT as D, renderJSX as E, Fragment as F, GetStaticPathsRequired as G, chunkToString as H, InvalidGetStaticPathsReturn as I, isRenderInstruction as J, SessionStorageInitError as K, ROUTE_TYPE_HEADER as L, MiddlewareNoDataOrNextCalled as M, NOOP_MIDDLEWARE_HEADER as N, ForbiddenRewrite as O, PageNumberParamNotFound as P, ASTRO_VERSION as Q, REROUTE_DIRECTIVE_HEADER as R, SessionStorageSaveError as S, LocalsReassigned as T, PrerenderClientAddressNotAvailable as U, clientAddressSymbol as V, ClientAddressNotAvailable as W, StaticClientAddressNotAvailable as X, AstroResponseHeadersReassigned as Y, responseSentSymbol as Z, renderPage as _, createAstro as a, REWRITE_DIRECTIVE_HEADER_VALUE as a0, renderEndpoint as a1, ExpectedImage as a2, LocalImageUsedWrongly as a3, MissingImageDimension as a4, UnsupportedImageFormat as a5, IncompatibleDescriptorOptions as a6, UnsupportedImageConversion as a7, NoImageMetadata as a8, FailedToFetchRemoteImageDimensions as a9, ExpectedImageOptions as aa, ExpectedNotESMImage as ab, InvalidImageService as ac, toStyleString as ad, ImageMissingAlt as ae, bold as af, red as ag, yellow as ah, dim as ai, blue as aj, LocalsNotAnObject as ak, REROUTABLE_STATUS_CODES as al, getAugmentedNamespace as am, commonjsGlobal as an, addAttribute as b, createComponent as c, renderComponent as d, renderScript as e, decodeKey as f, renderSlot as g, escape as h, renderHead as i, decryptString as j, createSlotValueFromString as k, isAstroComponentFactory as l, maybeRenderHead as m, i18nNoLocaleFoundInPath as n, ResponseSentError as o, originPathnameSymbol as p, RewriteWithBodyUsed as q, renderTemplate as r, spreadAttributes as s, MiddlewareNotAResponse as t, unescapeHTML as u, InvalidGetStaticPathsEntry as v, GetStaticPathsExpectedParams as w, GetStaticPathsInvalidRouteParam as x, NoMatchingStaticPathFound as y, PrerenderDynamicEndpointPathCollide as z };

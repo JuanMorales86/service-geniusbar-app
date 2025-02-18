@@ -1,4 +1,4 @@
-import { c as createComponent, a as createAstro, r as renderTemplate, m as maybeRenderHead, s as spreadAttributes, b as addAttribute, d as renderComponent, u as unescapeHTML, F as Fragment, h as renderSlot, e as renderScript, i as renderHead } from './astro/server_B5a4cxtw.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, r as renderTemplate, s as spreadAttributes, b as addAttribute, d as renderComponent, u as unescapeHTML, F as Fragment, g as renderSlot, e as renderScript, i as renderHead } from './astro/server_BSg9zxmn.mjs';
 /* empty css                                  */
 
 const $$Astro$a = createAstro();
@@ -539,8 +539,8 @@ const $$ClientRouter = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
   Astro2.self = $$ClientRouter;
   const { fallback = "animate" } = Astro2.props;
-  return renderTemplate`<meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback"${addAttribute(fallback, "content")}>${renderScript($$result, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/node_modules/.pnpm/astro@5.3.0_@types+node@22._e437acd706f6c70e494a501d4a0c6afc/node_modules/astro/components/ClientRouter.astro?astro&type=script&index=0&lang.ts")}`;
-}, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/node_modules/.pnpm/astro@5.3.0_@types+node@22._e437acd706f6c70e494a501d4a0c6afc/node_modules/astro/components/ClientRouter.astro", void 0);
+  return renderTemplate`<meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback"${addAttribute(fallback, "content")}>${renderScript($$result, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/node_modules/.pnpm/astro@5.3.0_@types+node@22._32aba32bcd1a7ab367dcb38845249641/node_modules/astro/components/ClientRouter.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/node_modules/.pnpm/astro@5.3.0_@types+node@22._32aba32bcd1a7ab367dcb38845249641/node_modules/astro/components/ClientRouter.astro", void 0);
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
