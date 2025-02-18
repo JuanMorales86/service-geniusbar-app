@@ -1,11 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
+import vercel from "@astrojs/vercel/serverless";
 import db from "@astrojs/db";
-
-
-
 import icon from "astro-icon";
 
 
@@ -66,19 +63,14 @@ export default defineConfig({
     port:4321 // Astro port
   },
   output: "server",
-  adapter: vercel(),
-  // hooks: {
-  //   'astro:config:setup': ({ command, isRestart }) => {
-  //     console.log(`Astro build starting. Command: ${command}, isRestart: ${isRestart}`);
-  //   },
-  //   'astro:config:done': ({ config }) => {
-  //     console.log('Astro configuration completed');
-  //   },
-  //   'astro:server:setup': ({ server }) => {
-  //     console.log('Astro server setup completed');
-  //   },
-  //   'astro:build:start': ({ buildConfig }) => {
-  //     console.log('Astro build started');
-  //   },
-  // },
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+    imagesConfig: true,
+    serverless: {
+      entry: 'dist/server/entry.mjs',
+      includeFiles: ['dist/server/**/*']
+    }
+  })
 });
