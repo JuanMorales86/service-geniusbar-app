@@ -1,5 +1,5 @@
 /* empty css                                     */
-import { c as createComponent, a as createAstro } from '../chunks/astro/server_BSg9zxmn.mjs';
+import { c as createComponent, a as createAstro } from '../chunks/astro/server_CdFMc5nU.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro();

@@ -1,9 +1,12 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import db from "@astrojs/db";
 import icon from "astro-icon";
+
+process.env.ASTRO_OUTPUT = "server";
+console.log("🔍 Astro config - output mode:", "server"); // Verificar qué modo se usa en build
 
 
 // https://astro.build/config
@@ -43,6 +46,7 @@ export default defineConfig({
     }
   })],
   vite: {
+    logLevel: "info",
     optimizeDeps: {
       include: ["react-to-print", "fast-glob"],
       exclude: ["oslo"]
@@ -53,6 +57,7 @@ export default defineConfig({
         transformMixedEsModules: true,
       }
     },
+   
     server: {
       hmr:{
         port: 9000,// You can change this to any available port
@@ -63,10 +68,5 @@ export default defineConfig({
     port:4321 // Astro port
   },
   output: "server",
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-    imageService: true,
-  })
+  adapter: vercel()
 });
