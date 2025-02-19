@@ -5,7 +5,7 @@ import vercel from "@astrojs/vercel";
 import db from "@astrojs/db";
 import icon from "astro-icon";
 
-process.env.ASTRO_OUTPUT = "server";
+
 console.log("🔍 Astro config - output mode:", "server"); // Verificar qué modo se usa en build
 
 
