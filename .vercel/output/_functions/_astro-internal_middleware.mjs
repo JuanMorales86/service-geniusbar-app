@@ -1,4 +1,4 @@
-import { l as lucia } from './chunks/auth_dBB4lbfl.mjs';
+import { l as lucia } from './chunks/auth_B-WdwNpW.mjs';
 import { verifyRequestOrigin } from 'lucia';
 import { d as defineMiddleware, s as sequence } from './chunks/index_DlzGT8U0.mjs';
 import './chunks/astro-designed-error-pages_CRtBtjUK.mjs';

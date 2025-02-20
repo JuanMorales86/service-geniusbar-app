@@ -1,7 +1,7 @@
 /* empty css                                     */
 import { c as createComponent, d as renderComponent, r as renderTemplate, m as maybeRenderHead, a as createAstro } from '../chunks/astro/server_CuO-qrqT.mjs';
 import 'kleur/colors';
-import { G as GET } from '../chunks/getOrders_CV8ROXKX.mjs';
+import { G as GET } from '../chunks/getOrders_BVLV6lTK.mjs';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import * as React from 'react';
 import React__default, { useRef, Component } from 'react';
