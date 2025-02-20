@@ -1,9 +1,10 @@
 /* empty css                                     */
-import { c as createComponent, a as createAstro, d as renderComponent, r as renderTemplate } from '../chunks/astro/server_CdFMc5nU.mjs';
+import { c as createComponent, a as createAstro, d as renderComponent, r as renderTemplate } from '../chunks/astro/server_CuO-qrqT.mjs';
+import 'kleur/colors';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import React__default from 'react';
 import { T as Toast } from '../chunks/ToastContainer_BNDuhfT2.mjs';
-import { $ as $$Layout } from '../chunks/Layout_Bw86FrCc.mjs';
+import { $ as $$Layout } from '../chunks/Layout_kJWPOogx.mjs';
 export { renderers } from '../renderers.mjs';
 
 const CustomMultiSelect = ({ options, value, onChange }) => {

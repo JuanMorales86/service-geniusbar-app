@@ -31,6 +31,7 @@
     "astro-icon": "^1.1.5",
     "blurhash": "^2.0.5",
     "gsap": "^3.12.7",
+    "kleur": "^4.1.5",
     "lucia": "^3.2.2",
     "nodemailer": "^6.10.0",
     "oslo": "^1.2.1",
@@ -56,7 +57,9 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "postinstall-postinstall"
+      "esbuild",
+      "postinstall-postinstall",
+      "sharp"
     ]
   },
   "resolutions": {

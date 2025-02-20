@@ -1,8 +1,9 @@
 import { l as lucia } from './chunks/auth_dBB4lbfl.mjs';
 import { verifyRequestOrigin } from 'lucia';
-import { d as defineMiddleware, s as sequence } from './chunks/index_BJxkbgUC.mjs';
-import './chunks/astro-designed-error-pages_B8L_ethK.mjs';
-import './chunks/astro/server_CdFMc5nU.mjs';
+import { d as defineMiddleware, s as sequence } from './chunks/index_DlzGT8U0.mjs';
+import './chunks/astro-designed-error-pages_CRtBtjUK.mjs';
+import 'kleur/colors';
+import './chunks/astro/server_CuO-qrqT.mjs';
 
 const onRequest$1 = defineMiddleware(async (context, next) => {
   if (context.request.method !== "GET") {

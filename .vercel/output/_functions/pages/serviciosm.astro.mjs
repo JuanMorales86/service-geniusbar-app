@@ -1,8 +1,9 @@
 /* empty css                                     */
-import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate, g as renderSlot, d as renderComponent, e as renderScript } from '../chunks/astro/server_CdFMc5nU.mjs';
-import { $ as $$Layout, l as linksServices } from '../chunks/Layout_Bw86FrCc.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, b as addAttribute, r as renderTemplate, g as renderSlot, d as renderComponent, e as renderScript } from '../chunks/astro/server_CuO-qrqT.mjs';
+import 'kleur/colors';
+import { $ as $$Layout, l as linksServices } from '../chunks/Layout_kJWPOogx.mjs';
 /* empty css                                      */
-import { $ as $$Image } from '../chunks/_astro_assets_DK96HvVi.mjs';
+import { $ as $$Image } from '../chunks/_astro_assets_C5xdvKAf.mjs';
 import { B as BlurImages } from '../chunks/BlurImages_ND7kZO24.mjs';
 export { renderers } from '../renderers.mjs';
 

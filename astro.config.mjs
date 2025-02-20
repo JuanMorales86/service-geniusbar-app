@@ -12,6 +12,13 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 // https://astro.build/config
 export default defineConfig({
 
+  output: "server",
+  adapter: vercel({
+    "webAnalytics":{
+      "enabled": true,
+    }
+  }),
+
   image: {
     domains: ['i.imgur.com']
   },
@@ -67,6 +74,5 @@ export default defineConfig({
   server:{
     port:4321 // Astro port
   },
-  output: "server",
-  adapter: vercel()
+ 
 });
