@@ -65,11 +65,11 @@ export default defineConfig({
       }
     },
    
-    server: {
-      hmr:{
-        port: 9000,// You can change this to any available port
-      }
-    }
+    // server: {
+    //   hmr:{
+    //     port: 9000,// You can change this to any available port
+    //   }
+    // }
   },
   server:{
     port:4321 // Astro port

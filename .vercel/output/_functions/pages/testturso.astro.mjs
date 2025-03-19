@@ -1,13 +1,13 @@
 /* empty css                                     */
-import { c as createComponent, d as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_CuO-qrqT.mjs';
+import { c as createComponent, d as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_3REQY16S.mjs';
 import 'kleur/colors';
-import { $ as $$Layout } from '../chunks/Layout_kJWPOogx.mjs';
-import { t as turdb } from '../chunks/turso_GRw5KsYt.mjs';
+import { $ as $$Layout } from '../chunks/Layout_C6La3IX1.mjs';
+import { t as turdb } from '../chunks/turso_CdaR7E3F.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$TestTurso = createComponent(async ($$result, $$props, $$slots) => {
   const { rows } = await turdb.execute("select * from User");
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "servicios" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<ul class="flex flex-col text-white font-mono text-4xl"> ${rows.map((post) => renderTemplate`<li class="text-center">Identificador: ${post.id}</li>
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "servicios" }, { "default": async ($$result2) => renderTemplate` ${maybeRenderHead()}<ul class="flex flex-col text-white font-mono text-4xl"> ${rows.map((post) => renderTemplate`<li class="text-center">Identificador: ${post.id}</li>
             <li class="text-center">Nombre: ${post.username}</li>
             <li class="text-center">Admin?: ${post.isAdmin}</li>
             <li class="text-center">Passwod: ${post.password}</li>`)} </ul> ` })}
