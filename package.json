@@ -6,7 +6,7 @@
     "dev": "astro dev --host",
     "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
     "start": "astro start",
-    "build": "astro check && astro build",
+    "build": "node ./vercel-build.js",
     "preview": "astro preview",
     "astro": "astro"
   },
