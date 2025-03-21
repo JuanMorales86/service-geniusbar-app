@@ -9,8 +9,8 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/"
-  to = "/home"
+  from = "/home"
+  to = "/.netlify/functions/entry"
   status = 302
 
 [[redirects]]
