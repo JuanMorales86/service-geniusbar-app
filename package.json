@@ -21,7 +21,7 @@
     "@fontsource/fira-sans": "^5.1.1",
     "@fontsource/roboto": "^5.1.1",
     "@formkit/tempo": "^0.1.2",
-    "@libsql/client": "^0.3.6",
+    "@libsql/client": "^0.15.0",
     "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
     "@oslojs/crypto": "^1.0.1",

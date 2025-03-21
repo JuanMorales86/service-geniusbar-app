@@ -1,6 +1,6 @@
 import type { APIContext } from "astro";
 import { PUT as updateOrder } from "./updateOrders";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console)
 
 

@@ -1,4 +1,4 @@
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console);
 
 export async function GET() {

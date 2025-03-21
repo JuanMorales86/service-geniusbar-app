@@ -3,7 +3,7 @@ import type { APIContext } from "astro";
 // import { db, eq, User } from "astro:db";
 import { checkAccountLocked, resetFailedAttempts } from "./signverificator";
 import { Argon2id } from "oslo/password";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 
 export async function POST(context: APIContext):Promise<Response>{
 

@@ -1,5 +1,5 @@
 // import { db, eq, sql, User } from "astro:db";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console)
 
 const MAX_FAILED_ATTEMPTS = 4;

@@ -2,7 +2,7 @@ import { google, lucia } from "@/auth/auth";
 import {  OAuth2RequestError } from "arctic";
 import { generateId } from "lucia";
 import type { APIContext } from "astro";
-import { turdb } from "db/turso";
+import { turdb } from "../../../../db/turso";
 
 export async function GET(context: APIContext): Promise<Response> {
     const code = context.url.searchParams.get("code");

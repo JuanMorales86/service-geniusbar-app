@@ -5,7 +5,7 @@ import {Lucia} from "lucia"
 import { LibSQLAdapter } from "@lucia-auth/adapter-sqlite";
 import { GitHub } from "arctic";//Artic para Github
 import { Google } from "arctic";//Artic para Google
-import { turdb } from "db/turso";
+import { turdb } from "../../db/turso";
 
 //const adapter = new DrizzleSQLiteAdapter(db as any, Session, User); // your adapter
 

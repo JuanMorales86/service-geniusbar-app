@@ -1,12 +1,11 @@
 import type { APIContext } from "astro"
-import { turdb } from "db/turso";
-const cl = console.log.bind(console)
+import { turdb } from "../../../db/turso";
 
 
 export async function DELETE(context: APIContext): Promise<Response> {
     try{    
         const {id} = await context.request.json();
-        cl('Tratando de borrar la orden', id);
+   
 
  
         const {rows: deletedOrder} = await turdb.execute({
@@ -14,7 +13,7 @@ export async function DELETE(context: APIContext): Promise<Response> {
             args: [id],
         })
 
-        cl('Delete operation result:', deletedOrder);
+      
 
         if (deletedOrder.length === 0) {
             return new Response(JSON.stringify({ error: 'Orden no encontrada' }), {

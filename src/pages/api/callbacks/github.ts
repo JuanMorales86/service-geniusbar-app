@@ -5,7 +5,7 @@ import { generateId } from "lucia";
 //import { db, User, eq } from "astro:db";
 
 import type { APIContext } from "astro";
-import { turdb } from "db/turso";
+import { turdb } from "../../../../db/turso";
 
 export async function GET(context: APIContext): Promise<Response> {
 	const code = context.url.searchParams.get("code");

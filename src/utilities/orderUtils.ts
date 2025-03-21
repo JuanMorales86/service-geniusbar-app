@@ -1,5 +1,5 @@
 //import { db, desc, ServiceOrder } from "astro:db";
-import { turdb } from "db/turso";
+import { turdb } from "../../db/turso";
 
 export async function getNextOrderNumber() {
     // const latestOrder = await db.select({ ordernumber: ServiceOrder.ordernumber })

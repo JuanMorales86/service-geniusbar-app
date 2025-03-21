@@ -1,7 +1,7 @@
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
 import type { APIContext } from "astro";
 // import { ServiceOrder, db, eq } from "astro:db";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console)
 
 function removeNullUndefined(obj: Record<string, any>) {

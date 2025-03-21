@@ -4,7 +4,7 @@ import { generateId } from "lucia";
 import { Argon2id } from 'oslo/password';
 // import { db, eq, User } from "astro:db";
 import { lucia } from "@/auth/auth";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console);
 
 // async function storeSessionData(session: any) {

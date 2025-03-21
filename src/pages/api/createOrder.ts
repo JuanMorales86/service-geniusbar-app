@@ -5,7 +5,7 @@ import type { APIContext } from "astro";
 import { generateId } from "lucia";
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
 import { getNextOrderNumber } from "@/utilities/orderUtils";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 
 const cl = console.log.bind(console);
 export async function POST(contex: APIContext) : Promise<Response> {

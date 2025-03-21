@@ -7,7 +7,7 @@ import type { APIContext } from "astro";
 //import { db, Usermsj } from "astro:db";
 import { sendMail } from "@/pages/api/sendMail";
 import { generateId } from "lucia";
-import { turdb } from "db/turso";
+import { turdb } from "../../../db/turso";
 
 
 
