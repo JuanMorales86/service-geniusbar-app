@@ -7,7 +7,6 @@
     "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
     "start": "astro start",
     "build": "astro build --remote",
-    "build:vercel": "astro check && astro build --remote",
     "preview": "astro preview",
     "astro": "astro"
   },
