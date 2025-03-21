@@ -14,7 +14,9 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 export default defineConfig({
 
   output: "server",
-  adapter: netlify(),
+  adapter: netlify({
+    functionPerRoute: false
+  }),
 
   image: {
     domains: ['i.imgur.com']
