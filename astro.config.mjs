@@ -50,6 +50,11 @@ export default defineConfig({
     }
   })],
   vite: {
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
+    },
     logLevel: "info",
     optimizeDeps: {
       include: ["react-to-print", "fast-glob"],

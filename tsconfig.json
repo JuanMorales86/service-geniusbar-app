@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
