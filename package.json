@@ -6,13 +6,15 @@
     "dev": "astro dev --host",
     "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
     "start": "astro start",
-    "build": "node ./vercel-build.js",
+    "build": "astro build --remote",
+    "build:vercel": "astro check && astro build --remote",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/db": "^0.14.6",
+    "@astrojs/db": "^0.14.8",
+    "@astrojs/netlify": "^6.2.3",
     "@astrojs/react": "^4.2.0",
     "@astrojs/tailwind": "^5.1.5",
     "@astrojs/vercel": "^8.0.7",
@@ -23,6 +25,7 @@
     "@libsql/client": "^0.3.6",
     "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "@oslojs/crypto": "^1.0.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "arctic": "^1.9.2",
@@ -31,7 +34,7 @@
     "blurhash": "^2.0.5",
     "gsap": "^3.12.7",
     "kleur": "^4.1.5",
-    "lucia": "^3.2.2",
+    "lucia": "^3.1.0",
     "nodemailer": "^6.10.0",
     "oslo": "^1.2.1",
     "react": "^19.0.0",
@@ -58,9 +61,17 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
+      "netlify-cli",
       "postinstall-postinstall",
       "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "unix-dgram"
     ]
+  },
+  "peerDependencies": {
+    "@oslojs/crypto": "^1.0.1"
   },
   "resolutions": {
     "minimist": "1.2.6",
@@ -70,6 +81,9 @@
     "minimatch": "^5.1.0"
   },
   "overrides": {
+    "oslo": "1.2.1",
+    "oslojs/crypto": "1.0.1",
+    "@libsql/client": "0.15.0",
     "fast-glob": {
       "main": "./out/index.js",
       "module": "./out/index.js",
