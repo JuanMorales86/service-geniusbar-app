@@ -11,7 +11,7 @@
 [[redirects]]
   from = "/home"
   to = "/.netlify/functions/entry"
-  status = 302
+  status = 200
 
 [[redirects]]
   from = "/*"
