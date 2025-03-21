@@ -288,4 +288,4 @@ const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
     url: $$url
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { $$Home as $, _page as _ };
+export { _page as _ };

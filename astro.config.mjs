@@ -15,7 +15,8 @@ export default defineConfig({
 
   output: "server",
   adapter: netlify({
-    functionPerRoute: false
+    functionPerRoute: false,
+    dist: new URL('./dist/', import.meta.url)
   }),
 
   image: {

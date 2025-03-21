@@ -1,11 +1,14 @@
 /* empty css                                     */
-import { c as createComponent, r as renderComponent, a as renderTemplate } from '../chunks/astro/server_9MFPbHYP.mjs';
+import { c as createComponent, b as createAstro } from '../chunks/astro/server_9MFPbHYP.mjs';
 import 'kleur/colors';
-import { $ as $$Home } from '../chunks/home_0HM2OE0W.mjs';
+import '../chunks/home_CUa9SbzX.mjs';
 export { renderers } from '../renderers.mjs';
 
+const $$Astro = createAstro();
 const $$Index = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${renderComponent($$result, "Home", $$Home, {})}`;
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$Index;
+  return Astro2.redirect("/formservice");
 }, "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/src/pages/index.astro", void 0);
 
 const $$file = "C:/Users/juanj/Desktop/ASTRO/service-geniusbar-app/src/pages/index.astro";
