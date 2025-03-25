@@ -15,7 +15,7 @@ export default defineConfig({
   output: "server",
   adapter: netlify({
     functionPerRoute: false,
-    edgeMiddleware: false,
+    autoRedirect: false,
   }),
 
   image: {
