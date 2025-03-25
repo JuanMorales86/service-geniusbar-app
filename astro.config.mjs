@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
-import netlify from "@astrojs/netlify"
+import netlify from "@astrojs/netlify/functions"
 import db from "@astrojs/db";
 import icon from "astro-icon";
 
@@ -16,7 +15,7 @@ export default defineConfig({
   output: "server",
   adapter: netlify({
     functionPerRoute: false,
-    dist: new URL('./dist/', import.meta.url)
+    edgeMiddleware: false,
   }),
 
   image: {
