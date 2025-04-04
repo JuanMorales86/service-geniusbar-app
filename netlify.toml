@@ -1,7 +1,11 @@
 [build]
   command = "pnpm build"
   publish = "dist/"
-  functions = ".netlify/functions"
+   functions = ".netlify/v1/functions"
+
+[[edge_functions]]
+  path = "/*"
+  function = "ssr"
 
   [functions]
   node_bundler = "esbuild"

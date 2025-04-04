@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import netlify from "@astrojs/netlify/functions"
+import netlify from "@astrojs/netlify"
 import db from "@astrojs/db";
 import icon from "astro-icon";
 
