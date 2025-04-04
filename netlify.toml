@@ -1,7 +1,10 @@
 [build]
   command = "pnpm build"
   publish = "dist/"
-  compress = true
+  functions = ".netlify/functions"
+
+  [functions]
+  node_bundler = "esbuild"
 
   [images]
   remote_images = [
