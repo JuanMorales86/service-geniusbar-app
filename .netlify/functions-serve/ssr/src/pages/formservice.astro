@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FormReact from "@/components/FormReact"
+
+const seoData = {
+    title: "Formulario de Consultas - Genius Bar Service",
+    description: "Consulta por la reparación de tu iPhone, MacBook, iPad o Apple Watch. Rellena nuestro formulario y recibe una respuesta rápida de nuestros expertos.",
+    keywords: "consulta reparación Apple, formulario servicio técnico, reparación iPhone, Genius Bar Argentina, reparación MacBook, consulta Genius Bar",
+    image: "https://i.imgur.com/DGwX45I.png?format=webp",
+    url: "https://geniusbarservice.com/formservice",
+
+}
+---
+
+
+<Layout {...seoData}>
+    <div class="flex flex-col gap-8 ">
+    <FormReact  client:load>
+    </FormReact>
+    </div>
+</Layout>

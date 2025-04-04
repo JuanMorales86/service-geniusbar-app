@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Boulogne Sur Mer",
+			"country": {
+				"code": "AR",
+				"name": "Argentina"
+			},
+			"subdivision": {
+				"code": "B",
+				"name": "Buenos Aires"
+			},
+			"timezone": "America/Argentina/Buenos_Aires",
+			"latitude": -34.5042,
+			"longitude": -58.5558,
+			"postalCode": "1609"
+		},
+		"timestamp": 1743804118746
+	}
+}
