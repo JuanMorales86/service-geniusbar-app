@@ -1,12 +1,17 @@
 import { l as lucia } from './chunks/auth_dBB4lbfl.mjs';
 import { verifyRequestOrigin } from 'lucia';
-import { c as cookieExports } from './chunks/index_BYVHR9n5.mjs';
+import 'es-module-lexer';
+import './chunks/shared_BTASe_bZ.mjs';
 import 'kleur/colors';
-import { A as AstroError, R as ResponseSentError, F as ForbiddenRewrite } from './chunks/astro/server_9MFPbHYP.mjs';
+import { A as AstroError, R as ResponseSentError, F as ForbiddenRewrite } from './chunks/astro/server_BN0oIdhg.mjs';
+import 'clsx';
+import { serialize, parse } from 'cookie';
+import 'html-escaper';
 
 const DELETED_EXPIRATION = /* @__PURE__ */ new Date(0);
 const DELETED_VALUE = "deleted";
 const responseSentSymbol = Symbol.for("astro.responseSent");
+const identity = (value) => value;
 class AstroCookie {
   constructor(value) {
     this.value = value;
@@ -57,7 +62,7 @@ class AstroCookies {
     };
     this.#ensureOutgoingMap().set(key, [
       DELETED_VALUE,
-      cookieExports.serialize(key, DELETED_VALUE, serializeOptions),
+      serialize(key, DELETED_VALUE, serializeOptions),
       false
     ]);
   }
@@ -77,25 +82,29 @@ class AstroCookies {
         return void 0;
       }
     }
-    const values = this.#ensureParsed(options);
+    const decode = options?.decode ?? decodeURIComponent;
+    const values = this.#ensureParsed();
     if (key in values) {
       const value = values[key];
-      return new AstroCookie(value);
+      if (value) {
+        return new AstroCookie(decode(value));
+      }
     }
   }
   /**
    * Astro.cookies.has(key) returns a boolean indicating whether this cookie is either
    * part of the initial request or set via Astro.cookies.set(key)
    * @param key The cookie to check for.
+   * @param _options This parameter is no longer used.
    * @returns
    */
-  has(key, options = void 0) {
+  has(key, _options) {
     if (this.#outgoing?.has(key)) {
       let [, , isSetValue] = this.#outgoing.get(key);
       return isSetValue;
     }
-    const values = this.#ensureParsed(options);
-    return !!values[key];
+    const values = this.#ensureParsed();
+    return values[key] !== void 0;
   }
   /**
    * Astro.cookies.set(key, value) is used to set a cookie's value. If provided
@@ -131,7 +140,7 @@ class AstroCookies {
     }
     this.#ensureOutgoingMap().set(key, [
       serializedValue,
-      cookieExports.serialize(key, serializedValue, serializeOptions),
+      serialize(key, serializedValue, serializeOptions),
       true
     ]);
     if (this.#request[responseSentSymbol]) {
@@ -172,9 +181,9 @@ class AstroCookies {
     cookies.#consumed = true;
     return cookies.headers();
   }
-  #ensureParsed(options = void 0) {
+  #ensureParsed() {
     if (!this.#requestValues) {
-      this.#parse(options);
+      this.#parse();
     }
     if (!this.#requestValues) {
       this.#requestValues = {};
@@ -187,12 +196,12 @@ class AstroCookies {
     }
     return this.#outgoing;
   }
-  #parse(options = void 0) {
+  #parse() {
     const raw = this.#request.headers.get("cookie");
     if (!raw) {
       return;
     }
-    this.#requestValues = cookieExports.parse(raw, options);
+    this.#requestValues = parse(raw, { decode: identity });
   }
 }
 

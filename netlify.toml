@@ -1,7 +1,20 @@
 [build]
   command = "pnpm build"
   publish = "dist/"
+  compress = true
 
+  [images]
+  remote_images = [
+       "https:\\/\\/i\\.imgur\\.com\\/.*",
+        "https:\\/\\/imgur\\.com\\/.*"
+  ]
+
+[dev]
+ command = "pnpm dev"
+ port = 8888
+ targetPort = 4321
+ autoLaunch = true
+ framework = "#custom"
 
 [[redirects]]
   from = "/home"

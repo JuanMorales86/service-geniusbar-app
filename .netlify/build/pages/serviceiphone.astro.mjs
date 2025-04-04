@@ -1,8 +1,8 @@
 /* empty css                                     */
-import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_9MFPbHYP.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_BN0oIdhg.mjs';
 import 'kleur/colors';
-import { $ as $$Layout, C as CarouselTexts } from '../chunks/Layout_D6bI2Eai.mjs';
-import { B as BlurImages } from '../chunks/BlurImages_ND7kZO24.mjs';
+import { $ as $$Layout, C as CarouselTexts } from '../chunks/Layout_BvMxcmfm.mjs';
+import { B as BlurImages } from '../chunks/BlurImages_6st8Dbtr.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 export { renderers } from '../renderers.mjs';
 

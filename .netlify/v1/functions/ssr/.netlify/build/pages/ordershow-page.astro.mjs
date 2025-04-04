@@ -1,5 +1,5 @@
 /* empty css                                     */
-import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead, b as createAstro } from '../chunks/astro/server_9MFPbHYP.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead, b as createAstro } from '../chunks/astro/server_BN0oIdhg.mjs';
 import 'kleur/colors';
 import { G as GET } from '../chunks/getOrders_CV8ROXKX.mjs';
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
@@ -7,7 +7,7 @@ import * as React from 'react';
 import React__default, { useRef, Component } from 'react';
 import * as reactToPrint from 'react-to-print';
 import { C as ConfirmationToast } from '../chunks/ToastContainer_BNDuhfT2.mjs';
-import { $ as $$Layout, a as $$Icon } from '../chunks/Layout_D6bI2Eai.mjs';
+import { $ as $$Layout, a as $$Icon } from '../chunks/Layout_BvMxcmfm.mjs';
 export { renderers } from '../renderers.mjs';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {

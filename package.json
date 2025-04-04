@@ -38,6 +38,7 @@
     "oslo": "^1.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-loading-skeleton": "^3.5.0",
     "service-geniusbar-app": "link:",
     "sharp": "^0.33.5",
     "tailwind-scrollbar-hide": "^2.0.0",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.26",
     "@types/nodemailer": "^6.4.17",
+    "@types/react-lazy-load-image-component": "^1.6.4",
     "daisyui": "^4.12.23",
     "dotenv": "^16.4.7",
     "esbuild": "^0.25.0",

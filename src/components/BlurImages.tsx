@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React from "react";
 
 interface BlurImagesProps {
     src: string;
@@ -8,6 +8,8 @@ interface BlurImagesProps {
     height?: string | "600px";
 }
 
+
+
 export default function BlurImages({
     src,
     alt,
@@ -15,56 +17,19 @@ export default function BlurImages({
     width,
     height,
 }: BlurImagesProps) {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const imageRef = useRef<HTMLImageElement>(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const image = entries[0];
-                if (image.isIntersecting) {
-                    const imageElement = new Image();
-                    imageElement.src = src;
-                    imageElement.onload = () => {
-                        setIsLoaded(true);
-                    };
-                    observer.unobserve(image.target);
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        if (imageRef.current) {
-            observer.observe(imageRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, [src]);
-
-
+    
+    // Solución extremadamente básica: solo mostrar la imagen
     return (
-        <div ref={imageRef} className="relative overflow-hidden">
-            <div 
-                className={`${className} absolute inset-0 blur-2xl scale-105 transition-opacity duration-500`}
-                style={{
-                    backgroundImage: `url(${src})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: isLoaded ? 0 : 1
-                }}
-            />
-            <picture>
-                <source srcSet={src} type="image/webp" />
+        <div className="relative">
             <img
-                src={src.replace('?format=webp', '')}
+                src={src}
                 alt={alt}
-                className={`${className} transition-opacity duration-1000`}
-                style={{ opacity: isLoaded ? 1 : 0 }}
-                loading="lazy"
+                className={className}
                 width={width}
                 height={height}
+                loading="lazy"
             />
-            </picture>
         </div>
     );
 }
