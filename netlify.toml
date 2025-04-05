@@ -23,12 +23,3 @@
  autoLaunch = true
  framework = "#custom"
 
-[[redirects]]
-  from = "/home"
-  to = "/.netlify/build/entry"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/build/entry"
-  status = 200
