@@ -13,8 +13,8 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 // https://astro.build/config
 export default defineConfig({
 
-  output: "server",
-  adapter: node({ mode: "standalone"}),
+  output: 'server',
+  adapter: node({ mode: 'standalone' }),
   experimental: {
     session: true,
   },
