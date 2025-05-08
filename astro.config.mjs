@@ -15,6 +15,9 @@ export default defineConfig({
 
   output: "server",
   adapter: node({ mode: "standalone"}),
+  experimental: {
+    session: true,
+  },
 
   image: {
     domains: ['i.imgur.com']
