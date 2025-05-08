@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
-import netlify from "@astrojs/netlify"
+//import netlify from "@astrojs/netlify"
 import node from "@astrojs/node";
 import db from "@astrojs/db";
 import icon from "astro-icon";
@@ -76,8 +76,8 @@ export default defineConfig({
     //   }
     // }
   },
-  server:{
-    port:4321 // Astro port
-  },
+  // server:{
+  //   port:4321 // Astro port
+  // },
  
 });

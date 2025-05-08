@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev --host",
     "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
-    "start": "astro start",
+    "start": "node ./dist/server/entry.mjs",
     "build": "astro build --remote",
     "preview": "astro preview",
     "astro": "astro"
