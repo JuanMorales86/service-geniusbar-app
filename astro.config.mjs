@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
 import netlify from "@astrojs/netlify"
+import node from "@astrojs/node";
 import db from "@astrojs/db";
 import icon from "astro-icon";
 
@@ -13,7 +14,7 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 export default defineConfig({
 
   output: "server",
-  adapter: netlify(),
+  adapter: node({ mode: "standalone"}),
 
   image: {
     domains: ['i.imgur.com']

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: astro-ssr-app
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node ./dist/server/entry.mjs
+    plan: free
