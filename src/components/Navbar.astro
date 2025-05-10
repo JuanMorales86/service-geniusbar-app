@@ -5,15 +5,12 @@ import { Icon } from "astro-icon/components";
 import UserDropdown from "./UserMenu.astro";
 
 
-interface Props {
-  user?: {
-    username: string;
-    isAdmin: boolean;
-  } | null
-};
 
 
-const {user} = Astro.props
+
+//const {user} = Astro.props
+const user = Astro.locals.user;
+console.log("user desde el navbar", user);
 ---
 
 <nav  id="navbar" class="navbar z-20 flex justify-between items-center  sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1 px-4">

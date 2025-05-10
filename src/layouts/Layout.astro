@@ -28,9 +28,12 @@ const { title = 'Genius Bar Servicio Técnico - Apple',
 		keywords = 'reparación de dispositivos de telefonia movil y portatiles laptops, servicio técnico, Apple, Genius Bar, iPhone, Mac, iPad, Multi marca, Samsung, Xiaomi, Tcl, Android"',
 		image = "@/utilities/img/logogeniusbar130px.png",
 		url = "https://apple.com",
-		user = Astro.locals.user, 
+		user = Astro.locals.user,
 		showWhatsAppButton = true } 
 		= Astro.props;
+
+
+console.log("user desde el layout principal", user);
 ---
 
 <!doctype html>
