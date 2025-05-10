@@ -37,7 +37,12 @@ export async function GET(context: APIContext): Promise<Response> {
         if(existingUser) {
             const session = await lucia.createSession(String(existingUser.id), {});
             const sessionCookie = lucia.createSessionCookie(session.id);
-            context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+            context.cookies.set(sessionCookie.name, sessionCookie.value, 
+                {  
+                    ...sessionCookie.attributes,
+                    path: sessionCookie.attributes.path ?? "/",
+                    sameSite: sessionCookie.attributes.sameSite ?? "lax",
+                });
             return context.redirect("/home");
         }
 
@@ -50,7 +55,11 @@ export async function GET(context: APIContext): Promise<Response> {
 
         const session = await lucia.createSession(userId, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
-        context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+        context.cookies.set(sessionCookie.name, sessionCookie.value,   {  
+                    ...sessionCookie.attributes,//El spread ...sessionCookie.attributes mantiene los atributos críticos como secure, httpOnly, expires, etc.
+                    path: sessionCookie.attributes.path ?? "/",//El fallback ?? "/" y ?? "lax" asegura que el path y el comportamiento cross-site no fallen si están undefined.
+                    sameSite: sessionCookie.attributes.sameSite ?? "lax",
+                });
         return context.redirect("/home");
     } catch(error) {
         if (error instanceof OAuth2RequestError){

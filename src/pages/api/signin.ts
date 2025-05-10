@@ -76,8 +76,12 @@ export async function POST(context: APIContext):Promise<Response>{
     const sessionCookie = lucia.createSessionCookie(session.id)//Crea una cookie de sesión
     context.cookies.set(
         sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes
+        sessionCookie.value,{
+            ...sessionCookie.attributes,
+            path: sessionCookie.attributes.path ?? "/",
+            sameSite: sessionCookie.attributes.sameSite ?? "lax",
+
+        }
     ) //Establece la cookie en la respuesta
     return context.redirect("/home") //Redirige al usuario a la página de inicio
 

@@ -99,8 +99,11 @@ export async function POST(context:APIContext) : Promise<Response> {
     const sessionCookie = lucia.createSessionCookie(session.id);//Setear la cookie de sesion
     context.cookies.set(
         sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes
+        sessionCookie.value, {
+            ...sessionCookie.attributes,
+            path: sessionCookie.attributes.path ?? "/",
+            sameSite: sessionCookie.attributes.sameSite ?? "lax",
+        }
     )
 
     //await storeSessionData(session)

@@ -15,8 +15,11 @@ export async function POST(context: APIContext): Promise<Response> {
 	const sessionCookie = lucia.createBlankSessionCookie();//aqui despues se crea una cookie de ssesion pero vacia
 	context.cookies.set(
 	sessionCookie.name, 
-	sessionCookie.value, 
-	sessionCookie.attributes
+	sessionCookie.value, {
+		...sessionCookie.attributes,
+		path: sessionCookie.attributes.path ?? "/",
+		sameSite: sessionCookie.attributes.sameSite ?? "lax",
+	}
 );
 
     //por ultimo redirige a la pagina de login
