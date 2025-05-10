@@ -35,7 +35,7 @@ export const lucia = new Lucia(adapter, {
 });
 
 const googleCallbackURL = import.meta.env.PROD ?
-	"https://yourdomain.com/api/callbacks/google" :
+	"https://service-geniusbar-app.onrender.com/api/callbacks/google" :
 	"http://localhost:4321/api/callbacks/google";
 
 export const google = new Google(
