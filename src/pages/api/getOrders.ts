@@ -28,10 +28,10 @@ export async function GET(context: APIContext): Promise<Response> {
             args: [],
         })
 
-        cl('Count countResults', countResults)
+        //cl('Count countResults', countResults)
 
         const totalOrder = Number(countResults[0]?.totalOrders) ?? 0;
-        cl('Total de ordenes', totalOrder)
+        //cl('Total de ordenes', totalOrder)
 
         //2.Calcular el total de paginas
         const totalPages = Math.ceil(totalOrder / elementsPerPages);
@@ -46,7 +46,7 @@ export async function GET(context: APIContext): Promise<Response> {
             sql: "SELECT * FROM ServiceOrder LIMIT ? OFFSET ?",
             args: [elementsPerPages, offset],
         });
-        cl('Orders retrived', orders)
+        //cl('Orders retrived', orders)
 
         return new Response(JSON.stringify({
             ordenes: orders,

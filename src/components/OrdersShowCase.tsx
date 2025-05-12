@@ -124,7 +124,7 @@ class OrdersShowCase extends Component<Props, State> {
   }
 
   handleEdit = (order: ServiceOrder) => {
-    cl('orden editando:', order)
+    //cl('orden editando:', order)
     this.setState({
       editingOrderId: order.id,
       editFormData: {
@@ -162,7 +162,7 @@ class OrdersShowCase extends Component<Props, State> {
       value = e.target.value; // Para inputs normales, solo obtiene el valor del input
     } 
 
-    cl('edit change:', name, value)
+    //cl('edit change:', name, value)
     this.setState(prevState => ({
       editFormData: prevState.editFormData ? {
         ...prevState.editFormData,
@@ -173,7 +173,7 @@ class OrdersShowCase extends Component<Props, State> {
 
   handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    cl('summiting edit:', this.state.editFormData)
+    //cl('summiting edit:', this.state.editFormData)
     const response = await fetch('api/getOrders', {
       method: 'PUT',
       headers:{ 'Content-Type': 'application/json' },
@@ -183,7 +183,7 @@ class OrdersShowCase extends Component<Props, State> {
 
     if (response.ok) {
       const updatedOrder = await response.json();
-      cl('updated Order:', updatedOrder)
+      //cl('updated Order:', updatedOrder)
       this.setState(prevState => ({
         ordersData: prevState.ordersData ? {
           ...prevState.ordersData,
@@ -231,7 +231,7 @@ changePage = (newPage: number) => {
 }
 
 render() {
-  cl('User prop in render:', this.props.user.isAdmin)
+  //cl('User prop in render:', this.props.user.isAdmin)
       const { ordersData, isLoading, error, editFormData, editingOrderId } = this.state;
 
       if (isLoading) {

@@ -16,8 +16,8 @@ export async function PUT(context: APIContext): Promise<Response> {
     const updateData = {
       ...removeNullUndefined(rawUpdateData), 
       updatedAt: getCurrentFormattedDate()}
-    cl('tratando de modificar la orden', id)
-    cl('Before update:', updateData);
+    //cl('tratando de modificar la orden', id)
+    //cl('Before update:', updateData);
     
     // const updatedOrder = await db
     //   .update(ServiceOrder)
@@ -81,8 +81,8 @@ export async function PUT(context: APIContext): Promise<Response> {
       4.Usamos RETURNING * para obtener la fila actualizada
       5.La sintaxis es más cercana a SQL puro pero mantiene la seguridad con parámetros 
     */
-        cl('resultado de la modificaciond de la base de datos',updatedOrder)
-        cl('updateData de la modificaciond de la base de datos',updateData)
+        //cl('resultado de la modificaciond de la base de datos',updatedOrder)
+        //cl('updateData de la modificaciond de la base de datos',updateData)
  
       if(updatedOrder.length === 0){
         return new Response(JSON.stringify({ error: 'Orden no encontrada'}), {
@@ -96,7 +96,7 @@ export async function PUT(context: APIContext): Promise<Response> {
         sql:'SELECT * FROM ServiceOrder WHERE id = ?',
         args:[id],
       })
-      cl('Order after update:', checkOrder);
+      //cl('Order after update:', checkOrder);
 
     return new Response(JSON.stringify(updatedOrder[0]), {
       status: 200,

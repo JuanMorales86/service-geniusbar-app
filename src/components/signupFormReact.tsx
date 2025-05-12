@@ -2,7 +2,7 @@ import React from "react";
 const cl = console.log.bind(console)
 
 const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
-    cl('Component rendering');  // Add this line at the start
+    //cl('Component rendering');  // Add this line at the start
     const [username, setUsername] = React.useState("");
     const [showAdminField, setShowAdminField] = React.useState(false);
     const [adminUsers, setAdminUsers] = React.useState<string[]>([]);
@@ -16,7 +16,7 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
         
         getAdminUsers();
     }, []);
-    cl(adminUsers)
+    //cl(adminUsers)
   
     const handleUsernameChange = (e: any) => {
         const value = e.target.value;

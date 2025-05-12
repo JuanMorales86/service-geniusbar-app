@@ -4,7 +4,7 @@ import {Toast} from "./ToastContainer";
 import CustomMultiSelect from "./CreateMultiSelect";
 
 const cl = console.log.bind(console)
-cl("Service create orders form component loaded");
+//cl("Service create orders form component loaded");
 
 const initialFormState = {
   clientname: "",
@@ -183,10 +183,10 @@ export default function CreateOrderForm() {
         body: JSON.stringify(formData),
       });
 
-      console.log("Response received:", response);
+      //console.log("Response received:", response);
 
       const data = await response.json();
-      console.log("Response data:", data);
+      //console.log("Response data:", data);
 
       if (response.ok && data.success) {
         setToastMessage("Orden Creada Sastisfactoriamente");

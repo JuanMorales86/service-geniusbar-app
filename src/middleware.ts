@@ -5,7 +5,7 @@ import { defineMiddleware } from "astro/middleware";
 import type { APIContext, MiddlewareNext } from "astro";
 
 
-console.log('Middleware de autenticacion ejecutado')
+//console.log('Middleware de autenticacion ejecutado')
 
 export const onRequest = defineMiddleware(async (context: APIContext, next: MiddlewareNext)=> {
   try{

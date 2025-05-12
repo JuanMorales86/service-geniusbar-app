@@ -88,7 +88,7 @@ export async function incrementFailedAttempts(username: string): Promise<void> {
     })
     const currentUserRow = currentUserRows[0] as unknown as UserRow;
     const currentTotal = currentUserRow.totalAttempts || 0;
-    cl("Antes de Actualizar",beforeUpdates)
+    //cl("Antes de Actualizar",beforeUpdates)
 
 //    await db.update(User).set({
 //         failedAttempts: sql`${User.failedAttempts} + 1`,
@@ -108,7 +108,7 @@ export async function incrementFailedAttempts(username: string): Promise<void> {
         args: [username]
     })
     const afterUpdateRow = afterUpdateRows[0] as unknown as UserRow;
-    cl("Despues de Actualizar",afterUpdateRow)
+    //cl("Despues de Actualizar",afterUpdateRow)
 }
 
 //Funcion para reiniciar los intentos fallidos

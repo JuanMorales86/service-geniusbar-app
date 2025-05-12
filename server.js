@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 4321;
 // Unir todas las interfaces (0.0.0.0) como requiere render
 const HOST = '0.0.0.0';
 
-console.log(`Starting server on ${HOST}:${PORT}`);
+//console.log(`Starting server on ${HOST}:${PORT}`);
 
 
 // Usar el handler directamente con un servidor HTTP nativo
@@ -24,7 +24,7 @@ server.on('error', (err) => {
 
 // Iniciar el servidor
 server.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/`);
+  //console.log(`Server running at http://${HOST}:${PORT}/`);
 });
 
 // Manejar señales de terminación para cerrar limpiamente

@@ -13,20 +13,20 @@ export async function POST(contex: APIContext) : Promise<Response> {
     const {
         clientname, clientdni, email, phone, deviceType, phonedetails, model, serial, issue, devicepassword,
     } = formData;
-    cl('CreateOrder API endpoint hit', formData);
+    //cl('CreateOrder API endpoint hit', formData);
 
-    cl('Attempting to insert order into database', {
-        clientname,
-        clientdni,
-        email,
-        phone,
-        deviceType,
-        model,
-        serial,
-        phonedetails,
-        issue,
-        devicepassword,
-      });
+    // cl('Attempting to insert order into database', {
+    //     clientname,
+    //     clientdni,
+    //     email,
+    //     phone,
+    //     deviceType,
+    //     model,
+    //     serial,
+    //     phonedetails,
+    //     issue,
+    //     devicepassword,
+    //   });
 
         try {
             const orderId = generateId(15);
@@ -105,13 +105,13 @@ export async function POST(contex: APIContext) : Promise<Response> {
                 args: [],
             });
       
-          cl("countResults:", countResultsUpdate); // Verifica el valor de countResulstUpdated
+          //cl("countResults:", countResultsUpdate); // Verifica el valor de countResulstUpdated
           
           if (countResultsUpdate.length > 0) {
-            cl("countResults[0]:", countResultsUpdate[0]); 
+           //cl("countResults[0]:", countResultsUpdate[0]); 
 
             const idFromCount = countResultsUpdate[0].idCount;
-            cl('idFrontCount', idFromCount)
+           // cl('idFrontCount', idFromCount)
 
             if(idFromCount !== undefined) {
                 //const orderCountBeforeUpdate = await db.select().from(OrderCount).limit(1);
@@ -120,7 +120,7 @@ export async function POST(contex: APIContext) : Promise<Response> {
                     sql: "SELECT * FROM OrderCount LIMIT 1",
                     args: [],
                 });
-                console.log("OrderCount antes de la actualización:", orderCountBeforeUpdate)
+                //console.log("OrderCount antes de la actualización:", orderCountBeforeUpdate)
                 
                 // await db
                 // .update(OrderCount)
@@ -143,10 +143,10 @@ export async function POST(contex: APIContext) : Promise<Response> {
                     sql: "SELECT * FROM OrderCount LIMIT 1",
                     args: [],
                 })
-                console.log("OrderCount después de la actualización:", orderCountAfterUpdate);
+                //console.log("OrderCount después de la actualización:", orderCountAfterUpdate);
               
             } else {
-                console.error('Error: idFromCount es un undefined, pero countResults.lenght > 0')
+                //console.error('Error: idFromCount es un undefined, pero countResults.lenght > 0')
                 //await db.insert(OrderCount).values({ totalOrders: 0 });
 
                 await turdb.execute({
@@ -165,7 +165,7 @@ export async function POST(contex: APIContext) : Promise<Response> {
         }
         // ----------> Fin de la logica de actualizacion <-----
 
-            cl('orden creada:', orderId, 'Numero de Orden:', orderNumber)
+            //cl('orden creada:', orderId, 'Numero de Orden:', orderNumber)
 
             return new Response(JSON.stringify({ success: true, orderId, orderNumber }), {
             status: 200,

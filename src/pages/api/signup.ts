@@ -89,7 +89,7 @@ export async function POST(context:APIContext) : Promise<Response> {
         sql: "INSERT INTO User (id, username, password, github_id, isAdmin) VALUES ( ?, ? , ?, ? , ? )",
         args: [userId, username, hashedPassword, null, isAdmin]
     })
-    cl('User created successfully:', userId);
+    //cl('User created successfully:', userId);
     //Crear sesion de usuario 
     
     

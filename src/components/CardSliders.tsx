@@ -21,8 +21,8 @@ export default function ImageLightboxSlider({images}: LightboxPorps) {
     const [ispaused, setPaused] = useState(false);
     const [currentImageIndexes, setCurrentImageIndexes] = useState<number []>(() => Array(images.length).fill(0));
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    cl(selectedIndex);
-    cl(currentImageIndexes);
+    //cl(selectedIndex);
+    //cl(currentImageIndexes);
 
     // UseEffect para el scroll horizontal
     useEffect(() => {
