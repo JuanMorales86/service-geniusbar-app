@@ -54,7 +54,6 @@ turso.ts
 checktables.ts
 
 #Src
-middleware.ts
 Pruebas
 theme.ts
 prisma
