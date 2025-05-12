@@ -8,8 +8,7 @@ import UserDropdown from "./UserMenu.astro";
 
 
 
-//const {user} = Astro.props
-const user = Astro.locals.user;
+const {user} = Astro.props
 console.log("user desde el navbar", user);
 ---
 
