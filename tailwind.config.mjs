@@ -390,7 +390,7 @@ export default {
           "@apply bg-auto bg-cover bg-no-repeat": {},
         },
         ".atention-guys": {
-          "@apply bg-auto bg-center bg-no-repeat w-[90dvw] h-[55dvh]": {},
+          "@apply bg-auto bg-center bg-no-repeat w-[90dvw] h-auto h-64 sm:h-80 md:h-96": {},
         },
         ".order-container": {
           "@apply min-h-screen flex flex-col justify-center items-center": {},

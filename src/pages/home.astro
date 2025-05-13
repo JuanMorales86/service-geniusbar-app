@@ -172,8 +172,8 @@ const seoData = {
       <section class="bg-mainbrand-light dark:bg-mainbrand-dark text-mainbrand-dark dark:text-mainbrand-light py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {ourServiceImages.map(async (services) => {
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {ourServiceImages.map( (services) => {
               return (
                 // <div class="text-center" >
                 //   <Image src={services.image} alt={services.title} quality="medium" inferSize densities={[4,4]} class="w-auto h-5/6 rounded-lg mx-auto mb-4 shadow-md" loading={"lazy"}/>
@@ -185,7 +185,7 @@ const seoData = {
                   client:visible
                   src={services.image}
                   alt={services.title}
-                  className='w-auto h-80 rounded-lg mx-auto mb-4 shadow-md '
+                  className='w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg mx-auto mb-4 shadow-md'
                   />
                   <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
                   <p >{services.description}</p>
@@ -195,7 +195,7 @@ const seoData = {
             })}
           </div>
           <div class="grid grid-cols-1 mt-24 ">
-            {plusServices.map( async (services) => {
+            {plusServices.map( (services) => {
               return (
 
               <div class="text-center">
@@ -203,7 +203,7 @@ const seoData = {
                 client:visible
                 src={services.image}
                 alt={services.title}
-                className='w-auto h-auto lg:h-[500px] lg:w-full rounded-lg mx-auto mb-4 shadow-md object-cover'
+                className='w-full h-64 sm:h-80 md:h-[500px] object-cover rounded-lg mx-auto mb-4 shadow-md'
                 />
                 <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
                 <p>{services.description}</p>
@@ -259,18 +259,9 @@ const seoData = {
       <!-- About Us Section -->
       <section class="bg-gray-900 dark:bg-mainbrand-light dark:text-mainbrand-dark text-white py-16">
         <div class="container mx-auto px-6">
-          <div class="flex flex-col md:flex-row items-center">
-            <div class="md:w-3/4 mb-8 md:mb-0">
-              <!-- <Image src="https://i.imgur.com/oU5Yi8f.png" inferSize densities={[3,3]} alt="Genius Bar Team" class="rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light "> -->
-              <BlurImages
-              client:visible
-              src="https://i.imgur.com/oU5Yi8f.png"
-              alt="Genius Bar Team"
-              className='rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
-              />
-            </div>
-            
-            <div class="md:w-1/2 md:pl-12 text-center md:text-left">
+          <div class="flex flex-col-reverse md:flex-row items-center gap-8">
+
+          <div class="md:w-1/2 text-center md:text-left">
               <h2 class="text-3xl font-bold mb-4">Sobre Genius Bar</h2>
               <p class="mb-4">
                 {aboutGen}
@@ -279,6 +270,17 @@ const seoData = {
                 {missionGen}
               </p>
             </div>
+
+            <div class="md:w-1/2">
+              <BlurImages
+              client:visible
+              src="https://i.imgur.com/oU5Yi8f.png"
+              alt="Genius Bar Team"
+              className='w-full h-64 sm:h-80 md:96 object-cover rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
+              />
+            </div>
+            
+            
           </div>
         </div>
       </section>
