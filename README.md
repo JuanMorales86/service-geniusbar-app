@@ -1,54 +1,102 @@
-# Astro Starter Kit: Basics
+# 💡 Service Genius Bar App
 
-```sh
-npm create astro@latest -- --template basics
-```
+**Autor:** Juan Morales
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 📋 Descripción
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Aplicación web para la **gestión de órdenes de servicio técnico** de dispositivos electrónicos, inspirada en el estilo "Genius Bar". Permite:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- Crear, consultar, modificar y eliminar órdenes
+- Gestionar usuarios, sesiones y roles
+- Comunicarte con clientes por correo electrónico
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🧱 Estructura del Proyecto
+src/         -> Código fuente principal  
+components/  -> Componentes reutilizables (React/Astro)  
+pages/       -> Páginas y endpoints API  
+db/          -> Configuración y modelos de base de datos  
+public/      -> Archivos estáticos  
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Funcionalidades Principales
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### 🛠 Gestión de Órdenes de Servicio
+- CRUD de órdenes
+- Seguimiento de reparaciones
+- Detalles de dispositivos y fallas
 
-Any static assets, like images, can be placed in the `public/` directory.
+### 🔐 Autenticación y Autorización
+- Login con proveedores: Local, GitHub, Google
+- Protección contra accesos no autorizados
+- Roles: administrador / usuario
 
-## 🧞 Commands
+### 📬 Comunicación con Clientes
+- Envío de correos automáticos
+- Formulario de contacto
 
-All commands are run from the root of the project, from a terminal:
+### 🎨 Interfaz de Usuario
+- Diseño responsivo
+- Animaciones fluidas
+- Modo claro / oscuro
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 🧰 Tecnologías Utilizadas
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Frontend
+- ⚡ **Astro.js** (framework principal)
+- ⚛️ **React** (componentes interactivos)
+- 🎨 **Tailwind CSS** + **DaisyUI**
+- 🎞 **GSAP** (animaciones)
+
+### Backend
+- 🌐 API REST (Astro/Node.js)
+- 📧 **Nodemailer** (envío de correos)
+- Typescript
+
+### Base de Datos
+- 🗃 **SQLite** con Astro DB
+- ☁️ **Turso DB** (persistencia en la nube)
+
+### Autenticación
+- 🛡 **Lucia Auth** (sesiones y seguridad)
+
+### Herramientas de Desarrollo
+- 🧠 **TypeScript** (tipado)
+- 🧹 **ESLint / Prettier** (formato de código)
+
+---
+
+## 🎨 Características de Diseño
+
+- UI moderna y adaptable
+- Componentes reutilizables
+- Tema personalizado con colores de marca
+- Soporte completo para **modo claro / oscuro**
+
+---
+
+## ▶️ Ejecución
+
+### 1. Clona el repositorio:
+
+git clone https://github.com/JuanMorales86/service-geniusbar-app.git
+
+##  Instala las dependencias:
+
+pnpm install
+
+## 4. Inicia el servidor de desarrollo:
+
+pnpm run dev
+
+## Compila para producción:
+
+pnpm run buid
+
+📄 Licencia:
+
+Este proyecto está bajo la licencia MIT.
