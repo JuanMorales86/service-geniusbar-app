@@ -2,6 +2,8 @@
 
 **Autor:** Juan Morales
 
+Live demo : https://service-geniusbar-app.onrender.com/home
+
 ## 📋 Descripción
 
 Aplicación web para la **gestión de órdenes de servicio técnico** de dispositivos electrónicos, inspirada en el estilo "Genius Bar". Permite:
