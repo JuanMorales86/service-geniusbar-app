@@ -85,19 +85,7 @@ export async function POST(context: APIContext) : Promise<Response> {
                 </div>
 
                 </div>
-            `, // html body
-            attachments: [
-                {
-                    filename: 'test.pdf',
-                    path: '../../ASTRO/service-geniusbar-app/src/Pruebas/test.pdf.pdf',
-                    contenType: 'application/pdf'
-                },
-                {
-                    filename: 'sample_jpg',
-                    path: '../../ASTRO/service-geniusbar-app/src/Pruebas/sample_jpg.jpg',
-                    contenType: 'image/jpg'
-                },
-            ]
+            `
         }
         
 
@@ -124,7 +112,18 @@ export async function POST(context: APIContext) : Promise<Response> {
 
 
 
-
-
-
 /*APIContext es un tipo de Astro que se utiliza para crear endpoints de API en un proyecto de Astro. Cuando se utiliza en una función de endpoint, APIContext proporciona acceso a la solicitud entrante y a la respuesta saliente, lo que le permite a la función de endpoint manejar la solicitud y generar una respuesta adecuada. */
+
+ // html body
+            // attachments: [
+            //     {
+            //         filename: 'test.pdf',
+            //         path: '../../ASTRO/service-geniusbar-app/src/Pruebas/test.pdf.pdf',
+            //         contenType: 'application/pdf'
+            //     },
+            //     {
+            //         filename: 'sample_jpg',
+            //         path: '../../ASTRO/service-geniusbar-app/src/Pruebas/sample_jpg.jpg',
+            //         contenType: 'image/jpg'
+            //     },
+            // ]

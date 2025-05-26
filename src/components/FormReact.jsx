@@ -606,8 +606,8 @@ const styles = {
         setToastPositionV('end')
         setShowToast(true)
 
-        const formData = new FormData();
-        formData.append('nombre', nombre);
+        const formData = new FormData();//estoy creando un objeto de tipo FormData para enviar los datos del formulario al servidor. FormData es una clase nativa de JavaScript que se utiliza para representar los datos de formulario en formato de clave-valor.
+        formData.append('nombre', nombre);//append donde se agrega un par clave-valor al objeto FormData.
         formData.append('modelo', modelo);
         formData.append('telefono', telefono);
         formData.append('email', email);
@@ -620,17 +620,17 @@ const styles = {
             formData.append('opcionSeleccionada', "Ninguna escogida");
             formData.append('opcionDispositivo', "Ninguna escogida");
         }
-           try { 
+        try { 
             
-            const response = await fetch('/api/submitForm', {
+            const response = await fetch('/api/submitForm', {//preguntamos al api submitForm es un archivo servidor, la pregunta es un POST y el body es el formData
                 method: 'POST',
                 body: formData,
             });
 
             if (response.ok) {
-                const result = await response.json()
+                const result = await response.json();//response.json() convierte la respuesta en un objeto JSON que puede ser leida por JavaScript.
                 // console.log('Formulario enviado con exito', result);
-                if(result.success){
+                if(result.success){//si el resultado es exitoso 
                     setToastMessage('Consulta enviada con exito')
                     setToastType('success')
                     setToastPositionV('top')
