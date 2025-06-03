@@ -38,7 +38,7 @@ export function observers() {
 export function observerBounce(imageClass, sectionId, animationClass) {
 	const observerBounce = new IntersectionObserver((entries) => {
 		entries.forEach(entry => {
-			const imagen = entry.target.querySelector(`.${imageClass}`)//Observer para la imagen principal de
+			const imagen = entry.target.querySelector(`.${imageClass}`)//Observer para la imagen principal de la sección.
 		if(imagen){
       if (entry.isIntersecting){
 				imagen.classList.add(animationClass);
@@ -49,8 +49,32 @@ export function observerBounce(imageClass, sectionId, animationClass) {
 		});
 	}, { threshold: 0.1 });
 
-	const section = document.querySelector(`#${sectionId}`);
-	if (section) { observerBounce.observe(section);}
+	const section = document.querySelector(`#${sectionId}`);//Seleccionamos la sección con el ID proporcionado.
+	if (section) { observerBounce.observe(section);}//Observamos la sección con el ID proporcionado y aplicamos el observer.
+}
+
+//Funcion manejar el indicador de ayuda scroll con clase .scroll-indicator (serviciosm)
+export function observerScrollIndicator(){
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if(!scrollIndicator) return;
+  const observer = new IntersectionObserver((entries) => {
+    //Si la primera seccion esta completamente visisble, ocultar el indicador
+    entries.forEach(entry => {
+      if(entry.intersectionRatio < 0.8) {
+        scrollIndicator.classList.add('hidden');
+      } else {
+        scrollIndicator.classList.remove('hidden');
+      }
+    });
+  }, {
+    threshold: [0.8],// Define el umbral de intersección para mostrar el indicador de desplazamiento. en este caso es 0.8 por que quiero que se muestre cuando el 80% de la sección esté visible.
+    rootMargin: '0px' // Define el margen de la ventana de observación. en este es 0 porque no quiero que se mueva
+});
+
+  const firstSection = document.querySelector('#brand_principal_title');
+  if(firstSection){
+    observer.observe(firstSection);
+  }
 }
 
 

@@ -4,8 +4,7 @@ interface BlurImagesProps {
     src: string;
     alt: string;
     className?: string;
-    width?: string | "800px";
-    height?: string | "600px";
+    fixedsize?: boolean;
 }
 
 
@@ -14,8 +13,7 @@ export default function BlurImages({
     src,
     alt,
     className = '',
-    width,
-    height,
+    fixedsize = false,
 }: BlurImagesProps) {
 
     
@@ -26,8 +24,7 @@ export default function BlurImages({
                 src={src}
                 alt={alt}
                 className={className}
-                width={width}
-                height={height}
+                style={fixedsize ? {width: '600px', height: '400px'} : undefined}
                 loading="lazy"
             />
         </div>

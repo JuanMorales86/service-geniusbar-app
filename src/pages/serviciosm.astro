@@ -2,6 +2,7 @@
 import type { Linkservice } from "@/data/layout/links";
 import { linksServices } from "@/data/layout/links";
 import Linkse from "@/components/Linkse.astro";
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import IcoDoubleCheck from "@/utilities/icons/icoDoubleCheck.astro";
@@ -56,7 +57,13 @@ const seoData = {
                 </div>    
             
         </section>
-    
+        
+        <section id="brand-image-helper" class="block place-items-center section">
+            <div>
+                <Icon class="scroll-indicator text-4xl " name="lucide:arrow-up-down"></Icon>
+            </div>
+        </section>
+
         <section id="question_basic_problems" class=" flex flex-col md:flex-row items-center section">
             <div class="sectionquest bg-custom-gradientwithimage flex flex-col justify-center items-center gap-y-5 w-full h-full rounded-2xl py-4 overflow-hidden">
                 <h1 class="text-3xl md:text-5xl text-mainbrand-light dark:text-mainbrand-light font-apple font-bold text-center">Reparamos Tu Telefono al Momento</h1>
@@ -93,7 +100,8 @@ const seoData = {
                                     client:visible
                                     src={imgServiciosm.imagenIphone}
                                     alt={imgServiciosm.altIphone}
-                                    className="w-full h-full object-cover"
+                                    fixedsize
+                                    className="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -108,13 +116,14 @@ const seoData = {
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300 ">
                         <div class="flex flex-col md:flex-row md:h-auto">
                             
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
-                                <div class="aspect-[4/3] w-full">
+                            <div class="w-full md:w-1/2 flex ">
+                                <div class="aspect-[4/3] w-full flex items-center justify-center">
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenWatch}
                                     alt= {imgServiciosm.altimagenWatch}
-                                    className="w-full h-full object-cover"
+                                    fixedsize
+                                    className="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -128,13 +137,15 @@ const seoData = {
                     
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300">
                         <div class="flex flex-col md:flex-row h-auto">
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
-                                <div class="aspect-[4/3] w-full">    
+
+                            <div class="w-full md:w-1/2 flex">
+                                <div class="aspect-[4/3] w-full items-center justify-center">    
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenIpads}
                                     alt= {imgServiciosm.altimageIpads}
-                                    className="w-full h-full object-cover"
+                                    fixedsize
+                                    className="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -149,13 +160,14 @@ const seoData = {
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300">
                         <div class="flex flex-col md:flex-row h-auto">
 
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
-                                <div class="aspect-[4/3] w-full">
+                            <div class="w-full md:w-1/2 flex">
+                                <div class="aspect-[4/3] w-full flex items-center justify-center">
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenMacbook}
                                     alt= {imgServiciosm.altimagenMacbook}
-                                    className="w-full h-full object-cover"
+                                    fixedsize
+                                    className="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -168,14 +180,15 @@ const seoData = {
                     </div>
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300">
                         <div class="flex flex-col md:flex-row h-auto">
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
+                            <div class="w-full md:w-1/2 flex">
 
-                                <div class="aspect-[4/3] w-full">
+                                <div class="aspect-[4/3] w-full flex items-center justify-center">
                                     <BlurImages
                                     client:visible
                                     src={imgServiciosm.imagenImac}
                                     alt={imgServiciosm.altimageImac}
-                                    className="w-full h-full object-cover"
+                                    fixedsize
+                                    className="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -191,13 +204,14 @@ const seoData = {
                         
                         <div class="flex flex-col md:flex-row h-auto">
 
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
-                                    <div class="aspect-[4/3] w-full">
+                            <div class="w-full md:w-1/2 flex">
+                                    <div class="aspect-[4/3] w-full flex items-center justify-center">
                                         <BlurImages
                                         client:visible
                                         src={imgServiciosm.imagenMagsafe}
                                         alt={imgServiciosm.altMagsafe}
-                                        className="w-full h-full object-cover"
+                                        fixedsize
+                                        className="w-full h-full object-contain p-4"
                                         />
                                     </div>
                             </div>
@@ -227,11 +241,22 @@ const seoData = {
 </Layout>
 
 <script>
-    import { observers, observerBounce } from "@/script/observer";
+    import { observers, observerBounce, observerScrollIndicator } from "@/script/observer";
 
     document.addEventListener('astro:page-load', () => {
-        observers();
-        observerBounce('imagen-p','brand_principal_title', 'animate-bounce');
+        //Scroll Automatico a la primera seccion
+        const firstSection = document.querySelector('#brand_principal_title');
+        if(firstSection) {
+            firstSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+        setTimeout(() => {
+            observers();
+            observerBounce('imagen-p','brand_principal_title', 'animate-bounce');
+            observerScrollIndicator();
+        }, 100);
     })
 
     document.getElementById('experthelp')?.addEventListener('click', function(e) {
