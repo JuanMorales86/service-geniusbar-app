@@ -1,7 +1,7 @@
 import { lucia } from "@/auth/auth";
 import type { APIContext } from "astro";
 // import { db, eq, User } from "astro:db";
-import { checkAccountLocked, resetFailedAttempts } from "./signverificator";
+import { checkAccountLocked, resetFailedAttempts, incrementFailedAttempts } from "./signverificator";
 import { Argon2id } from "oslo/password";
 import { turdb } from "../../../db/turso";
 
@@ -49,11 +49,17 @@ export async function POST(context: APIContext):Promise<Response>{
 
     //Si el usuario no existe
     if(!foundUser){
+        //return context.redirect("/signin?error=user_not_found");
+        //✅ Incrementar intentos fallidos por usuario existente
+        await incrementFailedAttempts(username);
         return context.redirect("/signin?error=user_not_found");
     }
     //verificar el usuario tiene password
     if(!foundUser.password){
-        return new Response("El Usuario o el Password es Incorrecto", {status:400})
+        //return new Response("El Usuario o el Password es Incorrecto", {status:400})
+        //✅ Incrementar intentos fallidos por falta de password
+        await incrementFailedAttempts(username);
+        return new Response("User or Password is Incorrect", {status:400})
     }
 
 
@@ -65,10 +71,11 @@ export async function POST(context: APIContext):Promise<Response>{
 
     //si el password no es valido
     if(!valiPassword){
-        return context.redirect("/signin?error=invalid_password&username=" + encodeURIComponent(username));    }
-
+        await incrementFailedAttempts(username);
+        return context.redirect("/signin?error=invalid_password&username=" + encodeURIComponent(username));
+    }
     
-
+    //✅ Login exitoso - resetear intentos fallidos
     await resetFailedAttempts(username);
 
     //El password es valido, el usuario se puede logear

@@ -24,17 +24,13 @@ export function observers() {
         threshold: Array.from({length: 101}, (_, i) => i / 100),//crea un array de 41 valores entre 0 y 1, representando cada 2.5% de visibilidad.
         //Esto crea thresholds para cada 2.5% de visibilidad, desde 0% hasta 100%
         rootMargin: '100px 0px -100px 0px' //100px arriba y -100px abajo
-
-
       });
-    
     document.querySelectorAll('.section').forEach(el => {//Seleccionamos todos los elementos con la clase section.
         observer.observe(el)//Aplicamos el observer a cada uno de estos elementos. 
     })
 }
 
 //Funcion que agrega interactividad a la clase imageClass, sectionId y la animacion en taildwind que entre como parametro y le agrega un efecto bounce al div
-
 export function observerBounce(imageClass, sectionId, animationClass) {
 	const observerBounce = new IntersectionObserver((entries) => {
 		entries.forEach(entry => {
@@ -47,7 +43,7 @@ export function observerBounce(imageClass, sectionId, animationClass) {
 			}
     }
 		});
-	}, { threshold: 0.1 });
+	}, { threshold: 0.1 });//el threshold es una fracción que indica qué tan visible debe estar un elemento para que se active el callback. el threshold es un metodo que se utiliza para configurar el umbral de intersección. y viene de la libreria Intersection Observer API
 
 	const section = document.querySelector(`#${sectionId}`);//Seleccionamos la sección con el ID proporcionado.
 	if (section) { observerBounce.observe(section);}//Observamos la sección con el ID proporcionado y aplicamos el observer.
@@ -57,13 +53,29 @@ export function observerBounce(imageClass, sectionId, animationClass) {
 export function observerScrollIndicator(){
   const scrollIndicator = document.querySelector('.scroll-indicator');
   if(!scrollIndicator) return;
+
   const observer = new IntersectionObserver((entries) => {
     //Si la primera seccion esta completamente visisble, ocultar el indicador
     entries.forEach(entry => {
-      if(entry.intersectionRatio < 0.8) {
-        scrollIndicator.classList.add('hidden');
+      //Si la primera seccion esta completa visible, mostrar el indicador
+      if(entry.intersectionRatio > 0.8) {
+        //scrollIndicator.classList.add('hidden');
+        //Mostrar el indicador suavemente
+        scrollIndicator.style.opacity = '1';
+        scrollIndicator.style.visibility = 'visible';
+        scrollIndicator.style.transform = 'translateY(0)';
       } else {
-        scrollIndicator.classList.remove('hidden');
+        //scrollIndicator.classList.remove('hidden');
+        //ocultar el indicador suavemente
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.transform = 'translateY(10px)';
+
+        //ocular el indicador completamente despues de la transicion
+        setTimeout(() => {
+          if(scrollIndicator.style.opacity === '0'){
+            scrollIndicator.style.visibility = 'hidden';
+          }
+        }, 500);
       }
     });
   }, {

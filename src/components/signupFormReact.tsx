@@ -5,16 +5,16 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
     //cl('Component rendering');  // Add this line at the start
     const [username, setUsername] = React.useState("");
     const [showAdminField, setShowAdminField] = React.useState(false);
-    const [adminUsers, setAdminUsers] = React.useState<string[]>([]);
+    const [adminUsers, setAdminUsers] = React.useState<string[]>([]);//el estado de adminUsers es un array de strings donde se guardan los nombres de los usuarios administradores
 
     React.useEffect(() => {
         const getAdminUsers = async () => {
-            const response = await fetch('/api/adminConfig');
-            const data = await response.json();
-            setAdminUsers(data);
+            const response = await fetch('/api/adminConfig');// si la respuesta es positiva se puede hacer un fetch a la api de adminConfig
+            const data = await response.json();//si esto positivo se hace un fetch a la api de adminConfig
+            setAdminUsers(data);//entoces se setea el estado de adminUsers con los datos de la respuesta
         };
         
-        getAdminUsers();
+        getAdminUsers();//llamo a la funcion getAdminUsers
     }, []);
     //cl(adminUsers)
   

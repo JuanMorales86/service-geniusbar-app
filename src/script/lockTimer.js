@@ -1,7 +1,7 @@
 export function initLockTimer() {
   const timerElement = document.getElementById("lockTimer");
   if (timerElement) {
-    let timeLeft = parseInt(timerElement.dataset.remainingTime);
+    let timeLeft = parseInt(timerElement.dataset.remainingTime);//En segundos
     const username = timerElement.dataset.username;
 
     const updateMessage = () => {
