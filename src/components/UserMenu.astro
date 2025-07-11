@@ -11,7 +11,7 @@ const dropdownId = `user-dropdown-${variant}`;
 ---
 
 <!-- Front User Menu Icon -->
-<div  class="relative inline-block text-left ">
+<div  class="relative inline-block z-20">
     <div>
         <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-md shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 " 
         id={buttonId}
@@ -23,7 +23,7 @@ const dropdownId = `user-dropdown-${variant}`;
         </button>
     </div>
 
-    <div  class="absolute right-0 mt-2  bg-gray-400 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden w-full lg:w-56 z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
+    <div  class="absolute top-full w-56  mt-2  bg-gray-400/75 dark:bg-blk-gray-dark/75 divide-y divide-gray-100 dark:divide-gray-600 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
         {
             user ? (
                 <div class="px-4 py-3" role="none">
@@ -33,20 +33,16 @@ const dropdownId = `user-dropdown-${variant}`;
                 </div>
                 ) : (
                     <div class="py-1"  role="none">
-                        <DropDownbutton class="block px-4 py-2  " href="/signup" role="menuitem">
+                        <DropDownbutton href="/signup" role="menuitem">
                             Crear Cuenta
                         </DropDownbutton>
                     
-                        <DropDownbutton class="block px-4 py-2 " href="/signin" role="menuitem">
+                        <DropDownbutton  href="/signin" role="menuitem">
                             Iniciar Sesión
                         </DropDownbutton>
                     </div>
 
-                    <div class="py-1" role="none">
-                        <DropDownbutton class="rounded-none" href="/api/github" role="menuitem">
-                            Iniciar Sesión con Github
-                        </DropDownbutton>
-                    </div>
+                 
                     <div class="py-1" role="none">
                         <DropDownbutton class="rounded-none" href="/api/google" role="menuitem">
                             Iniciar Sesión con Google
@@ -81,3 +77,9 @@ const dropdownId = `user-dropdown-${variant}`;
         initLockTimer();
     });
 </script>
+
+   <!-- <div class="py-1" role="none">
+                        <DropDownbutton class="rounded-none" href="/api/github" role="menuitem">
+                            Iniciar Sesión con Github
+                        </DropDownbutton>
+                    </div> -->

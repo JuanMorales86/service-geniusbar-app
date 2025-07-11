@@ -38,6 +38,7 @@ export function initNavbarGSAP(): void {
             x: '0%',
             duration: 0.3,
             ease: 'power2.in',
+            display: 'block',
         });
     };
 
@@ -46,6 +47,13 @@ export function initNavbarGSAP(): void {
             x: '100%',
             duration: 0.3,
             ease: 'power2.in',
+            onComplete: () => {
+                //setea el display a none solo al completar la animacion
+                if(elements.mobileMenu){
+                    elements.mobileMenu.style.display = 'none';
+                }
+            },
+            
         });
     };
 

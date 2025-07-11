@@ -1,8 +1,8 @@
 ---
-const {href:link} = Astro.props
+const {href:link, class: additionalClass} = Astro.props
 ---
 
 
-<a href={link} class="flex text-black hover:bg-sky-700 dark:focus:text-white hover:shadow-lg px-5 py-2.5 rounded-sm justify-center transition-all duration-300 ease-in-out scale-90 hover:scale-custom scale-custom font-apple font-bold">
+<a href={link} class={`flex items-center text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white dark:focus:text-white hover:shadow-lg px-4 py-2 rounded-md justify-center transition-all duration-300 ease-in-out scale-90 hover:scale-custom2 font-apple font-bold focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 cursor-pointer ${additionalClass || ''}`}> 
     <slot />
 </a>

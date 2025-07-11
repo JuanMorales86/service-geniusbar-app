@@ -8,12 +8,18 @@ const {user} = Astro.props
 
 ---
 
-<nav  id="navbar" class="navbar z-20 flex justify-between items-center  sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1 px-4">
-    <div class="flex items-center custom:w-56">
+<nav  id="navbar" class="navbar z-20 flex justify-between items-center sticky top-0 transition-transform duration-300 ease-in-out transform-gpu bg-gray-esp shrink-0 py-1 px-4">
+    <div class="flex items-center justify-around  ">
       <a href="/home" class="hover:animate-spin-reverse animate-spin-scale" title="Home" aria-label="logo tienda">
         <Icon class="text-sky-600 custom:text-4xl text-4xl animate-spin-slow hover:animate-none origin-center drop-shadow-xl " name="lucide:atom" title="logo tienda"/>
       </a>
+
+        <span class="font-apple text-lg font-bold text-light-text dark:text-dark-text sm:text-xl md:text-2xl drop-shadow-2xl"><a href="/home">GENIUSBAR</a></span>
+     
+ 
     </div>
+    
+    
 
     <!-- Menu Hamburger for mobile -->
      <button id="mobile-menu-button" class="lg:hidden group p-2 rounded-lg hover:bg-sky-100/20 transition-all duration-300">
@@ -21,7 +27,7 @@ const {user} = Astro.props
      </button>
 
      <!-- Side Menu for mobile -->
-     <div id="mobile-menu" class="lg:hidden fixed top-0 right-0 h-screen w-64 bg-gray-esp/30 backdrop-blur-md transform translate-x-full transition-transform duration-300 ease-in-out z-30 border-l border-sky-200/20" >
+     <div id="mobile-menu" class=" fixed top-0 right-0 w-screen h-screen bg-gray-esp/30 backdrop-blur-md transform translate-x-full transition-transform duration-300 ease-in-out z-30 border-l border-sky-200/20 lg:hidden" >
       <div class="p-4 h-full w-full overflow-y-auto">
         <button id="close-menu" class="absolute top-4 right-4">
           <Icon name="lucide:x" class="w-6 h-6 text-sky-600"/>
