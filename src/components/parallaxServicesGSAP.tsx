@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactElement } from "react";
 import {gsap} from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { FaArrowDown } from 'react-icons/fa';
 
 
 
@@ -88,7 +89,7 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                     backgroundPosition: "center center",
                     backgroundSize: "cover", /// Adjust the background size as needed
                     width: "100vw", // Adjust the width as needed
-                    height: "900px", // Adjust the height as needed
+                    height: "1200px", // Adjust the height as needed
                     // transform: "translateZ(0)", //Hardware acceleration
                 }}>
                 </div>
@@ -100,7 +101,15 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                  >
                     Consultas Gratuitas
                  </a>
-                </div> 
+                </div>
+
+               
+                        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-100 md:hidden text-center">
+                            {/* Pass className and other props directly */}
+                            <FaArrowDown className="w-10 h-10 text-white drop-shadow-lg" /> 
+                            <p className="text-white text-sm mt-2">Desliza para ver más</p>
+                        </div>
+                 
                 </section>
             ))}
         </section>

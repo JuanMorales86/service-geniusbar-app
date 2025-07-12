@@ -39,6 +39,8 @@ const {user} = Astro.props
             const finalUrl = (link.adminOnly && user && !user.isAdmin)
             ? link.userRedirectUrl
             : link.url;
+
+            if(link.adminOnly && (!user || !user.isAdmin)) return null; //no renderizar el Link
         
             return showLink && (
               <div class=" transform hover:translate-x-2 transition-transform duration-200">
@@ -58,6 +60,8 @@ const {user} = Astro.props
           const finalUrl = (link.adminOnly && user && !user.isAdmin)
           ? link.userRedirectUrl
           : link.url;
+
+          if(link.adminOnly && (!user || !user.isAdmin)) return null; //no renderizar el Link
       
           return showLink && (
             <div class="relative group">

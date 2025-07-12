@@ -8,7 +8,7 @@ const LOCK_DURATION = 60000; //30 minutos
 interface UserRow {
     id: string;
     username: string;
-    totalAttempts: number;
+    totalAttempts: number ;
     failedAttempts: number;
     lastFailedAttempt: string;
 }
@@ -77,52 +77,31 @@ export async function checkAccountLocked(username: string): Promise<{
 
 //Funcion para incrementar los intentos fallidos
 export async function incrementFailedAttempts(username: string): Promise<void> {
-    //const beforeUpdate =  await db.select().from(User).where(eq(User.username, username)).limit(1);
-    //almaceno en beforeUpdateRows el resultado de la consulta a la base de datos`
-    // const { rows: beforeUpdateRows } = await turdb.execute({
-    //     sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
-    //     args: [username]
-    // })
-    // const beforeUpdates = beforeUpdateRows[0] as unknown as UserRow;
-    // cl(beforeUpdates)
-
-    //const currentUser = await db.select().from(User).where(eq(User.username, username)).limit(1);
-    // almaceno en currentUserRows el resultado de la consulta a la base de datos
+    //Chekear que exista el usuario antes de incrementar los intentos fallidos
     const { rows: currentUserRows } = await turdb.execute({
         sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
         args: [username]
-    })
+     });
+    
+     // If user does not exist, do not proceed with incrementing attempts.
+    // The signin.ts already handles user not found before calling this.
+     if(currentUserRows.length === 0){
+        return;
+     }
+
     const currentUserRow = currentUserRows[0] as unknown as UserRow;
     const currentTotal = currentUserRow.totalAttempts || 0;
-    //cl("Antes de Actualizar",beforeUpdates)
-
-//    await db.update(User).set({
-//         failedAttempts: sql`${User.failedAttempts} + 1`,
-//         totalAttempts: currentTotal + 1,
-//         lastFailedAttempt: Date.now().toString(),
-//     }).where(eq(User.username, username));
+  
 
     await turdb.execute({
         sql: "UPDATE User SET failedAttempts = failedAttempts + 1, totalAttempts = ?, lastFailedAttempt = ? WHERE username = ?",
         args: [currentTotal + 1, Date.now().toString(), username]
     })
 
-    //const afterUpdate =  await db.select().from(User).where(eq(User.username, username)).limit(1);
-
-    // const { rows: afterUpdateRows } = await turdb.execute({
-    //     sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
-    //     args: [username]
-    // })
-    // const afterUpdateRow = afterUpdateRows[0] as unknown as UserRow;
-    //cl("Despues de Actualizar",afterUpdateRow)
 }
 
 //Funcion para reiniciar los intentos fallidos
 export async function resetFailedAttempts(username: string): Promise<void> {
-    // await db.update(User).set({
-    //     failedAttempts: 0, 
-    //     lastFailedAttempt: '0',
-    // }).where(eq(User.username, username));
 
     await turdb.execute({
         sql: "UPDATE User SET failedAttempts = 0, lastFailedAttempt = '0' WHERE username = ?",

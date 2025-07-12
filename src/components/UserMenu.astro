@@ -23,11 +23,11 @@ const dropdownId = `user-dropdown-${variant}`;
         </button>
     </div>
 
-    <div  class="absolute top-full w-56  mt-2  bg-gray-400/75 dark:bg-blk-gray-dark/75 divide-y divide-gray-100 dark:divide-gray-600 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
+    <div  class="absolute top-full w-56  mt-2 text-blackep  bg-gray-400/75 dark:bg-blk-gray-dark/75 divide-y divide-gray-100 dark:divide-gray-600 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
         {
             user ? (
                 <div class="px-4 py-3" role="none">
-                    <p class="text-sm text-gray-900 truncate" role="none">
+                    <p class="text-sm text-gray-200 text-pretty font-bold truncate" role="none">
                         Hola: {user.username} 👋
                     </p>
                 </div>
@@ -42,7 +42,7 @@ const dropdownId = `user-dropdown-${variant}`;
                         </DropDownbutton>
                     </div>
 
-                 
+            
                     <div class="py-1" role="none">
                         <DropDownbutton class="rounded-none" href="/api/google" role="menuitem">
                             Iniciar Sesión con Google
