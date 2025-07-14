@@ -104,9 +104,9 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                 </div>
 
                
-                        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-100 md:hidden text-center">
+                        <div className="absolute bottom-4 flex-col content-center z-100 text-center">
                             {/* Pass className and other props directly */}
-                            <FaArrowDown className="w-10 h-10 text-white drop-shadow-lg" /> 
+                            <FaArrowDown className="w-full h-10 text-white drop-shadow-lg" /> 
                             <p className="text-white text-sm mt-2">Desliza para ver más</p>
                         </div>
                  
