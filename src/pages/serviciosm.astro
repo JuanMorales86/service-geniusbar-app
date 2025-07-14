@@ -65,23 +65,23 @@ const seoData = {
         </section>
 
         <section id="question_basic_problems" class=" flex flex-col md:flex-row items-center section">
-            <div class="sectionquest bg-custom-gradientwithimage flex flex-col justify-center items-center gap-y-5 w-full h-full rounded-2xl py-4 overflow-hidden">
+            <div class="sectionquest bg-custom-gradientwithimage flex flex-col justify-center items-center gap-y-3 w-full h-full rounded-2xl py-4 overflow-hidden">
                 <h1 class="text-3xl md:text-5xl text-mainbrand-light dark:text-mainbrand-light font-apple font-bold text-center">Reparamos Tu Telefono al Momento</h1>
-                <div class="flex flex-col md:flex-row items-center gap-y-8">
+                <div class="flex flex-col md:flex-row items-center gap-y-8 object-cover">
                     <div class="animate-spin-scale hover:animate-none">
-                        <IcoHumanFixer wi="5rem" he="5rem"/>
+                        <IcoHumanFixer className="w-12 h-12 md:w-20 md:h-20"/>
                     </div>
                     <div class="w-full md:w-1/2 flex items-center justify-center">
-                        <Image class=" h-80 sm:h-80 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"high"} densities={[1.5, 2]}/>
+                        <Image class=" h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"high"} densities={[1.5, 2]}/>
                     </div>
-                        <IcoScrewDriver wi="5rem" he="5rem"/>
-                    <Image class="h-80 sm:h-80 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"high"} densities={[1.5, 2]} />
+                        <IcoScrewDriver className="w-12 h-12 md:w-20 md:h-20"/>
+                    <Image class="h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"high"} densities={[1.5, 2]} />
                     <div class="animate-spin-scale">      
-                        <IcoDoubleCheck wi="5rem" he="5rem"/>
+                        <IcoDoubleCheck className="w-12 h-12 md:w-20 md:h-20"/>
                     </div>
                 </div>
     
-                <div class="grid grid-cols-2 md:grid-cols-4 place-items-center gap-16 md:gap-32 filter font-apple">
+                <div class="grid grid-cols-1 md:grid-flow-col-2 md:grid-cols-4 place-items-center gap-16 md:gap-32 filter font-apple">
                 {linksServices.map((link: Linkservice) => <Linkse {...link} />)}
                 </div>
     
@@ -92,10 +92,10 @@ const seoData = {
             <div class="container mx-auto px-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 ">
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300 ">
-                        <div class="flex flex-col md:flex-row md:h-auto">
+                        <div class="flex flex-col lg:flex-row md:h-auto items-center">
 
-                            <div class="w-full md:w-1/2 flex items-center justify-center">
-                                <div class="aspect-[4/3] w-full">
+                            <div class="w-full flex items-center justify-center">
+                                <div class="aspect-[4/3]  w-full">
                                     <BlurImages
                                     client:visible
                                     src={imgServiciosm.imagenIphone}
@@ -106,7 +106,7 @@ const seoData = {
                                 </div>
                             </div>
 
-                            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                            <div class="w-full p-6 flex flex-col items-center text-center md:justify-center md:items-start md:text-left">
                                 <p class="text-xl font-apple font-semibold text-blackep mb-2 ">Apple IPhone</p>
                                 <p class="text-gray-700 font-sans font-medium mb-4">Servicio tecnico para tu IPhone</p>
                                 <a href="/serviceiphone" class="font-montserrat font-bold text-sky-600 hover:text-sky-700 ">Mas información</a>
@@ -114,10 +114,10 @@ const seoData = {
                         </div>
                     </div>
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300 ">
-                        <div class="flex flex-col md:flex-row md:h-auto">
+                        <div class="flex flex-col lg:flex-row md:h-auto items-center">
                             
-                            <div class="w-full md:w-1/2 flex ">
-                                <div class="aspect-[4/3] w-full flex items-center justify-center">
+                            <div class="w-full flex items-center justify-center">
+                                <div class="aspect-[4/3]  w-full">
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenWatch}
@@ -127,7 +127,7 @@ const seoData = {
                                     />
                                 </div>
                             </div>
-                            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                            <div class="w-full p-6 flex flex-col items-center text-center md:justify-center md:items-start md:text-left">
                                 <p class="text-xl font-apple font-semibold text-blackep mb-2 ">Apple Watch</p>
                                 <p class="text-gray-700 font-sans font-medium mb-4">Servicio tecnico para tu Watch Series</p>
                                 <a href="" class="font-montserrat font-bold text-sky-600 hover:text-sky-700">Mas información</a>
@@ -136,10 +136,10 @@ const seoData = {
                     </div>
                     
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300">
-                        <div class="flex flex-col md:flex-row h-auto">
+                        <div class="flex flex-col lg:flex-row md:h-auto items-center">
 
-                            <div class="w-full md:w-1/2 flex">
-                                <div class="aspect-[4/3] w-full items-center justify-center">    
+                            <div class="w-full flex items-center justify-center">
+                                <div class="aspect-[4/3] w-full">    
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenIpads}
@@ -149,7 +149,7 @@ const seoData = {
                                     />
                                 </div>
                             </div>
-                            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                            <div class="w-full p-6 flex flex-col items-center text-center md:justify-center md:items-start md:text-left">
                                 <p class="text-xl font-apple font-semibold text-blackep mb-2">Apple IPad</p>
                                 <p class="text-gray-700 font-sans font-medium mb-4">Servicio tecnico <br>para tus <br>IPads Pro, Air, Mini</p>
                                 <a href="" class="font-montserrat font-bold text-sky-600 hover:text-sky-700">Mas información</a>
@@ -158,10 +158,10 @@ const seoData = {
                    
                 </div>
                     <div class="bg-white rounded-lg drop-shadow-lg overflow-hidden hover:scale-custom2 transition-transform duration-300">
-                        <div class="flex flex-col md:flex-row h-auto">
+                        <div class="flex flex-col lg:flex-row md:h-auto items-center">
 
-                            <div class="w-full md:w-1/2 flex">
-                                <div class="aspect-[4/3] w-full flex items-center justify-center">
+                            <div class="w-full flex items-center justify-center">
+                                <div class="aspect-[4/3] w-full">
                                     <BlurImages
                                     client:visible
                                     src= {imgServiciosm.imagenMacbook}
@@ -171,7 +171,7 @@ const seoData = {
                                     />
                                 </div>
                             </div>
-                            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+                            <div class="w-full p-6 flex flex-col items-center text-center md:justify-center md:items-start md:text-left">
                                 <p class="text-xl font-apple font-semibold text-blackep mb-2">Apple MacBook</p>
                                 <p class="text-gray-700 font-sans font-medium mb-4">Servicio tecnico para tu Macbook o Macbook Pro Series</p>
                                 <a href="" class="font-montserrat font-bold text-sky-600 hover:text-sky-700">Mas información</a>

@@ -5,44 +5,15 @@ import IcoChargeFail from "@/utilities/icons/icoChargeFail.astro";
 import IcoMobileTurnOff from "@/utilities/icons/icoMobileTurnOff.astro";
 import IcoScreenBroken from "@/utilities/icons/icoScreenBroken.astro";
 import IcoScreenTouchFail from "@/utilities/icons/icoScreenTouchFail.astro";
-
-// interface Icons {
-//     IcoChargeFail: typeof IcoChargeFail;
-//     IcoScreenBroken: typeof IcoScreenBroken;
-//     IcoMobileTurnOff: typeof IcoMobileTurnOff;
-//     IcoScreenTouchFail: typeof IcoScreenTouchFail;
-// }
-
-
-// const icons: Icons = {
-//     IcoChargeFail,
-//     IcoScreenBroken,
-//     IcoScreenTouchFail,
-//     IcoMobileTurnOff,
-// }
-
-// const icons = { 
-//     IcoChargeFail,
-//     IcoScreenBroken,
-//     IcoScreenTouchFail,
-//     IcoMobileTurnOff,
-// }; //Creamos un objeto icons que contiene los componentes de iconos importados, utilizando los mismos nombres que en src\data\layout\links.ts.
-
-
-// const renderIcon = (iconName: string) => {
-//     const Icon = icons[iconName as keyof typeof icons];
-//     return Icon;
-// }
-
 ---
 
-<a href={path} class="hover:underline font-apple font-semibold flex flex-col items-center mx-2 my-2 circular-gradient-bg text-xs transition-transform duration-300  hover:scale-custom2 cursor-pointer filter drop-shadow-lg">
+<a href={path} class="hover:underline font-apple font-semibold flex flex-col items-center mx-auto my-auto md:mx-2 md:my-2 circular-gradient-bg text-xs transition-transform duration-300  hover:scale-custom2 cursor-pointer filter drop-shadow-lg">
     <slot name="before"/>
     
-    {icon === 'IcoChargeFail' && <IcoChargeFail wi="3rem" he="3rem" />}
-    {icon === 'IcoScreenBroken' && <IcoScreenBroken wi="3rem" he="3rem"  />}
-    {icon === 'IcoScreenTouchFail' && <IcoScreenTouchFail wi="3rem" he="3rem"  />}
-    {icon === 'IcoMobileTurnOff' && <IcoMobileTurnOff wi="3rem" he="3rem"  />}
+    {icon === 'IcoChargeFail' && <IcoChargeFail className="w-7 h-7  md:w-12 md:h-12  object-cover" />}
+    {icon === 'IcoScreenBroken' && <IcoScreenBroken className="w-7 h-7  md:w-12 md:h-12  object-cover"  />}
+    {icon === 'IcoScreenTouchFail' && <IcoScreenTouchFail className="w-7 h-7  md:w-12 md:h-12  object-cover"  />}
+    {icon === 'IcoMobileTurnOff' && <IcoMobileTurnOff className="w-7 h-7  md:w-12 md:h-12  object-cover"  />}
         {title}      
     <slot name="after"/>  
     

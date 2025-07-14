@@ -95,7 +95,7 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                 </div>
                 <div className="content relative z-10 text-white text-center p-8 bg-mainbrand-dark bg-opacity-50 rounded-lg max-w-4xl mx-auto">
                  <h2 className="text-4xl font-bold">{service.title}</h2>
-                 <p className="text-xl p-12 font-semibold">{service.description}</p>
+                 <p className="md:text-xl text-auto p-4 font-semibold">{service.description}</p>
                  <a href="/formservice"
                  className="btn-custom-hero animate-pulse transition all duration-300 hover:animate-none hover:shadow-lg"
                  >
@@ -104,7 +104,7 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                 </div>
 
                
-                        <div className="absolute bottom-4 flex-col content-center z-100 text-center">
+                        <div className="absolute flex-col content-center z-100 text-center">
                             {/* Pass className and other props directly */}
                             <FaArrowDown className="w-full h-10 text-white drop-shadow-lg" /> 
                             <p className="text-white text-sm mt-2">Desliza para ver más</p>
