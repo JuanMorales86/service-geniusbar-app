@@ -35,7 +35,7 @@ export const lucia = new Lucia(adapter, {
 });
 
 const googleCallbackURL = import.meta.env.PROD ?
-	"https://www.geniusbarserviciotecnico.com/api/callbacks/google" :
+	import.meta.env.GOOGLE_REDIRECT :
 	"http://localhost:4321/api/callbacks/google";
 
 export const google = new Google(
