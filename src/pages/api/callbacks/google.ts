@@ -65,6 +65,7 @@ export async function GET(context: APIContext): Promise<Response> {
         if (error instanceof OAuth2RequestError){
             return new Response(null, {
                 status: 400
+                
             });
         }
         return new Response(null, {
