@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --host",
-    "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/home'\"",
+    "dev:open": "astro dev --host & powershell -Command \"Start-Process 'http://localhost:4321/'\"",
     "start": "node server.js",
     "build": "astro build --remote",
     "preview": "astro preview",

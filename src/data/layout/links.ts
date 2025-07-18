@@ -15,7 +15,7 @@ export interface Linkservice {
 export const linksData: Links[] = [//Array linksData: Es un array de objetos que implementan la interfaz Links. Cada objeto en el array representa un enlace con un título y una URL correspondiente.
     {
         title: 'Home',
-        url: '/home',
+        url: '/',
         requiresAuth: false
     },
     {

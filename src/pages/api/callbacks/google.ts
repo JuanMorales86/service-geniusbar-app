@@ -43,7 +43,7 @@ export async function GET(context: APIContext): Promise<Response> {
                     path: sessionCookie.attributes.path ?? "/",
                     sameSite: sessionCookie.attributes.sameSite ?? "lax",
                 });
-            return context.redirect("/home");
+            return context.redirect("/");
         }
 
         const userId = generateId(15);
@@ -60,7 +60,7 @@ export async function GET(context: APIContext): Promise<Response> {
                     path: sessionCookie.attributes.path ?? "/",//El fallback ?? "/" y ?? "lax" asegura que el path y el comportamiento cross-site no fallen si están undefined.
                     sameSite: sessionCookie.attributes.sameSite ?? "lax",
                 });
-        return context.redirect("/home");
+        return context.redirect("/");
     } catch(error) {
         if (error instanceof OAuth2RequestError){
             return new Response(null, {
