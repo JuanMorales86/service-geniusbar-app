@@ -52,7 +52,7 @@ const detailServices = [
 
  
  <section class="bg-sky-700 text-white py-16 mt-4">
-    <div class="container mx-auto px-6 text-center">
+    <div id="experthelp" class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-4">¿Listo para reparar tu dispositivo?</h2>
       <p class="text-xl mb-8">Contáctanos hoy mismo para obtener un diagnóstico gratuito</p>
       <a
@@ -68,12 +68,29 @@ const detailServices = [
   
 </Layout>
 
-<style>
-    /* body{
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    } */
+<script>
 
+    document.addEventListener('astro:page-load', () => {
+        //Scroll Automatico a la primera seccion
+        const firstMainSection = document.querySelector('#first-parallax-service-item');
+        if(firstMainSection) {
+            firstMainSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+        
+    })
+
+    document.getElementById('experthelp')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.history.pushState({}, '', '/expert-help');
+        window.location.href = '/formservice';
+        
+    })
+</script>
+
+<style>
     .perspective-1000 {
         perspective: 1000px;
     }

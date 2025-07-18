@@ -7,6 +7,7 @@ import node from "@astrojs/node";
 import db from "@astrojs/db";
 import icon from "astro-icon";
 import middleware from "./src/middleware.ts"
+import sitemap from "@astrojs/sitemap";
 
 
 
@@ -18,11 +19,8 @@ export default defineConfig({
 
   output: 'server',
   adapter: node({ mode: 'standalone' }),
-
   middleware: [middleware],
-
-
-
+  site: 'https://www.geniusbarserviciotecnico.com',
   image: {
     domains: ['i.imgur.com']
   },
@@ -45,6 +43,7 @@ export default defineConfig({
   // },
 
   integrations: [
+    sitemap(),
     tailwind(), 
     db({
       remoteUrl: process.env.ASTRO_DB_REMOTE_URL,
@@ -55,7 +54,9 @@ export default defineConfig({
     include: { 
       lucide: ["*"] //importar todo * biblioteca de iconos
     }
-  })],
+  })
+    
+],
   vite: {
     resolve: {
       alias: {

@@ -79,6 +79,7 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                 <section
                 key={index}
                 ref={el => {sectionRefs.current[index] = el}}
+                id={index === 0 ? 'first-parallax-service-item' : undefined} //OJO
                 className="parallax-section relative w-screen h-screen flex items-center justify-center overflow-hidden"
                 >
                    <div 
@@ -90,11 +91,12 @@ const ParallaxServicesGSAP = ({services}: ParallaxProps): ReactElement => {
                     backgroundSize: "cover", /// Adjust the background size as needed
                     width: "100vw", // Adjust the width as needed
                     height: "1200px", // Adjust the height as needed
+                    objectFit: "contain",
                     // transform: "translateZ(0)", //Hardware acceleration
                 }}>
                 </div>
                 <div className="content relative z-10 text-white text-center p-8 bg-mainbrand-dark bg-opacity-50 rounded-lg max-w-4xl mx-auto">
-                 <h2 className="text-4xl font-bold">{service.title}</h2>
+                 <h2 className="md:text-4xl size-auto font-bold">{service.title}</h2>
                  <p className="md:text-xl text-auto p-4 font-semibold">{service.description}</p>
                  <a href="/formservice"
                  className="btn-custom-hero animate-pulse transition all duration-300 hover:animate-none hover:shadow-lg"

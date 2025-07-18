@@ -125,6 +125,10 @@ main{
   box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
 }
 
+textarea {
+  field-sizing: content;
+}
+
 .printable-order-container {
   display: flex;
   flex-direction: column;
