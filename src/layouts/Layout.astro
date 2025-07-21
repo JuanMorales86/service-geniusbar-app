@@ -26,7 +26,7 @@ interface Props {
 const { title = 'Genius Bar Servicio Técnico - Apple', 
 		description = 'Arreglamos tu iPhone, Mac y más. Somos Expertos en Apple.',
 		keywords = 'reparación de dispositivos de telefonia movil y portatiles laptops, servicio técnico, Apple, Genius Bar, iPhone, Mac, iPad, Multi marca, Samsung, Xiaomi, Tcl, Android"',
-		image = "public/img/logogeniusbar130px.png",
+		image = "https://www.geniusbarserviciotecnico.com/img/logogeniusbar130px.png",
 		url = "https://geniusbarserviciotecnico.com",
 		user = Astro.locals.user,
 		showWhatsAppButton = true } 
@@ -44,8 +44,9 @@ const { title = 'Genius Bar Servicio Técnico - Apple',
 		<meta name={description} content={description} />
 		<meta name={keywords} content={keywords} />
 		<meta name="google-adsense-account" content="ca-pub-1952463626478297">
+		<link rel="shortcut icon" href="https://www.geniusbarserviciotecnico.com/img/logogeniusbar130px.png" type="image/x-icon">
 		<link rel="canonical" href="https://www.geniusbarserviciotecnico.com/"/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="https://www.geniusbarserviciotecnico.com/favicon.svg" />
 		<link rel="preconnect" href="https://fonts.cdnfonts.com" as="font" crossorigin="anonymous" />
 		<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" >
 		<meta name="generator" content={Astro.generator} />
