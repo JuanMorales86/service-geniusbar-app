@@ -1,6 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import FormReact from "@/components/FormReact"
+import MapPosition from "@/components/PositionMap";
+import { Icon } from "astro-icon/components";
+
 
 const seoData = {
     title: "Formulario de Consultas - Genius Bar Service",
@@ -10,12 +13,79 @@ const seoData = {
     url: "https://geniusbarserviciotecnico.com/formservice",
 
 }
+
+const mapCenter = [-58.3816, -34.6037]; // Buenos Aires [lng, lat]
+const mapZoom = 15; // Nivel de zoom del mapa
+const markerCoordinates = [-58.37490623783136, -34.601575689879155]; // Coordenadas del marcador de la tienda
+const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio técnico especializado</p>';
 ---
 
 
 <Layout {...seoData}>
-    <div class="flex flex-col gap-8 ">
-    <FormReact  client:load>
-    </FormReact>
-    </div>
+    <div class="container mx-auto flex-row px-4 py-2 gap-8">
+        
+        <!-- Titulo y Descripción -->
+        <div class="flex-1 text-center text-white md:px-64 px-auto mb-8 ">
+            <p class="text-lg">¿Tienes alguna pregunta o necesitas ayuda con tu dispositivo Apple? Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+            <p class="text-sm mt-4">También puedes contactarnos directamente a través de nuestras redes sociales o por teléfono.</p>
+        </div>
+        
+        <!-- Form-->
+        <div class="flex flex-col md:flex-row gap-8 items-center justify-center mb-8">
+            <div class="flex-1 min-w-[500px]">
+                <FormReact  client:load />
+            </div>    
+        </div>
+        
+        <h2 class="text-3xl font-bold text-center mb-6">Contáctanos y Encuéntranos</h2>
+       
+        <!-- Map Section -->
+        <div class="flex flex-col md:flex-row justify-center items-center min-w-[400px] mb-8">
+            <h2 class="text-3xl font-bold text-center">Nuestra Ubicación</h2>
+            
+            <MapPosition
+            center={mapCenter}
+            zoom={mapZoom}
+            markerCoords={markerCoordinates}
+            popupContent={markerPopupContent}
+            client:load
+            />
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="bg-sky-700 dark:bg-sky-700 text-mainbrand-light dark:text-mainbrand-light py-16 rounded-lg">
+        <div class="container mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <p class="font-bold">Teléfono</p>
+              <a  href="https://wa.me/5491123560959?text=Hola,%20quisiera%20más%20información%20sobre%20sus%20servicios"
+              target="_blank"
+              rel="noopener noreferrer"><p class="font-semibold">+54 9 11-2356-0959</p></a>
+             
+            </div>
+            <div class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <p class="font-bold animate-bounce transition-all duration-500 hover:animate-none">Email</p>
+              <a href="mailto:geniusbarservices.ar@gmail.com" class="hover:text-blue-500 transition-colors font-semibold ">geniusbarservices.ar@gmail.com</a>
+            </div>
+            <div class="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <p class="font-bold">Dirección</p>
+              <p class="font-semibold">Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+  
 </Layout>

@@ -49,6 +49,7 @@ const { title = 'Genius Bar Servicio Tecnico - Apple',
 		<link rel="icon" type="image/png" href="https://www.geniusbarserviciotecnico.com/img/favicon.png" />
 		<link rel="preconnect" href="https://fonts.cdnfonts.com" as="font" crossorigin="anonymous" />
 		<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" >
+		<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
@@ -80,11 +81,10 @@ const { title = 'Genius Bar Servicio Tecnico - Apple',
 				}
 			}, null, 2)}
 		</script>
-		 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
         <script src="../script/gtag-init.js"></script>
-
-
-			
+		<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>	
 	</head>
 	<body >
 		<div class:list={["bg-gradient-to-b",
@@ -99,7 +99,6 @@ const { title = 'Genius Bar Servicio Tecnico - Apple',
 			<Footer/>
 			{showWhatsAppButton && <WhatsAppButton />}
 		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 	</body>
 </html>
 

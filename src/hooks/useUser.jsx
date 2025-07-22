@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function useUser(user){
-    //console.log(user)
     const [loaduser, setLoadUser] = useState();
     
 
@@ -11,7 +10,6 @@ export default function useUser(user){
         }
     }, [user]);
 
-    //console.log(loaduser)
 
     return loaduser
 }
