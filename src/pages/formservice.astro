@@ -22,7 +22,7 @@ const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio téc
 
 
 <Layout {...seoData}>
-    <div class="container mx-auto flex-row px-4 py-2 gap-8">
+    <div class="container mx-auto px-4 py-2 gap-8">
         
         <!-- Titulo y Descripción -->
         <div class="flex-1 text-center text-white md:px-64 px-auto mb-8 ">
@@ -32,7 +32,7 @@ const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio téc
         
         <!-- Form-->
         <div class="flex flex-col md:flex-row gap-8 items-center justify-center mb-8">
-            <div class="flex-1 min-w-[500px]">
+            <div class="flex-1 w-auto">
                 <FormReact  client:load />
             </div>    
         </div>
@@ -40,7 +40,7 @@ const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio téc
         <h2 class="text-3xl font-bold text-center mb-6">Contáctanos y Encuéntranos</h2>
        
         <!-- Map Section -->
-        <div class="flex flex-col md:flex-row justify-center items-center min-w-[400px] mb-8">
+        <div class="flex flex-col md:flex-row justify-center items-center w-auto mb-8">
             <h2 class="text-3xl font-bold text-center">Nuestra Ubicación</h2>
             
             <MapPosition
@@ -53,9 +53,9 @@ const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio téc
         </div>
         
         <!-- Contact Section -->
-        <div class="bg-sky-700 dark:bg-sky-700 text-mainbrand-light dark:text-mainbrand-light py-16 rounded-lg">
-        <div class="container mx-auto">
-          <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
+        <div class="bg-sky-700 dark:bg-sky-700 text-mainbrand-light dark:text-mainbrand-light py-16 rounded-lg w-full">
+        <div class="w-full mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-8">Contácto</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="text-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +80,7 @@ const markerPopupContent = '<h3>Genius Bar Servicio Tecnico</h3><p>Servicio téc
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <p class="font-bold">Dirección</p>
-              <p class="font-semibold">Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>
+              <p class="font-semibold">Florida 537, Galerias Jardin,<br>Local 366 PB, CABA, Argentina</br></p>
             </div>
           </div>
         </div>

@@ -723,9 +723,9 @@ const styles = {
 
     //dark:border dark:bg-gray-800 dark:border-gray-700
     return (
-        <div className="flex items-center justify-center py-8 mx-auto rounded-lg w-4/6 sm:w-4/6 md:w-3/6 lg:w-2/6 border-accent-light border-2 border-solid shadow-sm dark:border bg-light-bg dark:bg-dark-bg dark:border-black">
-        <form className="flex flex-col gap-3 w-full  px-4 sm:px-6" onSubmit={handleSubmit}>
-            <div className="flex justify-center">
+        <div className="flex items-center justify-center py-8 mx-auto rounded-lg w-4/6 sm:w-4/6 md:w-3/6 lg:w-3/6 border-accent-light border-2 border-solid shadow-sm dark:border bg-light-bg dark:bg-dark-bg dark:border-black">
+        <form className="flex flex-col gap-3 w-full px-4 sm:px-6" onSubmit={handleSubmit}>
+            <div className="w-full flex  justify-center">
                 <h2 className=" mb-4 text-2xl font-bold text-gray-900 dark:text-white">Formulario de Consultas</h2>
             </div>
             <div className='mb-2'>
@@ -736,7 +736,7 @@ const styles = {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 required
-                placeholder="Juan"
+                placeholder="Nombre"
                 className="form-inputbox"
                 />
             </div>
