@@ -77,7 +77,7 @@ const galleryImages = [
     alt: 'Servicios Apple',
     title: 'Apple Watch',
     textColor: 'text-mainbrand-light',
-    path: '/serviceapplewatch'
+    path: '/servicewatch'
   },
   {
     images: [
@@ -95,15 +95,15 @@ const galleryImages = [
   },
   {
     images: [
-      'https://i.imgur.com/dPf5FtL.jpg',
-      'https://i.imgur.com/rQ7P7QH.png',
-      'https://i.imgur.com/vVAnm8B.jpg',
-      'https://i.imgur.com/7zq5NGl.jpg'
+      'https://i.imgur.com/pwgtuyS.png',
+      'https://i.imgur.com/DGwX45I.png',
+      'https://i.imgur.com/jLmt4Sc.png',
+      'https://i.imgur.com/oxpU3fM.png'
     ],
     alt: 'Servicios Apple',
     title: 'Consultas',
     textColor: 'text-sky-700',
-    path: '/serviceconsultas'
+    path: '/formservice'
   },
 ]
 
@@ -133,7 +133,7 @@ const userTestimony = [
   {valoration: 'Excelente atención al cliente y conocimientos técnicos. Resolvieron un problema complejo con mi PC.', username: '- Javier D.'},
 ]
 
-const aboutGen = 'En Genius Bar, nos dedicamos a proporcionar servicios técnicos de alta calidad para tus dispositivos electronicos. Con años de experiencia y un equipo de técnicos altamente capacitados, estamos comprometidos a ofrecer soluciones rapidas y confiables.'
+const aboutGen = 'En Genius Fix Servicio Tecnico, nos dedicamos a proporcionar servicios técnicos de alta calidad para tus dispositivos electronicos. Con años de experiencia y un equipo de técnicos altamente capacitados, estamos comprometidos a ofrecer soluciones rapidas y confiables.'
 
 const missionGen = "Nuestra mision es mantener tus dispositivos funcionando perfectamente, minimizando el tiempo de inactividad y maximizando tu productividad y satisfaccion."
 
@@ -174,11 +174,6 @@ const seoData = {
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {ourServiceImages.map( (services) => {
               return (
-                // <div class="text-center" >
-                //   <Image src={services.image} alt={services.title} quality="medium" inferSize densities={[4,4]} class="w-auto h-5/6 rounded-lg mx-auto mb-4 shadow-md" loading={"lazy"}/>
-                //   <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
-                //   <p>{services.description}</p>
-                // </div>
                 <div class="text-center">
                   <BlurImages
                   client:visible
@@ -261,7 +256,7 @@ const seoData = {
           <div class="flex flex-col-reverse md:flex-row items-center gap-8">
 
           <div class="md:w-1/2 text-center md:text-left">
-              <h2 class="text-3xl font-bold mb-4">Sobre Genius Bar</h2>
+              <h2 class="text-3xl font-bold mb-4">Sobre Nuestro Servicio Tecnico</h2>
               <p class="mb-4">
                 {aboutGen}
               </p>
@@ -274,7 +269,7 @@ const seoData = {
               <BlurImages
               client:visible
               src="https://i.imgur.com/oU5Yi8f.png"
-              alt="Genius Bar Team"
+              alt="Genius Bar Servicio Tecnico Nosotros"
               className='w-full h-64 sm:h-80 md:96 object-cover rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
               />
             </div>
@@ -311,7 +306,7 @@ const seoData = {
             </div>
             <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Ofrecen garantía en sus reparaciones?</h3>
-              <p>Sí, todas nuestras reparaciones vienen con una garantía de 90 días en mano de obra y piezas.</p>
+              <p>Sí, todas nuestras reparaciones vienen con una garantía de 3 meses en mano de obra y piezas.</p>
             </div>
             <div class="bg-gray-esp dark:bg-mainbrand-light dark:text-mainbrand-dark p-6 rounded-lg shadow">
               <h3 class="text-xl font-semibold mb-2">¿Qué marcas de dispositivos reparan?</h3>
@@ -345,7 +340,7 @@ const seoData = {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <p class="font-bold animate-bounce transition-all duration-500 hover:animate-none">Email</p>
-              <a href="mailto:geniusbarservices.ar@gmail.com" class="hover:text-blue-500 transition-colors font-semibold ">geniusbarservices.ar@gmail.com</a>
+              <a href="mailto:geniusfix.ar@gmail.com" class="hover:text-blue-500 transition-colors font-semibold ">geniusfix.ar@gmail.com</a>
             </div>
             <div class="text-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-4 text-blue-500 dark:text-mainbrand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">

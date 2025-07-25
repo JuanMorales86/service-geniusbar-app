@@ -34,19 +34,7 @@ export async function POST(context: APIContext) : Promise<Response> {
 
     //Guardar en Base de datos
     try{
-        // await db.insert(Usermsj).values(
-        //     {
-        //     id: userGenerate,
-        //     userId: userGenerate,
-        //     nombre,
-        //     modelo,
-        //     telefono,
-        //     email,
-        //     mensaje,
-        //     opcionSeleccionada,
-        //     opcionDispositivo,
-        //     }
-        // );
+        
 
         await turdb.execute({
             sql:'INSERT INTO Usermsj (id, userId, nombre, modelo, telefono, email, mensaje, opcionSeleccionada, opcionDispositivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -56,10 +44,10 @@ export async function POST(context: APIContext) : Promise<Response> {
         //!el env si funciona aqui
         const mailOptions ={ 
             from: {
-                name: `Genius Bar Servicio Tecnico Consulta Cliente: ${nombre}`,
+                name: `Genius Fix Servicio Tecnico Consulta Cliente: ${nombre}`,
                 address: USER_GMAIL
             }, // sender address
-            to: `geniusbarservices.ar@gmail.com, ${email}`, // list of receivers
+            to: `geniusfix.ar@gmail.com, ${email}`, // list of receivers
             subject: "Confimacion de envío de la consulta", // Subject line
             text: "Hola ${nombre}, hemos recibido tu mensaje", // plain text body
             html: `
@@ -81,7 +69,7 @@ export async function POST(context: APIContext) : Promise<Response> {
                 <p>Nos pondremos en contacto con usted a la brevedad.</p>
                 <p>Gracias por elegir a Genius Bar.</p>
                 <div style="margin-top: 40px;">
-                <a href="https://geniusbarserviciotecnico.com" style="display: inline-block; padding:10px 20px; background-color: #101010; color: #fff; text-decoration: none; border-radius: 4px;">Visite nuestro sitio web</a>
+                <a href="https://geniusfix.ar.com" style="display: inline-block; padding:10px 20px; background-color: #101010; color: #fff; text-decoration: none; border-radius: 4px;">Visite nuestro sitio web</a>
                 </div>
 
                 </div>
@@ -109,20 +97,3 @@ export async function POST(context: APIContext) : Promise<Response> {
     
 
 
-
-
-/*APIContext es un tipo de Astro que se utiliza para crear endpoints de API en un proyecto de Astro. Cuando se utiliza en una función de endpoint, APIContext proporciona acceso a la solicitud entrante y a la respuesta saliente, lo que le permite a la función de endpoint manejar la solicitud y generar una respuesta adecuada. */
-
- // html body
-            // attachments: [
-            //     {
-            //         filename: 'test.pdf',
-            //         path: '../../ASTRO/service-geniusbar-app/src/Pruebas/test.pdf.pdf',
-            //         contenType: 'application/pdf'
-            //     },
-            //     {
-            //         filename: 'sample_jpg',
-            //         path: '../../ASTRO/service-geniusbar-app/src/Pruebas/sample_jpg.jpg',
-            //         contenType: 'image/jpg'
-            //     },
-            // ]

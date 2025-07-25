@@ -1,0 +1,190 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import BlurImages from "@/components/BlurImages"
+import InfiniteCarousel from "@/components/InfiniteCarousel"
+import { AppleWatchCarouselTexts, AppleWatchServiceInfo, AppleWatchModels } from "@/data/layout/links"
+
+const seoData = {
+  title: "Reparación de Watch - Genius Fix Servicio tecnico en Argentina",
+  description: "Especialistas en reparación de MacBook: cambio de SSD, RAM, lógica, teclado, pantalla y más. Soporte para todos los modelos. Diagnóstico gratuito y garantía.",
+  keywords: "reparación MacBook, MacBook Pro, MacBook Air, cambio SSD MacBook, reparación lógica MacBook, teclado MacBook, servicio técnico Apple",
+  image: "https://i.imgur.com/glr1Ad7.jpg",
+  url: "https://geniusbarserviciotecnico.com/servicemac"
+}
+
+
+
+---
+
+<Layout {...seoData}>
+  <!-- Hero Section -->
+  <section class="text-mainbrand-light rounded-lg">
+    <div class="container mx-auto text-center mb-4">
+        <BlurImages
+        client:visible
+        src="https://i.imgur.com/rm3Q1tU.jpg"
+        alt="Ipad Servicio Tecnico"
+        className="rounded-lg shadow-inner w-full h-auto md:h-[580px] object-cover"
+        />
+    </div>
+  </section>
+
+  <!-- Services Details -->
+  <section class="bg-mainbrand-light dark:bg-transparent text-mainbrand-dark dark:text-mainbrand-light py-16">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-8">
+        <div class="mb-12 md:mb-0 text-center md:text-left">
+          <h2 class="text-3xl font-bold mb-2 text-mainbrand-dark dark:text-mainbrand-light">Servicios Disponibles: Watch</h2>
+          <InfiniteCarousel
+          client:load
+          texts={AppleWatchCarouselTexts}
+          />
+        </div>
+        <div>
+          <BlurImages
+          client:visible
+          src="https://i.imgur.com/9BzXlZL.jpg"
+          alt="MacBook Repair Process"
+          className="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Models Supported Section -->
+  <section class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 font-apple text-mainbrand-dark dark:text-mainbrand-light">Modelos Soportados</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {AppleWatchModels.map((watch) => (
+          <div class=" bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-lg font-bold mb-2 text-gray-800 dark:text-white">{watch.name}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-1">Año: {watch.year}</p>
+            <span class="inline-block px-3 py-1 bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-sm rounded-full">
+              ✓ {watch.support}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Information with Pricing -->
+  <section class="bg-mainbrand-dark dark:bg-mainbrand-light py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 font-apple text-mainbrand-light dark:text-mainbrand-dark">Servicios y Tarifas</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {AppleWatchServiceInfo.map((item) => (
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl font-bold text-gray-800 dark:text-white">{item.service}</h3>
+              <div class="text-right">
+                <p class="text-lg font-semibold text-green-600 dark:text-green-400">{item.price}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">⏱️ {item.time}</p>
+              </div>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300">{item.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="mt-12 text-center text-mainbrand-dark dark:text-mainbrand-light">
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-custom2 hover:translate-y-2">
+            <a href="/formservice">
+                <h3 class="text-xl font-bold mb-2 ">💡 Diagnóstico GRATUITO</h3>
+                <p class="text-lg font-semibold">Evaluamos tu Equipo sin costo. Solo pagas si decides reparar.</p>
+            </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commitment Section -->
+  <section class="bg-gradient-to-r from-mainbrand-light/20 to-mainbrand-dark/20 py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 font-apple">Especialistas en watch</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+          <div class="text-center mb-4">
+            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-white">🔧</span>
+            </div>
+          </div>
+          <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Herramientas Especializadas</h3>
+          <p class="md:text-lg text-auto text-center md:text-left">Contamos con equipamiento especializado para Watch: estaciones de soldadura, microscopios, herramientas de precisión y software de diagnóstico.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+          <div class="text-center mb-4">
+            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-white">✅</span>
+            </div>
+          </div>
+          <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Repuestos Certificados</h3>
+          <p class="md:text-lg text-auto text-center md:text-left">Utilizamos únicamente repuestos certificados. Garantizamos compatibilidad con la mayoría de los apple watchs.</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+          <div class="text-center mb-4">
+            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-white">🛡️</span>
+            </div>
+          </div>
+          <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Garantía</h3>
+          <p class="md:text-lg text-auto text-center md:text-left">Ofrecemos 3 meses en componentes. Incluye soporte técnico post-reparación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso de Reparación -->
+  <section class="bg-gray-50 dark:bg-gray-800 py-16">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 font-apple text-mainbrand-dark dark:text-mainbrand-light">Nuestro Proceso</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl text-white font-bold">1</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Diagnóstico</h3>
+          <p class="text-gray-600 dark:text-gray-300">Evaluación completa y gratuita de tu Watchs</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl text-white font-bold">2</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Presupuesto</h3>
+          <p class="text-gray-600 dark:text-gray-300">Cotización transparente con tiempos estimados</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl text-white font-bold">3</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Reparación</h3>
+          <p class="text-gray-600 dark:text-gray-300">Trabajo especializado con repuestos Certificados</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl text-white font-bold">4</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Entrega</h3>
+          <p class="text-gray-600 dark:text-gray-300">Testing completo y garantía incluida</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex justify-center mt-4 animate-pulse transition-all duration-300">
+    <a href="/formservice">
+      <button class="btn-custom">Consultar Reparación</button>
+    </a>
+  </div>
+</Layout>

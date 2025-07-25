@@ -272,7 +272,7 @@ export default {
         },
       },
       dropShadow: {
-        custom: "10px 10px 16px #0b0b0b",
+        custom: "10px 10px 15px #0b0b0b",
         "custom-blue": "10px 10px 5px rgba(0, 0, 0, 0.5)",
       },
       fontSize: {
@@ -283,7 +283,7 @@ export default {
         "imagen-p": "url('https://i.imgur.com/4Dfhwxq.jpg')",
         "custom-gradientwithimage":
           "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://i.imgur.com/5qgZu04.jpg')",
-        "custom-atention-guys-img": "url('https://i.imgur.com/IBgQmhD.png')",
+        "custom-atention-guys-img": "url('https://i.imgur.com/FfRZedo.jpg')",
         "texturized-bg-blue":
           "url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23f9f7fc' fill-opacity='0.95' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E')",
         "arrow-right":
@@ -390,7 +390,7 @@ export default {
           "@apply bg-auto bg-cover bg-no-repeat": {},
         },
         ".atention-guys": {
-          "@apply bg-auto bg-center bg-no-repeat w-[90dvw] h-auto h-64 sm:h-80 md:h-96": {},
+          "@apply bg-cover bg-center bg-no-repeat w-[90dvw] h-auto h-96 sm:h-80 md:h-96": {},
         },
         ".order-container": {
           "@apply min-h-screen flex flex-col justify-center items-center": {},

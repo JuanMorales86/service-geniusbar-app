@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro"
 import BlurImages from "@/components/BlurImages"
 import InfiniteCarousel from "@/components/InfiniteCarousel"
-import { CarouselTexts } from "@/data/layout/links"
+import { IphoneCarouselTexts } from "@/data/layout/links"
 
 const seoData = {
   title: "Reparación de iPhone - Genius Bar Service en Argentina",
@@ -32,10 +32,10 @@ const seoData = {
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-8">
         <div class="mb-12 md:mb-0 text-center md:text-left">
-          <h2 class="text-3xl font-bold mb-2">Servicios Disponibles</h2>
+          <h2 class="text-3xl font-bold mb-2">Servicios Disponibles: Celulares</h2>
           <InfiniteCarousel
           client:load
-          texts={CarouselTexts}
+          texts={IphoneCarouselTexts}
           />
         </div>
         <div>
