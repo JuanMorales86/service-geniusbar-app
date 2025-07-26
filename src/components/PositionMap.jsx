@@ -24,7 +24,7 @@ const MapPosition = ({ center, zoom, markerCoords, popupContent }) => {
           .setPopup(
             new window.maplibregl.Popup().setHTML(
               popupContent ||
-                "<h3>Genius Bar Servicio Tecnico</h3><p>Servicio técnico especializado</p>"
+                "<h3>ONTHEPOINTSERVICE</h3><p>Servicio técnico especializado</p>"
             )
           )
           .addTo(map.current);
