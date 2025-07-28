@@ -20,7 +20,7 @@ export default defineConfig({
   output: 'server',
   adapter: node({ mode: 'standalone' }),
   middleware: [middleware],
-  site: 'https://www.geniusbarserviciotecnico.com',
+  site: 'https://www.onthepointservice.com',
   image: {
     domains: ['i.imgur.com']
   },
