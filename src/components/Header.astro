@@ -1,5 +1,11 @@
 ---
 
+import BlurText from "./BlurText";
+
+const handleAnimationComplete = () => {
+  console.log('Animation completed!');
+};
+
 interface Props {
   title: string;
   description: string;
@@ -13,7 +19,20 @@ const { title, user, description } = Astro.props;
 <header class="py-8 px-4 mx-w-xl lg:py-2 lg:px-6">
   <div class="mx-auto mb-4 lg:mb-4 text-center">
 
-    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl light:text-mainbrand-dark dark:text-mainbrand-light tracking-tight font-apple font-bold">ONTHEPOINTSERVICE</h2>
+    <div class="flex flex-col items-center">
+
+      <BlurText
+      text="ON THE POINT SERVICE"
+      delay={300}
+      animateBy="words"
+      direction="top"
+      animationFrom={{ filter: 'blur(10px)', opacity: 0, y: -50 }} 
+      animationTo={[{ filter: 'blur(0px)', opacity: 1, y: 0 }]} 
+      onAnimationComplete={handleAnimationComplete}
+      client:load
+      className="flex justify-center items-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl light:text-mainbrand-dark dark:text-mainbrand-light tracking-tight font-apple font-bold"
+    />
+    </div>
     
     <p
       class="lg:text-xl sm:text-lg light:text-mainbrand-dark dark:text-gray-400 font-apple"
