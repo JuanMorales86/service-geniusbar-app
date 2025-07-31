@@ -89,10 +89,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		  <meta name="twitter:image" content={image} />
 		  <ClientRouter />
 		  <!-- JSON-LD para google -->
-		<script type="application/ld+json">
-			${jsonLdString}
-			
-			
+		<script type="application/ld+json" set:html={jsonLdString}></script>			
 		</script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
         <script src="../script/gtag-init.js"></script>
