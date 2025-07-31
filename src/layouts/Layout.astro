@@ -32,6 +32,24 @@ const { title = 'OnThePointService - Servicio Tecnico',
 		showWhatsAppButton = true } 
 		= Astro.props;
 
+// Definir el esquema JSON-LD para la página web
+// Este esquema es para Google y otros motores de búsqueda
+const webPageSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"url": url,
+	"name": title,
+	"description": description,
+	"image": image,
+	"publisher": {
+		"@type": "Organization",
+		"name": "onthepointservice",
+	}
+
+};
+
+// Convertir el objeto en una cadena JSON
+const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pretty-printing
 
 ---
 
@@ -39,7 +57,6 @@ const { title = 'OnThePointService - Servicio Tecnico',
 <html lang="es" class="dark">
 	<head>
 		<meta charset="UTF-8" />
-		
 		<meta name="viewport" content="width=device-width" initiall-scale="1.0" />
 		<meta name={description} content={description} />
 		<meta name={keywords} content={keywords} />
@@ -68,18 +85,8 @@ const { title = 'OnThePointService - Servicio Tecnico',
 		  <ClientRouter />
 		  <!-- JSON-LD para google -->
 		<script is:inline type="application/ld+json">
-			{JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "WebPage",
-				"url": url,
-				"name": title,
-				"description": description,
-				"image": image,
-				"publisher": {
-					"@type": "Organization",
-					"name": "OnthePointService",
-				}
-			}, null, 2)}
+			${jsonLdString}
+			
 		</script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
         <script src="../script/gtag-init.js"></script>
