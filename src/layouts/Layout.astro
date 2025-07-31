@@ -26,7 +26,7 @@ interface Props {
 const { title = 'OnThePointService - Servicio Tecnico', 
 		description = 'Reparacion de dispositivos electronicos.',
 		keywords = 'reparacion de dispositivos de telefonia movil y portatiles laptops, Servicio Tecnico, Apple, iPhone, Mac, iPad, Multi marca, Samsung, Xiaomi, Tcl, Android"',
-		image = "https://www.onthepointservice.com/img/ONTHEPOINTSERVICEPNG.png",
+		image = "https://i.imgur.com/LBotlIU.png",
 		url = "https://onthepointservice.com",
 		user = Astro.locals.user,
 		showWhatsAppButton = true } 
@@ -35,16 +35,21 @@ const { title = 'OnThePointService - Servicio Tecnico',
 // Definir el esquema JSON-LD para la página web
 // Este esquema es para Google y otros motores de búsqueda
 const webPageSchema = {
-	"@context": "https://schema.org",
-	"@type": "WebPage",
+	"@context": "https://schema.org/",
+	"@type": "LocalBusiness",
 	"url": url,
 	"name": title,
 	"description": description,
-	"image": image,
-	"publisher": {
-		"@type": "Organization",
-		"name": "onthepointservice",
-	}
+	"image": "https://i.imgur.com/LBotlIU.png",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "Florida, 537",
+		"addressLocality": "Buenos Aires",
+		"postalCode": "1005",
+		"addressCountry": "AR"
+	},
+	"telephone": "+54 9 11 2356 0959",
+	"openingHours": "Mo-Fr 10:00-19:00",
 
 };
 
