@@ -37,9 +37,9 @@ const { title = 'OnThePointService - Servicio Tecnico',
 const webPageSchema = {
 	"@context": "https://schema.org/",
 	"@type": "LocalBusiness",
-	"url": url,
-	"name": title,
-	"description": description,
+	"url": "https://onthepointservice.com/",
+	"name": "OnThePointService - Servicio Tecnico",
+	"description": "Reparacion de dispositivos electronicos.",
 	"image": "https://i.imgur.com/LBotlIU.png",
 	"address": {
 		"@type": "PostalAddress",
@@ -89,8 +89,9 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		  <meta name="twitter:image" content={image} />
 		  <ClientRouter />
 		  <!-- JSON-LD para google -->
-		<script is:inline type="application/ld+json">
+		<script type="application/ld+json">
 			${jsonLdString}
+			
 			
 		</script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
