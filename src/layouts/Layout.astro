@@ -26,7 +26,7 @@ interface Props {
 const { title = 'OnThePointService - Servicio Tecnico', 
 		description = 'Reparacion de dispositivos electronicos.',
 		keywords = 'reparacion de dispositivos de telefonia movil y portatiles laptops, Servicio Tecnico, Apple, iPhone, Mac, iPad, Multi marca, Samsung, Xiaomi, Tcl, Android"',
-		image = "https://i.imgur.com/LBotlIU.png",
+		image = "https://i.imgur.com/DzwHSCZ.png?format=webp",
 		url = "https://onthepointservice.com",
 		user = Astro.locals.user,
 		showWhatsAppButton = true } 
@@ -40,7 +40,7 @@ const webPageSchema = {
 	"url": "https://onthepointservice.com/",
 	"name": "OnThePointService - Servicio Tecnico",
 	"description": "Reparacion de dispositivos electronicos.",
-	"image": "https://i.imgur.com/LBotlIU.png",
+	"image": "https://i.imgur.com/DzwHSCZ.png",
 	"address": {
 		"@type": "PostalAddress",
 		"streetAddress": "Florida, 537",
@@ -66,9 +66,9 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		<meta name={description} content={description} />
 		<meta name={keywords} content={keywords} />
 		<meta name="google-adsense-account" content="ca-pub-1952463626478297">
-		<link rel="shortcut icon" href="https://www.onthepointservice.com/img/ONTHEPOINTSERVICEPNG.png" type="image/png">
+		<link rel="shortcut icon" href="https://www.onthepointservice.com/img/onthepointservice.png" type="image/png">
 		<link rel="canonical" href="https://onthepointservice.com/"/>
-		<link rel="icon" type="image/png" href="https://www.onthepointservice.com/img/ONTHEPOINTSERVICEPNG.png" sizes="16x16" />
+		<link rel="icon" type="image/png" href="https://www.onthepointservice.com/img/onthepointservice.png" sizes="16x16" />
 		<link rel="preconnect" href="https://fonts.cdnfonts.com" as="font" crossorigin="anonymous" />
 		<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sf-pro-display" >
 		<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
@@ -109,6 +109,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 			<Footer/>
 			{showWhatsAppButton && <WhatsAppButton />}
 		</div>
+
 	</body>
 </html>
 
