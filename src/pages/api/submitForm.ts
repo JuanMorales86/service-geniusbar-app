@@ -44,15 +44,15 @@ export async function POST(context: APIContext) : Promise<Response> {
         //!el env si funciona aqui
         const mailOptions ={ 
             from: {
-                name: `Genius Fix Servicio Tecnico Consulta Cliente: ${nombre}`,
+                name: `OnthePointService Servicio Tecnico Consulta Cliente: ${nombre}`,
                 address: USER_GMAIL
             }, // sender address
-            to: `geniusfix.ar@gmail.com, ${email}`, // list of receivers
+            to: `onthepointservice@gmail.com, ${email}`, // list of receivers
             subject: "Confimacion de envío de la consulta", // Subject line
             text: "Hola ${nombre}, hemos recibido tu mensaje", // plain text body
             html: `
                 <div style="font-family: apple, sans-serif; line-height: 1.6; text-align: center; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-                <img src="https://i.imgur.com/rrUbj7z.png" alt="Logo de Genius Bar" style="max-width: 200px; width:"60px";">
+                <img src="https://onthepointservice.com/img/onthepointservice.png" alt="Logo de onthepointservice" style="max-width: 200px; width:"60px";">
                 <h2 style="color: #333;">Servicio Técnico</h2>
                 <p>Hola <strong>${nombre}</strong>:</p>
                 <p><strong>Hemos recibido tu mensaje:</strong></p>
@@ -67,9 +67,9 @@ export async function POST(context: APIContext) : Promise<Response> {
                     <li><strong>Identificador Numerico:</strong> ${modelo}</li>
                 </ul>
                 <p>Nos pondremos en contacto con usted a la brevedad.</p>
-                <p>Gracias por elegir a Genius Bar.</p>
+                <p>Gracias por elegir a OnthePointService.</p>
                 <div style="margin-top: 40px;">
-                <a href="https://geniusfix.ar.com" style="display: inline-block; padding:10px 20px; background-color: #101010; color: #fff; text-decoration: none; border-radius: 4px;">Visite nuestro sitio web</a>
+                <a href="https://onthepointservice.com" style="display: inline-block; padding:10px 20px; background-color: #101010; color: #fff; text-decoration: none; border-radius: 4px;">Visite nuestro sitio web</a>
                 </div>
 
                 </div>
