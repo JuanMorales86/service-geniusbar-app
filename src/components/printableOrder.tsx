@@ -42,7 +42,7 @@ export class PrintableOrder extends React.PureComponent<{
         <div className="mt-12 left-10 right-10 text-right border-t-2 border-blk-gray-light text-blk-gray-dark pt-2"><span>Cordialmente:<span className="block text-blk-gray-dark font-bold">Juan Morales</span> </span>
         </div>
             <div className="flex flex-col items-center justify-center w-full  text-center text-lg font-semibold my-8">
-            <h1>Genius Bar</h1>
+            <h1>OnThePointService</h1>
             <p>Division Servicio Tecnologia</p>
             <p>Florida 537, PB, Loc. 366, CABA</p>
             <p>Lunes a Viernes: 10 a 19 hs, Sabados: 11 a 16 hs</p>
@@ -68,9 +68,9 @@ export class PrintableOrder extends React.PureComponent<{
                 <p>•	TODO TRABAJO EN PLACA corre el riesgo de perder funcionalidades o en su defecto de que no encienda más.</p>
                 <p>•	Todo equipo humedecido o mojado podrá presentar fallas progresivas inclusive luego de ser reparado.</p>
                 <p>•	Cambio de Pantallas y Baterías (garantía de 90 días), cumpliendo con los términos y condiciones.</p>
-                <p>•	GARANTIA: LA GARANTIA COMIENZA A SER EFECTIVA DESDE EL MOMENTO EN EL QUE SE LE NOTIFICA AL CLIENTE. Para que sea válida se debe de presentar la factura u orden, el equipo se recibirá para ser diagnosticado y verificar la falla, el equipo no puede presentar (caídas, golpes o ralladuras, humedad o agua), (exceso de calor sobre la placa), (haber sido abierto por otro servicio técnico), (NO pueden haber sido violados los sellos de seguridad), la garantía solo ampara la zona o componentes reparados, GENIUS BAR no se hace responsable de desperfectos por alteraciones ó actualizaciones a nivel de software. La garantía tiene una duración de 30 a 90 días (de acuerdo a la reparación realizada) </p>
+                <p>•	GARANTIA: LA GARANTIA COMIENZA A SER EFECTIVA DESDE EL MOMENTO EN EL QUE SE LE NOTIFICA AL CLIENTE. Para que sea válida se debe de presentar la factura u orden, el equipo se recibirá para ser diagnosticado y verificar la falla, el equipo no puede presentar (caídas, golpes o ralladuras, humedad o agua), (exceso de calor sobre la placa), (haber sido abierto por otro servicio técnico), (NO pueden haber sido violados los sellos de seguridad), la garantía solo ampara la zona o componentes reparados, OnthePointService no se hace responsable de desperfectos por alteraciones ó actualizaciones a nivel de software. La garantía tiene una duración de 30 a 90 días (de acuerdo a la reparación realizada) </p>
                 <p>•	GARANTIA DE CAMBIO DE PANTALLAS: Por ningún motivo será válida la garantía si está partido el táctil ó display, mojado o humedecido o fractura interna por mala manipulación. </p>
-                <p>•	Al pasar 90 días luego de ser reparado, el equipo se considera abandonado, en este caso GENIUS BAR, obtendrá el dominio del equipo y dispondrá del mismo perdiendo el cliente todo el derecho a reclamo sobre él (código civil, art.2525/2526).</p>
+                <p>•	Al pasar 90 días luego de ser reparado, el equipo se considera abandonado, en este caso OnthePointService, obtendrá el dominio del equipo y dispondrá del mismo perdiendo el cliente todo el derecho a reclamo sobre él (código civil, art.2525/2526).</p>
                 <p>•	No nos hacemos responsables si el IMEI del equipo queda bloqueado por ENACOM en el tiempo que permanezca en nuestro laboratorio, “LA RESPONSABILIDAD LEGAL DEL EQUIPO POR ESTATUS DUDOSOS (POR EJEMPLO, ROBO Ó EXTRAVIO) ES TOTALMENTE DEL CLIENTE QUE LE DA INGRESO AL MISMO EN NUESTRO LOCAL”.</p>
                 </div>
           </div>
