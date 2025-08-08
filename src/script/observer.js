@@ -116,6 +116,8 @@ export function ObserveImages() {// Funcion Sin Uso no me funciono
   return observer;
 }
 
+
+
 /*
 !Resumen: Este enfoque permite una animación suave que comienza tan pronto como el elemento empieza a entrar en la vista y alcanza su estado final cuando el 40% del elemento es visible, simulando así el comportamiento de animation-range: entry 0% cover 40%. */
 

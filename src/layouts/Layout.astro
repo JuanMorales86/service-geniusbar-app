@@ -98,8 +98,11 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		  <meta name="twitter:description" content={description} />
 		  <meta name="twitter:image" content={image} />
 		  <ClientRouter />
-		  <!-- JSON-LD para google -->
-		<script type="application/ld+json" set:html={jsonLdString}></script>			
+		  
+		<script type="application/ld+json" set:html={jsonLdString}></script>	<!-- JSON-LD para google -->
+		<script is:inline type="text/javascript">
+			window.Tawk_API = window.Tawk_API || {};
+  			window.Tawk_LoadStart = new Date();
 		</script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17275138138"></script>
         <script src="../script/gtag-init.js"></script>
@@ -118,24 +121,24 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 			</main>
 			<Footer/>
 			{showWhatsAppButton && <WhatsAppButton />}
+			
+
 		</div>
 
-		<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6890dcd6f0318c19234332d4/1j1qtta25';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+
+<script >
+	import { initTwakTo } from "@/script/tawkto-init";
+
+	document.addEventListener('astro:page-load', initTwakTo);
 </script>
-<!--End of Tawk.to Script-->
+
+
+
 
 	</body>
 </html>
+
+
 
 
 <style is:global>
