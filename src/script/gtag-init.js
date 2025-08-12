@@ -7,4 +7,8 @@ function gtag() {
 }
 gtag("js", new Date());
 
-gtag("config", "AW-17275138138");
+gtag("config", "AW-17275820692");
+
+
+
+
