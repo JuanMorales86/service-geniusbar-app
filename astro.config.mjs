@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import "dotenv/config"; // Import dotenv to load environment variables
 import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
+import tailwindcss from "tailwindcss";
 //import netlify from "@astrojs/netlify"
 import node from "@astrojs/node";
 import db from "@astrojs/db";
@@ -58,6 +59,7 @@ export default defineConfig({
     
 ],
   vite: {
+    plugins: [tailwindcss()], 
     resolve: {
       alias: {
         '@': '/src'
