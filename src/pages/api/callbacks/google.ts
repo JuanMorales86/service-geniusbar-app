@@ -16,6 +16,15 @@ export async function GET(context: APIContext): Promise<Response> {
         });
     };
 
+    // Borramos las cookies de estado después de usarlas.
+    // Esto previene que se queden en el navegador y causen conflictos en futuros inicios de sesión.
+    context.cookies.delete("google_oauth_state", {
+        path: "/",
+    });
+    context.cookies.delete("google_oauth_code_verifier", {
+        path: "/",
+    });
+
     try{
         const tokens = await google.validateAuthorizationCode(code, storeCodeVerifier);//valida el codigo de autorizacion de google
         const token = tokens.accessToken;
@@ -25,11 +34,22 @@ export async function GET(context: APIContext): Promise<Response> {
             }
         });
 
-        const googleUser = await googleUserResponse.json();
+        // Si la respuesta de Google no es OK, algo salió mal con el token.
+        if (!googleUserResponse.ok) {
+            return new Response("Failed to fetch user from Google", { status: 400 });
+        }
+
+        const googleUser: GoogleUser = await googleUserResponse.json();
+
+
+        // Aunque el console.log muestra un id, es bueno validar que siempre esté presente.
+        if (!googleUser.id) {
+            return new Response("Google user ID not found", { status: 400 });
+        }
 
         const { rows: existingUserRows } = await turdb.execute({
             sql: "SELECT * FROM User WHERE google_id = ? LIMIT 1",
-            args: [googleUser.id]
+            args: [String(googleUser.id)] // Aseguramos que el ID sea un string
         });
 
         const existingUser = existingUserRows[0];
@@ -37,29 +57,24 @@ export async function GET(context: APIContext): Promise<Response> {
         if(existingUser) {
             const session = await lucia.createSession(String(existingUser.id), {});
             const sessionCookie = lucia.createSessionCookie(session.id);
-            context.cookies.set(sessionCookie.name, sessionCookie.value, 
-                {  
-                    ...sessionCookie.attributes,
-                    path: sessionCookie.attributes.path ?? "/",
-                    sameSite: sessionCookie.attributes.sameSite ?? "lax",
-                });
+            // Simplificamos el seteo de la cookie
+            context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
             return context.redirect("/");
         }
 
         const userId = generateId(15);
+        // Si el email no viene, creamos un username alternativo para evitar errores.
+        const username = googleUser.email ?? `user_${userId}`;
 
         await turdb.execute({
             sql: "INSERT INTO User (id, google_id, username) VALUES (?,?,?)",
-            args: [userId, googleUser.id, googleUser.email]
+            args: [userId, String(googleUser.id), username]
         });
 
         const session = await lucia.createSession(userId, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
-        context.cookies.set(sessionCookie.name, sessionCookie.value,   {  
-                    ...sessionCookie.attributes,//El spread ...sessionCookie.attributes mantiene los atributos críticos como secure, httpOnly, expires, etc.
-                    path: sessionCookie.attributes.path ?? "/",//El fallback ?? "/" y ?? "lax" asegura que el path y el comportamiento cross-site no fallen si están undefined.
-                    sameSite: sessionCookie.attributes.sameSite ?? "lax",
-                });
+        // Simplificamos el seteo de la cookie
+        context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
         return context.redirect("/");
     } catch(error) {
         if (error instanceof OAuth2RequestError){
@@ -72,4 +87,11 @@ export async function GET(context: APIContext): Promise<Response> {
             status: 500
         });
     }
+}
+
+// Interfaz para tipar la respuesta del usuario de Google
+interface GoogleUser {
+	id: string | number;
+	email?: string;
+	name?: string;
 }

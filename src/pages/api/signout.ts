@@ -13,15 +13,8 @@ export async function POST(context: APIContext): Promise<Response> {
 
     //Vuelve a crear una cookie de session pero vacia
 	const sessionCookie = lucia.createBlankSessionCookie();//aqui despues se crea una cookie de ssesion pero vacia
-	context.cookies.set(
-	sessionCookie.name, 
-	sessionCookie.value, {
-		...sessionCookie.attributes,
-		path: sessionCookie.attributes.path ?? "/",
-		sameSite: sessionCookie.attributes.sameSite ?? "lax",
-	}
-);
+	context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 
-    //por ultimo redirige a la pagina de login
-	return context.redirect("/serviciosm");
+    // Por último, redirige al usuario. Redirigir a la página de inicio de sesión o a la principal es lo más común.
+	return context.redirect("/signin");
 }
