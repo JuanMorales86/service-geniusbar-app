@@ -11,7 +11,7 @@ config({ path: "../../../.env" });
 //         name: 'OnthePointService',
 //         address: process.env.USER_GMAIL
 //     }, // sender address
-//     to: ["tecnorosativentas@gmail.com", "manofspotify986@gmail.com", "juanjosemorales1986@hotmail.com"], // list of receivers
+//     to: ["tecnorosativentas@gmail.com", "manofspotify986@gmail.com", "onthepointservice@gmailcom"], // list of receivers
 //     subject: "Email enviado usando nodemailer y gmail", // Subject line
 //     text: "Hello world?", // plain text body
 //     html: "<b>Hello world?</b>", // html body

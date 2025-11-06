@@ -42,6 +42,7 @@ observer.js
 
 #Utilities
 encodeImageToBlurhash.ts
+ai.js
 
 #Apis
 sendMail-Respaldo.js
