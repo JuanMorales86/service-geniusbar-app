@@ -65,7 +65,7 @@ const seoData = {
         </section>
 
         <section id="question_basic_problems" class=" flex flex-col md:flex-row items-center section">
-            <div class="sectionquest bg-custom-gradientwithimage flex flex-col justify-center items-center gap-y-3 w-full h-full rounded-2xl py-4 overflow-hidden">
+            <div class="sectionquest bg-custom-gradientwithimage flex flex-col justify-center items-center gap-y-3 w-full h-full rounded-2xl py-4 overflow-hidden md:p-8">
                 <h1 class="text-3xl md:text-5xl text-mainbrand-light dark:text-mainbrand-light font-apple font-bold text-center">Reparamos Tu Telefono al Momento</h1>
                 <div class="flex flex-col md:flex-row items-center gap-y-8 object-cover">
                     <div class="animate-spin-scale hover:animate-none">
@@ -81,7 +81,7 @@ const seoData = {
                     </div>
                 </div>
     
-                <div class="grid grid-cols-1 md:grid-flow-col-2 md:grid-cols-4 place-items-center gap-16 md:gap-32 filter font-apple">
+                <div class="grid grid-cols-2 md:grid-flow-col-2 md:grid-cols-4 place-items-center gap-16 md:gap-32 filter font-apple">
                 {linksServices.map((link: Linkservice) => <Linkse {...link} />)}
                 </div>
     

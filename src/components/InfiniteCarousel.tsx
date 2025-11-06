@@ -30,8 +30,8 @@ const InfiniteCarousel = ({
 }: InfiniteCarouselProps) => {
 
     return (
-        <div className=" relative overflow-hidden py-8 bg-gradient-to-r from-mainbrand-dark to-gray-600 dark:from-gray-400 dark:to-mainbrand-dark rounded-lg h-full w-full place-content-center  ">
-            <div className="w-[200%] inline-flex flex-nowrap">
+        <div className="relative overflow-hidden bg-gradient-to-r from-mainbrand-dark to-gray-600 dark:from-gray-400 dark:to-mainbrand-dark rounded-lg h-full w-full justify-center items-center justify-items-center place-content-center  ">
+            <div className="w-[200%] inline-flex flex-nowrap ">
                 {/* First Row - moving rigth */}
                 <div className="flex animate-scroll-right items-center whitespace-nowrap">
                     {texts.firstRow.map((text, i) => (
