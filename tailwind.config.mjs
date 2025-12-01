@@ -1,6 +1,5 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -102,11 +101,11 @@ export default {
       },
 
       purple: {
-        light: "#B8A5FF",  // Light purple that pairs well with your sky colors
-        medium: "#8B6DFF",  // Medium purple that bridges between your blues
-        main: "#6B4EDB",  // Main purple that complements your blue-600
-        darker: "#4A3A9C",  // Darker purple that works with your dark theme
-        deeppurple: "#2D2463",  // Deep purple that pairs with your blackEerie
+        light: "#B8A5FF", // Light purple that pairs well with your sky colors
+        medium: "#8B6DFF", // Medium purple that bridges between your blues
+        main: "#6B4EDB", // Main purple that complements your blue-600
+        darker: "#4A3A9C", // Darker purple that works with your dark theme
+        deeppurple: "#2D2463", // Deep purple that pairs with your blackEerie
       },
 
       green: {
@@ -161,7 +160,7 @@ export default {
         "spin-reverse": "spinreverse 0.5s linear 1 forwards",
         "spin-scale": "spinscale 12s ease-in-out infinite",
         "spin-whastapp": "spinwithpause 80s linear infinite",
-		    "pulse-whatsapp": "pulsewithpause 5s ease-in-out infinite",
+        "pulse-whatsapp": "pulsewithpause 5s ease-in-out infinite",
         "scroll-left": "scrollleft 60s linear infinite ",
         "scroll-right": "scrollright 60s linear infinite  ",
         appear: "appear2 1s forwards",
@@ -226,31 +225,30 @@ export default {
           "66.66%": { transform: "rotate(360deg)" },
         },
         pulsewithpause: {
-          '0%, 66.66%, 100%': {
-            transform: 'scale(1)',
-            opacity: '1'
+          "0%, 66.66%, 100%": {
+            transform: "scale(1)",
+            opacity: "1",
           },
-          '33.33%': {
-            transform: 'scale(1.1)',
-            opacity: '0.8'
+          "33.33%": {
+            transform: "scale(1.1)",
+            opacity: "0.8",
           },
-          
-		},
+        },
         scrollleft: {
-          '0%': {
-            transform: 'translateX(0)'
+          "0%": {
+            transform: "translateX(0)",
           },
-          '100%': {
-            transform: 'translateX(-50%)'
-          }
+          "100%": {
+            transform: "translateX(-50%)",
+          },
         },
         scrollright: {
-          '0%': {
-            transform: 'translateX(-50%)'
+          "0%": {
+            transform: "translateX(-50%)",
           },
-          '100%': {
-            transform: 'translateX(0)'
-          }
+          "100%": {
+            transform: "translateX(0)",
+          },
         },
         appear2: {
           from: {
@@ -348,7 +346,7 @@ export default {
         },
 
         ".labelinput-custom": {
-          "@apply block mb-2 text-mainbrand-light dark:text-mainbrand-light font-bold text-lg":
+          "@apply block mb-2 text-light-text dark:text-dark-text font-bold text-lg":
             {},
         },
         ".select-input": {
@@ -390,7 +388,8 @@ export default {
           "@apply bg-auto bg-cover bg-no-repeat": {},
         },
         ".atention-guys": {
-          "@apply bg-cover bg-center bg-no-repeat w-[90dvw] h-auto h-96 sm:h-80 md:h-96": {},
+          "@apply bg-cover bg-center bg-no-repeat w-[90dvw] h-auto h-96 sm:h-80 md:h-96":
+            {},
         },
         ".order-container": {
           "@apply min-h-screen flex flex-col justify-center items-center": {},

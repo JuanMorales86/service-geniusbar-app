@@ -1107,7 +1107,7 @@ const styles = {
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
                 >
-                    <span className="text-white cursor-pointer">¿Dónde encontrar Model?</span>
+                    <span className="text-light-text dark:text-dark-text cursor-pointer">¿Dónde encontrar Model?</span>
                     <div  style={{ ...styles.hoverImage, ...(isHover ? styles.hoverImageVisible : {}) }}>
                         <button
                         style={{ ...styles.sliderButton, ...styles.prevButton}}
@@ -1163,4 +1163,3 @@ const styles = {
     )
 
 }
-
