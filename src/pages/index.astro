@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ImageLightboxSlider from '@/components/CardSliders';
-import BlurImages from '@/components/BlurImages.tsx';
+import { Image } from 'astro:assets'; // Importamos el componente Image de Astro
 
 
 
@@ -175,11 +175,12 @@ const seoData = {
             {ourServiceImages.map( (services) => {
               return (
                 <div class="text-center">
-                  <BlurImages
-                  client:visible
+                  <Image
                   src={services.image}
                   alt={services.title}
-                  className='w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg mx-auto mb-4 shadow-md'
+                  width={500} 
+                  height={384} 
+                  class='w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg mx-auto mb-4 shadow-md'
                   />
                   <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
                   <p >{services.description}</p>
@@ -193,11 +194,12 @@ const seoData = {
               return (
 
               <div class="text-center">
-                <BlurImages
-                client:visible
+                <Image
                 src={services.image}
                 alt={services.title}
-                className='w-full h-64 sm:h-80 md:h-[500px] object-cover rounded-lg mx-auto mb-4 shadow-md'
+                width={1000} 
+                height={500}
+                class='w-full h-64 sm:h-80 md:h-[500px] object-cover rounded-lg mx-auto mb-4 shadow-md'
                 />
                 <h3 class="text-xl font-semibold mb-2">{services.title}</h3>
                 <p>{services.description}</p>
@@ -266,11 +268,12 @@ const seoData = {
             </div>
 
             <div class="md:w-1/2">
-              <BlurImages
-              client:visible
+              <Image
               src="https://i.imgur.com/oU5Yi8f.png"
               alt="OnthePointService Servicio Tecnico Nosotros"
-              className='w-full h-64 sm:h-80 md:96 object-cover rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
+              width={500} 
+              height={384} 
+              class='w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg shadow-lg dark:ring-4 dark:ring-mainbrand-light '
               />
             </div>
             

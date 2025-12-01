@@ -9,21 +9,20 @@ import IcoDoubleCheck from "@/utilities/icons/icoDoubleCheck.astro";
 import IcoScrewDriver from "@/utilities/icons/icoScrewDriver.astro";
 import IcoHumanFixer from "@/utilities/icons/icoHumanFixer.astro";
 // import srcImage from "../utilities/img/macbookimg.png"
-import BlurImages from "@/components/BlurImages";
 
 
 const imgServiciosm = {
-    imagenWatch: "https://i.imgur.com/MWqBcoZ.png?format=webp",
+    imagenWatch: "https://i.imgur.com/MWqBcoZ.png",
     altimagenWatch: "imagenes de relojes apple watch edicion finales del 2023",
-    imagenIpads: "https://i.imgur.com/qp7cVtL.png?format=webp",
+    imagenIpads: "https://i.imgur.com/qp7cVtL.png",
     altimageIpads: "imagenes de ipads 2024 - 2025",
-    imagenImac: "https://i.imgur.com/9CkA3Td.png?format=webp",
+    imagenImac: "https://i.imgur.com/9CkA3Td.png",
     altimageImac: "imagenes de imac 2024 - 2025",
-    imagenIphone: "https://i.imgur.com/PH2qZ3V.png?format=webp",
+    imagenIphone: "https://i.imgur.com/PH2qZ3V.png",
     altIphone: "imagenes de iphones 2024 - 2025",
-    imagenMacbook: "https://i.imgur.com/4oYiCkZ.png?format=webp",
+    imagenMacbook: "https://i.imgur.com/4oYiCkZ.png",
     altimagenMacbook: "imagenes de macbook 2023",
-    imagenMagsafe: 'https://i.imgur.com/CrJ07C2.png?format=webp',
+    imagenMagsafe: 'https://i.imgur.com/CrJ07C2.png',
     altMagsafe: 'imagenes de magsafe cargador macbook',
 }
 
@@ -72,10 +71,10 @@ const seoData = {
                         <IcoHumanFixer className="w-12 h-12 md:w-20 md:h-20"/>
                     </div>
                     <div class="w-full md:w-1/2 flex items-center justify-center">
-                        <Image class=" h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"high"} densities={[1.5, 2]}/>
+                        <Image class=" h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/iYtVSQG.png" alt="imagen iphonex roto" format="avif" quality={"mid"} densities={[1.5, 2]}/>
                     </div>
                         <IcoScrewDriver className="w-12 h-12 md:w-20 md:h-20"/>
-                    <Image class="h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"high"} densities={[1.5, 2]} />
+                        <Image class="h-40 sm:h-40 md:h-96 object-contain rounded-lg" width={480} height={270} decoding="async" loading="lazy" src="https://i.imgur.com/ag9L3xJ.png"  alt="imagen iphone xsmax reparado" format="avif" quality={"mid"} densities={[1.5, 2]} />
                     <div class="animate-spin-scale">      
                         <IcoDoubleCheck className="w-12 h-12 md:w-20 md:h-20"/>
                     </div>
@@ -96,12 +95,11 @@ const seoData = {
 
                             <div class="w-full flex items-center justify-center">
                                 <div class="aspect-[4/3]  w-full">
-                                    <BlurImages
-                                    client:visible
+                                    <Image
                                     src={imgServiciosm.imagenIphone}
                                     alt={imgServiciosm.altIphone}
-                                    fixedsize
-                                    className="w-full h-full object-contain p-4"
+                                    width={400} height={300}
+                                    class="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -118,12 +116,11 @@ const seoData = {
                             
                             <div class="w-full flex items-center justify-center">
                                 <div class="aspect-[4/3]  w-full">
-                                    <BlurImages
-                                    client:visible
+                                    <Image
                                     src= {imgServiciosm.imagenWatch}
                                     alt= {imgServiciosm.altimagenWatch}
-                                    fixedsize
-                                    className="w-full h-full object-contain p-4"
+                                    width={400} height={300}
+                                    class="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -140,12 +137,11 @@ const seoData = {
 
                             <div class="w-full flex items-center justify-center">
                                 <div class="aspect-[4/3] w-full">    
-                                    <BlurImages
-                                    client:visible
+                                    <Image
                                     src= {imgServiciosm.imagenIpads}
                                     alt= {imgServiciosm.altimageIpads}
-                                    fixedsize
-                                    className="w-full h-full object-contain p-4"
+                                    width={400} height={300}
+                                    class="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -162,12 +158,11 @@ const seoData = {
 
                             <div class="w-full flex items-center justify-center">
                                 <div class="aspect-[4/3] w-full">
-                                    <BlurImages
-                                    client:visible
+                                    <Image
                                     src= {imgServiciosm.imagenMacbook}
                                     alt= {imgServiciosm.altimagenMacbook}
-                                    fixedsize
-                                    className="w-full h-full object-contain p-4"
+                                    width={400} height={300}
+                                    class="w-full h-full object-contain p-4"
                                     />
                                 </div>
                             </div>
@@ -183,12 +178,11 @@ const seoData = {
                            
                              <div class="w-full flex items-center justify-center">
                                 <div class="aspect-[4/3] w-full">
-                                    <BlurImages
-                                    client:visible
+                                    <Image
                                     src={imgServiciosm.imagenImac}
                                     alt={imgServiciosm.altimageImac}
-                                    fixedsize
-                                    className="w-full h-full object-contain"
+                                    width={400} height={300}
+                                    class="w-full h-full object-contain"
                                     />
                                 </div>
                             </div>
@@ -206,12 +200,11 @@ const seoData = {
 
                             <div class="w-full flex items-center justify-center">
                                     <div class="aspect-[4/3] w-full ">
-                                        <BlurImages
-                                        client:visible
+                                        <Image
                                         src={imgServiciosm.imagenMagsafe}
                                         alt={imgServiciosm.altMagsafe}
-                                        fixedsize
-                                        className="w-full h-full object-contain p-4"
+                                        width={400} height={300}
+                                        class="w-full h-full object-contain p-4"
                                         />
                                     </div>
                             </div>

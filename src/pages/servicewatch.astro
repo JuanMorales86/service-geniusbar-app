@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-import BlurImages from "@/components/BlurImages"
+import { Image } from "astro:assets" // Importamos el componente Image de Astro
 import InfiniteCarousel from "@/components/InfiniteCarousel"
 import { AppleWatchCarouselTexts, AppleWatchServiceInfo, AppleWatchModels } from "@/data/layout/links"
 
@@ -20,11 +20,13 @@ const seoData = {
   <!-- Hero Section -->
   <section class="text-mainbrand-light rounded-lg">
     <div class="container mx-auto text-center mb-4">
-        <BlurImages
-        client:visible
+        <Image
         src="https://i.imgur.com/rm3Q1tU.jpg"
         alt="Ipad Servicio Tecnico"
-        className="rounded-lg shadow-inner w-full h-auto md:h-[580px] object-cover"
+        width={1200} 
+        height={580} 
+        loading={"eager"}
+        class="rounded-lg shadow-inner w-full h-auto md:h-[580px] object-cover"
         />
     </div>
   </section>
@@ -41,11 +43,12 @@ const seoData = {
           />
         </div>
         <div>
-          <BlurImages
-          client:visible
+          <Image
           src="https://i.imgur.com/9BzXlZL.jpg"
           alt="MacBook Repair Process"
-          className="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
+          width={800} 
+          height={400} 
+          class="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
           />
         </div>
       </div>

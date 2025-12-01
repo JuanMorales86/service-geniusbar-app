@@ -61,9 +61,6 @@ export const linksServices: Linkservice[] = [
 
 ]
 
-
-
-
 export const IphoneCarouselTexts = {
     firstRow: [
         "Pantalla",

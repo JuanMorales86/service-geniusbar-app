@@ -7,7 +7,7 @@ import IcoScreenBroken from "@/utilities/icons/icoScreenBroken.astro";
 import IcoScreenTouchFail from "@/utilities/icons/icoScreenTouchFail.astro";
 ---
 
-<a href={path} class="hover:underline font-apple font-semibold flex flex-col items-center mx-auto my-auto md:mx-2 md:my-2 circular-gradient-bg text-xs transition-transform duration-300  hover:scale-custom2 cursor-pointer filter drop-shadow-lg">
+<a href={path} class="w-20 h-20 md:w-28 md:h-28 hover:underline font-apple font-semibold flex flex-col items-center justify-center mx-auto my-auto md:mx-2 md:my-2 circular-gradient-bg text-xs transition-transform duration-300  hover:scale-custom2 cursor-pointer filter drop-shadow-lg">
     <slot name="before"/>
     
     {icon === 'IcoChargeFail' && <IcoChargeFail className="w-7 h-7  md:w-12 md:h-12  object-cover" />}
@@ -25,8 +25,6 @@ import IcoScreenTouchFail from "@/utilities/icons/icoScreenTouchFail.astro";
     .circular-gradient-bg{
         background-image: radial-gradient(circle, #1da1f2, #1da1f2);
         border-radius: 50%;
-        width: 100px;
-        height: 100px;
         display: flex;
         align-items: center;
         justify-content: center;

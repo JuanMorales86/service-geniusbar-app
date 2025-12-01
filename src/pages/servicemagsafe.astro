@@ -1,8 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-import BlurImages from "@/components/BlurImages"
 import InfiniteCarousel from "@/components/InfiniteCarousel"
 import { MagsafeCarouselTexts, MagsafeServiceInfo, MagsafeModels } from "@/data/layout/links"
+import { Image } from "astro:assets" 
 
 const seoData = {
   title: "Reparación de Cargador Magsafe - OnthePointService Servicio tecnico en Argentina",
@@ -20,11 +20,13 @@ const seoData = {
   <!-- Hero Section -->
   <section class="text-mainbrand-light rounded-lg">
     <div class="container mx-auto text-center mb-4">
-        <BlurImages
-        client:visible
+        <Image
         src="https://i.imgur.com/Jr3EApO.jpg"
         alt="Ipad Servicio Tecnico"
-        className="rounded-lg shadow-inner w-full h-auto md:h-[580px] object-cover"
+        width= {1200}
+        height= {580}
+        loading={"eager"}
+        class="rounded-lg shadow-inner w-full h-auto md:h-[580px] object-cover"
         />
     </div>
   </section>
@@ -41,11 +43,12 @@ const seoData = {
           />
         </div>
         <div>
-          <BlurImages
-          client:visible
+          <Image
           src="https://i.imgur.com/P9nXzbB.jpg"
           alt="MacBook Repair Process"
-          className="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
+          width={800}
+          height={400}
+          class="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
           />
         </div>
       </div>
