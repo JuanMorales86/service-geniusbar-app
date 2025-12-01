@@ -622,15 +622,14 @@ const styles = {
         }
         try { 
             
-            const response = await fetch('/api/submitForm', {//preguntamos al api submitForm es un archivo servidor, la pregunta es un POST y el body es el formData
+            const response = await fetch('/api/submitForm', {
                 method: 'POST',
                 body: formData,
             });
 
             if (response.ok) {
-                const result = await response.json();//response.json() convierte la respuesta en un objeto JSON que puede ser leida por JavaScript.
-                // console.log('Formulario enviado con exito', result);
-                if(result.success){//si el resultado es exitoso 
+                const result = await response.json();
+                if(result.success){
                     setToastMessage('Consulta enviada con exito')
                     setToastType('success')
                     setToastPositionV('top')
@@ -705,11 +704,6 @@ const styles = {
         setSelectedOptionsT('');
     };
 
-    /*prevIndex: Este es el valor actual del índice de la imagen antes de que se actualice.
-    - prevIndex === 0: Si el índice actual es 0 (es decir, estamos en la primera imagen), entonces queremos ir a la última imagen. Esto se hace estableciendo el índice a 
-    - imagesHelpers.length - 1.
-    prevIndex - 1: Si el índice actual no es 0, simplemente restamos 1 al índice para ir a la imagen anterior.
-    */
     const handlePrevImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? imagesHelpers.length - 1 : prevIndex - 1));
     };
@@ -717,13 +711,11 @@ const styles = {
     const handleNextImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex === imagesHelpers.length - 1 ? 0 : prevIndex + 1));
 
-        /*prevIndex === imagesHelpers.length - 1: Si el índice actual es el último índice (es decir, estamos en la última imagen), entonces queremos ir a la primera imagen. Esto se hace estableciendo el índice a 0.
-        - prevIndex + 1: Si el índice actual no es el último, simplemente sumamos 1 al índice para ir a la imagen siguiente.   */
     };
 
     //dark:border dark:bg-gray-800 dark:border-gray-700
     return (
-        <div className="flex items-center justify-center py-8 mx-auto rounded-lg w-4/6 sm:w-4/6 md:w-3/6 lg:w-3/6 border-accent-light border-2 border-solid shadow-sm dark:border bg-light-bg dark:bg-dark-bg dark:border-black">
+        <div className="flex items-center justify-center py-8 mx-auto rounded-lg w-4/6 sm:w-4/6 md:w-3/6 lg:w-3/6 border-accent-dark border-2 border-solid shadow-sm dark:border bg-light-bg dark:bg-dark-bg dark:border-black">
         <form className="flex flex-col gap-3 w-full px-4 sm:px-6" onSubmit={handleSubmit}>
             <div className="w-full flex  justify-center">
                 <h2 className=" mb-4 text-2xl font-bold text-gray-900 dark:text-white">Formulario de Consultas</h2>
