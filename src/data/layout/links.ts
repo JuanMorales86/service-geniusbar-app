@@ -91,6 +91,30 @@ export const IphoneCarouselTexts = {
     ]
 }
 
+export const TelevisionTexts = {
+    firstRow: [
+        "Pantalla (LCD/QLED)",
+        "Fuente de Alimentación",
+        "Placa T-Con",
+        "Placa Principal",
+        "Puertos HDMI/USB",
+        "Leds Apagados",
+        "Problemas de Audio",
+        "Problemas de Imagen",
+        "Problemas de Encendido",
+    ],
+
+    secondRow: [
+        "Problemas de Software",
+        "Conectividad WiFi",
+        "Control Remoto",
+        "Soporte y Base",
+        "Diagnóstico de Líquidos",
+        "Mantenimiento Preventivo",
+        "Entre Otros"
+      ]
+}
+
 export const MacCarouselTexts ={
     firstRow: [
     "SSD / Disco Duro",

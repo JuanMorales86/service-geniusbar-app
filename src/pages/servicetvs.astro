@@ -1,0 +1,88 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import { Image } from "astro:assets"
+import InfiniteCarousel from "@/components/InfiniteCarousel"
+import { TelevisionTexts } from "@/data/layout/links"
+
+const seoData = {
+  title: "Reparación de Televisores - OnthePointService Service en Argentina",
+  description: "Expertos en reparación de Televisores: cambio de pantalla, batería, cámara, puertos de carga y más. Usamos repuestos originales con garantía. ¡Consulta ahora!",
+  keywords: "reparación Televisores, cambio pantalla Televisores, reparación batería Televisores, servicio técnico Televisores, OnthePointService Argentina",
+  image: "https://imgur.com/fwREo3G.png?format=webp",
+  url: "https://onthepointservice.com/servicetvs"
+}
+---
+
+
+<Layout {...seoData}>
+     <!-- Hero Section -->
+  <section class="text-mainbrand-light rounded-lg">
+    <div class="container mx-auto text-center mb-4">
+        <Image
+        src="https://imgur.com/fwREo3G.png?format=webp"
+        alt="Television Service"
+        width={1200}
+        height={580}
+        loading={"eager"}
+        class="rounded-lg  shadow-inner w-full h-auto md:h-[580px] object-cover"
+        />
+    </div>
+  </section>
+
+  <!-- Services Details -->
+  <section class="bg-mainbrand-light dark:bg-transparent text-mainbrand-dark dark:text-mainbrand-light py-16 ">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-8">
+        <div class="mb-12 md:mb-0 text-balance text-justify md:text-left">
+          <h2 class="text-3xl font-bold mb-2">Servicios Disponibles: Celulares</h2>
+          <InfiniteCarousel
+          client:load
+          texts={TelevisionTexts}
+          />
+        </div>
+        <div class="mt-12 md:mt-0">
+          <Image
+          src="https://i.imgur.com/IRLLMJT.jpg?format=webp"
+          alt="Television Service"
+          width={800}
+          height={400}
+          class="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Summary Section -->
+<section class="bg-gradient-to-r from-mainbrand-light/20 to-mainbrand-dark/20 py-16">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12 font-apple">Nuestro Compromiso con la Excelencia</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+        <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Diagnóstico Profesional</h3>
+        <p class="md:text-lg text-auto text-center md:text-left">Utilizamos herramientas de diagnóstico avanzadas para identificar con precisión el problema de tu dispositivo, garantizando reparaciones efectivas desde el primer momento.</p>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+        <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Repuestos Originales</h3>
+        <p class="md:text-lg text-auto text-center md:text-left">Trabajamos exclusivamente con componentes originales y de alta calidad, asegurando la durabilidad y el rendimiento óptimo de tu iPhone después de cada reparación.</p>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+        <h3 class="md:text-2xl text-lg text-center md:text-left font-bold mb-4 text-sky-600">Garantía Asegurada</h3>
+        <p class="md:text-lg text-auto text-center md:text-left">Todas nuestras reparaciones incluyen garantía, respaldando nuestro compromiso con la calidad y tu tranquilidad. Servicio post-reparación disponible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- More sections following home.astro style -->
+
+  <div class="flex justify-center mt-4 animate-pulse transition-all duration-300">
+    <a href="/formservice">
+      <button class="btn-custom">Consultar</button>
+    </a>
+  </div>
+
+
+</Layout>

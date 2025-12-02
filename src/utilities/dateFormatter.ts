@@ -14,20 +14,3 @@ export function formatDate(): string {
 export function getCurrentFormattedDate(): string {
     return formatDate();
 }
-
-
-// export function formatDate(date: Date | number): string {
-//     const d = new Date(date);
-//     return d.toLocaleString('es-AR', {
-//         year: 'numeric',
-//         month: 'long',
-//         day: 'numeric',
-//         hour: '2-digit',
-//         minute: '2-digit',
-//         second: '2-digit',
-//     });
-// };
-
-// export function getCurrentFormattedDate(): string {
-//     return formatDate(new Date());
-// }

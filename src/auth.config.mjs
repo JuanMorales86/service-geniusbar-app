@@ -1,5 +1,5 @@
-import { defineConfig } from "auth-astro";//importar libreria de autenticacion de astro
-import Google from "@auth/core/providers/google";//importar libreria de autenticacion de google
+import { defineConfig } from "auth-astro";
+import Google from "@auth/core/providers/google";
 
 export default defineConfig({
     providers: [
