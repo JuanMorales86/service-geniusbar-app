@@ -15,16 +15,16 @@ const seoData = {
 
 
 <Layout {...seoData}>
-     <!-- Hero Section -->
+    <!-- Hero Section -->
   <section class="text-mainbrand-light rounded-lg">
-    <div class="container mx-auto text-center mb-4">
+    <div class="container mx-auto text-center mb-4" oncontextmenu="return false">
         <Image
         src="https://imgur.com/fwREo3G.png?format=webp"
         alt="Television Service"
         width={1200}
         height={580}
         loading={"eager"}
-        class="rounded-lg  shadow-inner w-full h-auto md:h-[580px] object-cover"
+        class="rounded-lg  shadow-inner w-full h-auto md:h-[580px] object-cover pointer-events-none"
         />
     </div>
   </section>
@@ -40,13 +40,13 @@ const seoData = {
           texts={TelevisionTexts}
           />
         </div>
-        <div class="mt-12 md:mt-0">
+        <div class="mt-12 md:mt-0" oncontextmenu="return false">
           <Image
           src="https://i.imgur.com/IRLLMJT.jpg?format=webp"
           alt="Television Service"
           width={800}
           height={400}
-          class="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover"
+          class="rounded-lg shadow-xl w-full h-auto md:h-[400px] object-cover pointer-events-none"
           />
         </div>
       </div>

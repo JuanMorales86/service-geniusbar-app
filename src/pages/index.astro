@@ -185,10 +185,10 @@ const seoData = {
       <section class="bg-mainbrand-light dark:bg-mainbrand-dark text-mainbrand-dark dark:text-mainbrand-light py-16">
         <div class="container mx-auto px-6">
           <h2 class="text-3xl font-bold text-center mb-8">Nuestros Servicios</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" oncontextmenu="return false">
             {ourServiceImages.map( (services) => {
               return (
-                <div class="text-center">
+                <div class="text-center" >
                   <Image
                   src={services.image}
                   alt={services.title}
@@ -203,7 +203,7 @@ const seoData = {
               )
             })}
           </div>
-          <div class="grid grid-cols-1 mt-24 ">
+          <div class="grid grid-cols-1 mt-24" oncontextmenu="return false">
             {plusServices.map( (services) => {
               return (
 
@@ -226,7 +226,7 @@ const seoData = {
       
       <!-- Cards Section -->
        <section class="">
-        <div class="">
+        <div class="" oncontextmenu="return false">
           <h2></h2>
           <ImageLightboxSlider client:visible images={galleryImages}/>
         </div>
@@ -281,7 +281,7 @@ const seoData = {
               </p>
             </div>
 
-            <div class="md:w-1/2">
+            <div class="md:w-1/2" oncontextmenu="return false">
               <Image
               src="https://i.imgur.com/oU5Yi8f.png"
               alt="OnthePointService Servicio Tecnico Nosotros"
