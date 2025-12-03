@@ -34,6 +34,7 @@ enviar-email.ts
 BlurHashImages.tsx
 ImageLoader.tsx
 initMobileMenu.ts
+SessionManager.astro
 
 #Scripts
 inituserdropdown.js

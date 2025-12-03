@@ -112,7 +112,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		<script defer src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
 		<script defer src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>	
 	</head>
-	<body >
+	<body data-user-logged-in={!!user}>
 		<div class:list={["bg-gradient-to-b",
 				"from-[#FEFFFE] via-[#F8F8F8] to-[#F5F5F5]", //FEFFFE COLOR APPLE (Gris)
 				"dark:from-blk-gray-dark dark:via-blk-dark dark:to-blk-gray-light",
@@ -124,15 +124,23 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 			</main>
 			<Footer/>
 			{showWhatsAppButton && <WhatsAppButton />}
-			
 
 		</div>
 
 
 <script >
 	import { initTwakTo } from "@/script/tawkto-init";
+	import { initSessionManager } from "@/script/session-manager.js";
 
-	document.addEventListener('astro:page-load', initTwakTo);
+	document.addEventListener('astro:page-load', () => {
+		initTwakTo();
+
+		// Verificamos si el usuario está logueado leyendo el atributo del body
+		const userIsLoggedIn = document.body.getAttribute('data-user-logged-in') === 'true';
+		if (userIsLoggedIn) {
+			initSessionManager({ timeoutMinutes: 1 });
+		}
+	});
 </script>
 
 
@@ -140,10 +148,10 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 
 	</body>
 </html>
-
-
-
+<!-- Pasamos el estado de la sesión al body para que el script pueda leerlo -->
 
 <style is:global>
  @import '../styles/global.css';
 </style>
+
+

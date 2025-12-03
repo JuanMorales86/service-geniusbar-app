@@ -15,8 +15,6 @@ const adapter = new LibSQLAdapter(turdb, {
 }
 )
 
-//console.log('este es el adaptor', adapter)
-
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
