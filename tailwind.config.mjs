@@ -313,7 +313,7 @@ export default {
 
       addComponents({
         ".btn-custom": {
-          "@apply flex-row justify-center text-white dark:text-black text-lg bg-dark-bg dark:bg-light-bg hover:bg-sky-700 focus:ring-4 w-full focus:outline-none rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:text-white hover:bg-white hover:text-black dark:hover:bg-dark-bg dark:hover:text-white hover:shadow-lg transition-all duration-200 ease-in-out gap-x-2 opacity-90 hover:opacity-100 hover:scale-custom7 cursor-pointer font-apple font-bold focus:ring-gray-esp/50 dark:focus:ring-gray-esp/55":
+          "@apply flex-row justify-center text-white dark:text-black text-lg bg-dark-bg dark:bg-light-bg hover:bg-sky-700 focus:ring-4 w-full focus:outline-none rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:text-black hover:bg-white hover:text-black dark:hover:bg-sky-esp dark:hover:text-white hover:shadow-lg transition-all duration-200 ease-in-out gap-x-2 opacity-90 hover:opacity-100 hover:scale-custom7 cursor-pointer font-apple font-bold focus:ring-gray-esp/50 dark:focus:ring-gray-esp/55":
             {},
         },
         ".btn-custom-hero": {

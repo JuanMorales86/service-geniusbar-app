@@ -137,16 +137,6 @@ class OrdersShowCase extends Component<Props, State> {
     });
   }
 
-  // handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement >) => {
-  //   const {name, value} = e.target;
-  //   cl('edit change:', name, value)
-  //   this.setState(prevState => ({
-  //     editFormData: prevState.editFormData ? {
-  //       ...prevState.editFormData,
-  //       [name]: value,
-  //     } : { [name]: value }
-  //   }));
-  // }
 
   handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement >) => {
     const {name} = e.target;
@@ -275,7 +265,7 @@ render() {
                         </div>
 
                         <button onClick={() => this.handleToggleCard(order.id)} className="btn-custom">
-                          {this.state.expandedCards.has(order.id) ? '🔼Mostrar Más' : '🔽Mostrar Mas'}
+                          {this.state.expandedCards.has(order.id) ? '🔼Mostrar Menos' : '🔽Mostrar Más'}
                         </button>
                         </div>
                         
