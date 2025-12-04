@@ -37,6 +37,51 @@ export const linksData: Links[] = [//Array linksData: Es un array de objetos que
     },
 ]
 
+export const linksData2: Links[] = [//Array linksData: Es un array de objetos que implementan la interfaz Links. Cada objeto en el array representa un enlace con un título y una URL correspondiente.
+    {
+        title: 'Reparación iPhone',
+        url: '/serviceiphone',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación MacBook',
+        url: '/servicemac',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación iMac',
+        url: '/serviceimac',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación iPad',
+        url: '/serviceipad',
+        requiresAuth: false
+    },
+    
+    {
+        title: 'Reparación Watch',
+        url: '/servicewatch',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación Placas',
+        url: '/serviceplacas',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación MagSafe',
+        url: '/servicemagsafe',
+        requiresAuth: false
+    },
+    {
+        title: 'Reparación TV',
+        url: '/servicetvs',
+        requiresAuth: false
+    },
+
+]
+
 export const linksServices: Linkservice[] = [
     {
         title: 'No carga',

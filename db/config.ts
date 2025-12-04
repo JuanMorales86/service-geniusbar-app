@@ -80,7 +80,7 @@ const Usermsj = defineTable({
     }
   })
 
-  const subscriptions =  defineTable({
+  const Subscriptions =  defineTable({
     columns: {
       id: column.number({ primaryKey: true, autoIncrement: true}),
       email: column.text({ unique: true, optional: false}),
@@ -97,6 +97,6 @@ export default defineDb({
     ServiceOrder,
     OrderCount,
     Admin,
-    subscriptions,
+    Subscriptions,
   }
 });

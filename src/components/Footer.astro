@@ -1,26 +1,48 @@
 ---
 import type { Links } from "@/data/layout/links"; 
-import { linksData } from "@/data/layout/links";
-import Linksfooter from "./Linksfooter.astro";
+import { linksData, linksData2 } from "@/data/layout/links";
 import { Icon } from "astro-icon/components";
+
+// 1. Adaptamos la estructura para usar tus datos existentes y añadir todos los servicios.
+const footerSections = [
+    {
+        title: "Navegación",
+        // Usamos 'linksData' para generar los enlaces de navegación principal.
+        // El .map transforma { title, url } en { name, href } para que coincida.
+        links: linksData.map((link: Links) => ({ name: link.title, href: link.url }))
+    },
+    {
+        title: "Nuestros Servicios",
+        // Creamos una lista completa con todos tus servicios.
+        links: linksData2.map((link: Links) => ({ name: link.title, href: link.url }))
+    }
+];
 ---
 
 <footer>
-    <div class="flex flex-col  justify-center gap-5 border-y-[1px] border-blue-400 py-4 mt-8 items-center bg-blk-gray-dark ">
-        <!-- <IcoAtom name="logo" wi="3rem" he="3rem" /> -->
-        <!-- <Icon class="text-sky-600 text-6xl" name="lucide:atom" /> -->
-         <div class="flex justify-around items-center md:flex-row flex-col w-full px-4 gap-y-4">
+    <div class="flex flex-col justify-center gap-8 border-y-[1px] border-blue-400 py-8 mt-8 items-center bg-blk-gray-dark">
+         <div class="flex justify-around items-center md:flex-row flex-col w-full px-4 gap-y-8 md:gap-y-4">
             <div class="flex items-center">
 
-                <picture class="w-16 h-auto ">
+                <picture class="w-20 md:w-32 h-auto ">
                     <a href="/">
                         <img class="rounded-lg hover:animate-shake transition-all duration-1000 ease-in-out" src="https://www.onthepointservice.com/img/onthepointservice.png" alt="Logo Empresa">
                     </a>
                 </picture>
             </div>
-            <nav class="flex flex-col md:flex-row gap-3 items-center">
-                {linksData.map((link: Links) => <Linksfooter {...link}/>)}
-            </nav>
+            <!-- 2. Renderizamos la nueva estructura unificada de enlaces -->
+            <div class="flex flex-col md:flex-row text-center md:text-left gap-8 md:gap-16">
+                {footerSections.map(section => (
+                    <div>
+                        <h3 class="font-bold text-white mb-3 uppercase tracking-wider">{section.title}</h3>
+                        <ul class="space-y-2">
+                            {section.links.map(link => (
+                                <li><a href={link.href} class="text-gray-300 hover:text-sky-400 transition-colors">{link.name}</a></li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
          </div>
 
          <div class="flex flex-col md:flex-row justify-between items-center border-t border-blue-400  pt-4">
@@ -30,7 +52,7 @@ import { Icon } from "astro-icon/components";
                 <a href="https://www.facebook.com/Barradeatomo"  aria-label="instagram"><Icon class="text-blue-facebook animate-pulse transition-all duration-500 text-4xl" name="lucide:facebook" /></a>
             </div>
 
-            <form id="subscribe-form" action="/api/subscribe" method="POST" class="flex flex-col sm:flex-row items-center gap-2 mt-4 ms-0 md:mt-0 md:ms-8">
+            <form id="subscribe-form" action="/api/subscribes" method="POST" class="flex flex-col sm:flex-row items-center gap-2 mt-4 ms-0 md:mt-0 md:ms-8">
                 <input name="email" type="email" placeholder="Tu correo electrónico" class="px-4 py-2 border rounded bg-gray-700 text-white" required>
                 <button type="submit" class="bg-blue-500 text-white font-apple font-bold px-4 py-2 rounded hover:scale-custom2 hover:animate-pulse transition-all ease-in-out duration-500">Suscribirse</button>
                 <p id="subscribe-message" class="text-sm mt-2 sm:mt-0 sm:ml-4"></p>
@@ -66,38 +88,6 @@ import { Icon } from "astro-icon/components";
 </footer>
 
 <script>
-    const form = document.getElementById('subscribe-form') as HTMLFormElement;
-    const messageEl = document.getElementById('subscribe-message') as HTMLParagraphElement;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-        messageEl.textContent = 'Enviando...';
-        messageEl.className = 'text-white';
-        button.disabled = true;
-
-        try {
-            const response = await fetch('/api/subscribe', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (response.ok || (response.redirected && response.status === 200)) { // 303 redirige y fetch lo sigue, resultando en 200 OK
-                messageEl.textContent = '¡Gracias por suscribirte!';
-                messageEl.className = 'text-green-400';
-                form.reset();
-            } else { // Captura errores 400, 409, 500, etc.
-                messageEl.textContent = 'Este correo ya está suscrito o es inválido.';
-                messageEl.className = 'text-red-400';
-            }
-        } catch (error) {
-            messageEl.textContent = 'Error de red. Inténtalo de nuevo.';
-            messageEl.className = 'text-red-400';
-        } finally {
-            button.disabled = false;
-            setTimeout(() => { messageEl.textContent = ''; }, 5000);
-        }
-    });
+    import { initSubscriptionForm } from '@/script/subscribes.js';
+    initSubscriptionForm();
 </script>
