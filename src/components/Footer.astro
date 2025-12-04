@@ -30,9 +30,10 @@ import { Icon } from "astro-icon/components";
                 <a href="https://www.facebook.com/Barradeatomo"  aria-label="instagram"><Icon class="text-blue-facebook animate-pulse transition-all duration-500 text-4xl" name="lucide:facebook" /></a>
             </div>
 
-            <form action="/subscribe" method="POST" class="flex flex-col sm:flex-row items-center gap-2 mt-4 ms-0 md:mt-0 md:ms-8">
-                <input type="email" placeholder="Tu correo electrónico" class="px-4 py-2 border rounded bg-gray-700 text-white" required>
+            <form id="subscribe-form" action="/api/subscribe" method="POST" class="flex flex-col sm:flex-row items-center gap-2 mt-4 ms-0 md:mt-0 md:ms-8">
+                <input name="email" type="email" placeholder="Tu correo electrónico" class="px-4 py-2 border rounded bg-gray-700 text-white" required>
                 <button type="submit" class="bg-blue-500 text-white font-apple font-bold px-4 py-2 rounded hover:scale-custom2 hover:animate-pulse transition-all ease-in-out duration-500">Suscribirse</button>
+                <p id="subscribe-message" class="text-sm mt-2 sm:mt-0 sm:ml-4"></p>
             </form>
          </div>
 
@@ -64,3 +65,39 @@ import { Icon } from "astro-icon/components";
     </div>
 </footer>
 
+<script>
+    const form = document.getElementById('subscribe-form') as HTMLFormElement;
+    const messageEl = document.getElementById('subscribe-message') as HTMLParagraphElement;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+        messageEl.textContent = 'Enviando...';
+        messageEl.className = 'text-white';
+        button.disabled = true;
+
+        try {
+            const response = await fetch('/api/subscribe', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok || (response.redirected && response.status === 200)) { // 303 redirige y fetch lo sigue, resultando en 200 OK
+                messageEl.textContent = '¡Gracias por suscribirte!';
+                messageEl.className = 'text-green-400';
+                form.reset();
+            } else { // Captura errores 400, 409, 500, etc.
+                messageEl.textContent = 'Este correo ya está suscrito o es inválido.';
+                messageEl.className = 'text-red-400';
+            }
+        } catch (error) {
+            messageEl.textContent = 'Error de red. Inténtalo de nuevo.';
+            messageEl.className = 'text-red-400';
+        } finally {
+            button.disabled = false;
+            setTimeout(() => { messageEl.textContent = ''; }, 5000);
+        }
+    });
+</script>

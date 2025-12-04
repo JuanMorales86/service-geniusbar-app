@@ -80,6 +80,14 @@ const Usermsj = defineTable({
     }
   })
 
+  const subscriptions =  defineTable({
+    columns: {
+      id: column.number({ primaryKey: true, autoIncrement: true}),
+      email: column.text({ unique: true, optional: false}),
+      created_at: column.date({ optional: false, default: new Date()}),
+    }
+  })
+
 // https://astro.build/db/config
 export default defineDb({
   tables: {
@@ -89,5 +97,6 @@ export default defineDb({
     ServiceOrder,
     OrderCount,
     Admin,
+    subscriptions,
   }
 });

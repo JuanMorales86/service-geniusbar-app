@@ -8,8 +8,6 @@ export async function GET() {
 
     //const {rows: tableinfo } = await turdb.execute( `PRAGMA table_info(Session)`);
     const {rows: content} = await turdb.execute(`SELECT * FROM Session`);//aqui se puede ver la informacion de la tabla
-    //cl('INFORMACION de la tabla Session', content);
-    //cl('Admin users from DB:', adminUsers);
     return new Response(JSON.stringify(adminUsers.map(user => user.username)))//devuelve un array con los nombres de los usuarios administradores
 }
 
