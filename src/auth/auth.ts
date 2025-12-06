@@ -1,7 +1,5 @@
 // src/auth.ts del doc de lucia
 import {Lucia} from "lucia"
-//import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle"//anadir
-//import { db, Session, User } from "astro:db"; //anadir
 import { LibSQLAdapter } from "@lucia-auth/adapter-sqlite";
 import { GitHub } from "arctic";//Artic para Github
 import { Google } from "arctic";//Artic para Google
@@ -18,13 +16,12 @@ const adapter = new LibSQLAdapter(turdb, {
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			// set to `true` when using HTTPS (ahora como lo corro en pnpm run dev es false PROD y se ejecuta en HTTP que es localhost cuando se ejecute en pnp run start se debe cambiar a true)
 			secure: import.meta.env.PROD
 		}
 	},
 	getUserAttributes: (attributes) => {
 		return {
-			// attributes has the type of DatabaseUserAttributes
+			
 			githubId: attributes.github_id,
 			username: attributes.username,
 			isAdmin: attributes.isAdmin
@@ -55,7 +52,7 @@ export const github = new GitHub(
 declare module "lucia" {
 	interface Register {
 		Lucia: typeof lucia;
-		DatabaseUserAttributes: DatabaseUserAttributes;//Agregar esta extension para q detecte la interface DatabaseUserAttributes 
+		DatabaseUserAttributes: DatabaseUserAttributes; 
 	}
 }
 

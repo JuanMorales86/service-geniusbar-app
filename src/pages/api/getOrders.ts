@@ -9,6 +9,7 @@ export async function GET(context: APIContext): Promise<Response> {
     try {
         const elementsPerPages = 5; //Ajustar paginacion a conveniencia
         const actualPage = parseInt(context.url.searchParams.get('pagina') || '1', 10) || 1;
+        const searchQuery = context.url.searchParams.get('search') || '';
         /*Intenta obtener el parámetro 'pagina' de la URL usando context.url.searchParams.get('pagina'). o pages o hojas se puede cambiar el nombre pagina por otro que tenga sentido.
 
         Si 'pagina' está presente en la URL, lo convierte a un número entero con parseInt(). El segundo argumento 10 indica que la conversión debe hacerse en base 10.
@@ -21,30 +22,38 @@ export async function GET(context: APIContext): Promise<Response> {
         const offset = (actualPage - 1) * elementsPerPages;
 
         //1.Obtener el conteo total de ordenes desde OrderCount
-        // const countResults = await db.select({ totalOrders: OrderCount.totalOrders }).from(OrderCount).limit(1);
+        let countSql = "SELECT COUNT(*) as totalOrders FROM ServiceOrder";
+        const countArgs: (string | number)[] = [];
+        if (searchQuery) {
+            countSql += " WHERE clientname LIKE ? OR clientdni LIKE ? OR phone LIKE ? OR ordernumber LIKE ? OR status LIKE ?";
+            const searchTerm = `%${searchQuery}%`;
+            countArgs.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm);
+        }
 
         const {rows: countResults} = await turdb.execute({
-            sql: "SELECT totalOrders FROM OrderCount LIMIT 1 ",
-            args: [],
+            sql: countSql,
+            args: countArgs,
         })
 
-        //cl('Count countResults', countResults)
-
         const totalOrder = Number(countResults[0]?.totalOrders) ?? 0;
-        //cl('Total de ordenes', totalOrder)
 
         //2.Calcular el total de paginas
         const totalPages = Math.ceil(totalOrder / elementsPerPages);
         
         //3.Obtener las ordenes de la pagina actual
-        // const orders = await db.select()
-        // .from(ServiceOrder)
-        // .offset(offset)
-        // .limit(elementsPerPages);
+        let ordersSql = "SELECT * FROM ServiceOrder";
+        const ordersArgs: (string | number)[] = [];
+        if (searchQuery) {
+            ordersSql += " WHERE clientname LIKE ? OR clientdni LIKE ? OR phone LIKE ? OR ordernumber LIKE ? OR status LIKE ?";
+            const searchTerm = `%${searchQuery}%`;
+            ordersArgs.push(searchTerm, searchTerm, searchTerm, searchTerm, searchTerm);
+        }
+        ordersSql += " ORDER BY createdAt DESC LIMIT ? OFFSET ?";
+        ordersArgs.push(elementsPerPages, offset);
 
         const {rows: orders} = await turdb.execute({
-            sql: "SELECT * FROM ServiceOrder LIMIT ? OFFSET ?",
-            args: [elementsPerPages, offset],
+            sql: ordersSql,
+            args: ordersArgs,
         });
         //cl('Orders retrived', orders)
 

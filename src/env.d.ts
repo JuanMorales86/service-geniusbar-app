@@ -9,19 +9,3 @@ declare namespace App {
 		user: import("lucia").User | null;
 	}
 }
-
-// interface ImportMetaEnv {
-
-// }
-
-// interface Env {
-//     readonly BD_URL: string;
-//     readonly BD_TOKEN: string;
-// }
-
-
-// declare module 'astro' {
-//     interface AstroGlobal {
-//         env: Env
-//     }
-// }

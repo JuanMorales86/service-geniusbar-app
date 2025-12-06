@@ -44,7 +44,7 @@ export async function POST(context:APIContext) : Promise<Response> {
             args: [username]
         });
         if (existingUser.length > 0) {// length > 0 significa que se encontró al menos un usuario con ese nombre. Si es mayor que 0, significa que ya existe un usuario con ese nombre
-            return context.redirect("/signup?error=user_exists&message=" + encodeURIComponent("Este usuario ya existe")); 
+            return context.redirect("/signup?error=user_exists&message=" + encodeURIComponent("Este usuario ya existe.")); 
 
             /** 
             Redirige al usuario de vuelta al formulario de registro.
@@ -56,17 +56,17 @@ export async function POST(context:APIContext) : Promise<Response> {
 
     //Validar los datos
     if (!username || !password){
-        return context.redirect("/signup?error=invalid_input&message=" + encodeURIComponent("Usuario o Contraseña incorrectos"));
+        return context.redirect("/signup?error=invalid_input&message=" + encodeURIComponent("Usuario o Contraseña incorrectos."));
     }
     
     if( typeof username !== 'string' || username.length < 4){
         // return new Response("El Usuario debe contener al menos 4 caracteres de longitud ", {status:400})
-        return context.redirect("/signup?error=invalid_username&message=" + encodeURIComponent("Usuario debe contener al menos 4 caracteres de longitud"));
+        return context.redirect("/signup?error=invalid_username&message=" + encodeURIComponent("El usuario debe contener al menos 4 caracteres."));
     }
     
     if( typeof password !== 'string' || password.length < 4){
         // return new Response("La Contraseña debe contener al menos 4 caracteres de longitud ", {status:400})
-        return context.redirect("/signup?error=invalid_password&message=" + encodeURIComponent("La Contraseña debe contener al menos 4 caracteres de longitud"));
+        return context.redirect("/signup?error=invalid_password&message=" + encodeURIComponent("La contraseña debe contener al menos 4 caracteres."));
     }
     
 
@@ -113,7 +113,7 @@ export async function POST(context:APIContext) : Promise<Response> {
     //Manejo de errores
 } catch(error) {
     console.error("Error durante el registro:", error);
-    return context.redirect("/signup?error=server_error&message=" + encodeURIComponent("Error en el servidor"));
+    return context.redirect("/signup?error=server_error&message=" + encodeURIComponent("Error en el servidor."));
     
 }
 

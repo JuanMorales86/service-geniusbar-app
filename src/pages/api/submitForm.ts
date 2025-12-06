@@ -52,13 +52,13 @@ export async function POST(context: APIContext) : Promise<Response> {
             text: "Hola ${nombre}, hemos recibido tu mensaje", // plain text body
             html: `
                 <div style="font-family: apple, sans-serif; line-height: 1.6; text-align: center; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-                <img src="https://onthepointservice.com/img/onthepointservice.png" alt="Logo de onthepointservice" style="max-width: 200px; width:"60px";">
+                <img src="https://onthepointservice.com/img/onthepointservice.png" alt="Logo de onthepointservice" style="max-width: 150px; margin-bottom: 20px;">
                 <h2 style="color: #333;">Servicio Técnico</h2>
                 <p>Hola <strong>${nombre}</strong>:</p>
                 <p><strong>Hemos recibido tu mensaje:</strong></p>
                 <blockquote style="background-color: #fff; padding: 10px; border-left: 4px solid #ccc; margin: 20px 0;">${mensaje}</blockquote>
                 <p><strong>Detalles de la consulta:</strong></p>
-                <ul style="list-style-type: none; padding: 0; tex-aling: left; margin: 20px auto; max-width: 300px;">
+                <ul style="list-style-type: none; padding: 0; text-align: left; margin: 20px auto; max-width: 300px;">
                     <li><strong>Nombre:</strong> ${nombre}</li>   
                     <li><strong>Teléfono:</strong> ${telefono}</li>
                     <li><strong>Email:</strong> ${email}</li>
@@ -95,5 +95,3 @@ export async function POST(context: APIContext) : Promise<Response> {
         }
     }
     
-
-

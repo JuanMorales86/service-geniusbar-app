@@ -46,6 +46,7 @@ interface State {//Agregar estados de inteface
     toastType: string;
     toastColor: string;
     orderToDelete: string | null;
+    searchQuery: string;
 }
 
 
@@ -64,6 +65,7 @@ class OrdersShowCase extends Component<Props, State> {
     toastType: '',
     toastColor: 'text-white',
     orderToDelete: null,
+    searchQuery: '',
     
   }
 
@@ -187,11 +189,11 @@ class OrdersShowCase extends Component<Props, State> {
 }
 
   componentDidMount() {  
-    this.fetchOrders();
+    this.fetchOrders(1, this.state.searchQuery);
   }
 
 
-  async fetchOrders(page: number = 1)
+  async fetchOrders(page: number = 1, searchQuery: string = '')
 /*Al definir fetchOrders(page: number = 1), estás estableciendo un valor predeterminado para el parámetro page. Esto significa que si se llama a fetchOrders() sin ningún argumento, automáticamente usará 1 como valor para page.
 
   Este enfoque tiene dos beneficios principales:
@@ -201,7 +203,7 @@ class OrdersShowCase extends Component<Props, State> {
   Es una práctica común en la implementación de paginación, ya que proporciona un comportamiento predecible y fácil de manejar tanto para la carga inicial como para las navegaciones subsiguientes entre páginas.*/ 
   {
     try {
-        const response = await fetch(`api/getOrders?pagina=${page}`)//This change allows fetchOrders to accept a page number and use it in the API request. The default value of 1 ensures it works as before when called without arguments. Now your changePage method will work correctly with the updated fetchOrders.
+        const response = await fetch(`api/getOrders?pagina=${page}&search=${encodeURIComponent(searchQuery)}`)//This change allows fetchOrders to accept a page number and use it in the API request. The default value of 1 ensures it works as before when called without arguments. Now your changePage method will work correctly with the updated fetchOrders.
         if (!response.ok) {
             throw new Error('Fallo al cargar las ordenes');
         }
@@ -216,12 +218,20 @@ class OrdersShowCase extends Component<Props, State> {
 
 changePage = (newPage: number) => {
   if(this.state.ordersData && newPage >= 1 && newPage <= this.state.ordersData.totalPages) {
-    this.fetchOrders(newPage)
+    this.fetchOrders(newPage, this.state.searchQuery)
   }
 }
 
+handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const searchQuery = e.target.value;
+  this.setState({ searchQuery }, () => {
+    // Esta función se ejecuta después de que el estado se haya actualizado.
+    this.fetchOrders(1, this.state.searchQuery); // Reinicia a la página 1 en cada nueva búsqueda.
+  });
+}
+
 render() {
-  //cl('User prop in render:', this.props.user.isAdmin)
+      //cl('User prop in render:', this.props.user.isAdmin)
       const { ordersData, isLoading, error, editFormData, editingOrderId } = this.state;
 
       if (isLoading) {
@@ -234,6 +244,17 @@ render() {
 
       return (
         <div className='order-container'>
+            <div className="mb-4 p-4 bg-white dark:bg-gray-800 shadow-md rounded-lg text-center ">
+              <label htmlFor="search" className="block font-extrabold text-gray-700 dark:text-gray-200 mb-2">Buscar Orden</label>
+              <input
+                type="text"
+                id="search"
+                placeholder="Buscar por N° Orden, Cliente, DNI o Teléfono..."
+                value={this.state.searchQuery}
+                onChange={this.handleSearchChange}
+                className="form-inputbox w-full"
+              />
+            </div>
             <h2 className='titles-styles'>ORDENES</h2>
             <ul className='order-ul-styles'>
                 {ordersData?.ordenes.map((order) => (

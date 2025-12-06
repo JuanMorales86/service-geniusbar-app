@@ -16,14 +16,14 @@ export async function POST(context: APIContext):Promise<Response>{
     //Validar si la cuenta esta bloqueada
     const { isLocked, remainingTime, permanentLock } = await checkAccountLocked(username);
     if (permanentLock) {
-        return context.redirect(`/signin?error=permanent_lock&username=${encodeURIComponent(username)}`);
+        return context.redirect(`/signin?error=permanent_lock`);
     }
     
     if (isLocked) {
         const remainingSeconds = Math.ceil(remainingTime / 1000);
         const currentTime = Date.now();
         const unlockTime = currentTime + remainingTime;
-        return context.redirect(`/signin?error=account_locked&remainingTime=${remainingSeconds}&unlockTime=${unlockTime}&username=${encodeURIComponent(username)}`);
+        return context.redirect(`/signin?error=account_locked&remainingTime=${remainingSeconds}&unlockTime=${unlockTime}`);
     }
 
     //Validar los datos
@@ -72,7 +72,7 @@ export async function POST(context: APIContext):Promise<Response>{
     //si el password no es valido
     if(!valiPassword){
         await incrementFailedAttempts(username);
-        return context.redirect("/signin?error=invalid_password&username=" + encodeURIComponent(username));
+        return context.redirect("/signin?error=invalid_password");
     }
     
     //✅ Login exitoso - resetear intentos fallidos
