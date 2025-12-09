@@ -1,5 +1,5 @@
 import type { APIContext } from "astro";
-import { turdb } from "@../../db/turso";
+import { turdb } from "../../../db/turso";
 
 export async function DELETE(context: APIContext): Promise<Response> {
     try {

@@ -1,5 +1,5 @@
 import type { APIContext } from "astro";
-import { turdb } from "@../../db/turso";
+import { turdb } from "../../../db/turso";
 
 function removeNullUndefined(obj: Record<string, any>) {
     return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));

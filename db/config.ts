@@ -88,6 +88,30 @@ const Usermsj = defineTable({
     }
   })
 
+  const SaledDevices = defineTable({
+    columns: {
+      id: column.text({ primaryKey: true, optional: false, unique: true }),
+      clientname: column.text({ optional: false }),
+      clientdni: column.text({ optional: true }),
+      clientphone: column.text({ optional: true }),
+      saledate: column.text({ optional: true }),
+      devicename: column.text({ optional: true }),
+      deliverydate: column.text({ optional: true }),
+      currency: column.text({ optional: true, default: 'ARS' }),
+      brand: column.text({ optional: true }),
+      model: column.text({ optional: true }),
+      serial: column.text({ optional: true }),
+      imei1: column.text({ optional: true }),
+      imei2: column.text({ optional: true }),
+      condition_details: column.text({ optional: true }),
+      price: column.number({ optional: true }),
+      paymentmethod: column.text({ optional: true }),
+      description: column.text({ optional: true }),
+    }
+  })
+
+
+
 // https://astro.build/db/config
 export default defineDb({
   tables: {
@@ -98,5 +122,6 @@ export default defineDb({
     OrderCount,
     Admin,
     Subscriptions,
+    SaledDevices
   }
 });

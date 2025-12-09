@@ -1,5 +1,5 @@
 import type { APIContext } from "astro";
-import { turdb } from "@../../db/turso";
+import { turdb } from "../../../db/turso";
 
 export async function GET(context: APIContext): Promise<Response> {
     const url = new URL(context.request.url);

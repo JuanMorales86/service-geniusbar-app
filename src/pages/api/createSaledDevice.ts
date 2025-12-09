@@ -1,7 +1,7 @@
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
-import { turdb } from "@../../db/turso";
+import { turdb } from "../../../db/turso";
 
 export async function POST(context: APIContext): Promise<Response> {
     try {
