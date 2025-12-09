@@ -1,6 +1,6 @@
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
-import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
+import { getISODate } from "@/utilities/dateFormatter";
 import { turdb } from "@../../../db/turso";
 
 export async function POST(context: APIContext): Promise<Response> {
@@ -17,7 +17,7 @@ export async function POST(context: APIContext): Promise<Response> {
                   (id, clientname, clientdni, clientphone, saledate, devicename, deliverydate, currency, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             args: [
-                deviceId, clientname, clientdni, clientphone, getCurrentFormattedDate(), devicename, deliverydate, currency, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description
+                deviceId, clientname, clientdni, clientphone, getISODate(), devicename, deliverydate, currency, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description
             ],
         });
 

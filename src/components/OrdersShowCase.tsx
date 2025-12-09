@@ -297,7 +297,7 @@ render() {
                       <div className='order-card group'>
                        
                         <div className='order-list-item'>
-                        <p>Numero de Orden: <span>{order.ordernumber}</span></p>
+                        <p>Orden: <span>{order.ordernumber}</span></p>
                         <p>Status: <span>{order.status}</span></p>
                         <p>Cliente: <span>{order.clientname}</span></p>
                         <p>Dni: <span>{order.clientdni}</span></p>

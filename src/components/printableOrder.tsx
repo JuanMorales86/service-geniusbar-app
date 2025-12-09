@@ -1,13 +1,64 @@
 import React from "react";
-import type { ServiceOrder } from "@/types/database";
+import type { ServiceOrder, SaledDevice } from "@/types/database";
+import { formatDate } from "@/utilities/dateFormatter";
+
+const isServiceOrder = (order: any): order is ServiceOrder => {
+  return order && typeof order.ordernumber !== 'undefined';
+};
 
 export class PrintableOrder extends React.PureComponent<{
-  order?: ServiceOrder;
+  order?: ServiceOrder | SaledDevice;
   innerRef?: React.Ref<HTMLDivElement>;
 }> {
   
   render() {
     const { order } = this.props;
+
+    if (!order) {
+      return null;
+    }
+
+    if (!isServiceOrder(order)) {
+      // Es un SaledDevice, renderizamos el comprobante de entrega
+      const saledDevice = order as SaledDevice;
+      return (
+        <div ref={this.props.innerRef} className="printable-order-container font-apple text-black">
+          <div className="page first-page">
+            <div className="printable-order border-2">
+              <div className="flex flex-row justify-around items-center">
+                <picture>
+                  <img src="https://imgur.com/DzwHSCZ.png" alt="logo atomo" className="block m-auto mb-5 max-w-32 h-auto" />
+                </picture>
+                <span className="genius-bar-title text-center mb-2 text-blk-gray-dark text-xl font-bold">Division Venta de Dispositivos<br/> ¡Gracias por tu compra!</span>
+              </div>
+              <div className="text-center text-2xl border-2 border-blk-gray-dark p-2 mb-6 mx-2 shadow-lg font-bold">Comprobante de Entrega</div>
+              <div className="text-end text-md border-blk-gray-dark p-2 mb-2 font-semibold">Buenos Aires, {formatDate(saledDevice.saledate || new Date())}</div>
+              <table className="order-details">
+                <tbody>
+                  <tr><th>Cliente:</th><td>{saledDevice.clientname || 'No Registrado'}</td></tr>
+                  <tr><th>DNI:</th><td>{saledDevice.clientdni || 'No Registrado'}</td></tr>
+                  <tr><th>Teléfono:</th><td>{saledDevice.clientphone || 'No Registrado'}</td></tr>
+                  <tr><th>Dispositivo:</th><td>{saledDevice.devicename || 'No Especificado'}</td></tr>
+                  <tr><th>Marca:</th><td>{saledDevice.brand || 'No Especificada'}</td></tr>
+                  <tr><th>Modelo:</th><td>{saledDevice.model || 'No Especificado'}</td></tr>
+                  <tr><th>Serial:</th><td>{saledDevice.serial || 'N/A'}</td></tr>
+                  <tr><th>IMEI 1:</th><td>{saledDevice.imei1 || 'N/A'}</td></tr>
+                  <tr><th>IMEI 2:</th><td>{saledDevice.imei2 || 'N/A'}</td></tr>
+                  <tr><th>Precio:</th><td>{saledDevice.currency === 'USD' ? 'U$S' : '$'} {Number(saledDevice.price || 0).toLocaleString('es-AR')}</td></tr>
+                  <tr><th>Método de Pago:</th><td>{saledDevice.paymentmethod || 'No Especificado'}</td></tr>
+                </tbody>
+              </table>
+              <div className="mt-12 left-10 right-10 text-right border-t-2 border-blk-gray-light text-blk-gray-dark pt-2"><span>Entregado por:<span className="block text-blk-gray-dark font-bold">Juan Morales</span></span></div>
+              <div className="flex flex-col items-center justify-center w-full text-center text-lg font-semibold my-8">
+                <h1>OnThePointService</h1><h2>Genius Bar</h2><p>División Venta de Equipos</p><p>Florida 537, PB, Loc. 366, CABA</p><p>Teléfono: +54-9-1123560959</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Es una ServiceOrder, renderizamos el formato original
     return (
       <>
       <div ref={this.props.innerRef} className="printable-order-container font-apple text-black">
@@ -22,7 +73,7 @@ export class PrintableOrder extends React.PureComponent<{
        
         <div className="text-center text-2xl border-2 border-blk-gray-dark p-2 mb-6 mx-2 shadow-lg font-bold">Orden Comprobante</div>
 
-        <div className="text-end text-md border-blk-gray-dark p-2 mb-2 font-semibold">Buenos Aires, 02 de Octubre de 2024</div>
+        <div className="text-end text-md border-blk-gray-dark p-2 mb-2 font-semibold">Buenos Aires, {formatDate(order.createdAt || new Date())}</div>
 
         <table className="order-details ">
           <tbody>

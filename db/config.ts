@@ -51,11 +51,11 @@ const Usermsj = defineTable({
   const ServiceOrder = defineTable({
     columns: {
       id: column.text({ primaryKey: true, optional: false, unique: true}),
-      ordernumber: column.text({optional: true, unique: true}),
       clientname: column.text({optional: true}),
       clientdni: column.text({optional: true}),
+      clientphone: column.text({ optional: true }),
+      devicename: column.text({optional: true}),
       email: column.text({ optional: true }),
-      phone: column.text({ optional: true }),
       deviceType: column.text({ optional: true }),
       model: column.text({ optional: true }),
       serial: column.text({ optional: true }),

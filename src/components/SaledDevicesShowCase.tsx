@@ -4,6 +4,8 @@ import type { SaledDevice } from '../types/database';
 import Pagination from './Pagination';
 import LoadingSpinerAtom from './LoadingIcon';
 import { ConfirmationToast, Toast } from './ToastContainer';
+import PrinterWrapper from './PrinterWrapper';
+
 
 interface Props {
     user: {
@@ -280,6 +282,8 @@ class SaledDevicesShowCase extends Component<Props, State> {
                                                 <div className='order-buttons-group mt-4'>
                                                     <button className='btn-custom' onClick={() => this.handleEdit(device)}>Editar</button>													
                                                     <button className='btn-custom' onClick={() => this.handleDeleteClick(device.id)}>Eliminar</button>
+                                                    <PrinterWrapper order={device}/>
+
                                                 </div>
                                             )}
                                         </>

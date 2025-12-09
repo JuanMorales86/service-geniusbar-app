@@ -3,7 +3,7 @@
 import type { APIContext } from "astro";
 // import { db, ServiceOrder, OrderCount, sql, eq } from "astro:db"
 import { generateId } from "lucia";
-import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
+import { getISODate } from "@/utilities/dateFormatter";
 import { getNextOrderNumber } from "@/utilities/orderUtils";
 import { turdb } from "../../../db/turso";
 
@@ -55,7 +55,7 @@ export async function POST(contex: APIContext) : Promise<Response> {
 
             await turdb.execute({
                 sql: "INSERT INTO ServiceOrder (id, ordernumber, clientname, clientdni, email, phone, deviceType, model, serial, phonedetails, issue, devicepassword, status, createdAt, updatedAt, aditionalObservation, donerepairments, topay, payed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                args: [orderId, orderNumber, clientname, clientdni, email, phone, deviceType, model, serial, phonedetails, issue, devicepassword, 'Pending', getCurrentFormattedDate(), getCurrentFormattedDate(), 'Sin especificar', 'Sin especificar', 0, 0],
+                args: [orderId, orderNumber, clientname, clientdni, email, phone, deviceType, model, serial, phonedetails, issue, devicepassword, 'Pendiente', getISODate(), getISODate(), 'Sin especificar', 'Sin especificar', 0, 0],
             } as any);
 
             // Para actualizar el conteo de órdenes
@@ -183,5 +183,3 @@ export async function POST(contex: APIContext) : Promise<Response> {
             }
         )};
 }
-
-

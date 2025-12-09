@@ -1,23 +1,23 @@
 import type { APIContext } from "astro";
 import { generateId } from "lucia";
-import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
+import { getISODate } from "@/utilities/dateFormatter";
 import { turdb } from "../../../db/turso";
 
 export async function POST(context: APIContext): Promise<Response> {
     try {
         const formData = await context.request.json();
         const {
-            clientname, clientdni, clientphone, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description, currency
+            clientname, clientdni, clientphone, devicename, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description, currency
         } = formData;
 
         const deviceId = generateId(15);
 
         await turdb.execute({
             sql: `INSERT INTO SaledDevices 
-                  (id, clientname, clientdni, clientphone, saledate, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                  (id, clientname, clientdni, clientphone, saledate, devicename, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description, currency) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             args: [
-                deviceId, clientname, clientdni, clientphone, getCurrentFormattedDate(), brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description, currency
+                deviceId, clientname, clientdni, clientphone, getISODate(), devicename, brand, model, serial, imei1, imei2, condition_details, price, paymentmethod, description, currency
             ],
         });
 
