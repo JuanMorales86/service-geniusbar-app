@@ -15,7 +15,7 @@ export class PrintableOrder extends React.PureComponent<{
         <div className="printable-order border-2">
         <div className="flex flex-row justify-around items-center">
         <picture>
-          <img src="https://imgur.com/rrUbj7z.png" alt="logo atomo" className="block m-auto mb-5 max-w-32 h-auto" />
+          <img src="https://imgur.com/DzwHSCZ.png" alt="logo atomo" className="block m-auto mb-5 max-w-32 h-auto" />
         </picture>
         <span className="genius-bar-title text-center  mb-2 text-blk-gray-dark text-xl font-bold">Servicio Tecnico Especializado <br/> Reparación y soporte Apple/Samsung <br/>¡Soluciones rápidas y garantizadas!</span>
         </div>
@@ -43,6 +43,7 @@ export class PrintableOrder extends React.PureComponent<{
         </div>
             <div className="flex flex-col items-center justify-center w-full  text-center text-lg font-semibold my-8">
             <h1>OnThePointService</h1>
+            <h2>Genius Bar</h2>
             <p>Division Servicio Tecnologia</p>
             <p>Florida 537, PB, Loc. 366, CABA</p>
             <p>Lunes a Viernes: 10 a 19 hs, Sabados: 11 a 16 hs</p>
@@ -54,7 +55,7 @@ export class PrintableOrder extends React.PureComponent<{
         <div className="page second-page border-2 border-blackEerie">
         <div className="flex flex-row justify-center items-center">
         <picture>
-          <img src="https://imgur.com/rrUbj7z.png" alt="logo atomo" className="block mt-2 max-w-32" />
+          <img src="https://imgur.com/DzwHSCZ.png" alt="logo atomo" className="block mt-2 max-w-32" />
         </picture>
         </div>
           <div className="order-legals text-base font-aux font-semibold text-black flex flex-col">

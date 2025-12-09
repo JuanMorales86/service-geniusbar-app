@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FormSaledDevice from "@/components/FormSaledDevice.jsx";
+
+if (!Astro.locals.user || !Astro.locals.user.isAdmin) {
+    return Astro.redirect("/login");
+}
+---
+
+<Layout title="Registrar Venta | Service GeniusBar">
+    <main class="px-4">
+        <FormSaledDevice client:load />
+    </main>
+</Layout>

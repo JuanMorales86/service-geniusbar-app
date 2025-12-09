@@ -28,6 +28,26 @@ export type ServiceOrder = {
   topay?: number;
   payed?: number;
 };
+
+export interface SaledDevice {
+  id: string;
+  clientname: string;
+  clientdni?: string;
+  clientphone?: string;
+  saledate?: string;
+  brand?: string;
+  model?: string;
+  serial?: string;
+  imei1?: string;
+  imei2?: string;
+  condition_details?: string;
+  price?: number;
+  paymentmethod?: string;
+  description?: string;
+  currency?: string;
+  devicename?: string;
+  deliverydate?: string;
+}
 /*
 - export type ServiceOrder = ...: Exporta el tipo ServiceOrder para que pueda ser utilizado en otros archivos de tu proyecto.
 - z.infer<...>: Utiliza la función infer de Zod para inferir el tipo de datos a partir del esquema de la tabla ServiceOrder. Esto crea un tipo TypeScript que coincide exactamente con la estructura de tu tabla en la base de datos.

@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SaledDevicesShowCase from "@/components/SaledDevicesShowCase";
+
+if (!Astro.locals.user) {
+    return Astro.redirect("/login");
+}
+
+const user = {
+    isAdmin: Astro.locals.user.isAdmin,
+};
+---
+
+<Layout title="Dispositivos Vendidos | Service GeniusBar">
+    <main class="px-4">
+        <SaledDevicesShowCase client:load user={user} />
+    </main>
+</Layout>

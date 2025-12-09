@@ -4,7 +4,7 @@ import type { ServiceOrder } from '../types/database';//import type { ServiceOrd
 import Pagination from './Pagination';
 import LoadingSpinerAtom from './LoadingIcon';
 import PrinterWrapper from './PrinterWrapper';
-import {ConfirmationToast} from './ToastContainer';
+import {ConfirmationToast, Toast} from './ToastContainer';
 const cl = console.log.bind(console)
 interface Props {
   user: {
@@ -16,17 +16,17 @@ const statuslabels = [
   {value: 0, label: "Pendiente"},
   {value: 1, label: "En Proceso"},
   {value: 2, label: "Reparado"},
-  {value: 3, label: "Reparación Anulado por el Cliente"},
-  {value: 4, label: "Sin Reparación en Devolución"},
-  {value: 5, label: "Reparación Pospuesta a Espera del Cliente"},
+  {value: 3, label: "Reparacion Anulado por el Cliente"},
+  {value: 4, label: "Sin Reparación en Devolucion"},
+  {value: 5, label: "Reparacion Pospuesta a Espera del Cliente"},
   {value: 6, label: "Entregado y Retirado por el Cliente"},
   {value: 7, label: "Devolución a Pedido del Cliente"},
-  {value: 8, label: "Devolución sin Reparación"},
+  {value: 8, label: "Devolución sin Reparacion"},
   {value: 9, label: "Reparación Exitosa a Espera del Cliente"},
-  {value: 1, label: "En Diagnóstico"},
-
-
-
+  {value: 10, label: "En Diagnostico"},
+  {value: 11, label: "En reparacion con Terceros"},
+  {value: 12, label: "Reparación Anulada por Terceros"},
+  {value: 13, label: "Reparación Fallida"},
 ]
 
 
@@ -46,6 +46,9 @@ interface State {//Agregar estados de inteface
     toastType: string;
     toastColor: string;
     orderToDelete: string | null;
+    showGenericToast: boolean;
+    genericToastMessage: string;
+    genericToastType: string;
     searchQuery: string;
 }
 
@@ -65,6 +68,9 @@ class OrdersShowCase extends Component<Props, State> {
     toastType: '',
     toastColor: 'text-white',
     orderToDelete: null,
+    showGenericToast: false,
+    genericToastMessage: '',
+    genericToastType: 'info',
     searchQuery: '',
     
   }
@@ -74,14 +80,17 @@ class OrdersShowCase extends Component<Props, State> {
 
   handleToggleCard = (orderId: string) => {
     this.setState(prevState => {
-      const newExpandedCards = new Set(prevState.expandedCards);
-      if(newExpandedCards.has(orderId)) {
-        newExpandedCards.delete(orderId);
-      } else {
+      const isAlreadyExpanded = prevState.expandedCards.has(orderId);
+      const newExpandedCards = new Set<string>();
+
+      // Si la tarjeta clickeada no estaba expandida, la expandimos.
+      // Si ya estaba expandida, el nuevo Set quedará vacío, cerrándola.
+      if (!isAlreadyExpanded) {
         newExpandedCards.add(orderId);
       }
+
       return { expandedCards: newExpandedCards };
-    })
+    });
   }
 
   handleDeleteClick = (orderId: string) => {
@@ -101,14 +110,22 @@ class OrdersShowCase extends Component<Props, State> {
   }
 
   handleDelete = async (orderId: string) => {
-    
       try {
+        const orderToDelete = this.state.ordersData?.ordenes.find(o => o.id === orderId);
+
         const response = await fetch('api/deleteOrders', {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({id: orderId}),
         });
         if (response.ok) {
+          this.setState({
+            showGenericToast: true,
+            genericToastMessage: `Orden N° ${orderToDelete?.ordernumber || ''} eliminada con éxito.`,
+            genericToastType: 'success',
+          });
+          setTimeout(() => this.setState({ showGenericToast: false }), 5000);
+
           this.setState(prevState => ({
             ordersData: prevState.ordersData ? {
               ...prevState.ordersData,
@@ -120,9 +137,13 @@ class OrdersShowCase extends Component<Props, State> {
         }
       } catch (error) {
         console.error('Error borrando la orden:', error);
-
+        this.setState({
+          showGenericToast: true,
+          genericToastMessage: 'Error al eliminar la orden.',
+          genericToastType: 'error',
+        });
+        setTimeout(() => this.setState({ showGenericToast: false }), 5000);
       }
-   
   }
 
   handleEdit = (order: ServiceOrder) => {
@@ -185,6 +206,19 @@ class OrdersShowCase extends Component<Props, State> {
         editFormData: null, // Borrar form data
       }));
      
+      this.setState({
+        showGenericToast: true,
+        genericToastMessage: `Orden N° ${updatedOrder.ordernumber} actualizada con éxito.`,
+        genericToastType: 'success',
+      });
+      setTimeout(() => this.setState({ showGenericToast: false }), 5000);
+  } else {
+    this.setState({
+        showGenericToast: true,
+        genericToastMessage: 'Error al actualizar la orden.',
+        genericToastType: 'error',
+      });
+    setTimeout(() => this.setState({ showGenericToast: false }), 5000);
   }
 }
 
@@ -482,6 +516,16 @@ render() {
                 color={this.state.toastColor}
                 onConfirm={this.handleConfirmDelete}
                 onCancel={() => this.setState({ showToast: false, orderToDelete: null })}
+              />
+            )}
+            {this.state.showGenericToast && (
+              <Toast
+                message={this.state.genericToastMessage}
+                type={this.state.genericToastType}
+                positionV="top"
+                positionH="end"
+                onClose={() => this.setState({ showGenericToast: false })}
+                color={this.state.toastColor}
               />
             )}
         </div>

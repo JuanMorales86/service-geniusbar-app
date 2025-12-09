@@ -1,7 +1,7 @@
 import { getCurrentFormattedDate } from "@/utilities/dateFormatter";
 import type { APIContext } from "astro";
-// import { ServiceOrder, db, eq } from "astro:db";
 import { turdb } from "../../../db/turso";
+import { Toast } from "@/components/ToastContainer";
 const cl = console.log.bind(console)
 
 function removeNullUndefined(obj: Record<string, any>) {
@@ -19,52 +19,6 @@ export async function PUT(context: APIContext): Promise<Response> {
     //cl('tratando de modificar la orden', id)
     //cl('Before update:', updateData);
     
-    // const updatedOrder = await db
-    //   .update(ServiceOrder)
-    //   .set(updateData)
-    //   .where(eq(ServiceOrder.id, id))
-    //   .returning();
-
-    // const {rows: updatedOrder} = await turdb.execute({
-    //   sql: `UPDATE ServiceOrder 
-    //         SET status = ?, 
-    //             clientname = ?,
-    //             clientdni = ?,
-    //             email = ?,
-    //             phone = ?,
-    //             deviceType = ?,
-    //             model = ?,
-    //             serial = ?,
-    //             phonedetails = ?,
-    //             devicepassword = ?,
-    //             issue = ?,
-    //             aditionalObservation = ?,
-    //             donerepairments = ?,
-    //             topay = ?,
-    //             payed = ?,
-    //             updatedAt = ?
-    //         WHERE id = ? 
-    //         RETURNING *`,
-    //   args: [
-    //     ServiceOrder.status,
-    //     ServiceOrder.clientname,
-    //     ServiceOrder.clientdni,
-    //     ServiceOrder.email,
-    //     ServiceOrder.phone,
-    //     ServiceOrder.deviceType,
-    //     ServiceOrder.model,
-    //     ServiceOrder.serial,
-    //     ServiceOrder.phonedetails,
-    //     ServiceOrder.devicepassword,
-    //     ServiceOrder.issue,
-    //     ServiceOrder.aditionalObservation,
-    //     ServiceOrder.donerepairments,
-    //     ServiceOrder.topay,
-    //     ServiceOrder.payed,
-    //     updateData.updatedAt,
-    //     id
-    //         ]
-    // })
 
     const columns = Object.keys(updateData);//Obtiene los nombres de las columnas a actualizar
     const setClause = columns.map(col => `${col} = ?`).join(', '); // Crea la cláusula SET dinamica
@@ -101,7 +55,7 @@ export async function PUT(context: APIContext): Promise<Response> {
     return new Response(JSON.stringify(updatedOrder[0]), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
-      
+
     });
   } catch (error) {
     console.error('Error updating order:', error);

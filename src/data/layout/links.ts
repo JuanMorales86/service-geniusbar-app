@@ -28,7 +28,14 @@ export const linksData: Links[] = [//Array linksData: Es un array de objetos que
         url: '/service-createorders',
         requiresAuth: true,
         adminOnly: true,
-        userRedirectUrl: '/ordershow-page'//Redirecciona a la pagina de muestreo de ordenes ordenes para usuarios regulares
+        userRedirectUrl: '/'//Redirecciona a la pagina de muestreo de ordenes ordenes para usuarios regulares
+    },
+    {
+        title: 'Ordenes Venta Telefonos',
+        url: '/create-saled-device',
+        requiresAuth: true,
+        adminOnly: true,
+        userRedirectUrl: '/'//Redirecciona a la pagina de muestreo de ordenes ordenes para usuarios regulares
     },
     {
         title: 'Contacto',
