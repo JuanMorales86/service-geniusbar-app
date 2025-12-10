@@ -421,7 +421,7 @@ export default {
           },
         },
         ".order-card": {
-          "@apply p-4 m-2 rounded-md shadow-md text-white w-[380px] min-h-[200px] bg-gray-esp2Background/20":
+          "@apply p-4 m-2 rounded-md shadow-md text-white w-[400px] min-h-[200px] bg-gray-esp2Background/20":
             {},
         },
         ".order-editing-card-group": {

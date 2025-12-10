@@ -40,7 +40,7 @@ interface State {//Agregar estados de inteface
     error: string | null;
     editingOrderId: null;
     editFormData: Partial<ServiceOrder> | null;
-    expandedCards: Set<string>;
+    selectedOrderForModal: ServiceOrder | null;
     showToast: boolean;
     toastMessage: string;
     toastType: string;
@@ -62,7 +62,7 @@ class OrdersShowCase extends Component<Props, State> {
     error: null,
     editingOrderId: null,
     editFormData: null,
-    expandedCards: new Set(),
+    selectedOrderForModal: null,
     showToast: false,
     toastMessage: '',
     toastType: '',
@@ -77,21 +77,6 @@ class OrdersShowCase extends Component<Props, State> {
 
 
   componentRef = React.createRef<HTMLDivElement>();
-
-  handleToggleCard = (orderId: string) => {
-    this.setState(prevState => {
-      const isAlreadyExpanded = prevState.expandedCards.has(orderId);
-      const newExpandedCards = new Set<string>();
-
-      // Si la tarjeta clickeada no estaba expandida, la expandimos.
-      // Si ya estaba expandida, el nuevo Set quedará vacío, cerrándola.
-      if (!isAlreadyExpanded) {
-        newExpandedCards.add(orderId);
-      }
-
-      return { expandedCards: newExpandedCards };
-    });
-  }
 
   handleDeleteClick = (orderId: string) => {
     this.setState({
@@ -266,7 +251,7 @@ handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 render() {
       //cl('User prop in render:', this.props.user.isAdmin)
-      const { ordersData, isLoading, error, editFormData, editingOrderId } = this.state;
+      const { ordersData, isLoading, error, editFormData, editingOrderId, selectedOrderForModal } = this.state;
 
       if (isLoading) {
         return <LoadingSpinerAtom/>;
@@ -297,30 +282,15 @@ render() {
                       <div className='order-card group'>
                        
                         <div className='order-list-item'>
-                        <p>Orden: <span>{order.ordernumber}</span></p>
+                        <p className='text-center text-xl text-sky-500'><span>{order.ordernumber}</span></p>
                         <p>Status: <span>{order.status}</span></p>
                         <p>Cliente: <span>{order.clientname}</span></p>
                         <p>Dni: <span>{order.clientdni}</span></p>
-                        <p>Email: <span>{order.email}</span></p>
-                        <div className={`order-list-item-detailed ${this.state.expandedCards.has(order.id) ? 'expanded' : 'collapsed'}`}>
-                        
-                        <p>Telefono: <span>{order.phone}</span></p>
-                        <p>Tipo de Dispositivo: <span>{order.deviceType}</span></p>
                         <p>Modelo: <span>{order.model}</span></p>
-                        <p>Serial Equipo: <span>{ order.serial || "Vacio"}</span></p>
-                        <p>Detalles del Telefono: <span>{order.phonedetails}</span></p>
-                        <p>Contraseña del Dispositivo: <span>{order.devicepassword}</span></p>
                         <p>Problema: <span>{order.issue}</span></p>
-                        <p>Fecha de Creacion: <span>{order.createdAt || 0}</span></p>
-                        <p>Fecha de Actualizacion: <span>{order.updatedAt || 0}</span></p>
-                        <p>Observaciones Adicionales: <span>{order.aditionalObservation}</span></p>
-                        <p>Reparaciones Realizadas: <span>{order.donerepairments}</span></p>
-                        <p>Por pagar: <span>{Number(order.topay || 0).toLocaleString('es-AR')} Pesos</span></p>
-                        <p>Pagado: <span>{Number(order.payed || 0).toLocaleString('es-AR')} Pesos</span></p>
-                        </div>
 
-                        <button onClick={() => this.handleToggleCard(order.id)} className="btn-custom">
-                          {this.state.expandedCards.has(order.id) ? '🔼Mostrar Menos' : '🔽Mostrar Más'}
+                        <button onClick={() => this.setState({ selectedOrderForModal: order })} className="btn-custom mt-4">
+                          🔽Mostrar Más
                         </button>
                         </div>
                         
@@ -465,7 +435,7 @@ render() {
                               <button className='btn-custom' type='button' onClick={() => this.setState({
                                 editingOrderId: null,
                                 editFormData: null,
-                                expandedCards: new Set(),
+                                selectedOrderForModal: null,
                               })}>Cancelar</button>
                             </form>
                           
@@ -527,6 +497,38 @@ render() {
                 onClose={() => this.setState({ showGenericToast: false })}
                 color={this.state.toastColor}
               />
+            )}
+            {selectedOrderForModal && (
+              <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center p-4" onClick={() => this.setState({ selectedOrderForModal: null })}>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+                  <div className="flex justify-between items-center border-b pb-3 mb-4">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Detalles de la Orden N° {selectedOrderForModal.ordernumber}</h3>
+                    <button onClick={() => this.setState({ selectedOrderForModal: null })} className="text-gray-600 dark:text-gray-300 hover:text-red-500 text-2xl font-bold">&times;</button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-200">
+                      <p><strong>Status:</strong> <span>{selectedOrderForModal.status}</span></p>
+                      <p><strong>Cliente:</strong> <span>{selectedOrderForModal.clientname}</span></p>
+                      <p><strong>DNI:</strong> <span>{selectedOrderForModal.clientdni}</span></p>
+                      <p><strong>Email:</strong> <span>{selectedOrderForModal.email}</span></p>
+                      <p><strong>Teléfono:</strong> <span>{selectedOrderForModal.phone}</span></p>
+                      <p><strong>Tipo de Dispositivo:</strong> <span>{selectedOrderForModal.deviceType}</span></p>
+                      <p><strong>Modelo:</strong> <span>{selectedOrderForModal.model}</span></p>
+                      <p><strong>Serial Equipo:</strong> <span>{ selectedOrderForModal.serial || "Vacio"}</span></p>
+                      <p className="md:col-span-2"><strong>Detalles del Teléfono:</strong> <span>{selectedOrderForModal.phonedetails}</span></p>
+                      <p><strong>Contraseña del Dispositivo:</strong> <span>{selectedOrderForModal.devicepassword}</span></p>
+                      <p className="md:col-span-2"><strong>Problema:</strong> <span>{selectedOrderForModal.issue}</span></p>
+                      <p><strong>Fecha de Creación:</strong> <span>{selectedOrderForModal.createdAt || 'N/A'}</span></p>
+                      <p><strong>Última Actualización:</strong> <span>{selectedOrderForModal.updatedAt || 'N/A'}</span></p>
+                      <p className="md:col-span-2"><strong>Observaciones Adicionales:</strong> <span>{selectedOrderForModal.aditionalObservation}</span></p>
+                      <p className="md:col-span-2"><strong>Reparaciones Realizadas:</strong> <span>{selectedOrderForModal.donerepairments}</span></p>
+                      <p className="font-bold text-green-600"><strong>A pagar:</strong> <span>${Number(selectedOrderForModal.topay || 0).toLocaleString('es-AR')}</span></p>
+                      <p className="font-bold text-blue-600"><strong>Pagado:</strong> <span>${Number(selectedOrderForModal.payed || 0).toLocaleString('es-AR')}</span></p>
+                  </div>
+                  <div className="mt-6 flex justify-end">
+                      <button onClick={() => this.setState({ selectedOrderForModal: null })} className="btn-custom">Cerrar</button>
+                  </div>
+                </div>
+              </div>
             )}
         </div>
       )

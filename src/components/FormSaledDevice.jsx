@@ -17,6 +17,7 @@ export default function FormSaledDevice() {
         imei1: '',
         imei2: '',
         condition_details: '',
+        cost: '',
         price: '',
         paymentmethod: '',
         description: ''
@@ -39,7 +40,7 @@ export default function FormSaledDevice() {
         setFormData({
             clientname: '', clientdni: '', clientphone: '', devicename: '', deliverydate: '', currency: 'ARS',
             brand: '', model: '',
-            serial: '', imei1: '', imei2: '', condition_details: '', price: '',
+            serial: '', imei1: '', imei2: '', condition_details: '', cost: '', price: '',
             paymentmethod: '', description: ''
         });
     };
@@ -133,6 +134,7 @@ export default function FormSaledDevice() {
                 {renderInput("imei1", "IMEI 1", "35...", "text")}
                 {renderInput("imei2", "IMEI 2", "35...", "text")}
                 {renderInput("condition_details", "Detalles de Condición", "Ej: Nuevo en caja, Usado con marcas", "text")}
+                {renderInput("cost", "Costo de Compra", "0.00", "number")}
                 {renderInput("price", "Precio de Venta", "0.00", "number")}
 
                 <div className='mb-2'>

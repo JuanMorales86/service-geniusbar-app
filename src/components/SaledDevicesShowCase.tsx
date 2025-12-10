@@ -207,6 +207,7 @@ class SaledDevicesShowCase extends Component<Props, State> {
                 <p>IMEI 1: <span>{device.imei1}</span></p>
                 <p>IMEI 2: <span>{device.imei2}</span></p>
                 <p>Condición: <span>{device.condition_details}</span></p>
+                <p>Costo: <span>{device.currency === 'USD' ? 'U$S' : '$'} {Number(device.cost || 0).toLocaleString('es-AR')}</span></p>
                 <p>Precio: <span>{device.currency === 'USD' ? 'U$S' : '$'} {Number(device.price || 0).toLocaleString('es-AR')}</span></p>
                 <p>Método Pago: <span>{device.paymentmethod}</span></p>
                 <p>Moneda: <span>{device.currency === 'USD' ? 'Dólares (USD)' : 'Pesos (ARS)'}</span></p>

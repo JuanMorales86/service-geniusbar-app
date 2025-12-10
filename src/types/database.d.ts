@@ -41,6 +41,7 @@ export interface SaledDevice {
   imei1?: string;
   imei2?: string;
   condition_details?: string;
+  cost?: number;
   price?: number;
   paymentmethod?: string;
   description?: string;
