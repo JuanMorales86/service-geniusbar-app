@@ -13,8 +13,9 @@ export async function GET(context: APIContext): Promise<Response> {
         const args: (string | number)[] = [];
 
         if (search) {
+            // Si el usuario buscó algo, preparamos la condición de búsqueda
             whereClause = `WHERE clientname LIKE ? OR clientdni LIKE ? OR serial LIKE ? OR imei1 LIKE ?`;
-            const searchTerm = `%${search}%`;
+            const searchTerm = `%${search}%`; // El % busca el texto en cualquier parte del campo
             args.push(searchTerm, searchTerm, searchTerm, searchTerm);
         }
 
@@ -32,9 +33,9 @@ export async function GET(context: APIContext): Promise<Response> {
         const totalPages = Math.ceil(totalDevices / limit);
 
         return new Response(JSON.stringify({
-            devices,
-            actualPage: page,
-            totalPages,
+            devices,// La lista de 10 dispositivos de la página actual
+            actualPage: page, // El número de la página que se está viendo
+            totalPages, // El número total de páginas que existen
         }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },

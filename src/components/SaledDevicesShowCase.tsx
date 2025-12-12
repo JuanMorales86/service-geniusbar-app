@@ -42,7 +42,7 @@ class SaledDevicesShowCase extends Component<Props, State> {
         error: null,
         editingDeviceId: null,
         editFormData: null,
-        expandedCards: new Set(),
+        expandedCards: new Set(),//expandedCards hace new 
         showToast: false,
         toastMessage: '',
         toastType: '',
@@ -54,19 +54,43 @@ class SaledDevicesShowCase extends Component<Props, State> {
         searchQuery: '',
     };
 
+    private searchTimeout: NodeJS.Timeout | null = null;
+    private abortController: AbortController | null = null;
+
     componentDidMount() {
         this.fetchDevices(1, this.state.searchQuery);
     }
 
+    componentWillUnmount() {
+        // Limpia el temporizador si el componente se desmonta para evitar errores
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+        // Cancela cualquier petición en curso si el componente se desmonta
+        if (this.abortController) {
+            this.abortController.abort();
+        }
+    }
+
     async fetchDevices(page: number = 1, searchQuery: string = '') {
+        // Cancela la petición anterior antes de empezar una nueva
+        if (this.abortController) {
+            this.abortController.abort();
+        }
+        this.abortController = new AbortController();
+        const signal = this.abortController.signal;
+
         this.setState({ isLoading: true });
         try {
-            const response = await fetch(`api/getSaledDevices?pagina=${page}&search=${encodeURIComponent(searchQuery)}`);
+            const response = await fetch(`api/getSaledDevices?pagina=${page}&search=${encodeURIComponent(searchQuery)}`, { signal });
             if (!response.ok) throw new Error('Fallo al cargar los dispositivos');
             const data = await response.json();
             this.setState({ devicesData: data, isLoading: false });
         } catch (err: unknown) {
-            if (err instanceof Error) this.setState({ error: err.message, isLoading: false });
+            // Ignoramos el error si es por cancelación (AbortError)
+            if (err instanceof Error && err.name !== 'AbortError') {
+                this.setState({ error: err.message, isLoading: false });
+            }
         }
     }
 
@@ -106,12 +130,12 @@ class SaledDevicesShowCase extends Component<Props, State> {
                 body: JSON.stringify({ id: deviceId }),
             });
             if (response.ok) {
-                this.setState({
+                this.setState(prevState => ({
                     showGenericToast: true,
                     genericToastMessage: `Registro eliminado con éxito.`,
                     genericToastType: 'success',
-                });
-                setTimeout(() => this.setState({ showGenericToast: false }), 5000);
+                    devicesData: prevState.devicesData ? { ...prevState.devicesData, devices: prevState.devicesData.devices.filter(d => d.id !== deviceId) } : null
+                }));
                 this.fetchDevices(this.state.devicesData?.actualPage || 1, this.state.searchQuery);
             } else {
                 throw new Error('Error al eliminar el registro');
@@ -151,19 +175,17 @@ class SaledDevicesShowCase extends Component<Props, State> {
 
         if (response.ok) {
             const updatedDevice = await response.json();
-            this.setState(prevState => ({
+            this.setState((prevState) => ({
                 devicesData: prevState.devicesData ? {
                     ...prevState.devicesData,
                     devices: prevState.devicesData.devices.map(d => d.id === updatedDevice.id ? updatedDevice : d)
                 } : null,
                 editingDeviceId: null,
                 editFormData: null,
-            }));
-            this.setState({
                 showGenericToast: true,
                 genericToastMessage: `Registro actualizado con éxito.`,
                 genericToastType: 'success',
-            });
+            }));
             setTimeout(() => this.setState({ showGenericToast: false }), 5000);
         } else {
             this.setState({
@@ -183,9 +205,17 @@ class SaledDevicesShowCase extends Component<Props, State> {
 
     handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchQuery = e.target.value;
-        this.setState({ searchQuery }, () => {
-            this.fetchDevices(1, this.state.searchQuery);
-        });
+        this.setState({ searchQuery });
+
+        // Si ya hay un temporizador, lo limpiamos
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+
+        // Creamos un nuevo temporizador que llamará a fetchDevices después de 300ms
+        this.searchTimeout = setTimeout(() => {
+            this.fetchDevices(1, searchQuery);
+        }, 300); // 300ms de espera
     }
 
     render() {

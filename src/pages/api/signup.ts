@@ -7,15 +7,6 @@ import { lucia } from "@/auth/auth";
 import { turdb } from "../../../db/turso";
 const cl = console.log.bind(console);
 
-// async function storeSessionData(session: any) {
-//     const sessionids = generateId(32);//genera un id del usuario
-//       //Almacenar la session en la base de datos Turso
-//       await turdb.execute({
-//         sql: "INSERT INTO Session ( id, user_id, expires_at) VALUES (?, ?, ?)",
-//         args: [ sessionids, session.userId, session.expiresAt]
-//     })
-// }
-
 export async function POST(context:APIContext) : Promise<Response> {
     //Primero leer los datos del form
     const formData = await context.request.formData();
@@ -24,34 +15,26 @@ export async function POST(context:APIContext) : Promise<Response> {
     const password = formData.get("password");
     const adminCode = formData.get("adminCode");
 
-    const {ADMIN_USER_LEVEL, ADMIN_USERNAMES } = import.meta.env;
-    const adminUsers = String(ADMIN_USERNAMES);
-    const adminUserLevel = String(ADMIN_USER_LEVEL);
-
-    const adminUsernames = adminUsers?.split(',') || [];
+    // --- Lógica de Administrador Refinada ---
+    const adminUsernames = (import.meta.env.ADMIN_USERNAMES ?? "").split(',');
     const isAdminUsername = adminUsernames.includes(username);
-    const hasValidAdminCode = adminCode === adminUserLevel;
-
-    const isAdmin = isAdminUsername && hasValidAdminCode;
+    let isAdmin = false;
     
     try{
-        //Flujo de validacion
-        //Verificar si el usuario ya existe
-        //const existingUser = await db.select().from(User).where(eq(User.username, username));// existingUser es un array que contiene los resultados de la consulta a la base de datos
-        //Checks if User exists - Turso Version
+        // --- Validaciones ---
+
+        // 1. Validar formato de email (excepto para usuarios admin que no son email)
+        if (!isAdminUsername && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username)) {
+            return context.redirect("/signup?error=invalid_email&message=" + encodeURIComponent("Por favor, introduce un correo electrónico válido."));
+        }
+
+        // 2. Verificar si el usuario ya existe
         const { rows: existingUser } = await turdb.execute({
             sql: "SELECT * FROM User WHERE username = ?", 
             args: [username]
         });
         if (existingUser.length > 0) {// length > 0 significa que se encontró al menos un usuario con ese nombre. Si es mayor que 0, significa que ya existe un usuario con ese nombre
             return context.redirect("/signup?error=user_exists&message=" + encodeURIComponent("Este usuario ya existe.")); 
-
-            /** 
-            Redirige al usuario de vuelta al formulario de registro.
-            Añade parámetros en la URL:
-                > error=user_exists: identificador del tipo de error.
-                > message=: el mensaje que se mostrará al usuario.
-            encodeURIComponent(): función que codifica el texto para que sea seguro usarlo en URLs. */
         }
 
     //Validar los datos
@@ -60,39 +43,31 @@ export async function POST(context:APIContext) : Promise<Response> {
     }
     
     if( typeof username !== 'string' || username.length < 4){
-        // return new Response("El Usuario debe contener al menos 4 caracteres de longitud ", {status:400})
         return context.redirect("/signup?error=invalid_username&message=" + encodeURIComponent("El usuario debe contener al menos 4 caracteres."));
     }
     
     if( typeof password !== 'string' || password.length < 4){
-        // return new Response("La Contraseña debe contener al menos 4 caracteres de longitud ", {status:400})
         return context.redirect("/signup?error=invalid_password&message=" + encodeURIComponent("La contraseña debe contener al menos 4 caracteres."));
     }
     
+    // 3. Validar rol de administrador
+    if (isAdminUsername) {
+        if (adminCode === import.meta.env.ADMIN_USER_LEVEL) {
+            isAdmin = true;
+        } else {
+            // El usuario es un admin pero el código es incorrecto
+            return context.redirect("/signup?error=invalid_admin_code&message=" + encodeURIComponent("El código de administrador es incorrecto."));
+        }
+    }
 
-    
     //Insertar el usuario en la base de datos (creacion del usurio)
     const userId = generateId(15);//genera un id del usuario
     const hashedPassword = await new Argon2id().hash(password);//el await es por q devuelve una promesa es el hash de su contrasena
     
-    // await db.insert(User).values([
-    //     {
-    //         id: userId,
-    //         username,
-    //         password: hashedPassword,
-    //         github_id: null,
-    //         isAdmin: isAdmin,
-    //     },
-    // ])
-
     await turdb.execute({
         sql: "INSERT INTO User (id, username, password, github_id, isAdmin) VALUES ( ?, ? , ?, ? , ? )",
         args: [userId, username, hashedPassword, null, isAdmin]
     })
-    //cl('User created successfully:', userId);
-    //Crear sesion de usuario 
-    
-    
     
     //generar cookie de session (gestion de sesiones)
     const session = await lucia.createSession(userId, {});//Crear session
@@ -106,10 +81,7 @@ export async function POST(context:APIContext) : Promise<Response> {
         }
     )
 
-    //await storeSessionData(session)
-
-    
-    return context.redirect("/serviciosm")//Redirige a la pagina 
+    return context.redirect(isAdmin ? "/dashboard" : "/serviciosm")//Redirige a la pagina 
     //Manejo de errores
 } catch(error) {
     console.error("Error durante el registro:", error);

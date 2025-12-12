@@ -2,26 +2,17 @@ import React from "react";
 const cl = console.log.bind(console)
 
 const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
-    //cl('Component rendering');  // Add this line at the start
     const [username, setUsername] = React.useState("");
     const [showAdminField, setShowAdminField] = React.useState(false);
-    const [adminUsers, setAdminUsers] = React.useState<string[]>([]);//el estado de adminUsers es un array de strings donde se guardan los nombres de los usuarios administradores
-
-    React.useEffect(() => {
-        const getAdminUsers = async () => {
-            const response = await fetch('/api/adminConfig');// si la respuesta es positiva se puede hacer un fetch a la api de adminConfig
-            const data = await response.json();//si esto positivo se hace un fetch a la api de adminConfig
-            setAdminUsers(data);//entoces se setea el estado de adminUsers con los datos de la respuesta
-        };
-        
-        getAdminUsers();//llamo a la funcion getAdminUsers
-    }, []);
-    //cl(adminUsers)
+    
+    // Obtiene la lista de admins desde las variables de entorno y la convierte en un array.
+    // El '?? ""' evita errores si la variable no está definida.
+    const adminUsernames = (import.meta.env.PUBLIC_ADMIN_USERNAMES ?? "").split(',');
   
-    const handleUsernameChange = (e: any) => {
+    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setUsername(value);
-        setShowAdminField(adminUsers.includes(value));
+        setShowAdminField(adminUsernames.includes(value));
     };
 
     return (
@@ -33,10 +24,10 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
         >
             <div>
                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Your username
+                    Tu correo electrónico
                 </label>
                 <input
-                    type="text"
+                    type="email"
                     name="username"
                     id="username"
                     value={username}
@@ -62,11 +53,18 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
             </div>
                 {
                     showAdminField && (
-                        <input type="password" 
-                        name="adminCode"
-                        placeholder="Admin Code"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        />
+                        <div>
+                            <label htmlFor="adminCode" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Código de Administrador
+                            </label>
+                            <input type="password" 
+                            name="adminCode"
+                            id="adminCode"
+                            placeholder="••••••••"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            required
+                            />
+                        </div>
                 )}
                 {errorMessage && (
                 <div className="text-redCrayola text-sm" role="alert">

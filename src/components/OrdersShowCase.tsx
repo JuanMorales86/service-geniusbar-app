@@ -76,6 +76,9 @@ class OrdersShowCase extends Component<Props, State> {
   }
 
 
+  private searchTimeout: NodeJS.Timeout | null = null;
+  private abortController: AbortController | null = null;
+
   componentRef = React.createRef<HTMLDivElement>();
 
   handleDeleteClick = (orderId: string) => {
@@ -211,6 +214,15 @@ class OrdersShowCase extends Component<Props, State> {
     this.fetchOrders(1, this.state.searchQuery);
   }
 
+  componentWillUnmount() {
+    if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+    }
+    if (this.abortController) {
+        this.abortController.abort();
+    }
+  }
+
 
   async fetchOrders(page: number = 1, searchQuery: string = '')
 /*Al definir fetchOrders(page: number = 1), estás estableciendo un valor predeterminado para el parámetro page. Esto significa que si se llama a fetchOrders() sin ningún argumento, automáticamente usará 1 como valor para page.
@@ -221,15 +233,22 @@ class OrdersShowCase extends Component<Props, State> {
   Permite que la primera carga de datos (que generalmente es la página 1) se pueda hacer simplemente llamando a fetchOrders() sin argumentos.
   Es una práctica común en la implementación de paginación, ya que proporciona un comportamiento predecible y fácil de manejar tanto para la carga inicial como para las navegaciones subsiguientes entre páginas.*/ 
   {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const signal = this.abortController.signal;
+
+    this.setState({ isLoading: true });
     try {
-        const response = await fetch(`api/getOrders?pagina=${page}&search=${encodeURIComponent(searchQuery)}`)//This change allows fetchOrders to accept a page number and use it in the API request. The default value of 1 ensures it works as before when called without arguments. Now your changePage method will work correctly with the updated fetchOrders.
+        const response = await fetch(`api/getOrders?pagina=${page}&search=${encodeURIComponent(searchQuery)}`, { signal })//This change allows fetchOrders to accept a page number and use it in the API request. The default value of 1 ensures it works as before when called without arguments. Now your changePage method will work correctly with the updated fetchOrders.
         if (!response.ok) {
             throw new Error('Fallo al cargar las ordenes');
         }
         const data = await response.json();
         this.setState({ ordersData: data, isLoading: false });
     } catch (err: unknown) {
-        if (err instanceof Error) {
+        if (err instanceof Error && err.name !== 'AbortError') {
             this.setState({ error: err.message, isLoading: false });
         }
     }
@@ -243,10 +262,15 @@ changePage = (newPage: number) => {
 
 handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const searchQuery = e.target.value;
-  this.setState({ searchQuery }, () => {
-    // Esta función se ejecuta después de que el estado se haya actualizado.
-    this.fetchOrders(1, this.state.searchQuery); // Reinicia a la página 1 en cada nueva búsqueda.
-  });
+  this.setState({ searchQuery });
+
+  if (this.searchTimeout) {
+    clearTimeout(this.searchTimeout);
+  }
+
+  this.searchTimeout = setTimeout(() => {
+    this.fetchOrders(1, searchQuery);
+  }, 300);
 }
 
 render() {
