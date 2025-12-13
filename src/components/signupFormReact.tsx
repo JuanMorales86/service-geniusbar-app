@@ -3,7 +3,10 @@ const cl = console.log.bind(console)
 
 const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
     const [username, setUsername] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [verifyPassword, setVerifyPassword] = React.useState("");
     const [showAdminField, setShowAdminField] = React.useState(false);
+    const [passwordError, setPasswordError] = React.useState<string | null>(null);
     
     // Obtiene la lista de admins desde las variables de entorno y la convierte en un array.
     // El '?? ""' evita errores si la variable no está definida.
@@ -15,12 +18,20 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
         setShowAdminField(adminUsernames.includes(value));
     };
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        if (password !== verifyPassword) {
+            e.preventDefault(); // Evita que el formulario se envíe
+            setPasswordError("Las contraseñas no coinciden. Por favor, verifícalas.");
+        }
+    };
+
     return (
         <form
             id="signinForm"
             className="space-y-4 md:space-y-6"
             method="POST"
             action="/api/signup"
+            onSubmit={handleSubmit}
         >
             <div>
                 <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -47,6 +58,23 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="verifypassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Verificar Password
+                </label>
+                <input
+                    type="password"
+                    name="verifypassword"
+                    id="verifypassword"
+                    placeholder="••••••••"
+                    value={verifyPassword}
+                    onChange={(e) => setVerifyPassword(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                 />
@@ -69,6 +97,11 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
                 {errorMessage && (
                 <div className="text-redCrayola text-sm" role="alert">
                     <span className="font-medium">{decodeURIComponent(errorMessage)}</span>
+                </div>
+                )}
+                {passwordError && (
+                <div className="text-redCrayola text-sm" role="alert">
+                    <span className="font-medium">{passwordError}</span>
                 </div>
                 )}
 
