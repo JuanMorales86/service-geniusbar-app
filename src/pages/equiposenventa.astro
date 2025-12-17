@@ -1,0 +1,77 @@
+---
+// src/pages/iphones.astro
+import Layout from '@/layouts/Layout.astro';
+import { turdb } from '../../db/turso';
+import ProductCard from '@/components/ProductCard.astro';
+import Lightbox from '@/components/Lightbox.astro';
+import type { Product } from '@/types/database';
+
+// 1. Obtener todos los productos disponibles de la BD
+const { rows } = await turdb.execute({
+    sql: "SELECT * FROM Product WHERE is_available = 1 ORDER BY is_new DESC, model",
+    args: []
+});
+
+// Hacemos una aserción de tipo para que TypeScript sepa que cada 'row' es un 'Product'.
+const products = rows as unknown as Product[];
+
+// 2. Separar en nuevos y usados
+const newProducts = products.filter(p => p.is_new);
+const usedProducts = products.filter(p => !p.is_new);
+---
+<Layout title="Equipos en Venta | Service GeniusBar">
+    <main class="container mx-auto px-4 py-8">
+        <!-- 1. Hero Section -->
+        <section class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">El Equipo que buscas, <br/> nosotros lo encontramos.</h1>
+            <p class="text-lg text-gray-600 mb-8">Modelos nuevos bajo pedido y usados seleccionados con garantía.</p>
+            <a href="#catalogo" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
+                Ver Catálogo
+            </a>
+        </section>
+
+        <div id="catalogo">
+            <!-- 2. Sección de Nuevos -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold mb-2">Nuevos y Sellados</h2>
+                <p class="text-gray-500 mb-8">Los últimos modelos, bajo pedido especial para ti.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {newProducts.length > 0 ? (
+                        newProducts.map(product => <ProductCard product={product} />)
+                    ) : (
+                        <div class="col-span-full text-center py-8 px-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                            <p class="text-gray-500 dark:text-gray-400">No hay Equipos nuevos disponibles en este momento. ¡Vuelve a consultar pronto!</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            <!-- 3. Sección de Usados -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold mb-2">Usados Seleccionados</h2>
+                <p class="text-gray-500 mb-8">Equipos 100% funcionales, verificados y con garantía.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {usedProducts.length > 0 ? (
+                        usedProducts.map(product => <ProductCard product={product} />)
+                    ) : (
+                        <div class="col-span-full text-center py-8 px-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                            <p class="text-gray-500 dark:text-gray-400">No hay Equipos usados disponibles en este momento. ¡Vuelve a consultar pronto!</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+        </div>
+
+        <!-- Aquí irían las otras secciones como "Cómo Funciona" -->
+
+    </main>
+
+    <!-- Añadimos el componente Lightbox al final -->
+    <Lightbox />
+</Layout>
+
+<script>
+    import { initLightbox } from '@/script/lightboxHandler.js';
+    
+    initLightbox();
+</script>

@@ -49,6 +49,21 @@ export interface SaledDevice {
   devicename?: string;
   deliverydate?: string;
 }
+
+
+export interface Product {
+  id: string;
+  model: string;
+  storage: number;
+  color?: string;
+  is_new: boolean;
+  condition?:string;
+  battery_health?: number;
+  price: number;
+  image_url?: string;
+  description?: string;
+  is_available: boolean;
+}
 /*
 - export type ServiceOrder = ...: Exporta el tipo ServiceOrder para que pueda ser utilizado en otros archivos de tu proyecto.
 - z.infer<...>: Utiliza la función infer de Zod para inferir el tipo de datos a partir del esquema de la tabla ServiceOrder. Esto crea un tipo TypeScript que coincide exactamente con la estructura de tu tabla en la base de datos.

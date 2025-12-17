@@ -209,6 +209,40 @@ textarea {
   }
 }
 
+.holographic-glare {
+        background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            hsla(0, 0%, 100%, 0.2),
+            hsla(0, 0%, 100%, 0) 40%
+        );
+        pointer-events: none; /* Asegura que el brillo no interfiera con el clic */
+    }
+
+/* Animación de barrido de gradiente para botones */
+@keyframes gradient-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-button {
+  background-size: 200% 200%;
+  animation: gradient-sweep 4s ease infinite;
+}
+
+.animate-gradient-text {
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text; /* Compatibilidad con Safari */
+  color: transparent;
+  animation: gradient-sweep 6s ease infinite;
+}
 
 /* input{
   outline-color: white;

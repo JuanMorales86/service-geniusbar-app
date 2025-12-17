@@ -38,6 +38,13 @@ export const linksData: Links[] = [//Array linksData: Es un array de objetos que
         userRedirectUrl: '/'//Redirecciona a la pagina de muestreo de ordenes ordenes para usuarios regulares
     },
     {
+       title: 'Equipos',
+       url: '/equiposenventa',
+       requiresAuth: false,
+
+
+    },
+    {
         title: 'Contacto',
         url: '/formservice',
         requiresAuth: false

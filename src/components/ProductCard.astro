@@ -1,0 +1,60 @@
+---
+// src/components/ProductCard.astro
+import type { Product } from '@/types/database';
+
+interface Props {
+    product: Product;
+}
+
+const { product } = Astro.props;
+
+// Construir el mensaje para WhatsApp
+const message = `Hola, estoy interesado en el ${product.model} de ${product.storage}GB${product.is_new ? ' nuevo' : ` (condición: ${product.condition})`}. ¿Sigue disponible?`;
+const whatsappLink = `https://wa.me/5491123560959?text=${encodeURIComponent(message)}`;
+
+// Separar las URLs de las imágenes. Si no hay, usa un placeholder.
+const imageUrls = product.image_url ? product.image_url.split(',').map(url => url.trim()) : ['/placeholder-iphone.jpg'];
+---
+<div class="holographic-card border rounded-lg shadow-lg overflow-hidden flex flex-col relative group" style="transform-style: preserve-3d;">
+    <div class="holographic-glare absolute top-0 left-0 w-full h-full rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="transform: translateZ(20px);"></div>
+    <div class="card-image-container relative w-full h-72 cursor-pointer" data-images={imageUrls.join(',')}>
+        {imageUrls.map((url, index) => (
+            <img src={url} alt={`${product.model} - Vista ${index + 1}`} class:list={["absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none", { "opacity-0": index !== 0 }]} />
+        ))}
+    </div>
+    <div class="p-4 flex flex-col flex-grow bg-white/5 backdrop-blur-md border-t border-white/10">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">{product.model}</h3>
+        <p class="text-sm text-sky-500">{product.storage}GB {product.color ? ` - ${product.color}` : ''}</p>
+
+        {product.is_new ? (
+            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200 last:mr-0 mr-1 mt-2">
+                Nuevo / Sellado
+            </span>
+        ) : (
+            <div class="mt-2 text-sm text-gray-800 dark:text-gray-200">
+                <p>Condición: <span class="font-semibold text-gray-900 dark:text-gray-100">{product.condition}</span></p>
+                {product.battery_health && <p>Batería: <span class="font-semibold">{product.battery_health}%</span></p>}
+            </div>
+        )}
+
+        <div class="mt-auto pt-4 ">
+            {product.price > 0 && (
+                <p class="text-xl font-bold text-right mb-4 text-gray-900 dark:text-gray-100">${product.price.toLocaleString('es-AR')}</p>
+            )}
+            <a href={whatsappLink} target="_blank" class="w-full block text-center font-bold py-2 px-4 rounded transition-transform duration-300 hover:scale-105 bg-gray-900 dark:bg-gray-800 hover:bg-black dark:hover:bg-gray-700">
+                <span class="animate-gradient-text" style="background-image: linear-gradient(to right, #4ade80, #3b82f6, #a855f7, #ec4899, #f59e0b, #4ade80);">
+                    Consultar por WhatsApp
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    import { initHolographicMode } from "@/script/holographicMode";
+
+    initHolographicMode();
+
+</script>

@@ -1,0 +1,55 @@
+---
+// src/components/Lightbox.astro
+import { Icon } from "astro-icon/components";
+---
+
+<div id="lightbox" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999] hidden items-center justify-center p-4" aria-modal="true" role="dialog">
+    <!-- Botón para cerrar -->
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-sky-400 transition-colors z-[1001]" aria-label="Cerrar vista ampliada">
+        <Icon name="lucide:x" class="w-10 h-10" />
+    </button>
+
+    <!-- Contenedor de la imagen -->
+    <div class="relative w-full max-w-4xl h-full max-h-[80vh]">
+        <img id="lightbox-image" src="" alt="Vista ampliada del producto" class="w-full h-full object-contain transition-opacity duration-300" />
+    </div>
+
+    <!-- Botones de navegación -->
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-sky-400 transition-colors p-2 rounded-full bg-black/30 hidden" aria-label="Imagen anterior">
+        <Icon name="lucide:chevron-left" class="w-8 h-8" />
+    </button>
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-sky-400 transition-colors p-2 rounded-full bg-black/30 hidden" aria-label="Siguiente imagen">
+        <Icon name="lucide:chevron-right" class="w-8 h-8" />
+    </button>
+</div>
+
+<script>
+    // Este script se encarga de la lógica interna del lightbox (cerrarlo)
+    document.addEventListener('astro:page-load', () => {
+        const lightbox = document.getElementById('lightbox');
+        const closeButton = document.getElementById('lightbox-close');
+        
+        if (!lightbox || !closeButton) return;
+
+        const closeLightbox = () => {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        };
+
+        closeButton.addEventListener('click', closeLightbox);
+
+        // Cerrar al hacer clic fuera de la imagen
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Cerrar con la tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+    });
+</script>
