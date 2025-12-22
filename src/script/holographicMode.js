@@ -9,10 +9,14 @@ export function initHolographicMode() {
       let imageCycleInterval;
       let currentImageIndex = 0;
 
-      card.addEventListener("mousemove", (e) => {
+      const handleMove = (e) => {
         const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        // Detectar si es evento táctil o de ratón
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
         const { width, height } = rect;
 
         // Calcular rotación
@@ -26,22 +30,28 @@ export function initHolographicMode() {
         if (glare) {
           glare.style.setProperty("--mouse-x", `${x}px`);
           glare.style.setProperty("--mouse-y", `${y}px`);
+          glare.style.opacity = "1"; // Forzar visibilidad en móviles
         }
-      });
+      };
 
-      card.addEventListener("mouseenter", () => {
+      const handleEnter = () => {
+        if (glare) glare.style.opacity = "1";
+
         if (!imageContainer) return;
         const images = imageContainer.querySelectorAll("img");
         if (images.length <= 1) return;
 
+        clearInterval(imageCycleInterval);
         imageCycleInterval = setInterval(() => {
           images[currentImageIndex].classList.add("opacity-0");
           currentImageIndex = (currentImageIndex + 1) % images.length;
           images[currentImageIndex].classList.remove("opacity-0");
         }, 1100); // Cambia de imagen cada 800ms
-      });
+      };
 
-      card.addEventListener("mouseleave", () => {
+      const handleLeave = () => {
+        if (glare) glare.style.opacity = ""; // Volver al comportamiento CSS
+
         // Resetear la transformación al salir
         card.style.transform =
           "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
@@ -55,7 +65,19 @@ export function initHolographicMode() {
           currentImageIndex = 0;
           images[currentImageIndex].classList.remove("opacity-0");
         }
-      });
+      };
+
+      // Eventos de Mouse (Desktop)
+      card.addEventListener("mousemove", handleMove);
+      card.addEventListener("mouseenter", handleEnter);
+      card.addEventListener("mouseleave", handleLeave);
+
+      // Eventos Táctiles (Móvil)
+      // passive: true mejora el rendimiento del scroll mientras se toca la tarjeta
+      card.addEventListener("touchmove", handleMove, { passive: true });
+      card.addEventListener("touchstart", handleEnter, { passive: true });
+      card.addEventListener("touchend", handleLeave);
+      card.addEventListener("touchcancel", handleLeave);
     });
   });
 }

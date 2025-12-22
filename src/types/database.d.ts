@@ -52,7 +52,7 @@ export interface SaledDevice {
 
 
 export interface Product {
-  id: string;
+  id: number;
   model: string;
   storage: number;
   color?: string;

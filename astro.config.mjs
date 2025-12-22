@@ -26,22 +26,6 @@ export default defineConfig({
     domains: ['i.imgur.com']
   },
 
-  // experimental: {
-  //   env: {
-  //     schema: {
-  //       PASS_APP_GMAIL: envField.string({
-  //         description: 'Gmail application password',
-  //         context: 'server',
-  //         access: 'secret',
-  //       }),
-  //       USER_GMAIL: envField.string({
-  //         description: 'Gmail user email',
-  //         context: 'server',
-  //         access: 'secret'
-  //       })
-  //     }
-  //   }
-  // },
 
   integrations: [
     sitemap(),
