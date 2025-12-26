@@ -54,7 +54,7 @@ const {user} = Astro.props
      </div>
 
       <!-- Menu desktop -->
-       <div class="hidden xl:flex items-center space-x-6 z-50">
+       <div class="hidden xl:flex items-center gap-x-3 z-50">
         {linksData.map(link => {
           const showLink = !link.requiresAuth || user;
           const finalUrl = (link.adminOnly && user && !user.isAdmin)
@@ -78,7 +78,7 @@ const {user} = Astro.props
 
 
 
-        <div  class="flex flex-row items-center gap-x-8 font-display font-bold text-sky-500 filter drop-shadow-lg hyphens-auto hover:cursor-none">
+        <div  class="xl:hidden flex flex-row items-center gap-x-8 font-display font-bold text-sky-500 filter drop-shadow-lg hyphens-auto hover:cursor-none">
           {
             user ?
             `Hola: ${user.username} ✋`

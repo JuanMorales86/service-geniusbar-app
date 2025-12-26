@@ -72,7 +72,6 @@ class OrdersShowCase extends Component<Props, State> {
     genericToastMessage: '',
     genericToastType: 'info',
     searchQuery: '',
-    
   }
 
 

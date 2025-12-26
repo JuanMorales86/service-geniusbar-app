@@ -1,0 +1,105 @@
+---
+import Layout from "@/layouts/Layout.astro"; // Asegúrate de que esta ruta coincida con tu Layout principal
+import { Icon } from "astro-icon/components";
+
+// Puedes reemplazar estas URLs con fotos reales de tu tienda
+const images = {
+  main: "https://i.imgur.com/D6qY76i.png", // Recomendado: 1000x1000px (Cuadrada o Vertical)
+  detail1: "https://i.imgur.com/JtkZ4wk.png", // Recomendado: 600x600px (Cuadrada)
+  detail2: "https://i.imgur.com/RUD3gjy.png" // Recomendado: 600x600px (Cuadrada)
+};
+---
+
+<Layout title="Nosotros | OnthePointService">
+  <section class="bg-gray-esp min-h-screen font-apple text-light-text dark:text-blk-gray-dark pb-20 rounded-xl ">
+    
+    <!-- Encabezado Simple -->
+    <div class="container mx-auto px-4 pt-24 pb-12 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 drop-shadow-xl animate-fade-in-up">
+        Más que un <span class="text-sky-600">Servicio Técnico</span>
+      </h1>
+      <p class="text-lg md:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed">
+        Queremos que veas dónde ocurre la magia. Un espacio transparente, moderno y equipado para cuidar tu tecnología.
+      </p>
+    </div>
+
+    <!-- Bento Grid Gallery -->
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+        
+        <!-- Foto Principal (Grande) -->
+        <div class="md:col-span-2 md:row-span-2 relative group rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+          <img 
+            src={images.main} 
+            alt="Nuestro Taller Principal" 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+            <h3 class="text-white text-2xl font-bold mb-1">Laboratorio Especializado</h3>
+            <p class="text-gray-200 text-sm font-medium">Equipamiento de precisión para diagnósticos exactos.</p>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Estadística (Confianza) -->
+        <div class="bg-sky-100 dark:bg-sky-900/20 backdrop-blur-md rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-lg border border-sky-200/30 group hover:bg-sky-200/30 transition-colors">
+          <div class="p-3 bg-white dark:bg-sky-800 rounded-full mb-4 shadow-sm group-hover:scale-110 transition-transform">
+            <Icon name="lucide:users" class="w-8 h-8 text-sky-600" />
+          </div>
+          <span class="text-4xl font-bold text-sky-600 dark:text-sky-400 mb-1">+1500</span>
+          <span class="text-sm font-bold opacity-70">Clientes Felices</span>
+        </div>
+
+        <!-- Foto Secundaria -->
+        <div class="relative group rounded-3xl overflow-hidden shadow-xl border border-white/20">
+          <img 
+            src={images.detail1} 
+            alt="Detalle reparación" 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+
+        <!-- Foto Terciaria -->
+        <div class="relative group rounded-3xl overflow-hidden shadow-xl border border-white/20 md:col-start-3">
+           <img 
+            src={images.detail2} 
+            alt="Atención al cliente" 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+
+        <!-- Tarjeta de Acción / Garantía -->
+        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 flex flex-col justify-center items-start shadow-xl border border-gray-100 dark:border-gray-700 relative overflow-hidden text-white dark:text-gray-400">
+          <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-sky-500/10 rounded-full blur-2xl"></div>
+          
+          <Icon name="lucide:shield-check" class="w-10 h-10 text-sky-500 mb-4" />
+          <h3 class="font-bold text-xl mb-2">Garantía Total</h3>
+          <p class="text-sm opacity-70 mb-6 leading-snug">
+            Cada reparación cuenta con nuestra garantía de satisfacción y soporte post-servicio.
+          </p>
+          <a href="/formservice" class="inline-flex items-center gap-2 text-sky-600 font-bold hover:gap-3 transition-all group">
+            Contáctanos <Icon name="lucide:arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"/>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sección de Valores (Iconos) -->
+    <div class="container mx-auto px-4 mt-20 max-w-5xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="p-4">
+           <h3 class="font-bold text-lg mb-2 flex justify-center items-center gap-2"><Icon name="lucide:zap" class="text-sky-500"/> Rapidez</h3>
+           <p class="text-sm opacity-70">Entendemos que tu tiempo vale oro. Diagnósticos en tiempo récord.</p>
+        </div>
+        <div class="p-4">
+           <h3 class="font-bold text-lg mb-2 flex justify-center items-center gap-2"><Icon name="lucide:search" class="text-sky-500"/> Transparencia</h3>
+           <p class="text-sm opacity-70">Sin letras pequeñas. Te explicamos exactamente qué le pasa a tu equipo.</p>
+        </div>
+        <div class="p-4">
+           <h3 class="font-bold text-lg mb-2 flex justify-center items-center gap-2"><Icon name="lucide:heart" class="text-sky-500"/> Pasión</h3>
+           <p class="text-sm opacity-70">Amamos la tecnología tanto como tú. Tratamos tu equipo como propio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
