@@ -1,4 +1,4 @@
-// src/script/session-manager.js
+// src/script/session-manager.js (dead man switch)
 
 let inactivityTimer;
 let warningTimer;
@@ -14,9 +14,9 @@ function createModal(onStayConnected) {
   if (document.getElementById(MODAL_ID)) return;
 
   const modalHTML = `
-    <div id="${MODAL_ID}" style="position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; align-items: center; justify-content: center; font-family: system-ui, sans-serif;">
+    <div id="${MODAL_ID}" style="position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; display: none; align-items: center; justify-content: center; font-family: system-ui, sans-serif; text-black;">
       <div style="background-color: white; color: black; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; max-width: 400px;">
-        <img src="/img/ONTHEPOINTSERVICEPNG.png" alt="Logo de la empresa" width="160" height="160" style="display: block; margin: 0 auto 1rem;"/>
+        <img src="/img/ONTHEPOINTSERVICEPNG.png" alt="Logo de la empresa" width="300" height="300" style="display: block; margin: 0 auto 1rem;"/>
         <h3 style="font-size: 1.25rem; font-weight: bold; margin: 0;">Tu sesión está a punto de expirar</h3>
         <p style="margin: 1rem 0;">Por inactividad, tu sesión se cerrará en <span id="session-countdown" style="font-weight: bold;"></span> segundos.</p>
         <button id="stay-connected-btn" class="btn-custom">Seguir conectado</button>
@@ -97,9 +97,9 @@ function setupInactivityDetection(timeoutMs, warningMs, logoutUrl) {
 }
 
 export function initSessionManager(options) {
-  const { timeoutMinutes = 15, logoutUrl = "/api/signout" } = options;
+  const { timeoutMinutes = 15, logoutUrl = "/api/signout" } = options;// es como un ternario para asignar valores por defecto si options llega vacio desde afuera se le asigna 15 minutos y /api/signout
   const timeoutMs = timeoutMinutes * 60 * 1000;
-  const warningMs = 30000; // 30 segundos de advertencia
+  const warningMs = 20000; // 30 segundos de advertencia
 
   // No iniciar si el timeout es menor que la advertencia
   if (timeoutMs <= warningMs) {

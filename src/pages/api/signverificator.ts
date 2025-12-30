@@ -32,30 +32,18 @@ export async function checkAccountLocked(username: string): Promise<{
     if(!user) return { isLocked: false, remainingTime: 0, permanentLock: false };
     //if (user.length === 0) return { isLocked: false, remainingTime: 0, permanentLock: false }; //original de astrodb
 
-    // if (user[0].totalAttempts >= 10) { //original de astrodb
-    //     return { isLocked: true, remainingTime: Infinity, permanentLock: true };
-    // }
+ 
 
     //Verificar el bloqueo permanente
     if(user.totalAttempts >= 8){
         return { isLocked: true, remainingTime: Infinity, permanentLock: true };
     } // Nuevo de turso
 
-    //const updateUser = await db.select().from(User).where(eq(User.username, username)).limit(1);
     
-    //aqui se actualiza el usuario (lo use solo para verificar si se actualizaba solo para comprobar)
-    // const {rows: updateUserRows } = await turdb.execute({
-    //     sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
-    //     args: [username]
-    // })
-
-    // const updateUser = updateUserRows[0] as unknown as UserRow;
 
     //Obtener intentos fallidos y la ultima fecha de intento.
     const failedAttempts = user.failedAttempts; //updateUser es un objeto de tipo UserRow donde failedAttempts es un numero aqui busco el valor de failedAttempts y lo almaceno en failedAttempts
     const lastFailedTimestamp  = parseInt(user.lastFailedAttempt);//nuevo de turso
-    //const failedAttempts = updateUser[0].failedAttempts;// original de astrodb
-    //const lastFailedTimestamp  = parseInt(updateUser[0].lastFailedAttempt);// original de astrodb
     
     // solo incrementar los intentos fallidos si el usuario no ha sido bloqueado permanentemente
     if (failedAttempts < MAX_FAILED_ATTEMPTS) {

@@ -138,7 +138,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		// Verificamos si el usuario está logueado leyendo el atributo del body
 		const userIsLoggedIn = document.body.getAttribute('data-user-logged-in') === 'true';
 		if (userIsLoggedIn) {
-			initSessionManager({ timeoutMinutes: 15 });
+			initSessionManager({ timeoutMinutes: 10 });
 		}
 	});
 </script>
