@@ -6,6 +6,7 @@ export async function GET(context: APIContext): Promise<Response> {
     const state = generateState();//Genera el estado de autenticacion
     const codeVerifier = generateCodeVerifier();
     const url = await google.createAuthorizationURL(state, codeVerifier, {scopes:["email", "profile"]});
+    url.searchParams.set("prompt", "select_account");
 
     context.cookies.set("google_oauth_state", state, {
         path: "/",
@@ -25,5 +26,3 @@ export async function GET(context: APIContext): Promise<Response> {
 
     return context.redirect(url.toString());
 }
-
-

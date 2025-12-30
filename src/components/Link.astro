@@ -4,11 +4,11 @@ import { Icon } from "astro-icon/components";
 import IcoNavApple from "../utilities/icons/icoNavApple.astro";
 import Headerbutton from "./Headerbutton.astro";
 
-const {title, url} = Astro.props as Links;
+const {title, url, class: className} = Astro.props;
 ---
 
 
-<Headerbutton href={url}>
+<Headerbutton href={url} class={className}>
 {title === 'Home' && <Icon class=" text-xl" name="lucide:home" />}
 {title === 'Servicios' && <IcoNavApple slot="before" />}
 {title === 'Ordenes y Reparaciones' && <Icon name="lucide:book-copy"/>}
@@ -18,4 +18,3 @@ const {title, url} = Astro.props as Links;
 {title === 'Contacto'  && <Icon class=" text-xl" name="lucide:contact-round" />}
 {title}
 </Headerbutton>
-
