@@ -6,6 +6,7 @@ import Logout from "./Logout.astro";
 const { user, variant = 'desktop' } = Astro.props
 const buttonId = `user-menu-${variant}`;
 const dropdownId = `user-dropdown-${variant}`;
+const dropdownPosition = variant === 'desktop' ? 'right-0' : 'left-1/2 -ml-28';
 
 
 ---
@@ -23,7 +24,7 @@ const dropdownId = `user-dropdown-${variant}`;
         </button>
     </div>
 
-    <div  class="absolute top-full w-56  mt-2 text-blackep  bg-gray-400/75 dark:bg-blk-gray-dark/75 divide-y divide-gray-100 dark:divide-gray-600 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
+    <div  class={`absolute top-full ${dropdownPosition} w-56  mt-2 text-blackep  bg-gray-400/75 dark:bg-blk-gray-dark/75 divide-y divide-gray-100 dark:divide-gray-600 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 hidden z-50`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu" id={dropdownId}>
         {
             user ? (
                 <div class="px-4 py-3" role="none">
@@ -77,9 +78,3 @@ const dropdownId = `user-dropdown-${variant}`;
         initLockTimer();
     });
 </script>
-
-   <!-- <div class="py-1" role="none">
-                        <DropDownbutton class="rounded-none" href="/api/github" role="menuitem">
-                            Iniciar Sesión con Github
-                        </DropDownbutton>
-                    </div> -->

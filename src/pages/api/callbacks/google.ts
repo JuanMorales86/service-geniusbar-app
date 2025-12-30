@@ -62,6 +62,28 @@ export async function GET(context: APIContext): Promise<Response> {
             return context.redirect("/");
         }
 
+        // Verificar si ya existe un usuario con ese email (username) para vincular la cuenta y evitar error 500
+        if (googleUser.email) {
+            const { rows: userByEmailRows } = await turdb.execute({
+                sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
+                args: [googleUser.email]
+            });
+            const userByEmail = userByEmailRows[0];
+
+            if (userByEmail) {
+                // Vincular cuenta: Actualizar el usuario existente agregando el google_id
+                await turdb.execute({
+                    sql: "UPDATE User SET google_id = ? WHERE id = ?",
+                    args: [String(googleUser.id), userByEmail.id]
+                });
+                
+                const session = await lucia.createSession(String(userByEmail.id), {});
+                const sessionCookie = lucia.createSessionCookie(session.id);
+                context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+                return context.redirect("/");
+            }
+        }
+
         const userId = generateId(15);
         // Si el email no viene, creamos un username alternativo para evitar errores.
         const username = googleUser.email ?? `user_${userId}`;
@@ -77,6 +99,7 @@ export async function GET(context: APIContext): Promise<Response> {
         context.cookies.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
         return context.redirect("/");
     } catch(error) {
+        console.error("Error en google callback:", error);
         if (error instanceof OAuth2RequestError){
             return new Response(null, {
                 status: 400
@@ -84,7 +107,7 @@ export async function GET(context: APIContext): Promise<Response> {
             });
         }
         return new Response(null, {
-            status: 500
+            status: 500 // Error interno del servidor para otros errores
         });
     }
 }
