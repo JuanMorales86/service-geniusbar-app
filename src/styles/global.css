@@ -209,6 +209,42 @@ textarea {
   }
 }
 
+    .popup-content-wrapper {
+        text-align: center; 
+        min-width: 200px;
+    }
+    .popup-slider {
+        position: relative;
+        width: 100%;
+        height: 120px; /* Altura fija para el slider */
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        background-color: #eee;
+    }
+    .popup-slider img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        animation: popupFade 12s infinite; /* Ciclo de 12 segundos */
+    }
+    /* Escalonamos las animaciones para que se sucedan */
+    .popup-slider img:nth-child(1) { animation-delay: 0s; }
+    .popup-slider img:nth-child(2) { animation-delay: 4s; }
+    .popup-slider img:nth-child(3) { animation-delay: 8s; }
+
+    @keyframes popupFade {
+        0% { opacity: 0; }
+        10% { opacity: 1; } /* Aparece rápido */
+        33% { opacity: 1; } /* Se mantiene visible 4 segundos aprox */
+        43% { opacity: 0; } /* Desaparece */
+        100% { opacity: 0; }
+    }
+
 .holographic-glare {
         background: radial-gradient(
             circle at var(--mouse-x) var(--mouse-y),

@@ -16,7 +16,19 @@ const seoData = {
 const mapCenter = [-58.3816, -34.6037]; // Buenos Aires [lng, lat]
 const mapZoom = 15; // Nivel de zoom del mapa
 const markerCoordinates = [-58.37490623783136, -34.601575689879155]; // Coordenadas del marcador de la tienda
-const markerPopupContent = '<h3>OnthePointService</h3><p>Servicio técnico especializado</p><p>Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>';
+const markerPopupContent = `
+    <div class="popup-content-wrapper">
+        <h3 style="font-weight: bold; font-size: 1.1em; margin-bottom: 8px;">OnthePointService</h3>
+        <div class="popup-slider">
+            <img src="https://i.imgur.com/v9ZwLTj.jpg" alt="Local OnthePointService" />
+            <img src="https://i.imgur.com/4Sk04qR.jpg" alt="Taller" />
+            <img src="https://i.imgur.com/94BMEfZ.jpg" alt="Reparación" />
+            <img src="https://i.imgur.com/0DaMFGz.jpg" alt="direccion" />
+        </div>
+        <p style="font-weight: 600; margin-bottom: 4px;">Servicio Técnico Especializado</p>
+        <p style="font-size: 0.9em; color: #333;">Florida 537, Galerias Jardin, Local 366 PB, CABA, Argentina</p>
+    </div>
+`;
 ---
 
 
@@ -47,6 +59,7 @@ const markerPopupContent = '<h3>OnthePointService</h3><p>Servicio técnico espec
             zoom={mapZoom}
             markerCoords={markerCoordinates}
             popupContent={markerPopupContent}
+            markerColor="#ff0000"
             client:load
             />
         </div>

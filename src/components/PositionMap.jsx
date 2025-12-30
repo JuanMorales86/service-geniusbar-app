@@ -1,6 +1,6 @@
 import React from "react";
 
-const MapPosition = ({ center, zoom, markerCoords, popupContent }) => {
+const MapPosition = ({ center, zoom, markerCoords, popupContent, markerColor }) => {
   const mapContainer = React.useRef(null);
   const map = React.useRef(null);
 
@@ -19,7 +19,7 @@ const MapPosition = ({ center, zoom, markerCoords, popupContent }) => {
       });
 
       if (markerCoords) {
-        new window.maplibregl.Marker() // Acceso a window.maplibregl.Marker
+        new window.maplibregl.Marker({ color: markerColor || '#0284c7' }) // Usa el color de la prop o un azul cielo por defecto
           .setLngLat(markerCoords)
           .setPopup(
             new window.maplibregl.Popup().setHTML(
@@ -42,7 +42,7 @@ const MapPosition = ({ center, zoom, markerCoords, popupContent }) => {
         map.current.remove();
       }
     };
-  }, [center, zoom, markerCoords, popupContent]);
+  }, [center, zoom, markerCoords, popupContent, markerColor]);
 
   return (
     <div
