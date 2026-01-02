@@ -109,9 +109,6 @@ export function initSessionManager(options) {
     return;
   }
 
-  console.log(
-    `[SessionManager] Iniciando. Timeout: ${timeoutMinutes} min. Advertencia: ${warningMs / 1000} seg.`
-  );
 
   // Nos aseguramos de que los listeners de actividad estén configurados.
   setupInactivityDetection(timeoutMs, warningMs, logoutUrl);
