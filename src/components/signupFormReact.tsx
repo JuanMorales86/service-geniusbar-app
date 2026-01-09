@@ -8,22 +8,21 @@ const SignupFormReact = ({ errorMessage }: { errorMessage: string | null }) => {
     const [showAdminField, setShowAdminField] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState<string | null>(null);
     
-    // Obtiene la lista de admins desde las variables de entorno y la convierte en un array.
-    // El '?? ""' evita errores si la variable no está definida.
-    const adminUsernames = (import.meta.env.PUBLIC_ADMIN_USERNAMES ?? "").split(',');
+    
+    const adminUsernames = React.useMemo(() => (import.meta.env.PUBLIC_ADMIN_USERNAMES ?? "").split(','), []);
   
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUsernameChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setUsername(value);
         setShowAdminField(adminUsernames.includes(value));
-    };
+    }, [adminUsernames]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
         if (password !== verifyPassword) {
-            e.preventDefault(); // Evita que el formulario se envíe
+            e.preventDefault(); 
             setPasswordError("Las contraseñas no coinciden. Por favor, verifícalas.");
         }
-    };
+    }, [password, verifyPassword]);
 
     return (
         <form
