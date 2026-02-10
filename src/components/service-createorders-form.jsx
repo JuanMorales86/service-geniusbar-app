@@ -3,9 +3,6 @@ import React from "react";
 import {Toast} from "./ToastContainer";
 import CustomMultiSelect from "./CreateMultiSelect";
 
-const cl = console.log.bind(console)
-//cl("Service create orders form component loaded");
-
 const initialFormState = {
   clientname: "",
   clientdni: "",
@@ -126,12 +123,8 @@ export default function CreateOrderForm() {
         wasChecked: true
       });
     }
-    //setIsCheckingEmail(false);
   }
 
-    // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
 
 
   const handleChange = (e) => {
@@ -143,20 +136,6 @@ export default function CreateOrderForm() {
       timeoutId = setTimeout(() => verifyEmail(value), 1000);
     }
   };
-
-  
-
-  // const handleMultipleSelect = (e) => {
-  //   const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-  //   setFormData(prevData => { 
-  //     const currentSelections = prevData.phonedetails.split(',').map(item => item.trim()).filter(Boolean);
-  //     const updateSelections = selectedOptions.length === 0 ? [] : currentSelections.filter(item => !selectedOptions.includes(item)).concat(selectedOptions.filter(item => !currentSelections.includes(item)));
-  //     return {
-  //       ...formData, 
-  //       phonedetails: [...new Set(updateSelections)].join(', ')
-  //     };
-  //   });
-  // };
 
   const navigateTo = () => {
     window.location.href = '/ordershow-page';

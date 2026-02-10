@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 
 const Toast = ({ message, type, positionH, positionV, onClose, color }) => {
     return (
@@ -24,8 +25,40 @@ const ConfirmationToast = ({ message, type, positionH, positionV, onConfirm, onC
     )
 }
 
+const useToast = () => {
+    const [toast, setToast] = useState({
+        show: false,
+        message: '',
+        type: 'info',
+        positionH: 'end',
+        positionV: 'top',
+        color: ''
+    });
 
-export {Toast, ConfirmationToast};
+    const showToast = useCallback((message, options = {}) => {
+        const { 
+            type = 'info', 
+            positionH = 'end', 
+            positionV = 'top', 
+            color = '', 
+            duration = 5000 
+        } = options;
+
+        setToast({ show: true, message, type, positionH, positionV, color });
+
+        if (duration > 0) {
+            setTimeout(() => {
+                setToast(prev => ({ ...prev, show: false }));
+            }, duration);
+        }
+    }, []);
+
+    const closeToast = useCallback(() => setToast(prev => ({ ...prev, show: false })), []);
+
+    return { toast, showToast, closeToast };
+};
+
+export {Toast, ConfirmationToast, useToast};
 
 
 
