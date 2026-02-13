@@ -29,6 +29,7 @@
     "@lucia-auth/adapter-sqlite": "^3.0.2",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.0.0",
+    "animejs": "^4.3.6",
     "arctic": "^1.9.2",
     "astro": "^5.16.4",
     "astro-icon": "^1.1.5",

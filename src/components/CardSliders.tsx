@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 import BlurImages from './BlurImages';
+import AnimeText from './AnimeText';
 const cl = console.log.bind(console)
 
 interface Image {
@@ -140,9 +141,10 @@ export default function ImageLightboxSlider({images}: LightboxPorps) {
                                 ))}
                                 </div>
                               <div className='absolute inset-0 flex items-center justify-center z-10'>
-                                <h3 className={`text-3xl font-bold px-4 py-2 font-apple rounded max-w-[300px] whitespace-normal break-word text-shadow-custom ${card.textColor || 'text-mainbrand-light'}`}>
-                                    {card.title}
-                                </h3>
+                                <AnimeText 
+                                    text={card.title}
+                                    className={`text-3xl font-bold px-4 py-2 font-apple rounded max-w-[300px] whitespace-normal break-word text-shadow-custom ${card.textColor || 'text-mainbrand-light'}`}
+                                />
                               </div>
                             </div>
                         </div>
