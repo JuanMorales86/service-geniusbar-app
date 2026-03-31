@@ -39,11 +39,7 @@ const { user = null } = Astro.props;
                             if (link.adminOnly && (!user || !user.isAdmin)) return null;
 
                             return showLink && (
-                               <div class="relative group">
-                                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-sky-600 group-hover:w-full transition-all duration-200">
-                                </div>
-                                    <Link title={link.title} url={finalUrl} class="text-sm text-white font-bold font-apple hover:text-sky-600 transition-colors duration-200"/>
-                                    </div>
+                               <div></div>
                             );
                         })}
                     </ul>
@@ -61,11 +57,7 @@ const { user = null } = Astro.props;
                             if (link.adminOnly && (!user || !user.isAdmin)) return null;
 
                             return showLink && (
-                              <div class="relative group">
-                                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-sky-600 group-hover:w-full transition-all duration-200">
-                                </div>
-                                    <Link title={link.title} url={finalUrl} class="text-sm text-white font-bold font-apple hover:text-sky-600 transition-colors duration-200"/>
-                                </div>
+                             <div></div>
                             );
                         })}
                     </ul>
