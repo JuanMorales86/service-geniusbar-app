@@ -15,7 +15,7 @@ const { user = null } = Astro.props;
 ---
 
 <footer>
-    <div class="flex flex-col justify-center gap-8 border-y-[1px] border-blue-400 py-8 mt-8 items-center bg-blk-gray-dark">
+    <div class="flex flex-col justify-center gap-8 border-y-[1px] border-blue-400 py-8 mt-8 items-center bg-blk-gray-dark text">
          <div class="flex justify-around items-center md:flex-row flex-col w-full px-4 gap-y-8 md:gap-y-4">
             <div class="flex items-center">
 
@@ -31,15 +31,20 @@ const { user = null } = Astro.props;
                     <h3 class="font-bold text-white mb-3 uppercase tracking-wider">Navegación</h3>
                     <ul class="space-y-2">
                         {linksData.map(link => {
-                            const showLink = !link.requiresAuth || user;
-                            const finalUrl = (link.adminOnly && user && !user.isAdmin) 
-                                ? link.userRedirectUrl 
-                                : link.url;
+                            const isUserAdmin = user?.isAdmin || false;
+                            const showLink = !link.requiresAuth || !!user;
+                            const finalUrl = (link.adminOnly && user && !isUserAdmin) 
+                                ? (link.userRedirectUrl || "/") 
+                                : (link.url || "#");
 
-                            if (link.adminOnly && (!user || !user.isAdmin)) return null;
+                            if (link.adminOnly && !isUserAdmin) return null;
 
                             return showLink && (
-                               <div></div>
+                               <div class="relative group">
+                                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-sky-600 group-hover:w-full transition-all duration-200">
+                                </div>
+                                    <Link title={link.title} url={finalUrl} class="text-sm text-white font-bold font-apple hover:text-sky-600 transition-colors duration-200"/>
+                                    </div>
                             );
                         })}
                     </ul>
@@ -49,15 +54,20 @@ const { user = null } = Astro.props;
                     <h3 class="font-bold text-white mb-3 uppercase tracking-wider">Nuestros Servicios</h3>
                     <ul class="space-y-2">
                         {linksData2.map(link => {
-                            const showLink = !link.requiresAuth || user;
-                            const finalUrl = (link.adminOnly && user && !user.isAdmin) 
-                                ? link.userRedirectUrl 
-                                : link.url;
+                            const isUserAdmin = user?.isAdmin || false;
+                            const showLink = !link.requiresAuth || !!user;
+                            const finalUrl = (link.adminOnly && user && !isUserAdmin) 
+                                ? (link.userRedirectUrl || "/") 
+                                : (link.url || "#");
 
-                            if (link.adminOnly && (!user || !user.isAdmin)) return null;
+                            if (link.adminOnly && !isUserAdmin) return null;
 
                             return showLink && (
-                             <div></div>
+                              <div class="relative group">
+                                <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-sky-400 to-sky-600 group-hover:w-full transition-all duration-200">
+                                </div>
+                                    <Link title={link.title} url={finalUrl} class="text-sm text-white font-bold font-apple hover:text-sky-600 transition-colors duration-200"/>
+                                </div>
                             );
                         })}
                     </ul>
