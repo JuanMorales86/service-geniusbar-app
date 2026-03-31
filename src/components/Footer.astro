@@ -11,33 +11,6 @@ interface Props {
 }
 
 const { user = null } = Astro.props;
-
-const  getAuthorizedLinks = (links: Links[]) => {
-    return links.filter(link => {
-        if (link.adminOnly && (!user || !user.isAdmin)) return false;
-        return !link.requiresAuth || user;
-    }).map(link => ({
-        name: link.title,
-        href: ((link.adminOnly && user && !user.isAdmin) ? link.userRedirectUrl : link.url) || "#"
-    }));
-};
-
-// 1. Adaptamos la estructura para usar tus datos existentes y añadir todos los servicios.
-const footerSections = [
-    {
-        title: "Navegación",
-        // Usamos 'linksData' para generar los enlaces de navegación principal.
-        // El .map transforma { title, url } en { name, href } para que coincida.
-        links: getAuthorizedLinks(linksData)
-        //links: linksData.map((link: Links) => ({ name: link.title, href: link.url }))
-    },
-    {
-        title: "Nuestros Servicios",
-        // Creamos una lista completa con todos tus servicios.
-        links: getAuthorizedLinks(linksData2)
-        //links: linksData2.map((link: Links) => ({ name: link.title, href: link.url }))
-    }
-];
 ---
 
 <footer>
@@ -53,16 +26,45 @@ const footerSections = [
             </div>
             <!-- 2. Renderizamos la nueva estructura unificada de enlaces -->
             <div class="flex flex-col md:flex-row text-center md:text-left gap-8 md:gap-16">
-                {footerSections.map(section => (
-                    <div>
-                        <h3 class="font-bold text-white mb-3 uppercase tracking-wider">{section.title}</h3>
-                        <ul class="space-y-2">
-                            {section.links.map(link => (
-                                <li><a href={link.href} class="text-gray-300 hover:text-sky-400 transition-colors">{link.name}</a></li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                <div>
+                    <h3 class="font-bold text-white mb-3 uppercase tracking-wider">Navegación</h3>
+                    <ul class="space-y-2">
+                        {linksData.map(link => {
+                            const showLink = !link.requiresAuth || user;
+                            const finalUrl = (link.adminOnly && user && !user.isAdmin) 
+                                ? link.userRedirectUrl 
+                                : link.url;
+
+                            if (link.adminOnly && (!user || !user.isAdmin)) return null;
+
+                            return showLink && (
+                                <li>
+                                    <a href={finalUrl || "#"} class="text-gray-300 hover:text-sky-400 transition-colors">{link.title}</a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-3 uppercase tracking-wider">Nuestros Servicios</h3>
+                    <ul class="space-y-2">
+                        {linksData2.map(link => {
+                            const showLink = !link.requiresAuth || user;
+                            const finalUrl = (link.adminOnly && user && !user.isAdmin) 
+                                ? link.userRedirectUrl 
+                                : link.url;
+
+                            if (link.adminOnly && (!user || !user.isAdmin)) return null;
+
+                            return showLink && (
+                                <li>
+                                    <a href={finalUrl || "#"} class="text-gray-300 hover:text-sky-400 transition-colors">{link.title}</a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </div>
          </div>
 
