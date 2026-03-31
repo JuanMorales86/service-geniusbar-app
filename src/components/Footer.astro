@@ -3,17 +3,22 @@ import type { Links } from "@/data/layout/links";
 import { linksData, linksData2 } from "@/data/layout/links";
 import { Icon } from "astro-icon/components";
 
-const {user} = Astro.props;
+interface Props {
+    user?: {
+        username: string;
+        isAdmin: boolean;
+    } | null;
+}
 
+const { user = null } = Astro.props;
 
 const  getAuthorizedLinks = (links: Links[]) => {
     return links.filter(link => {
-       if (link.adminOnly && (!user || !user.isAdmin)) return false; // Si el enlace es solo para admins y el usuario no es admin (o no hay usuario), no mostrarlo
-
+        if (link.adminOnly && (!user || !user.isAdmin)) return false;
         return !link.requiresAuth || user;
     }).map(link => ({
         name: link.title,
-        href: (link.adminOnly && user && !user.isAdmin) ? link.userRedirectUrl : link.url
+        href: ((link.adminOnly && user && !user.isAdmin) ? link.userRedirectUrl : link.url) || "#"
     }));
 };
 

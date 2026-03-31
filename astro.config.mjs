@@ -17,11 +17,10 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 
 // https://astro.build/config
 export default defineConfig({
-
+  site: 'https://www.onthepointservice.com',
   output: 'server',
   adapter: node({ mode: 'standalone' }),
   middleware: [middleware],
-  site: 'https://www.onthepointservice.com',
   image: {
     domains: ['i.imgur.com']
   },
