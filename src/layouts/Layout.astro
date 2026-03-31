@@ -122,7 +122,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 			<main >
 				<slot />
 			</main>
-			<Footer/>
+			<Footer user={user}/>
 			{showWhatsAppButton && <WhatsAppButton />}
 
 		</div>

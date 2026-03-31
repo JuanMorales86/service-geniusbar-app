@@ -54,13 +54,12 @@ const {user} = Astro.props
      </div>
 
       <!-- Menu desktop -->
-       <div class="hidden xl:flex items-center gap-x-3 z-50">
+      <div class="hidden xl:flex items-center gap-x-3 z-50">
         {linksData.map(link => {
           const showLink = !link.requiresAuth || user;
           const finalUrl = (link.adminOnly && user && !user.isAdmin)
           ? link.userRedirectUrl
           : link.url;
-
           if(link.adminOnly && (!user || !user.isAdmin)) return null; //no renderizar el Link
       
           return showLink && (

@@ -3,18 +3,34 @@ import type { Links } from "@/data/layout/links";
 import { linksData, linksData2 } from "@/data/layout/links";
 import { Icon } from "astro-icon/components";
 
+const {user} = Astro.props;
+
+
+const  getAuthorizedLinks = (links: Links[]) => {
+    return links.filter(link => {
+       if (link.adminOnly && (!user || !user.isAdmin)) return false; // Si el enlace es solo para admins y el usuario no es admin (o no hay usuario), no mostrarlo
+
+        return !link.requiresAuth || user;
+    }).map(link => ({
+        name: link.title,
+        href: (link.adminOnly && user && !user.isAdmin) ? link.userRedirectUrl : link.url
+    }));
+};
+
 // 1. Adaptamos la estructura para usar tus datos existentes y añadir todos los servicios.
 const footerSections = [
     {
         title: "Navegación",
         // Usamos 'linksData' para generar los enlaces de navegación principal.
         // El .map transforma { title, url } en { name, href } para que coincida.
-        links: linksData.map((link: Links) => ({ name: link.title, href: link.url }))
+        links: getAuthorizedLinks(linksData)
+        //links: linksData.map((link: Links) => ({ name: link.title, href: link.url }))
     },
     {
         title: "Nuestros Servicios",
         // Creamos una lista completa con todos tus servicios.
-        links: linksData2.map((link: Links) => ({ name: link.title, href: link.url }))
+        links: getAuthorizedLinks(linksData2)
+        //links: linksData2.map((link: Links) => ({ name: link.title, href: link.url }))
     }
 ];
 ---
