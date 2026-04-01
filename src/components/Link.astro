@@ -1,5 +1,4 @@
 ---
-import type { Links } from "@/data/layout/links";
 import { Icon } from "astro-icon/components";
 import IcoNavApple from "../utilities/icons/icoNavApple.astro";
 import Headerbutton from "./Headerbutton.astro";
@@ -16,5 +15,13 @@ const {title, url, class: className} = Astro.props;
 {title === 'Equipos' && <Icon class=" text-xl" name="lucide:tablet-smartphone" />}
 {title === 'Nosotros' && <Icon class=" text-xl" name="lucide:store" />}
 {title === 'Contacto'  && <Icon class=" text-xl" name="lucide:contact-round" />}
+{title === 'Reparación iPhone' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación iPad' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación MacBook' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación iMac' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación Watch' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación MagSafe' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación Placas' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
+{title === 'Reparación TV' && <Icon class=" text-xl" name="lucide:wrench" slot="before"/>}
 {title}
 </Headerbutton>
