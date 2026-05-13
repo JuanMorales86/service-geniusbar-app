@@ -30,7 +30,7 @@ export const onRequest = defineMiddleware(async (context: APIContext, next: Midd
       // }
 
       if(originHeader){
-        const validOrigin = verifyRequestOrigin(originHeader, allowedHosts);
+        const validOrigin = verifyRequestOrigin(originHeader, [hostHeader]);
 
         if(!validOrigin){
           console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
