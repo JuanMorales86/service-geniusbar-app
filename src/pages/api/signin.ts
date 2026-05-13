@@ -90,6 +90,7 @@ export async function POST(context: APIContext):Promise<Response>{
 
         }
     ) //Establece la cookie en la respuesta
-    return context.redirect("/") //Redirige al usuario a la página de inicio
+    return context.redirect("/", 302) //Redirige al usuario a la página de inicio
+    
 
 }

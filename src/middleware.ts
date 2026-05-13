@@ -18,15 +18,24 @@ export const onRequest = defineMiddleware(async (context: APIContext, next: Midd
       // Lista de dominios permitidos (apex y www)
       const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
 
-      if (
-        !originHeader ||
-        !hostHeader ||
-        //verifyRequestOrigin(originHeader, [hostHeader])
-        !verifyRequestOrigin(originHeader, allowedHosts)
-      ) {
-        //console.warn("Invalid request origin:", originHeader);
-        console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
-        return new Response(null, { status: 403 });
+      // if (
+      //(!)   originHeader ||
+      //(!)   hostHeader ||
+      //   //verifyRequestOrigin(originHeader, [hostHeader])
+      //(!)   verifyRequestOrigin(originHeader, allowedHosts)
+      // ) {
+      //   //console.warn("Invalid request origin:", originHeader);
+      //   console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
+      //   return new Response(null, { status: 403 });
+      // }
+
+      if(originHeader){
+        const validOrigin = verifyRequestOrigin(originHeader, allowedHosts);
+
+        if(!validOrigin){
+          console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
+          return new Response(null, { status: 403 });
+        }
       }
     }
   
