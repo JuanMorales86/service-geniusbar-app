@@ -5,6 +5,11 @@ import { checkAccountLocked, resetFailedAttempts, incrementFailedAttempts } from
 import { Argon2id } from "oslo/password";
 import { turdb } from "../../../db/turso";
 
+
+export async function GET(context: APIContext): Promise<Response> {
+    return context.redirect("/signin");
+}
+
 export async function POST(context: APIContext):Promise<Response>{
 
     //Leer la data del form
@@ -40,11 +45,6 @@ export async function POST(context: APIContext):Promise<Response>{
     const { rows: [foundUser] } = await turdb.execute({
         sql: "SELECT * FROM User WHERE username = ? LIMIT 1",
         args: [username]
-
-        /** - Usamos turdb.execute() para hacer consultas SQL directas
-            - rows: [foundUser] desestructura directamente el primer resultado
-            - LIMIT 1 asegura que solo obtenemos un usuario
-            - El objeto foundUser mantiene la misma estructura con las propiedades id, username, password, etc. */
     })
 
     //Si el usuario no existe

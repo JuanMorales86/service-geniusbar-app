@@ -2,11 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import IcoAtom from "@/utilities/icons/icoAtom.astro";
 
-
 const errorParam = Astro.url.searchParams.get('error');
-// const username = Astro.url.searchParams.get('username') || '';
 const remainingTime = Number(Astro.url.searchParams.get('remainingTime') || 0);
-// const permanentLock = Boolean(Astro.url.searchParams.get('permanentLock') || false);
 const permanentLock = errorParam === 'permanent_lock';
 let errorMessage = "";
 
