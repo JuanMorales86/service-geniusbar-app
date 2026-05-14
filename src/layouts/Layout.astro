@@ -3,7 +3,7 @@ import Header from '@/components/Header.astro';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
-import  {ClientRouter}   from 'astro:transitions'; // lo que era ViewTransition ahora se llama ClientRouter
+//import  {ClientRouter}   from 'astro:transitions'; // lo que era ViewTransition ahora se llama ClientRouter
 import '@fontsource-variable/montserrat/wght.css';// Supports weights 100-900
 import '@fontsource/roboto/700.css';//Supports 100-300-400-500-700-900-italic
 import '@fontsource/roboto/400.css';//Supports 100-300-400
@@ -99,7 +99,7 @@ const jsonLdString = JSON.stringify(webPageSchema, null, 2); // null, 2 for pret
 		  <meta name="twitter:title" content={title} />
 		  <meta name="twitter:description" content={description} />
 		  <meta name="twitter:image" content={image} />
-		  <ClientRouter />
+		  <!-- <ClientRouter /> -->
 		  
 		<script type="application/ld+json" set:html={jsonLdString}></script>	<!-- JSON-LD para google -->
 		<script is:inline type="text/javascript">
