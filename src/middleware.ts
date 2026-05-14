@@ -10,6 +10,16 @@ import type { APIContext, MiddlewareNext } from "astro";
 export const onRequest = defineMiddleware(async (context: APIContext, next: MiddlewareNext)=> {
   try{
 
+    console.log({
+      origin: context.request.headers.get("origin"),
+      host: context.request.headers.get("host"),
+      forwardedHost: context.request.headers.get("x-forwarded-host"),
+      forwardedProto: context.request.headers.get("x-forwarded-proto"),
+      url: context.url.href,
+      method: context.request.method
+    });
+
+
     // if ( import.meta.env.PROD && context.request.method !== "GET") {
     //   const originHeader = context.request.headers.get("Origin");
     //   //const hostHeader = context.request.headers.get("Host");
