@@ -87,6 +87,7 @@ export async function POST(context: APIContext):Promise<Response>{
             ...sessionCookie.attributes,
             path: sessionCookie.attributes.path ?? "/",
             sameSite: sessionCookie.attributes.sameSite ?? "lax",
+            secure: sessionCookie.attributes.secure ?? true,
 
         }
     ) //Establece la cookie en la respuesta

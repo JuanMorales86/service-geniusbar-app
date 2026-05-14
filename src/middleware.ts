@@ -29,14 +29,16 @@ export const onRequest = defineMiddleware(async (context: APIContext, next: Midd
       //   return new Response(null, { status: 403 });
       // }
 
-      if(originHeader){
-        const validOrigin = verifyRequestOrigin(originHeader, [hostHeader]);
+      // if(originHeader){
+      //   const validOrigin = verifyRequestOrigin(originHeader, [hostHeader]);
 
-        if(!validOrigin){
-          console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
-          return new Response(null, { status: 403 });
-        }
-      }
+      //   if(!validOrigin){
+      //     console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
+      //     return new Response(null, { status: 403 });
+      //   }
+      // }
+
+      if(import.meta.env.PROD && context.request.method !== "GET"){}
     }
   
     const sessionId = context.cookies.get(lucia.sessionCookieName)?.value ?? null;
