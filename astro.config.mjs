@@ -15,6 +15,9 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 // https://astro.build/config
 export default defineConfig({
   site: "https://onthepointservice.com",
+  server: {
+    host: true, // Permitir conexiones externas
+  },
   output: "server",
   adapter: node({ mode: "standalone" }),
   middleware: [middleware],
