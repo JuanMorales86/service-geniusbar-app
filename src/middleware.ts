@@ -10,44 +10,44 @@ import type { APIContext, MiddlewareNext } from "astro";
 export const onRequest = defineMiddleware(async (context: APIContext, next: MiddlewareNext)=> {
   try{
 
-    if ( import.meta.env.PROD && context.request.method !== "GET") {
-      const originHeader = context.request.headers.get("Origin");
-      //const hostHeader = context.request.headers.get("Host");
-      const hostHeader = context.request.headers.get("Host") ?? context.url.host;
+    // if ( import.meta.env.PROD && context.request.method !== "GET") {
+    //   const originHeader = context.request.headers.get("Origin");
+    //   //const hostHeader = context.request.headers.get("Host");
+    //   const hostHeader = context.request.headers.get("Host") ?? context.url.host;
       
-      // Lista de dominios permitidos (apex y www)
-      const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
+    //   // Lista de dominios permitidos (apex y www)
+    //   const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
 
-      if (originHeader) {
+    //   if (originHeader) {
 
-        const validOrigin = verifyRequestOrigin(originHeader, [hostHeader])
+    //     const validOrigin = verifyRequestOrigin(originHeader, [hostHeader])
 
-          if(!validOrigin){
+    //       if(!validOrigin){
 
-            console.warn(
-            "Bloqueo CSRF - Origin no permitido:",
-            originHeader,
-            "Host:",
-            hostHeader
-          );
-          return new Response(null, { status: 403 });
-          }
-        //verifyRequestOrigin(originHeader, allowedHosts)
-        // console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
-        // return new Response(null, { status: 403 });
-      }
+    //         console.warn(
+    //         "Bloqueo CSRF - Origin no permitido:",
+    //         originHeader,
+    //         "Host:",
+    //         hostHeader
+    //       );
+    //       return new Response(null, { status: 403 });
+    //       }
+    //     //verifyRequestOrigin(originHeader, allowedHosts)
+    //     // console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
+    //     // return new Response(null, { status: 403 });
+    //   }
 
-      // if(originHeader){
-      //   const validOrigin = verifyRequestOrigin(originHeader, [hostHeader]);
+    //   // if(originHeader){
+    //   //   const validOrigin = verifyRequestOrigin(originHeader, [hostHeader]);
 
-      //   if(!validOrigin){
-      //     console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
-      //     return new Response(null, { status: 403 });
-      //   }
-      // }
+    //   //   if(!validOrigin){
+    //   //     console.warn("Bloqueo CSRF - Origin no permitido:", originHeader, "Host:", hostHeader);
+    //   //     return new Response(null, { status: 403 });
+    //   //   }
+    //   // }
 
-      //if(import.meta.env.PROD && context.request.method !== "GET"){}
-    }
+    //   //if(import.meta.env.PROD && context.request.method !== "GET"){}
+    // }
   
     const sessionId = context.cookies.get(lucia.sessionCookieName)?.value ?? null;
     if (!sessionId) {
