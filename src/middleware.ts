@@ -18,14 +18,14 @@ export const onRequest = defineMiddleware(async (context: APIContext, next: Midd
       
       // Lista de dominios permitidos (apex y www)
       //const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
-      const allowedHosts = [
-        "onthepointservice.com", 
-        "www.onthepointservice.com"
+      const allowedOrigins = [
+        "https://onthepointservice.com",
+        "https://www.onthepointservice.com",
       ];
 
       console.log("ORIGIN HEADER:", originHeader)
 
-      if (originHeader && !allowedHosts.includes(originHeader)) {
+      if (originHeader && !allowedOrigins.includes(originHeader)) {
         console.warn("Blocked origin", originHeader);
 
         return new Response("Forbidden", { status: 403 });

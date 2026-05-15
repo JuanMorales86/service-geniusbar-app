@@ -15,16 +15,16 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 // https://astro.build/config
 export default defineConfig({
   site: "https://onthepointservice.com",
+  security: {
+      checkOrigin: false, // Deshabilitar la verificación de origen para permitir solicitudes desde dominios externos (útil para render.com)  
+    },
   server: {
     host: true, // Permitir conexiones externas
   },
   output: "server",
   adapter: node({ mode: "standalone" }),
   middleware: [middleware],
-
-  security: {
-      checkOrigin: false, // Deshabilitar la verificación de origen para permitir solicitudes desde dominios externos (útil para render.com)  
-    },
+  
   
   image: {
     domains: ["i.imgur.com"],

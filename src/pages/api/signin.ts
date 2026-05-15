@@ -11,10 +11,6 @@ export async function GET(context: APIContext):Promise<Response> {
 }
 
 export async function POST(context: APIContext):Promise<Response>{
-    console.log("POST /api/signin EJECUTADO")
-
-    
-
     //Leer la data del form
     const formData = await context.request.formData();
     const usernameInput = formData.get("username")
