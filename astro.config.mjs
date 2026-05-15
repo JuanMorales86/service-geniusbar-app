@@ -16,7 +16,7 @@ console.log("🔍 Astro config - output mode:", "server"); // Verificar qué mod
 export default defineConfig({
   site: "https://onthepointservice.com",
   security: {
-      checkOrigin: true, // Deshabilitar la verificación de origen para permitir solicitudes desde dominios externos (útil para render.com)  
+      checkOrigin: false, // Deshabilitar la verificación de origen para permitir solicitudes desde dominios externos (útil para render.com)  
     },
   server: {
     host: true, // Permitir conexiones externas
