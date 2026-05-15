@@ -1,6 +1,6 @@
 // src/middleware.ts de el doc de lucia
 import { lucia } from "./auth/auth";
-import { verifyRequestOrigin } from "lucia";
+//import { verifyRequestOrigin } from "lucia";
 import { defineMiddleware } from "astro/middleware";
 import type { APIContext, MiddlewareNext } from "astro";
 
@@ -10,36 +10,25 @@ import type { APIContext, MiddlewareNext } from "astro";
 export const onRequest = defineMiddleware(async (context: APIContext, next: MiddlewareNext)=> {
   try{
 
-    console.log({
-      origin: context.request.headers.get("origin"),
-      host: context.request.headers.get("host"),
-      forwardedHost: context.request.headers.get("x-forwarded-host"),
-      forwardedProto: context.request.headers.get("x-forwarded-proto"),
-      url: context.url.href,
-      method: context.request.method
-    });
-
-    console.log("SITE:", import.meta.env.SITE);
-    console.log("URL ORIGIN:", context.url.origin);
-
 
     if ( import.meta.env.PROD && context.request.method !== "GET") {
       const originHeader = context.request.headers.get("Origin");
       //const hostHeader = context.request.headers.get("Host");
-      const hostHeader = context.request.headers.get("Host");
+      //const hostHeader = context.request.headers.get("Host");
       
       // Lista de dominios permitidos (apex y www)
-      const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
+      //const allowedHosts = [hostHeader, "onthepointservice.com", "www.onthepointservice.com"];
+      const allowedHosts = [
+        "onthepointservice.com", 
+        "www.onthepointservice.com"
+      ];
 
-      if (originHeader && hostHeader) {
+      console.log("ORIGIN HEADER:", originHeader)
 
-        const validOrigin = verifyRequestOrigin(originHeader, [hostHeader])
+      if (originHeader && !allowedHosts.includes(originHeader)) {
+        console.warn("Blocked origin", originHeader);
 
-          if(!validOrigin){
-
-            return new Response(null, { status: 403 });
-          
-          }
+        return new Response("Forbidden", { status: 403 });
         //verifyRequestOrigin(originHeader, allowedHosts)
         // console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
         // return new Response(null, { status: 403 });
