@@ -21,6 +21,11 @@ export default defineConfig({
   output: "server",
   adapter: node({ mode: "standalone" }),
   middleware: [middleware],
+
+  security: {
+      checkOrigin: false, // Deshabilitar la verificación de origen para permitir solicitudes desde dominios externos (útil para render.com)  
+    },
+  
   image: {
     domains: ["i.imgur.com"],
   },
@@ -57,11 +62,6 @@ export default defineConfig({
         transformMixedEsModules: true,
       },
     },
-
-    experimental: {
-      trustProxy: true, // Permitir confiar en proxies para obtener la IP real del cliente
-    }
-
     // server: {
     //   hmr:{
     //     port: 9000,// You can change this to any available port
