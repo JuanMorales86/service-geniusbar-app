@@ -58,6 +58,10 @@ export default defineConfig({
       },
     },
 
+    experimental: {
+      trustProxy: true, // Permitir confiar en proxies para obtener la IP real del cliente
+    }
+
     // server: {
     //   hmr:{
     //     port: 9000,// You can change this to any available port
