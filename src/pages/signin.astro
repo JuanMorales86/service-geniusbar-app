@@ -55,12 +55,14 @@ const seoData = {
             class="space-y-4 md:space-y-6"
             method="POST"
             action="/api/signin"
+            enctype="application/x-www-form-urlencoded"
+            data-astro-reload
           >
             <div>
               <label
                 for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Your username</label
+                >Corrreo electrónico</label
               >
               <input
                 type="text"
@@ -77,7 +79,7 @@ const seoData = {
               <label
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Password</label
+                >Contraseña</label
               >
               <input
                 type="password"

@@ -84,7 +84,7 @@ export default function FormServices({})  {
             } 
         } catch (error) {
                 console.error('Error al enviar el formulario', error);
-                showToast('Error al enviar el formulario', { type: 'error', positionH: 'center', positionV: 'top' });
+                showToast('Error al enviar el formulario', { type: 'error', positionH: 'end', positionV: 'top' });
              
         } finally {
             setIsSubmit(false)//habilitar el boton de envio

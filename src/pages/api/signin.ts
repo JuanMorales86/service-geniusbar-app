@@ -6,12 +6,12 @@ import { Argon2id } from "oslo/password";
 import { turdb } from "../../../db/turso";
 
 
-export async function GET(context: APIContext): Promise<Response> {
+export async function GET(context: APIContext):Promise<Response> {
     return context.redirect("/signin");
 }
 
 export async function POST(context: APIContext):Promise<Response>{
-    console.log("GET /api/signin EJECUTADO")
+    console.log("POST /api/signin EJECUTADO")
 
     
 
