@@ -23,16 +23,8 @@ export const onRequest = defineMiddleware(async (context: APIContext, next: Midd
       console.log("ORIGIN HEADER:", originHeader)
 
       if (originHeader && !allowedOrigins.includes(originHeader)) {
-        console.warn("Blocked origin", originHeader);
-
-
         return new Response("Forbidden", { status: 403 });
-        //verifyRequestOrigin(originHeader, allowedHosts)
-        // console.warn("Bloqueo CSRF - Origin:", originHeader, "Host:", hostHeader);
-        // return new Response(null, { status: 403 });
       }
-
-      //if(import.meta.env.PROD && context.request.method !== "GET"){}
     }
   
     const sessionId = context.cookies.get(lucia.sessionCookieName)?.value ?? null;
